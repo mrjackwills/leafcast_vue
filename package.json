@@ -1,6 +1,6 @@
 {
   "name": "leafcast",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -56,5 +56,6 @@
     "webpack-bundle-analyzer": "^4.4.2"
   },
   "homepage": "https://github.com/mrjackwills/leafcast_vue",
-  "license": "MIT"
+  "license": "MIT",
+  "buildDate": "Fri Jun 11 2021 14:22:43 GMT-0400 (Eastern Daylight Time)"
 }

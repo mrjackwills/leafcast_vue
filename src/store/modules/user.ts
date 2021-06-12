@@ -40,7 +40,7 @@ class UserModule extends VuexModule {
 		PiStatusModule.dispatch_clear();
 		WSModule.dispatch_closeWS();
 		if (message) snackError({ message });
-		router.push('/login');
+		if (router.currentRoute.name !== 'login') router.push('/login');
 	}
 }
 

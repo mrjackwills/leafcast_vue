@@ -20,7 +20,7 @@
 						<v-img src='@/assets/logo.svg' :eager='true' :max-width='logoWidth' />
 					</v-col>
 					<v-col cols='auto' class='unselectable' >
-						<span class='text-h4'>Leafcast</span>
+						<span class='text-h4 offwhite--text'>Leafcast</span>
 					</v-col>
 				</v-row>
 			

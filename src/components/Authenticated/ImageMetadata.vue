@@ -22,7 +22,7 @@
 					<v-icon dense color='white'>{{ mdiClock }}</v-icon>
 				</v-col>
 				<v-col cols='auto'>
-					<span class='white--text mr-1'>taken at: </span><span class='secondary--text mr-1'>{{ new Date(timestamp).toString().substring(0,24) }}</span> <span class='offwhite--text' >( {{ timestampToHMS }} ago )</span>
+					<span class='white--text mr-1'>taken at: </span><span class='secondary--text mr-1'>{{ new Date(timestamp).toString().substring(0,24) }}</span><span v-if='cached' class='offwhite--text' > ( {{ timestampToHMS }} ago )</span>
 				</v-col>
 			</v-row>
 			

@@ -27,6 +27,7 @@
 
 					<v-btn
 						@click='refresh'
+						:disabled='loading'
 						class=' fab-fix elevation-0'
 						color='serious'
 						dark
@@ -52,7 +53,7 @@
 <script lang='ts'>
 
 import Vue from 'vue';
-import { PiStatusModule } from '@/store';
+import { PiStatusModule, LoadingModule } from '@/store';
 import { convert_bytes } from '@/vanillaTS/convertBytes';
 import { mdiAlertCircleOutline, mdiSourceBranch, mdiLanConnect, mdiNodejs, mdiDesktopClassic, mdiCameraFlip } from '@mdi/js';
 import { secondsToText } from '@/vanillaTS/secondsToText';
@@ -72,6 +73,9 @@ export default Vue.extend({
 	computed: {
 		internalIp () :string|undefined {
 			return PiStatusModule.internalIp;
+		},
+		loading (): boolean {
+			return LoadingModule.loading;
 		},
 		piNodeUptime () :number|undefined {
 			return PiStatusModule.piNodeUptime;
@@ -134,6 +138,7 @@ export default Vue.extend({
 			this.isIntersecting = !!entries[0]?.isIntersecting;
 		},
 		refresh ():void {
+			if (this.loading) return;
 			this.$emit('refresh');
 		}
 	},

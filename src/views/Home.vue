@@ -114,6 +114,7 @@ export default Vue.extend({
 		showPiInfo: false,
 		updateInterval: 0,
 		pageTitle: '',
+		initTimeout: 0
 	}),
 
 	metaInfo (): MetaInfo {
@@ -157,6 +158,7 @@ export default Vue.extend({
 		clearAllIntervals (): void {
 			clearInterval(this.pingInterval);
 			clearInterval(this.updateInterval);
+			clearInterval(this.initTimeout);
 			this.updateCountdown = 300;
 		},
 
@@ -166,6 +168,19 @@ export default Vue.extend({
 		closeWS (): void {
 			if (!this.ws_connected) return;
 			WSModule.dispatch_closeWS();
+		},
+
+		/**
+		* If a message isn't received within the first 5000ms of being mounted, logout
+		* */
+		initCheck () : void {
+			this.initTimeout = window.setTimeout(() => {
+				if (this.init) {
+					clearInterval(this.initTimeout);
+				} else {
+					UserModule.dispatch_logout('unable to contact pi');
+				}
+			}, 5000);
 		},
 
 		piInfo ():void {
@@ -221,6 +236,10 @@ export default Vue.extend({
 				break;
 			}
 		},
+	},
+
+	mounted () {
+		this.initCheck();
 	},
 
 	watch: {

@@ -189,7 +189,7 @@ export default Vue.extend({
 		updateInit () :void {
 			this.updateInterval = window.setInterval(() => {
 				this.updateCountdown --;
-				if (this.updateCountdown === 5) this.sendPhoto();
+				if (this.updateCountdown === 1) this.sendPhoto();
 				if (this.updateCountdown === 0) this.updateCountdown = 300;
 			}, 1000);
 		},

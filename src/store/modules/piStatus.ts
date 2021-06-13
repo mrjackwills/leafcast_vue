@@ -10,8 +10,8 @@ class PiStatus extends VuexModule {
 	private _internalIp: su = undefined
 	private _numberImages = 0
 	private _online = false
-	private _piNodeUptime: nu = undefined
-	private _piUptime: nu = undefined
+	private _nodeUptime: nu = undefined
+	private _uptime: nu = undefined
 	private _totalFileSize = ''
 	// totalFileSize
 	// numberImages
@@ -31,11 +31,11 @@ class PiStatus extends VuexModule {
 	get online (): boolean {
 		return this._online;
 	}
-	get piNodeUptime (): nu {
-		return this._piNodeUptime;
+	get nodeUptime (): nu {
+		return this._nodeUptime;
 	}
-	get piUptime (): nu {
-		return this._piUptime;
+	get uptime (): nu {
+		return this._uptime;
 	}
 	get totalFileSize (): string {
 		return this._totalFileSize;
@@ -63,12 +63,12 @@ class PiStatus extends VuexModule {
 		this._init = true;
 	}
 	@Mutation
-	private mutate_piNodeUptime (nu: nu): void {
-		this._piNodeUptime = nu;
+	private mutate_nodeUptime (nu: nu): void {
+		this._nodeUptime = nu;
 	}
 	@Mutation
-	private mutate_piUptime (nu: nu): void {
-		this._piUptime = nu;
+	private mutate_uptime (nu: nu): void {
+		this._uptime = nu;
 	}
 	@Mutation
 	private mutate_totalFileSize (s: string): void {
@@ -96,12 +96,12 @@ class PiStatus extends VuexModule {
 		this.mutate_online(b);
 	}
 	@Action
-	dispatch_piNodeUptime (nu: nu): void {
-		this.mutate_piNodeUptime(nu);
+	dispatch_nodeUptime (nu: nu): void {
+		this.mutate_nodeUptime(nu);
 	}
 	@Action
-	dispatch_piUptime (nu: nu): void {
-		this.mutate_piUptime(nu);
+	dispatch_uptime (nu: nu): void {
+		this.mutate_uptime(nu);
 	}
 	@Action
 	dispatch_totalFileSize (s: string): void {
@@ -115,8 +115,8 @@ class PiStatus extends VuexModule {
 		this.mutate_numberImages(0);
 		this.mutate_online(false);
 		this.mutate_piVersion(undefined);
-		this.mutate_piNodeUptime(undefined);
-		this.mutate_piUptime(undefined);
+		this.mutate_nodeUptime(undefined);
+		this.mutate_uptime(undefined);
 		this.mutate_totalFileSize('');
 	}
 }

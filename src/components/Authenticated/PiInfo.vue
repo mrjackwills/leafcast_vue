@@ -63,11 +63,11 @@ export default Vue.extend({
 		loading (): boolean {
 			return LoadingModule.loading;
 		},
-		piNodeUptime () :number|undefined {
-			return PiStatusModule.piNodeUptime;
+		nodeUptime () :number|undefined {
+			return PiStatusModule.nodeUptime;
 		},
-		piUptime () :number|undefined {
-			return PiStatusModule.piUptime;
+		uptime () :number|undefined {
+			return PiStatusModule.uptime;
 		},
 		piOnline () :boolean {
 			return PiStatusModule.online;
@@ -96,12 +96,12 @@ export default Vue.extend({
 					{
 						icon: mdiDesktopClassic,
 						text: 'pi uptime',
-						value: secondsToText(this.piUptime? this.piUptime*1000: 0),
+						value: secondsToText(this.uptime? this.uptime*1000: 0),
 					},
 					{
 						icon: mdiNodejs,
 						text: 'node uptime',
-						value: secondsToText(this.piNodeUptime? this.piNodeUptime*1000:0),
+						value: secondsToText(this.nodeUptime? this.nodeUptime*1000:0),
 					}
 				]);
 			}

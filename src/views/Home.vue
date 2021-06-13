@@ -93,18 +93,18 @@ export default Vue.extend({
 		},
 		nodeUptime: {
 			get: function (): number|undefined {
-				return PiStatusModule.piNodeUptime;
+				return PiStatusModule.nodeUptime;
 			},
 			set: function (s: number|undefined): void {
-				PiStatusModule.dispatch_piNodeUptime(s);
+				PiStatusModule.dispatch_nodeUptime(s);
 			}
 		},
-		piUptime: {
+		uptime: {
 			get: function (): number|undefined {
-				return PiStatusModule.piUptime;
+				return PiStatusModule.uptime;
 			},
 			set: function (s: number|undefined): void {
-				PiStatusModule.dispatch_piUptime(s);
+				PiStatusModule.dispatch_uptime(s);
 			}
 		},
 		piInit (): boolean {
@@ -220,7 +220,7 @@ export default Vue.extend({
 			this.updateInterval = window.setInterval(() => {
 				this.updateCountdown --;
 				if (this.nodeUptime) this.nodeUptime ++;
-				if (this.piUptime) this.piUptime ++;
+				if (this.uptime) this.uptime ++;
 
 				if (this.updateCountdown === 1) this.sendPhoto();
 				if (this.updateCountdown === 0) this.updateCountdown = 300;
@@ -246,8 +246,8 @@ export default Vue.extend({
 				PiStatusModule.dispatch_internalIp(message.data.data.piInfo.internalIp);
 				PiStatusModule.dispatch_numberImages(message.data.data.piInfo.numberImages);
 				PiStatusModule.dispatch_online(!message.cache);
-				this.piUptime = message.data.data.piInfo.piUptime;
-				this.nodeUptime = message.data.data.piInfo.piNodeUptime;
+				this.uptime = message.data.data.piInfo.uptime;
+				this.nodeUptime = message.data.data.piInfo.nodeUptime;
 				PiStatusModule.dispatch_piVersion(message.data.data.piInfo.piVersion);
 				PiStatusModule.dispatch_totalFileSize(message.data.data.piInfo.totalFileSize);
 				if (!this.init) this.updateInit();

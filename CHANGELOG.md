@@ -1,5 +1,5 @@
 ### Features
-+ show "cached imaged" overlay on image when !piOnline, [fcf7a99077508adba55b78e7508624b2feee8d77]
++ COMMENTED OUT - show "cached imaged" overlay on image when !piOnline, [fcf7a99077508adba55b78e7508624b2feee8d77]
 + new data from pi, total # files, total file size, display in PiInfo component, [fcf7a99077508adba55b78e7508624b2feee8d77]
 
 ### Fixes

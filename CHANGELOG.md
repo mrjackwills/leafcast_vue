@@ -4,7 +4,7 @@
 ### Fixes
 + pwa update snack message lowercased
 + readme link to pi repo fixed
-
++ update piStatusModuleInit after all other vuex data has been set
 
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.2.0'>v0.2.0</a>
 #### 2021-06-13

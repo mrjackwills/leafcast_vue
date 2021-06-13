@@ -233,7 +233,6 @@ export default Vue.extend({
  		*/
 		async wsDataHandler (message: TWSFromPi): Promise<void> {
 			
-			PiStatusModule.dispatch_init(true);
 			// TODO switch case for errors
 			// Maybe just logout?
 			switch (message.data?.message) {
@@ -250,6 +249,7 @@ export default Vue.extend({
 				this.nodeUptime = message.data.data.piInfo.nodeUptime;
 				PiStatusModule.dispatch_piVersion(message.data.data.piInfo.piVersion);
 				PiStatusModule.dispatch_totalFileSize(message.data.data.piInfo.totalFileSize);
+				PiStatusModule.dispatch_init(true);
 				if (!this.init) this.updateInit();
 				this.init = true;
 				this.loading = false;

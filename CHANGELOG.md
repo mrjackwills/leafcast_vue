@@ -1,6 +1,8 @@
 ### Features
 + COMMENTED OUT - show "cached imaged" overlay on image when !piOnline, [fcf7a99077508adba55b78e7508624b2feee8d77]
 + new data from pi, total # files, total file size, display in PiInfo component, [fcf7a99077508adba55b78e7508624b2feee8d77]
++ DisplayRows component to iterate over data to be displayed in simple data table
++ uptime & node uptime increase with each countdown interval
 
 ### Fixes
 + send a request for a new photo at when countdown is 1, instead of 5, [3c0997a616c011c40bc2820ca80006a4e1c3cc5d]
@@ -14,6 +16,8 @@
 ### Refactors
 + destructure data from axios request, [72dd69990b66d6df2452dbd336068130ae081364]
 + Toolbar logo made transparent [31ee4865dc71a29061546ab0df0c56543e764fa1]
++ types updated to match backend client
++ piNodeUptime & piUptime renamed to nodeUptime & uptime
 
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.1.0'>v0.1.0</a>
 #### 2021-06-11

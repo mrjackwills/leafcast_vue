@@ -29,10 +29,14 @@ export type TSnack = {
 		message?: string,
 		icon?: string
 		timeout?: number,
-		loading?: boolean
+		loading?: boolean,
+		
 }
 
 export type TConvertBytes = {
 	total: string,
 	unit: 'GB' | 'MB' | 'KB'
 }
+
+// export type TDataToDisplay = Array<Array<{icon: string, text: string, value: string, extra?: string, isTime?: boolean}>>
+export type TDataToDisplay = Array<Array< { [ K in 'icon' | 'text' | 'value' ]: string } & { extra?: string } >>

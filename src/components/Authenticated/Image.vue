@@ -2,7 +2,7 @@
 	<v-row justify='center' align='center' no-gutters>
 		<v-col cols='auto' class='parent' width>
 			<v-img v-if='!piOnline' src='@/assets/cached.png' class='cached' contain />
-			<v-img :src='image' contain class='image-border main-image' width='750px'/>
+			<v-img :src='image' contain class='image-border main-image' width='650px'/>
 			<v-img src='@/assets/watermark.png' class='watermark' contain />
 		</v-col>
 	</v-row>

@@ -1,25 +1,10 @@
 <template>
 
 	<v-row justify='center' align='center' class='' no-gutters v-intersect='onIntersect'>
-		<v-col cols='12' md='9' lg='6' class='text-center white--text text--body-1'>
+		
+		<app-display-rows :toDisplay='piInfo' />
 
-			<section v-for='(item, index) in piInfo' :key='index'>
-
-				<v-row justify='start' align='center' class='' no-gutters>
-					<v-col cols='auto' class='mr-2'>
-						<v-icon dense color='white' >{{ item.icon }}</v-icon>
-					</v-col>
-					<v-col cols='auto'>
-						<span class='white--text mr-1'>{{ item.text }}:</span> <span class='secondary--text'>{{ item.value }}</span>  <span v-if='item.extra' class='offwhite--text'>{{ item.extra }}</span>
-					</v-col>
-				</v-row>
-
-				<app-divider v-if='index + 1 !== piInfo.length'/>
-			
-			</section>
-		</v-col>
-
-		<v-col cols='12' class='ma-0 pa-0' id='update-button'>
+		<v-col cols='12' class='mt-2' id='update-button'>
 
 			<v-row align='center' justify='center' class='ma-0 pa-0'>
 
@@ -53,11 +38,12 @@
 <script lang='ts'>
 
 import Vue from 'vue';
-import { PiStatusModule, LoadingModule } from '@/store';
 import { convert_bytes } from '@/vanillaTS/convertBytes';
-import { mdiAlertCircleOutline, mdiSourceBranch, mdiLanConnect, mdiNodejs, mdiDesktopClassic, mdiCameraFlip, mdiImageMultiple, mdiHarddisk } from '@mdi/js';
+import { mdiAlertCircleOutline, mdiCameraFlip, mdiDesktopClassic, mdiHarddisk, mdiImageMultiple, mdiLanConnect, mdiNodejs, mdiSourceBranch } from '@mdi/js';
+import { PiStatusModule, LoadingModule } from '@/store';
 import { secondsToText } from '@/vanillaTS/secondsToText';
-import Divider from '@/components/Divider.vue';
+import { TDataToDisplay } from '@/types';
+import DisplayRows from '@/components/DisplayRows.vue';
 
 export default Vue.extend({
 	name: 'pi-info-component',
@@ -67,7 +53,7 @@ export default Vue.extend({
 	},
 
 	components: {
-		appDivider: Divider,
+		appDisplayRows: DisplayRows
 	},
 
 	computed: {
@@ -89,9 +75,9 @@ export default Vue.extend({
 		piVersion ():string|undefined {
 			return PiStatusModule.piVersion;
 		},
-		piInfo (): Array<{icon: string, text: string, value: string, extra?: string}> {
-			const cached = this.piOnline? `` : ` - cached`;
-			const output = [
+		piInfo (): TDataToDisplay {
+			const cached = this.piOnline? `` : `[ cached ]`;
+			const output = [ [
 				{
 					icon: mdiSourceBranch,
 					text: 'pi software version',
@@ -103,22 +89,23 @@ export default Vue.extend({
 					value: this.internalIp??'',
 					extra: cached
 				},
-			];
+			] ];
 			if (this.piOnline) {
-				output.push(
+				output.push([
 
 					{
 						icon: mdiDesktopClassic,
 						text: 'pi uptime',
-						value: secondsToText(this.piUptime? this.piUptime*1000: 0)
+						value: secondsToText(this.piUptime? this.piUptime*1000: 0),
 					},
 					{
 						icon: mdiNodejs,
 						text: 'node uptime',
-						value: secondsToText(this.piNodeUptime? this.piNodeUptime*1000:0)
-					});
+						value: secondsToText(this.piNodeUptime? this.piNodeUptime*1000:0),
+					}
+				]);
 			}
-			output.push(
+			output.push([
 				{
 					icon: mdiImageMultiple,
 					text: 'number of images',
@@ -127,10 +114,10 @@ export default Vue.extend({
 				},
 				{
 					icon: mdiHarddisk,
-					text: 'combined file size',
+					text: 'total file size',
 					value: this.convert_bytes(this.totalFileSize),
 					extra: cached
-				},
+				}, ]
 			);
 			return output;
 		},
@@ -174,6 +161,3 @@ export default Vue.extend({
 	}
 });
 </script>
-
-<style>
-</style>

@@ -8,9 +8,13 @@ class PiStatus extends VuexModule {
 	private _init = false
 	private _piVersion: su = undefined
 	private _internalIp: su = undefined
+	private _numberImages = 0
 	private _online = false
-	private _piNodeUptime: nu = undefined
-	private _piUptime: nu = undefined
+	private _nodeUptime: nu = undefined
+	private _uptime: nu = undefined
+	private _totalFileSize = ''
+	// totalFileSize
+	// numberImages
 
 	get init (): boolean {
 		return this._init;
@@ -21,14 +25,20 @@ class PiStatus extends VuexModule {
 	get internalIp (): su {
 		return this._internalIp;
 	}
+	get numberImages (): number {
+		return this._numberImages;
+	}
 	get online (): boolean {
 		return this._online;
 	}
-	get piNodeUptime (): nu {
-		return this._piNodeUptime;
+	get nodeUptime (): nu {
+		return this._nodeUptime;
 	}
-	get piUptime (): nu {
-		return this._piUptime;
+	get uptime (): nu {
+		return this._uptime;
+	}
+	get totalFileSize (): string {
+		return this._totalFileSize;
 	}
 	
 	@Mutation
@@ -44,17 +54,25 @@ class PiStatus extends VuexModule {
 		this._internalIp = su;
 	}
 	@Mutation
+	private mutate_numberImages (nu: number): void {
+		this._numberImages = nu;
+	}
+	@Mutation
 	private mutate_online (b: boolean): void {
 		this._online = b;
 		this._init = true;
 	}
 	@Mutation
-	private mutate_piNodeUptime (nu: nu): void {
-		this._piNodeUptime = nu;
+	private mutate_nodeUptime (nu: nu): void {
+		this._nodeUptime = nu;
 	}
 	@Mutation
-	private mutate_piUptime (nu: nu): void {
-		this._piUptime = nu;
+	private mutate_uptime (nu: nu): void {
+		this._uptime = nu;
+	}
+	@Mutation
+	private mutate_totalFileSize (s: string): void {
+		this._totalFileSize = s;
 	}
 
 	@Action
@@ -70,26 +88,36 @@ class PiStatus extends VuexModule {
 		this.mutate_internalIp(su);
 	}
 	@Action
+	dispatch_numberImages (nu: number): void {
+		this.mutate_numberImages(nu);
+	}
+	@Action
 	dispatch_online (b: boolean): void {
 		this.mutate_online(b);
 	}
 	@Action
-	dispatch_piNodeUptime (nu: nu): void {
-		this.mutate_piNodeUptime(nu);
+	dispatch_nodeUptime (nu: nu): void {
+		this.mutate_nodeUptime(nu);
 	}
 	@Action
-	dispatch_piUptime (nu: nu): void {
-		this.mutate_piUptime(nu);
+	dispatch_uptime (nu: nu): void {
+		this.mutate_uptime(nu);
+	}
+	@Action
+	dispatch_totalFileSize (s: string): void {
+		this.mutate_totalFileSize(s);
 	}
 
 	@Action
 	dispatch_clear () :void {
-		this.mutate_internalIp(undefined);
-		this.mutate_online(false);
 		this.mutate_init(false);
+		this.mutate_internalIp(undefined);
+		this.mutate_numberImages(0);
+		this.mutate_online(false);
 		this.mutate_piVersion(undefined);
-		this.mutate_piNodeUptime(undefined);
-		this.mutate_piUptime(undefined);
+		this.mutate_nodeUptime(undefined);
+		this.mutate_uptime(undefined);
+		this.mutate_totalFileSize('');
 	}
 }
 

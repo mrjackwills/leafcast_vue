@@ -91,6 +91,22 @@ export default Vue.extend({
 				LoadingModule.dispatch_loading(b);
 			}
 		},
+		nodeUptime: {
+			get: function (): number|undefined {
+				return PiStatusModule.nodeUptime;
+			},
+			set: function (s: number|undefined): void {
+				PiStatusModule.dispatch_nodeUptime(s);
+			}
+		},
+		uptime: {
+			get: function (): number|undefined {
+				return PiStatusModule.uptime;
+			},
+			set: function (s: number|undefined): void {
+				PiStatusModule.dispatch_uptime(s);
+			}
+		},
 		piInit (): boolean {
 			return PiStatusModule.init;
 		},
@@ -105,7 +121,6 @@ export default Vue.extend({
 		ws_connected (): boolean {
 			return WSModule.connected;
 		},
-		
 	},
 
 	data: () => ({
@@ -114,6 +129,7 @@ export default Vue.extend({
 		showPiInfo: false,
 		updateInterval: 0,
 		pageTitle: '',
+		initTimeout: 0
 	}),
 
 	metaInfo (): MetaInfo {
@@ -157,6 +173,7 @@ export default Vue.extend({
 		clearAllIntervals (): void {
 			clearInterval(this.pingInterval);
 			clearInterval(this.updateInterval);
+			clearInterval(this.initTimeout);
 			this.updateCountdown = 300;
 		},
 
@@ -166,6 +183,19 @@ export default Vue.extend({
 		closeWS (): void {
 			if (!this.ws_connected) return;
 			WSModule.dispatch_closeWS();
+		},
+
+		/**
+		* If a message isn't received within the first 5000ms of being mounted, logout
+		* */
+		initCheck () : void {
+			this.initTimeout = window.setTimeout(() => {
+				if (this.init) {
+					clearInterval(this.initTimeout);
+				} else {
+					UserModule.dispatch_logout('unable to contact pi');
+				}
+			}, 5000);
 		},
 
 		piInfo ():void {
@@ -189,7 +219,10 @@ export default Vue.extend({
 		updateInit () :void {
 			this.updateInterval = window.setInterval(() => {
 				this.updateCountdown --;
-				if (this.updateCountdown === 5) this.sendPhoto();
+				if (this.nodeUptime) this.nodeUptime ++;
+				if (this.uptime) this.uptime ++;
+
+				if (this.updateCountdown === 1) this.sendPhoto();
 				if (this.updateCountdown === 0) this.updateCountdown = 300;
 			}, 1000);
 		},
@@ -211,16 +244,22 @@ export default Vue.extend({
 				ImageModule.dispatch_imageSize_original(message.data.data.imageSize_original??0);
 				ImageModule.dispatch_timestamp(message.data.data.timestamp);
 				PiStatusModule.dispatch_internalIp(message.data.data.piInfo.internalIp);
+				PiStatusModule.dispatch_numberImages(message.data.data.piInfo.numberImages);
 				PiStatusModule.dispatch_online(!message.cache);
-				PiStatusModule.dispatch_piNodeUptime(message.data.data.piInfo.piNodeUptime);
-				PiStatusModule.dispatch_piUptime(message.data.data.piInfo.piUptime);
+				this.uptime = message.data.data.piInfo.uptime;
+				this.nodeUptime = message.data.data.piInfo.nodeUptime;
 				PiStatusModule.dispatch_piVersion(message.data.data.piInfo.piVersion);
+				PiStatusModule.dispatch_totalFileSize(message.data.data.piInfo.totalFileSize);
 				if (!this.init) this.updateInit();
 				this.init = true;
 				this.loading = false;
 				break;
 			}
 		},
+	},
+
+	mounted () {
+		this.initCheck();
 	},
 
 	watch: {
@@ -235,10 +274,7 @@ export default Vue.extend({
 </script>
 
 <style>
-.countdown{
-	font-feature-settings: 'tnum';
-	font-variant-numeric: tabular-nums;
-}
+
 .minh{
 	min-height: 240px;
 }

@@ -67,11 +67,13 @@ class AxiosRequests {
 
 	@wrap()
 	async wsAuth_post (password: string): Promise<boolean> {
-		const accessPass = await this.#wsAuthAxios.post('/', { key: process.env.VUE_APP_APIKEY, password });
-		UserModule.dispatch_authenticated(true);
-		snackReset();
-		WSModule.dispatch_openWs(accessPass.data.response);
-		return true;
+		const { data } = await this.#wsAuthAxios.post('/', { key: process.env.VUE_APP_APIKEY, password });
+		if (data.response) {
+			snackReset();
+			UserModule.dispatch_authenticated(true);
+			WSModule.dispatch_openWs(data?.response);
+		}
+		return !!data.response;
 	}
 }
 

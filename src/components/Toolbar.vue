@@ -12,16 +12,15 @@
 				class=' ml-4 unselectable'
 			>
 
-				<v-row align='center' justify='center' no-gutters class='pa-0 ma-0'>
+				<v-row align='center' justify='space-around' no-gutters class='pa-0 ma-0'>
 					<v-col
 						:class='$vuetify.breakpoint.mdAndUp ? "mr-2" : "mr-1"'
-						class=''
 						cols='auto'
 					>
-						<v-img src='@/assets/logo.svg' :eager='true' :width='logoWidth' />
+						<v-img src='@/assets/logo.svg' :eager='true' :max-width='logoWidth' />
 					</v-col>
-					<v-col cols='auto' class='unselectable' align-self='center'>
-						<span class='text-h4'>Leafcast</span>
+					<v-col cols='auto' class='unselectable' >
+						<span class='text-h4 offwhite--text'>Leafcast</span>
 					</v-col>
 				</v-row>
 			
@@ -65,7 +64,7 @@ export default Vue.extend({
 			return LoadingModule.loading;
 		},
 		logoWidth ():string {
-			return this.$vuetify.breakpoint.mdAndUp ? '3.6rem' : '2.6rem';
+			return this.$vuetify.breakpoint.mdAndUp ? '55px' : '40px';
 		},
 		init () :boolean {
 			return PiStatusModule.init;

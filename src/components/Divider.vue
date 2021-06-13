@@ -15,7 +15,7 @@ export default Vue.extend({
 	props: {
 		cols: {
 			type: Number,
-			default: 11
+			default: 12
 		}
 	}
 });

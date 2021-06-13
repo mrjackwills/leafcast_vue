@@ -91,6 +91,22 @@ export default Vue.extend({
 				LoadingModule.dispatch_loading(b);
 			}
 		},
+		nodeUptime: {
+			get: function (): number|undefined {
+				return PiStatusModule.nodeUptime;
+			},
+			set: function (s: number|undefined): void {
+				PiStatusModule.dispatch_nodeUptime(s);
+			}
+		},
+		uptime: {
+			get: function (): number|undefined {
+				return PiStatusModule.uptime;
+			},
+			set: function (s: number|undefined): void {
+				PiStatusModule.dispatch_uptime(s);
+			}
+		},
 		piInit (): boolean {
 			return PiStatusModule.init;
 		},
@@ -105,7 +121,6 @@ export default Vue.extend({
 		ws_connected (): boolean {
 			return WSModule.connected;
 		},
-		
 	},
 
 	data: () => ({
@@ -204,6 +219,9 @@ export default Vue.extend({
 		updateInit () :void {
 			this.updateInterval = window.setInterval(() => {
 				this.updateCountdown --;
+				if (this.nodeUptime) this.nodeUptime ++;
+				if (this.uptime) this.uptime ++;
+
 				if (this.updateCountdown === 1) this.sendPhoto();
 				if (this.updateCountdown === 0) this.updateCountdown = 300;
 			}, 1000);
@@ -228,8 +246,8 @@ export default Vue.extend({
 				PiStatusModule.dispatch_internalIp(message.data.data.piInfo.internalIp);
 				PiStatusModule.dispatch_numberImages(message.data.data.piInfo.numberImages);
 				PiStatusModule.dispatch_online(!message.cache);
-				PiStatusModule.dispatch_piNodeUptime(message.data.data.piInfo.piNodeUptime);
-				PiStatusModule.dispatch_piUptime(message.data.data.piInfo.piUptime);
+				this.uptime = message.data.data.piInfo.uptime;
+				this.nodeUptime = message.data.data.piInfo.nodeUptime;
 				PiStatusModule.dispatch_piVersion(message.data.data.piInfo.piVersion);
 				PiStatusModule.dispatch_totalFileSize(message.data.data.piInfo.totalFileSize);
 				if (!this.init) this.updateInit();
@@ -256,10 +274,7 @@ export default Vue.extend({
 </script>
 
 <style>
-.countdown{
-	font-feature-settings: 'tnum';
-	font-variant-numeric: tabular-nums;
-}
+
 .minh{
 	min-height: 240px;
 }

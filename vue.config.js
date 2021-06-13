@@ -32,6 +32,7 @@ module.exports = {
 			short_name: 'Leafcast',
 			start_url: '/',
 			display: 'standalone',
+			background_color: '#402e32',
 			version: serviceWorkerVersion
 		},
 

@@ -9,8 +9,8 @@
 					align='center'
 					justify='center'
 				>
-					<v-col cols='12' sm='10' md='8' lg='6' no-gutters class='ma-0 pa-0 px-1'>
-						<v-card transition='fade-transition' class='pb-2 elevation-0' color='primary' >
+					<v-col cols='12' sm='11' lg='8' xl='6' no-gutters class='ma-0 pa-0 px-1'>
+						<v-card transition='fade-transition' class='pb-2 elevation-0 ma-0 pa-0' color='primary'>
 							<app-toolbar />
 							<v-card-text class=''>
 								<v-fade-transition group hide-on-leave>

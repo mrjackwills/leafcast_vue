@@ -1,3 +1,14 @@
+# <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.2.1'>v0.2.1</a>
+#### 2021-06-13
+
+### Chores
++ dependancies updated, [aef27605de5b0d562be0cf0210dfb6c28ba4f6d2]
+
+### Fixes
++ pwa update snack message lowercased, [91bc7b7115dd3e1cbc8294e9a5e94c9dfbb2bfc1]
++ readme link to pi repo fixed, [91bc7b7115dd3e1cbc8294e9a5e94c9dfbb2bfc1]
++ update piStatusModuleInit after all other vuex data has been set, [c53599e0f77e919aba779cdd492b6b63b265a7f1]
+
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.2.0'>v0.2.0</a>
 #### 2021-06-13
 
@@ -18,7 +29,7 @@
 
 ### Refactors
 + destructure data from axios request, [72dd69990b66d6df2452dbd336068130ae081364]
-+ Toolbar logo made transparent [31ee4865dc71a29061546ab0df0c56543e764fa1]
++ Toolbar logo made transparent, [31ee4865dc71a29061546ab0df0c56543e764fa1]
 + types updated to match backend client, [4e5425bff0087fe6936aac3e534038687b1f101d]
 + piNodeUptime & piUptime renamed to nodeUptime & uptime, [4e5425bff0087fe6936aac3e534038687b1f101d]
 

@@ -91,7 +91,7 @@ export default Vue.extend({
 		 ** Show snack bar and reload, executed from service worker, reload page after 5 seconds
 		 */
 		appUpdate (): void {
-			snackSuccess({ message: 'Downloading Updates', loading: true, timeout: 4500, icon: '' });
+			snackSuccess({ message: 'downloading updates', loading: true, timeout: 4500, icon: '' });
 			window.setTimeout(() => location.reload(), 5000);
 		},
 		

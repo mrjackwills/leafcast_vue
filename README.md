@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-	Front end to the <a href='https://github.com/mrjackwills/leafcast_pi_client' target='_blank' rel='noopener noreferrer'>pi backend client</a>
+	Front end to the <a href='https://github.com/mrjackwills/leafcast_pi' target='_blank' rel='noopener noreferrer'>pi backend client</a>
 </p>
 
 ## Required serivices

@@ -1,7 +1,11 @@
+### Features
++ show "cached imaged" overlay on image when !piOnline, [fcf7a99077508adba55b78e7508624b2feee8d77]
++ new data from pi, total # files, total file size, display in PiInfo component, [fcf7a99077508adba55b78e7508624b2feee8d77]
+
 ### Fixes
 + send a request for a new photo at when countdown is 1, instead of 5, [3c0997a616c011c40bc2820ca80006a4e1c3cc5d]
 + refresh pi button disabled if loading, [777547ae285c52df4fcae2c097b4ec7abe7180b2]
-+ toolbar logo computed width use pixels instead of rems [370d4c078142fe2a7201dbf715714777710364c1]
++ toolbar logo computed width use pixels instead of rems, [370d4c078142fe2a7201dbf715714777710364c1]
 + Only show the photo take ago (hour, minute, second) if the image is from cache, [f03331e9d9de43070b5fd941966c5010c6c8f800]
 + logout if no ws message in first 5000ms of ws connection, [2f150909798e42103c45bfc28bd3e1adc5008959]
 + check not in login route before router push login, [d100f26d96e876590d3a954d7c7a7444d7a2f123]

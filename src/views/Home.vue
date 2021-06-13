@@ -226,10 +226,12 @@ export default Vue.extend({
 				ImageModule.dispatch_imageSize_original(message.data.data.imageSize_original??0);
 				ImageModule.dispatch_timestamp(message.data.data.timestamp);
 				PiStatusModule.dispatch_internalIp(message.data.data.piInfo.internalIp);
+				PiStatusModule.dispatch_numberImages(message.data.data.piInfo.numberImages);
 				PiStatusModule.dispatch_online(!message.cache);
 				PiStatusModule.dispatch_piNodeUptime(message.data.data.piInfo.piNodeUptime);
 				PiStatusModule.dispatch_piUptime(message.data.data.piInfo.piUptime);
 				PiStatusModule.dispatch_piVersion(message.data.data.piInfo.piVersion);
+				PiStatusModule.dispatch_totalFileSize(message.data.data.piInfo.totalFileSize);
 				if (!this.init) this.updateInit();
 				this.init = true;
 				this.loading = false;

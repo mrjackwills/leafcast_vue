@@ -64,7 +64,7 @@ Vue.use(Vuetify, {
 
 const opts = {
 	icons: {
-		iconfont: 'mdiSvg' as const,
+		iconfont: <const>'mdiSvg'
 	},
 	theme: {
 		options: {

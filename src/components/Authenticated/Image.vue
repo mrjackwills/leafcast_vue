@@ -1,7 +1,8 @@
 <template>
 	<v-row justify='center' align='center' no-gutters>
-		<v-col cols='auto' class='parent'>
-			<v-img :src='image' contain class='image-border main-image' />
+		<v-col cols='auto' class='parent' width>
+			<v-img v-if='!piOnline' src='@/assets/cached.png' class='cached' contain />
+			<v-img :src='image' contain class='image-border main-image' width='750px'/>
 			<v-img src='@/assets/watermark.png' class='watermark' contain />
 		</v-col>
 	</v-row>
@@ -10,13 +11,16 @@
 <script lang='ts'>
 
 import Vue from 'vue';
-import { ImageModule } from '@/store';
+import { ImageModule, PiStatusModule } from '@/store';
 
 export default Vue.extend({
 	name: 'image-component',
 	computed: {
 		image () : string {
 			return ImageModule.image;
+		},
+		piOnline () :boolean {
+			return PiStatusModule.online;
 		},
 	},
 
@@ -47,6 +51,14 @@ export default Vue.extend({
 	position: absolute;
 	bottom: 0;
 	right: 0;
+	max-width: 50%;
+	z-index: 2;
+}
+
+.cached {
+	position: absolute;
+	top: 0;
+	left: 0;
 	max-width: 50%;
 	z-index: 2;
 }

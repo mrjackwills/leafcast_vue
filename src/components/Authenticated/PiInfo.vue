@@ -55,7 +55,7 @@
 import Vue from 'vue';
 import { PiStatusModule, LoadingModule } from '@/store';
 import { convert_bytes } from '@/vanillaTS/convertBytes';
-import { mdiAlertCircleOutline, mdiSourceBranch, mdiLanConnect, mdiNodejs, mdiDesktopClassic, mdiCameraFlip } from '@mdi/js';
+import { mdiAlertCircleOutline, mdiSourceBranch, mdiLanConnect, mdiNodejs, mdiDesktopClassic, mdiCameraFlip, mdiImageMultiple, mdiHarddisk } from '@mdi/js';
 import { secondsToText } from '@/vanillaTS/secondsToText';
 import Divider from '@/components/Divider.vue';
 
@@ -118,7 +118,27 @@ export default Vue.extend({
 						value: secondsToText(this.piNodeUptime? this.piNodeUptime*1000:0)
 					});
 			}
+			output.push(
+				{
+					icon: mdiImageMultiple,
+					text: 'number of images',
+					value: `${this.numberFiles}`,
+					extra: cached
+				},
+				{
+					icon: mdiHarddisk,
+					text: 'combined file size',
+					value: this.convert_bytes(this.totalFileSize),
+					extra: cached
+				},
+			);
 			return output;
+		},
+		numberFiles (): number {
+			return PiStatusModule.numberImages;
+		},
+		totalFileSize (): string {
+			return PiStatusModule.totalFileSize;
 		}
 	},
 

@@ -5,6 +5,7 @@
 + Only show the photo take ago (hour, minute, second) if the image is from cache, [f03331e9d9de43070b5fd941966c5010c6c8f800]
 + logout if no ws message in first 5000ms of ws connection, [2f150909798e42103c45bfc28bd3e1adc5008959]
 + check not in login route before router push login, [d100f26d96e876590d3a954d7c7a7444d7a2f123]
++ toolbar title colour changed to off white, [ca614b2fc0f81c5547fc72d09c5c44045ee6c2d1]
 
 ### Refactors
 + destructure data from axios request, [72dd69990b66d6df2452dbd336068130ae081364]

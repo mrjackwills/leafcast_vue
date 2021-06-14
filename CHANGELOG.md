@@ -1,3 +1,14 @@
+### Fixes
++ footer links to github profile rather the vue repo, [0dbc5e2be009539df6c9a23903fb352441affda3]
+
+### Features
++ piOffline component, above imageMetaData, only visible when !piOnline, [93feb3e506ff426822eb6cb2b56ec6ca262d2abe]
++ tooltip on toolbar icon, [acd9408dbc3cfd1f9214b06beefd45ec909b520a]
+
+### Refactors
++ DisplayRows component moved into authenticated folder, [d4085bee536a8ae4f5ede43291ab1e39a9011bd3]
+
+
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.2.1'>v0.2.1</a>
 #### 2021-06-13
 

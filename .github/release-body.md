@@ -1,11 +1,14 @@
-<h2>Release of 0.2.1</h2>
+<h2>Release of 0.3.0</h2>
 
-### Chores
-+ dependancies updated, [aef27605de5b0d562be0cf0210dfb6c28ba4f6d2]
+### Features
++ piOffline component, above imageMetaData, only visible when !piOnline, [93feb3e506ff426822eb6cb2b56ec6ca262d2abe]
++ tooltip on toolbar icon, [acd9408dbc3cfd1f9214b06beefd45ec909b520a]
 
 ### Fixes
-+ pwa update snack message lowercased, [91bc7b7115dd3e1cbc8294e9a5e94c9dfbb2bfc1]
-+ readme link to pi repo fixed, [91bc7b7115dd3e1cbc8294e9a5e94c9dfbb2bfc1]
-+ update piStatusModuleInit after all other vuex data has been set, [c53599e0f77e919aba779cdd492b6b63b265a7f1]
++ footer links to github profile rather the vue repo, [0dbc5e2be009539df6c9a23903fb352441affda3]
+
+### Refactors
++ DisplayRows component moved into authenticated folder, [d4085bee536a8ae4f5ede43291ab1e39a9011bd3]
+
 
 <br><br>See <a href='https://github.com/mrjackwills/leafcast_vue/blob/main/CHANGELOG.md'>CHANGELOG.md</a> for more details<br>

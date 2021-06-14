@@ -39,11 +39,12 @@
 </template>
 
 <script lang='ts'>
-import { mdiGithub } from '@mdi/js';
-
-import { UserModule } from '@/store';
 
 import Vue from 'vue';
+
+import { mdiGithub } from '@mdi/js';
+import { UserModule } from '@/store';
+
 export default Vue.extend({
 	name: 'home-component',
 
@@ -55,12 +56,14 @@ export default Vue.extend({
 		authenticated (): boolean {
 			return UserModule.authenticated;
 		},
+		href (): string {
+			return process.env.VUE_APP_GITHUB?.split('leafcast')[0] ?? '';
+		}
 	},
 
 	data: () => ({
 		appVersion: process.env.VUE_APP_VERSION as string,
 		buildDate: process.env.VUE_APP_DATE as string,
-		href: 'https://www.github.com/mrjackwills/leafcast_vue',
 		buildTimeout: 0,
 		showBuild: false,
 		mdiGithub,

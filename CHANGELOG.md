@@ -1,3 +1,6 @@
+# <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.3.0'>v0.3.0</a>
+#### 2021-06-14
+
 ### Features
 + piOffline component, above imageMetaData, only visible when !piOnline, [93feb3e506ff426822eb6cb2b56ec6ca262d2abe]
 + tooltip on toolbar icon, [acd9408dbc3cfd1f9214b06beefd45ec909b520a]

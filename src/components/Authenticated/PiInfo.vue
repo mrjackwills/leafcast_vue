@@ -43,7 +43,7 @@ import { mdiAlertCircleOutline, mdiCameraFlip, mdiDesktopClassic, mdiHarddisk, m
 import { PiStatusModule, LoadingModule } from '@/store';
 import { secondsToText } from '@/vanillaTS/secondsToText';
 import { TDataToDisplay } from '@/types';
-import DisplayRows from '@/components/DisplayRows.vue';
+import DisplayRows from '@/components/Authenticated/DisplayRows.vue';
 
 export default Vue.extend({
 	name: 'pi-info-component',

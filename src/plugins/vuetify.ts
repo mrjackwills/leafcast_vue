@@ -26,6 +26,7 @@ import Vuetify, {
 	VTextField,
 	VToolbar,
 	VToolbarTitle,
+	VTooltip
 } from 'vuetify/lib';
 
 Vue.use(Vuetify, {
@@ -54,6 +55,7 @@ Vue.use(Vuetify, {
 		VTextField,
 		VToolbar,
 		VToolbarTitle,
+		VTooltip
 	},
 	directives: {
 		Intersect,

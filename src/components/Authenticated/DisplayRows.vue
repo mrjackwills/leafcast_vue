@@ -27,7 +27,7 @@
 
 			</v-row>
 			
-			<app-divider v-if='index + 1 !== toDisplay.length' class='hidden-sm-and-down' :cols='"12"' />
+			<app-divider v-if='index + 1 !== toDisplay.length' class='hidden-sm-and-down' />
 
 		</section>
 	</v-col>

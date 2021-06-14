@@ -1,9 +1,9 @@
-import { Module, VuexModule, Mutation, Action, getModule } from 'vuex-module-decorators';
+import { Action, getModule, Module, Mutation, VuexModule, } from 'vuex-module-decorators';
 import { ModuleName } from '@/types/enum_module';
 import { PiStatusModule, WSModule } from '@/store';
-import store from '@/store/vuex_setup';
-import router from '@/router';
 import { snackError } from '@/services/snack';
+import router from '@/router';
+import store from '@/store/vuex_setup';
 
 @Module({ dynamic: true, store, name: ModuleName.User, namespaced: true })
 class UserModule extends VuexModule {

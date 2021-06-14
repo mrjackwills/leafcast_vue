@@ -1,7 +1,7 @@
-import { Module, VuexModule, Mutation, Action, getModule } from 'vuex-module-decorators';
-import store from '@/store/vuex_setup';
-import { su, nu } from '@/types';
+import { Action, getModule, Module, Mutation, VuexModule, } from 'vuex-module-decorators';
 import { ModuleName } from '@/types/enum_module';
+import { su, nu } from '@/types';
+import store from '@/store/vuex_setup';
 
 @Module({ store, name: ModuleName.Snackbar, namespaced: true, dynamic: true, })
 class Snackbar extends VuexModule {

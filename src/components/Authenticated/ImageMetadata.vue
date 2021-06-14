@@ -2,6 +2,8 @@
 
 	<v-row justify='center' align='center' class='mt-3' no-gutters>
 		
+		<app-pi-offline v-if='!piOnline' />
+		
 		<app-display-rows :toDisplay='piInfo' />
 		
 	</v-row>
@@ -11,10 +13,11 @@
 
 import Vue from 'vue';
 import { secondsToText } from '@/vanillaTS/secondsToText';
-import { ImageModule } from '@/store';
+import { ImageModule, PiStatusModule } from '@/store';
 import { convert_bytes } from '@/vanillaTS/convertBytes';
-import { mdiClock, mdiUpdate, mdiAlertCircle, mdiImageSizeSelectLarge, mdiImage, mdiCameraFlip } from '@mdi/js';
-import DisplayRows from '@/components/DisplayRows.vue';
+import { mdiClock, mdiUpdate, mdiImageSizeSelectLarge, mdiImage } from '@mdi/js';
+import DisplayRows from '@/components/Authenticated/DisplayRows.vue';
+import PiOffline from '@/components/Authenticated/PiOffline.vue';
 
 import { TDataToDisplay } from '@/types';
 
@@ -22,7 +25,8 @@ export default Vue.extend({
 	name: 'image-metadata-component',
 
 	components: {
-		AppDisplayRows: DisplayRows
+		AppDisplayRows: DisplayRows,
+		AppPiOffline: PiOffline
 	},
 
 	computed: {
@@ -37,6 +41,9 @@ export default Vue.extend({
 		},
 		intervalToHMS () :string {
 			return secondsToText(this.updateCountdown*1000);
+		},
+		piOnline () :boolean {
+			return PiStatusModule.online;
 		},
 		piInfo (): TDataToDisplay {
 			return [
@@ -71,13 +78,6 @@ export default Vue.extend({
 			return ImageModule.updateCountdown;
 		},
 	},
-
-	data: () => ({
-		mdiClock,
-		mdiAlertCircle,
-		mdiCameraFlip,
-		mdiUpdate,
-	}),
 
 	methods: {
 		convert_bytes (amount: string|number):string {

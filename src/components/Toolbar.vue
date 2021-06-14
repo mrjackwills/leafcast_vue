@@ -9,7 +9,7 @@
 		>
 			<v-toolbar-title
 				:class='spacing'
-				class=' ml-4 unselectable'
+				class='ml-4 unselectable'
 			>
 
 				<v-row align='center' justify='space-around' no-gutters class='pa-0 ma-0'>

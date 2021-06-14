@@ -1,4 +1,4 @@
-import { Module, VuexModule, Mutation, Action, getModule } from 'vuex-module-decorators';
+import { Action, getModule, Module, Mutation, VuexModule, } from 'vuex-module-decorators';
 import { ModuleName } from '@/types/enum_module';
 import store from '@/store/vuex_setup';
 

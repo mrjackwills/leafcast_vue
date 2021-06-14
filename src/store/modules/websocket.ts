@@ -1,6 +1,6 @@
-import { TWSToServer } from '@/types';
-import { Module, VuexModule, Mutation, Action, getModule } from 'vuex-module-decorators';
+import { Action, getModule, Module, Mutation, VuexModule, } from 'vuex-module-decorators';
 import { ModuleName } from '@/types/enum_module';
+import { TWSToServer } from '@/types';
 import { UserModule } from '@/store';
 import { ws } from '@/services/WS';
 import store from '@/store/vuex_setup';

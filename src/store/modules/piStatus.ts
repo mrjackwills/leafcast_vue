@@ -1,4 +1,4 @@
-import { Module, VuexModule, Mutation, Action, getModule } from 'vuex-module-decorators';
+import { Action, getModule, Module, Mutation, VuexModule, } from 'vuex-module-decorators';
 import { ModuleName } from '@/types/enum_module';
 import { su, nu } from '@/types';
 import store from '@/store/vuex_setup';
@@ -13,8 +13,6 @@ class PiStatus extends VuexModule {
 	private _nodeUptime: nu = undefined
 	private _uptime: nu = undefined
 	private _totalFileSize = ''
-	// totalFileSize
-	// numberImages
 
 	get init (): boolean {
 		return this._init;

@@ -55,13 +55,13 @@ import Vue from 'vue';
 import { ImageModule, LoadingModule, PiStatusModule, UserModule, WSModule } from '@/store';
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 import { MetaInfo } from 'vue-meta';
-import { TWSFromPi } from '@/types';
+import { parseMessage } from '@/vanillaTS/messageParser';
+import { snackError } from '@/services/snack';
+import { TWSFromPi, nu } from '@/types';
 import { ws } from '@/services/WS';
 import Image from '@/components/Authenticated/Image.vue';
 import ImageMetadata from '@/components/Authenticated/ImageMetadata.vue';
 import PiInfo from '@/components/Authenticated/PiInfo.vue';
-import { parseMessage } from '@/vanillaTS/messageParser';
-import { snackError } from '@/services/snack';
 
 export default Vue.extend({
 	name: 'home-view',
@@ -92,18 +92,18 @@ export default Vue.extend({
 			}
 		},
 		nodeUptime: {
-			get: function (): number|undefined {
+			get: function (): nu {
 				return PiStatusModule.nodeUptime;
 			},
-			set: function (s: number|undefined): void {
+			set: function (s: nu): void {
 				PiStatusModule.dispatch_nodeUptime(s);
 			}
 		},
 		uptime: {
-			get: function (): number|undefined {
+			get: function (): nu {
 				return PiStatusModule.uptime;
 			},
-			set: function (s: number|undefined): void {
+			set: function (s: nu): void {
 				PiStatusModule.dispatch_uptime(s);
 			}
 		},

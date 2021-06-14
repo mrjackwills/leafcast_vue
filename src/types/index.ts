@@ -30,7 +30,6 @@ export type TSnack = {
 	icon?: string
 	timeout?: number,
 	loading?: boolean,
-	
 }
 
 export type TWSFromPi = { data?: TPhoto, cache?: boolean, unique?: boolean, error?: TError }

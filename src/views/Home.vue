@@ -107,8 +107,13 @@ export default Vue.extend({
 				PiStatusModule.dispatch_uptime(s);
 			}
 		},
-		piInit (): boolean {
-			return PiStatusModule.init;
+		init: {
+			get: function (): boolean {
+				return PiStatusModule.init;
+			},
+			set: function (b: boolean): void {
+				PiStatusModule.dispatch_init(b);
+			}
 		},
 		updateCountdown: {
 			get: function (): number {
@@ -124,7 +129,7 @@ export default Vue.extend({
 	},
 
 	data: () => ({
-		init: false,
+		// init: false,
 		pingInterval: 0,
 		showPiInfo: false,
 		updateInterval: 0,
@@ -245,11 +250,10 @@ export default Vue.extend({
 				PiStatusModule.dispatch_internalIp(message.data.data.piInfo.internalIp);
 				PiStatusModule.dispatch_numberImages(message.data.data.piInfo.numberImages);
 				PiStatusModule.dispatch_online(!message.cache);
-				this.uptime = message.data.data.piInfo.uptime;
-				this.nodeUptime = message.data.data.piInfo.nodeUptime;
 				PiStatusModule.dispatch_piVersion(message.data.data.piInfo.piVersion);
 				PiStatusModule.dispatch_totalFileSize(message.data.data.piInfo.totalFileSize);
-				PiStatusModule.dispatch_init(true);
+				this.uptime = message.data.data.piInfo.uptime;
+				this.nodeUptime = message.data.data.piInfo.nodeUptime;
 				if (!this.init) this.updateInit();
 				this.init = true;
 				this.loading = false;

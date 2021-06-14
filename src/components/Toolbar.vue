@@ -29,7 +29,26 @@
 			<v-spacer />
 
 			<section v-if='authenticated && init'>
-				<v-icon :class='{"pulse-animation": !piOnline}' color='offwhite' class='mr-4' :large='$vuetify.breakpoint.mdAndUp'>{{ icon }}</v-icon>
+
+				<v-tooltip
+					color='#000000'
+					top
+				>
+					<template v-slot:activator='{ on, attrs }'>
+						<v-icon
+							v-bind='attrs'
+							v-on='on'
+							:large='$vuetify.breakpoint.mdAndUp'
+							color='offwhite'
+							class='mr-4'
+						>
+							{{ icon }}
+						</v-icon>
+					</template>
+
+					<span>{{ tooltipText }}</span>
+				</v-tooltip>
+	
 			</section>
 
 			<v-progress-linear
@@ -48,7 +67,7 @@
 
 import Vue from 'vue';
 import { LoadingModule, UserModule, PiStatusModule } from '@/store';
-import { mdiWifi, mdiWifiOff } from '@mdi/js';
+import { mdiWifiArrowUpDown, mdiWifiStrengthAlertOutline } from '@mdi/js';
 
 export default Vue.extend({
 	name: 'Toolbar-component',
@@ -60,14 +79,20 @@ export default Vue.extend({
 		authenticated (): boolean {
 			return UserModule.authenticated;
 		},
+		icon () :string {
+			return this.piOnline ? mdiWifiArrowUpDown : mdiWifiStrengthAlertOutline ;
+		},
+		init () :boolean {
+			return PiStatusModule.init;
+		},
 		loading (): boolean {
 			return LoadingModule.loading;
 		},
 		logoWidth ():string {
 			return this.$vuetify.breakpoint.mdAndUp ? '55px' : '40px';
 		},
-		init () :boolean {
-			return PiStatusModule.init;
+		piOnline ():boolean {
+			return PiStatusModule.online;
 		},
 		spacing (): string {
 			return this.$vuetify.breakpoint.xsOnly? 'text-h6 py-2' : 'text-h4 py-4';
@@ -75,16 +100,13 @@ export default Vue.extend({
 		toolbarHeight (): string {
 			return this.$vuetify.breakpoint.xsOnly ? '56' : '70';
 		},
-		piOnline ():boolean {
-			return PiStatusModule.online;
-		},
-		icon () :string {
-			return this.piOnline ? mdiWifi : mdiWifiOff;
+		tooltipText () :string {
+			return this.piOnline ? 'connected to pi' : 'pi offline';
 		}
+	
 	},
 
 	data: () => ({
-		mdiWifi
 	})
 });
 </script>

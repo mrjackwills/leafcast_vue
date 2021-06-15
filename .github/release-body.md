@@ -1,14 +1,8 @@
-<h2>Release of 0.3.0</h2>
-
-### Features
-+ piOffline component, above imageMetaData, only visible when !piOnline, [93feb3e506ff426822eb6cb2b56ec6ca262d2abe]
-+ tooltip on toolbar icon, [acd9408dbc3cfd1f9214b06beefd45ec909b520a]
+<h2>Release of 0.3.1</h2>
 
 ### Fixes
-+ footer links to github profile rather the vue repo, [0dbc5e2be009539df6c9a23903fb352441affda3]
-
-### Refactors
-+ DisplayRows component moved into authenticated folder, [d4085bee536a8ae4f5ede43291ab1e39a9011bd3]
++ set loading to false on logout, [cf24805826e99b110006bcc5a3d0d4f6d77710d9]
++ only set init in Home.vue, [2ad5df2ccd29cc95fedb701ad8b28c08d600aa43]
 
 
 <br><br>See <a href='https://github.com/mrjackwills/leafcast_vue/blob/main/CHANGELOG.md'>CHANGELOG.md</a> for more details<br>

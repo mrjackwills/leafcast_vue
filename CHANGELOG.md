@@ -1,3 +1,6 @@
+# <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.3.1'>v0.3.1</a>
+#### 2021-06-14
+
 ### Fixes
 + set loading to false on logout, [cf24805826e99b110006bcc5a3d0d4f6d77710d9]
 + only set init in Home.vue, [2ad5df2ccd29cc95fedb701ad8b28c08d600aa43]

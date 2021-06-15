@@ -2,7 +2,7 @@
 
 	<v-row justify='center' align='center' class='mt-3' no-gutters>
 		
-		<app-pi-offline v-if='!piOnline' />
+		<app-pi-offline v-if='!piOnline && init' />
 		
 		<app-display-rows :toDisplay='piInfo' />
 		
@@ -36,8 +36,8 @@ export default Vue.extend({
 		imageSize_original (): number|undefined {
 			return ImageModule.imageSize_original;
 		},
-		timestamp (): number|undefined {
-			return ImageModule.timestamp;
+		init ():boolean {
+			return PiStatusModule.init;
 		},
 		intervalToHMS () :string {
 			return secondsToText(this.updateCountdown*1000);
@@ -73,6 +73,9 @@ export default Vue.extend({
 					}
 				]
 			];
+		},
+		timestamp (): number|undefined {
+			return ImageModule.timestamp;
 		},
 		updateCountdown (): number {
 			return ImageModule.updateCountdown;

@@ -107,8 +107,17 @@ export default Vue.extend({
 				PiStatusModule.dispatch_uptime(s);
 			}
 		},
-		piInit (): boolean {
-			return PiStatusModule.init;
+		// init () :boolean {
+		// 	return PiStatusModule.init;
+
+		// },
+		init: {
+			get: function (): boolean {
+				return PiStatusModule.init;
+			},
+			set: function (b: boolean): void {
+				PiStatusModule.dispatch_init(b);
+			}
 		},
 		updateCountdown: {
 			get: function (): number {
@@ -124,7 +133,6 @@ export default Vue.extend({
 	},
 
 	data: () => ({
-		init: false,
 		pingInterval: 0,
 		showPiInfo: false,
 		updateInterval: 0,
@@ -152,8 +160,8 @@ export default Vue.extend({
 				} catch (e) {
 					snackError(e);
 				}
-
 			});
+
 			this.sendPhoto();
 
 			// PING sever every 30 seconds, to keep client side connection alive
@@ -190,11 +198,8 @@ export default Vue.extend({
 		* */
 		initCheck () : void {
 			this.initTimeout = window.setTimeout(() => {
-				if (this.init) {
-					clearInterval(this.initTimeout);
-				} else {
-					UserModule.dispatch_logout('unable to contact pi');
-				}
+				if (this.init) clearInterval(this.initTimeout);
+				else UserModule.dispatch_logout('unable to contact pi');
 			}, 5000);
 		},
 
@@ -208,7 +213,7 @@ export default Vue.extend({
 			this.loading = true;
 			this.clearAllIntervals();
 			WSModule.dispatch_send({ message: 'force-update' });
-			this.updateInit();
+			this.startInterval();
 		},
 
 		sendPhoto () :void {
@@ -216,7 +221,8 @@ export default Vue.extend({
 			WSModule.dispatch_send({ message: 'photo' });
 		},
 
-		updateInit () :void {
+		startInterval () :void {
+			clearInterval(this.updateInterval);
 			this.updateInterval = window.setInterval(() => {
 				this.updateCountdown --;
 				if (this.nodeUptime) this.nodeUptime ++;
@@ -245,12 +251,11 @@ export default Vue.extend({
 				PiStatusModule.dispatch_internalIp(message.data.data.piInfo.internalIp);
 				PiStatusModule.dispatch_numberImages(message.data.data.piInfo.numberImages);
 				PiStatusModule.dispatch_online(!message.cache);
-				this.uptime = message.data.data.piInfo.uptime;
-				this.nodeUptime = message.data.data.piInfo.nodeUptime;
 				PiStatusModule.dispatch_piVersion(message.data.data.piInfo.piVersion);
 				PiStatusModule.dispatch_totalFileSize(message.data.data.piInfo.totalFileSize);
-				PiStatusModule.dispatch_init(true);
-				if (!this.init) this.updateInit();
+				this.uptime = message.data.data.piInfo.uptime;
+				this.nodeUptime = message.data.data.piInfo.nodeUptime;
+				if (!this.init) this.startInterval();
 				this.init = true;
 				this.loading = false;
 				break;

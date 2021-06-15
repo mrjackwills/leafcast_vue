@@ -58,7 +58,6 @@ class PiStatus extends VuexModule {
 	@Mutation
 	private mutate_online (b: boolean): void {
 		this._online = b;
-		this._init = true;
 	}
 	@Mutation
 	private mutate_nodeUptime (nu: nu): void {

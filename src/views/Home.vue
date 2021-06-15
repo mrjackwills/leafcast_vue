@@ -107,6 +107,10 @@ export default Vue.extend({
 				PiStatusModule.dispatch_uptime(s);
 			}
 		},
+		// init () :boolean {
+		// 	return PiStatusModule.init;
+
+		// },
 		init: {
 			get: function (): boolean {
 				return PiStatusModule.init;
@@ -129,7 +133,6 @@ export default Vue.extend({
 	},
 
 	data: () => ({
-		// init: false,
 		pingInterval: 0,
 		showPiInfo: false,
 		updateInterval: 0,
@@ -157,8 +160,8 @@ export default Vue.extend({
 				} catch (e) {
 					snackError(e);
 				}
-
 			});
+
 			this.sendPhoto();
 
 			// PING sever every 30 seconds, to keep client side connection alive
@@ -195,11 +198,8 @@ export default Vue.extend({
 		* */
 		initCheck () : void {
 			this.initTimeout = window.setTimeout(() => {
-				if (this.init) {
-					clearInterval(this.initTimeout);
-				} else {
-					UserModule.dispatch_logout('unable to contact pi');
-				}
+				if (this.init) clearInterval(this.initTimeout);
+				else UserModule.dispatch_logout('unable to contact pi');
 			}, 5000);
 		},
 
@@ -213,7 +213,7 @@ export default Vue.extend({
 			this.loading = true;
 			this.clearAllIntervals();
 			WSModule.dispatch_send({ message: 'force-update' });
-			this.updateInit();
+			this.startInterval();
 		},
 
 		sendPhoto () :void {
@@ -221,7 +221,8 @@ export default Vue.extend({
 			WSModule.dispatch_send({ message: 'photo' });
 		},
 
-		updateInit () :void {
+		startInterval () :void {
+			clearInterval(this.updateInterval);
 			this.updateInterval = window.setInterval(() => {
 				this.updateCountdown --;
 				if (this.nodeUptime) this.nodeUptime ++;
@@ -254,7 +255,7 @@ export default Vue.extend({
 				PiStatusModule.dispatch_totalFileSize(message.data.data.piInfo.totalFileSize);
 				this.uptime = message.data.data.piInfo.uptime;
 				this.nodeUptime = message.data.data.piInfo.nodeUptime;
-				if (!this.init) this.updateInit();
+				if (!this.init) this.startInterval();
 				this.init = true;
 				this.loading = false;
 				break;

@@ -1,6 +1,6 @@
 import { Action, getModule, Module, Mutation, VuexModule, } from 'vuex-module-decorators';
 import { ModuleName } from '@/types/enum_module';
-import { PiStatusModule, WSModule } from '@/store';
+import { LoadingModule, PiStatusModule, WSModule } from '@/store';
 import { snackError } from '@/services/snack';
 import router from '@/router';
 import store from '@/store/vuex_setup';
@@ -39,6 +39,7 @@ class UserModule extends VuexModule {
 		this.mutate_authenticated(false);
 		PiStatusModule.dispatch_clear();
 		WSModule.dispatch_closeWS();
+		LoadingModule.dispatch_loading(false);
 		if (message) snackError({ message });
 		if (router.currentRoute.name !== 'login') router.push('/login');
 	}

@@ -1,8 +1,10 @@
-<h2>Release of 0.3.1</h2>
+<h2>Release of 0.3.2</h2>
+
+### Chores
++ dependancies updated, [4e781726c5f08d79f83bd28939eec6dede736db1]
 
 ### Fixes
-+ set loading to false on logout, [cf24805826e99b110006bcc5a3d0d4f6d77710d9]
-+ only set init in Home.vue, [2ad5df2ccd29cc95fedb701ad8b28c08d600aa43]
-
++ vh fix class name fixed, [a50c9fcd4966eebb07a810a99e7257c6cc541280]
++ image border radius reduced, [fa2ef8133a577e7035ba6826c070bd8f3d1ce5cb]
 
 <br><br>See <a href='https://github.com/mrjackwills/leafcast_vue/blob/main/CHANGELOG.md'>CHANGELOG.md</a> for more details<br>

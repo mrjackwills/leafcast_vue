@@ -1,5 +1,5 @@
 <template>
-	<v-app container--fluid fill-height class='ma-0 pa-0 gp-full-height' id='leafcast'>
+	<v-app container--fluid fill-height class='ma-0 pa-0 vh-fix' id='leafcast'>
 		<v-main>
 			<v-container
 				class='fill-height'
@@ -139,7 +139,7 @@ export default Vue.extend({
 	border-radius: 3rem;
 }
 
-.gp-full-height ::v-deep .v-application--wrap {
+.vh-fix ::v-deep .v-application--wrap {
 	min-height: 100vh;
 	min-height: calc(var(--vh, 100vh) * 100);
 }

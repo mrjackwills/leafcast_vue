@@ -42,6 +42,10 @@ export default Vue.extend({
 		intervalToHMS () :string {
 			return secondsToText(this.updateCountdown*1000);
 		},
+		ddd () :string {
+			if (!this.timestamp) return '';
+			return this.formatDate(this.timestamp);
+		},
 		piOnline () :boolean {
 			return PiStatusModule.online;
 		},
@@ -51,7 +55,9 @@ export default Vue.extend({
 					{
 						icon: mdiClock,
 						text: 'taken',
-						value: this.timestamp? new Date(this.timestamp).toString().substring(0, 24):'',
+						// This is why?
+						// TODO fix this
+						value: this.ddd,
 					},
 					{
 						icon: mdiUpdate,
@@ -74,19 +80,40 @@ export default Vue.extend({
 				]
 			];
 		},
-		timestamp (): number|undefined {
-			return ImageModule.timestamp;
+		timestamp (): Date|undefined {
+			return ImageModule.timestamp ? new Date(ImageModule.timestamp) : undefined;
 		},
 		updateCountdown (): number {
 			return ImageModule.updateCountdown;
 		},
 	},
 
+	data: () => ({
+		dayOptions: [
+			'Monday',
+			'Tuesday',
+			'Wednesday',
+			'Thursday',
+			'Friday',
+			'Saturday',
+			'Sunday',
+		] as const
+	}),
+
 	methods: {
 		convert_bytes (amount: string|number):string {
 			const a = convert_bytes(amount);
 			return `${a.total} ${a.unit}`;
 		},
+
+		formatDate (data: Date): string {
+			return `${this.dayOptions[data.getDay()]} ${data.getFullYear()}-${this.zeroPad(data.getMonth() + 1)}-${this.zeroPad(data.getDate())} @ ${this.zeroPad(data.getHours())}:${this.zeroPad(data.getMinutes())}:${this.zeroPad(data.getSeconds())}`;
+		},
+
+		zeroPad (unit: number): string {
+			return String(unit).padStart(2, '0');
+		}
+		
 	},
 
 });

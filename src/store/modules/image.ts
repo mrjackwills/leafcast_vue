@@ -8,7 +8,7 @@ class Loading extends VuexModule {
 	private _image = ''
 	private _imageSize_compressed?: number
 	private _imageSize_original?: number
-	private _timestamp?: number
+	private _timestamp?: string
 	private _updateCountdown = 300
 
 	get cached (): boolean {
@@ -20,7 +20,7 @@ class Loading extends VuexModule {
 	get imageExists (): boolean {
 		return !!this._image;
 	}
-	get timestamp (): number|undefined {
+	get timestamp (): string|undefined {
 		return this._timestamp;
 	}
 	get imageSize_compressed (): number|undefined {
@@ -50,8 +50,8 @@ class Loading extends VuexModule {
 		this._imageSize_original = b;
 	}
 	@Mutation
-	private mutate_timestamp (b: number): void {
-		this._timestamp = b;
+	private mutate_timestamp (s: string): void {
+		this._timestamp = s;
 	}
 	@Mutation
 	private mutate_updateCountdown (b: number): void {
@@ -75,8 +75,8 @@ class Loading extends VuexModule {
 		this.mutate_imageSize_original(b);
 	}
 	@Action
-	dispatch_timestamp (b: number): void {
-		this.mutate_timestamp(b);
+	dispatch_timestamp (s: string): void {
+		this.mutate_timestamp(s);
 	}
 	@Action
 	dispatch_updateCountdown (b: number): void {

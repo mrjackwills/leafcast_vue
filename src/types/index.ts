@@ -13,7 +13,7 @@ export type TDataToDisplay = Array<Array< { [ K in 'icon' | 'text' | 'value' ]: 
 
 export type TError = { message: string, code: number }
 
-export type TPhoto = { message: 'photo', data: { image?: string, timestamp: number, imageSize_compressed?: number, imageSize_original? :number, piInfo: TPiStatus } }
+export type TPhoto = { message: 'photo', data: { image?: string, timestamp: string, imageSize_compressed?: number, imageSize_original? :number, piInfo: TPiStatus } }
 
 export type TPiStatus = { [ K in 'internalIp' | 'piVersion' | 'totalFileSize'] : string } & {[ K in 'uptime' | 'nodeUptime' | 'numberImages' ] : number }
 

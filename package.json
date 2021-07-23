@@ -1,7 +1,7 @@
 {
   "name": "leafcast_vue",
   "description": "frontend site for leafcast service",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "private": false,
   "homepage": "https://github.com/mrjackwills/leafcast_vue",
   "license": "MIT",
@@ -58,5 +58,5 @@
     "vuex-module-decorators": "^1.0.1",
     "webpack-bundle-analyzer": "^4.4.2"
   },
-  "buildDate": "Wed Jul 21 2021 13:51:07 GMT-0400 (Eastern Daylight Time)"
+  "buildDate": "Fri Jul 23 2021 13:46:08 GMT-0400 (Eastern Daylight Time)"
 }

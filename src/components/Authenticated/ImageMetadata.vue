@@ -90,13 +90,13 @@ export default Vue.extend({
 
 	data: () => ({
 		dayOptions: [
+			'Sunday',
 			'Monday',
 			'Tuesday',
 			'Wednesday',
 			'Thursday',
 			'Friday',
 			'Saturday',
-			'Sunday',
 		] as const
 	}),
 

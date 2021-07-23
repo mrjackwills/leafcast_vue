@@ -1,3 +1,6 @@
+# <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.4.1'>v0.4.1</a>
+#### 2021-07-23
+
 ### Fixes
 + ImageMetaData.vue - set Sunday as day 0
 

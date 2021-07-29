@@ -155,8 +155,6 @@ export default Vue.extend({
 			// This now might be a data, isBinary>?
 			ws?.connection?.addEventListener('message', (data) => {
 				try {
-					// eslint-disable-next-line no-console
-					console.log(data);
 					const message = parseMessage(data.data);
 					if (!message) throw Error(`can't parse message`);
 					this.wsDataHandler(message);

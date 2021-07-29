@@ -33,7 +33,6 @@ class WS extends VuexModule {
 	@Action
 	dispatch_closeWS (): void {
 		this.mutate_connected(false);
-		ws?.connection?.removeEventListener('message', undefined);
 		ws?.connection?.close();
 	}
 	@Action

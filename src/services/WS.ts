@@ -1,5 +1,4 @@
 import { UserModule } from '@/store';
-import WebSocket from 'isomorphic-ws';
 
 export class CreateWs {
 	#ws?: WebSocket

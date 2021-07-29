@@ -152,6 +152,7 @@ export default Vue.extend({
 		 * Create handlers for all ws events
 		 */
 		addHandlers (): void {
+			// This now might be a data, isBinary>?
 			ws?.connection?.addEventListener('message', (data) => {
 				try {
 					const message = parseMessage(data.data);

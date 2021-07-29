@@ -1,3 +1,15 @@
+# <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.5.0'>v0.5.0</a>
+#### 2021-07-29
+
+### Chores
++ dependancies updated, [d6ddacff0a15bb7f7effd8f386d7e6bad0defa53]
+
+### Features
++ use browser WebSocket instead of ws, [9beed907ad449828bfd85663fd4f4e0e7cc93d33]
+
+### Refactors
++ unused dependancies removed, [957c32920cff89715862aab5ac4362f7f4a9da1b]
+
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.4.1'>v0.4.1</a>
 #### 2021-07-23
 

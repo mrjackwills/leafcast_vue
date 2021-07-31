@@ -1,12 +1,10 @@
-<h2>Release of 0.5.0</h2>
+<h2>Release of 0.5.1</h2>
 
 ### Chores
-+ dependancies updated, [d6ddacff0a15bb7f7effd8f386d7e6bad0defa53]
++ dependancies updated, [7be3cd1472effad391a2199d9edbdf860d6b8f2d]
 
-### Features
-+ use browser WebSocket instead of ws, [9beed907ad449828bfd85663fd4f4e0e7cc93d33]
+### Fixes
++ DisplayRows.vue width increased, [68a0560260b280d82db3a8496b7ba6d951f17b2e]
 
-### Refactors
-+ unused dependancies removed, [957c32920cff89715862aab5ac4362f7f4a9da1b]
 
 <br><br>See <a href='https://github.com/mrjackwills/leafcast_vue/blob/main/CHANGELOG.md'>CHANGELOG.md</a> for more details<br>

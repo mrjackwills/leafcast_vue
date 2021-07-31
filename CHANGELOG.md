@@ -1,3 +1,6 @@
+# <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.5.1'>v0.5.1</a>
+#### 2021-07-31
+
 ### Chores
 + dependancies updated, [7be3cd1472effad391a2199d9edbdf860d6b8f2d]
 

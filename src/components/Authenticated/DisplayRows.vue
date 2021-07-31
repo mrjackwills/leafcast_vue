@@ -1,5 +1,5 @@
 <template>
-	<v-col cols='11' sm='9'  xl='8' class='text-center white--text text--body-1 mt-2'>
+	<v-col cols='11' md='9' class='text-center white--text text--body-1 mt-2'>
 
 		<section v-for='(row, index) in toDisplay' :key='index'>
 

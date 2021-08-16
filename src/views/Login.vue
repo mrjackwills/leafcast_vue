@@ -56,7 +56,7 @@ export default Vue.extend({
 	name: 'login-view',
 
 	computed: {
-		appendIcon () :string {
+		appendIcon (): string {
 			return this.password ? this.passwordVisible ? mdiEyeOff: mdiEye : '';
 		},
 		fieldType (): string {

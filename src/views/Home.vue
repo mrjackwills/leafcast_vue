@@ -80,7 +80,7 @@ export default Vue.extend({
 		imageExists (): boolean {
 			return ImageModule.imageExists;
 		},
-		infoIcon () :string {
+		infoIcon (): string {
 			return this.showPiInfo ? mdiChevronUp: mdiChevronDown;
 		},
 		loading: {
@@ -107,10 +107,6 @@ export default Vue.extend({
 				PiStatusModule.dispatch_uptime(s);
 			}
 		},
-		// init () :boolean {
-		// 	return PiStatusModule.init;
-
-		// },
 		init: {
 			get: function (): boolean {
 				return PiStatusModule.init;
@@ -197,7 +193,7 @@ export default Vue.extend({
 		/**
 		* If a message isn't received within the first 5000ms of being mounted, logout
 		* */
-		initCheck () : void {
+		initCheck (): void {
 			this.initTimeout = window.setTimeout(() => {
 				if (this.init) clearInterval(this.initTimeout);
 				else UserModule.dispatch_logout('unable to contact pi');
@@ -217,12 +213,12 @@ export default Vue.extend({
 			this.startInterval();
 		},
 
-		sendPhoto () :void {
+		sendPhoto (): void {
 			this.loading = true;
 			WSModule.dispatch_send({ message: 'photo' });
 		},
 
-		startInterval () :void {
+		startInterval (): void {
 			clearInterval(this.updateInterval);
 			this.updateInterval = window.setInterval(() => {
 				this.updateCountdown --;

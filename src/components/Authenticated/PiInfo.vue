@@ -57,19 +57,19 @@ export default Vue.extend({
 	},
 
 	computed: {
-		internalIp () :string|undefined {
+		internalIp (): string|undefined {
 			return PiStatusModule.internalIp;
 		},
 		loading (): boolean {
 			return LoadingModule.loading;
 		},
-		nodeUptime () :number|undefined {
+		nodeUptime (): number|undefined {
 			return PiStatusModule.nodeUptime;
 		},
-		uptime () :number|undefined {
+		uptime (): number|undefined {
 			return PiStatusModule.uptime;
 		},
-		piOnline () :boolean {
+		piOnline (): boolean {
 			return PiStatusModule.online;
 		},
 		piVersion ():string|undefined {

@@ -69,7 +69,7 @@ class Snackbar extends VuexModule {
 		this.mutate_visible(b);
 	}
 	@Action
-	dispatch_reset () : void {
+	dispatch_reset (): void {
 		this.mutate_loading(false);
 		this.mutate_icon(undefined);
 		this.mutate_message(undefined);

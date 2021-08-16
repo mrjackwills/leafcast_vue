@@ -61,7 +61,7 @@ export default Vue.extend({
 			get (): boolean {
 				return SnackModule.visible;
 			},
-			set (b: boolean) : void {
+			set (b: boolean): void {
 				SnackModule.dispatch_visible(b);
 			}
 		},

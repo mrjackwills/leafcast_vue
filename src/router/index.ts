@@ -25,7 +25,7 @@ export default new Router({
 			path: '/',
 			name: 'home',
 			component: Home,
-			beforeEnter: (_to, _from, next) :void => {
+			beforeEnter: (_to, _from, next): void => {
 				const isAuthenticated = UserModule.authenticated;
 				if (!isAuthenticated) next('/login');
 				else next();

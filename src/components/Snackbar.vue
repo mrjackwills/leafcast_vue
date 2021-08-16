@@ -27,8 +27,10 @@
 import Vue from 'vue';
 import { su, nu } from '@/types';
 import { SnackModule } from '@/store';
+
 export default Vue.extend({
 	name: 'snackbar-component',
+
 	computed: {
 		message: {
 			get (): su {
@@ -66,9 +68,11 @@ export default Vue.extend({
 			}
 		},
 	},
+
 	data: () => ({
 		timeout: 0
 	}),
+
 	methods: {
 		closeSnackbar (): void {
 			this.visible = false;
@@ -77,6 +81,7 @@ export default Vue.extend({
 			this.timeout = 0;
 		}
 	},
+	
 	watch: {
 		visible (i): void {
 			if (i && this.snackTimeout) this.timeout = window.setTimeout(() => {

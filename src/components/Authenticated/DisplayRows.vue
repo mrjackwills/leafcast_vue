@@ -44,8 +44,6 @@ export default Vue.extend({
 		appDivider: Divider
 	},
 
-	data: () => ({}),
-	
 	props: {
 		toDisplay: {
 			type: Array as () => TDataToDisplay,

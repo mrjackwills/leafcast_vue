@@ -15,7 +15,7 @@ export type TError = { message: string, code: number }
 
 export type TPhoto = { message: 'photo', data: { image?: string, timestamp: string, imageSize_compressed?: number, imageSize_original? :number, piInfo: TPiStatus } }
 
-export type TPiStatus = { [ K in 'internalIp' | 'piVersion' | 'totalFileSize'] : string } & {[ K in 'uptime' | 'nodeUptime' | 'numberImages' ] : number }
+export type TPiStatus = { [ K in 'internalIp' | 'piVersion' | 'totalFileSize']: string } & { [ K in 'uptime' | 'nodeUptime' | 'numberImages' ]: number }
 
 export type TSnackbarModule = {
 	loading: boolean,

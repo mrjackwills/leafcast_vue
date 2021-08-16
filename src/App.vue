@@ -14,7 +14,7 @@
 							<app-toolbar />
 							<v-card-text class=''>
 								<v-fade-transition group hide-on-leave>
-									<router-view key='a'/>
+									<router-view key='a' />
 								</v-fade-transition>
 							</v-card-text>
 						</v-card>
@@ -112,7 +112,7 @@ export default Vue.extend({
 			}
 		},
 
-		logout (message = 'you have been logged out') :void {
+		logout (message = 'you have been logged out'): void {
 			UserModule.dispatch_logout(message);
 		}
 

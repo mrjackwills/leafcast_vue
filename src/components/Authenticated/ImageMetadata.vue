@@ -30,7 +30,7 @@ export default Vue.extend({
 	},
 
 	computed: {
-		imageSize_compressed () : number|undefined {
+		imageSize_compressed (): number|undefined {
 			return ImageModule.imageSize_compressed;
 		},
 		imageSize_original (): number|undefined {
@@ -39,14 +39,14 @@ export default Vue.extend({
 		init ():boolean {
 			return PiStatusModule.init;
 		},
-		intervalToHMS () :string {
+		intervalToHMS (): string {
 			return secondsToText(this.updateCountdown*1000);
 		},
-		ddd () :string {
+		ddd (): string {
 			if (!this.timestamp) return '';
 			return this.formatDate(this.timestamp);
 		},
-		piOnline () :boolean {
+		piOnline (): boolean {
 			return PiStatusModule.online;
 		},
 		piInfo (): TDataToDisplay {

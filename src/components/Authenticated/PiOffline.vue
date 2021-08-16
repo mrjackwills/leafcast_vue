@@ -33,12 +33,6 @@ import { mdiAlertCircle } from '@mdi/js';
 export default Vue.extend({
 	name: 'pi-offline-component',
 
-	components: {
-	},
-
-	computed: {
-	},
-
 	data: () => ({
 		mdiAlertCircle,
 	}),

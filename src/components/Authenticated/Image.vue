@@ -14,8 +14,9 @@ import { ImageModule } from '@/store';
 
 export default Vue.extend({
 	name: 'image-component',
+	
 	computed: {
-		image () : string {
+		image (): string {
 			return ImageModule.image;
 		},
 	},

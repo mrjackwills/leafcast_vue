@@ -106,7 +106,7 @@ class PiStatus extends VuexModule {
 	}
 
 	@Action
-	dispatch_clear () :void {
+	dispatch_clear (): void {
 		this.mutate_init(false);
 		this.mutate_internalIp(undefined);
 		this.mutate_numberImages(0);

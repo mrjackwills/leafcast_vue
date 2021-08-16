@@ -27,7 +27,7 @@
 						small
 						rounded
 					>
-						<v-row align='center' justify='center' class='ma-0 pa-0' id=''>
+						<v-row align='center' justify='center' class='ma-0 pa-0'>
 							<v-col cols='auto' class='ma-0 pa-0'>
 								<v-icon class='mr-1'>{{ infoIcon }}</v-icon>
 							</v-col>
@@ -40,7 +40,7 @@
 
 				<v-col cols='12'>
 					<v-expand-transition>
-						<app-pi-info v-if='showPiInfo' @refresh='refresh'  />
+						<app-pi-info v-if='showPiInfo' @refresh='refresh' />
 					</v-expand-transition>
 				</v-col>
 
@@ -80,7 +80,7 @@ export default Vue.extend({
 		imageExists (): boolean {
 			return ImageModule.imageExists;
 		},
-		infoIcon () :string {
+		infoIcon (): string {
 			return this.showPiInfo ? mdiChevronUp: mdiChevronDown;
 		},
 		loading: {
@@ -107,10 +107,6 @@ export default Vue.extend({
 				PiStatusModule.dispatch_uptime(s);
 			}
 		},
-		// init () :boolean {
-		// 	return PiStatusModule.init;
-
-		// },
 		init: {
 			get: function (): boolean {
 				return PiStatusModule.init;
@@ -152,8 +148,7 @@ export default Vue.extend({
 		 * Create handlers for all ws events
 		 */
 		addHandlers (): void {
-			// This now might be a data, isBinary>?
-			ws?.connection?.addEventListener('message', (data) => {
+			ws.connection?.addEventListener('message', (data) => {
 				try {
 					const message = parseMessage(data.data);
 					if (!message) throw Error(`can't parse message`);
@@ -171,7 +166,7 @@ export default Vue.extend({
 			}, 1000 * 30);
 			
 			// Although should never have the connection killed
-			ws?.connection?.addEventListener('close', (_event) => {
+			ws.connection?.addEventListener('close', (_event) => {
 				UserModule.dispatch_logout();
 			});
 		},
@@ -197,7 +192,7 @@ export default Vue.extend({
 		/**
 		* If a message isn't received within the first 5000ms of being mounted, logout
 		* */
-		initCheck () : void {
+		initCheck (): void {
 			this.initTimeout = window.setTimeout(() => {
 				if (this.init) clearInterval(this.initTimeout);
 				else UserModule.dispatch_logout('unable to contact pi');
@@ -217,12 +212,12 @@ export default Vue.extend({
 			this.startInterval();
 		},
 
-		sendPhoto () :void {
+		sendPhoto (): void {
 			this.loading = true;
 			WSModule.dispatch_send({ message: 'photo' });
 		},
 
-		startInterval () :void {
+		startInterval (): void {
 			clearInterval(this.updateInterval);
 			this.updateInterval = window.setInterval(() => {
 				this.updateCountdown --;

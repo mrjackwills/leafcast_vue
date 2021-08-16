@@ -79,10 +79,10 @@ export default Vue.extend({
 		authenticated (): boolean {
 			return UserModule.authenticated;
 		},
-		icon () :string {
+		icon (): string {
 			return this.piOnline ? mdiWifiArrowUpDown : mdiWifiStrengthAlertOutline ;
 		},
-		init () :boolean {
+		init (): boolean {
 			return PiStatusModule.init;
 		},
 		loading (): boolean {
@@ -100,7 +100,7 @@ export default Vue.extend({
 		toolbarHeight (): string {
 			return this.$vuetify.breakpoint.xsOnly ? '56' : '70';
 		},
-		tooltipText () :string {
+		tooltipText (): string {
 			return this.piOnline ? 'connected to pi' : 'pi offline';
 		}
 	

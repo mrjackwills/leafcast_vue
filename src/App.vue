@@ -14,7 +14,7 @@
 							<app-toolbar />
 							<v-card-text class=''>
 								<v-fade-transition group hide-on-leave>
-									<router-view key='a'/>
+									<router-view key='a' />
 								</v-fade-transition>
 							</v-card-text>
 						</v-card>

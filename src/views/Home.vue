@@ -27,7 +27,7 @@
 						small
 						rounded
 					>
-						<v-row align='center' justify='center' class='ma-0 pa-0' id=''>
+						<v-row align='center' justify='center' class='ma-0 pa-0'>
 							<v-col cols='auto' class='ma-0 pa-0'>
 								<v-icon class='mr-1'>{{ infoIcon }}</v-icon>
 							</v-col>
@@ -40,7 +40,7 @@
 
 				<v-col cols='12'>
 					<v-expand-transition>
-						<app-pi-info v-if='showPiInfo' @refresh='refresh'  />
+						<app-pi-info v-if='showPiInfo' @refresh='refresh' />
 					</v-expand-transition>
 				</v-col>
 
@@ -149,7 +149,7 @@ export default Vue.extend({
 		 */
 		addHandlers (): void {
 			// This now might be a data, isBinary>?
-			ws?.connection?.addEventListener('message', (data) => {
+			ws.connection?.addEventListener('message', (data) => {
 				try {
 					const message = parseMessage(data.data);
 					if (!message) throw Error(`can't parse message`);
@@ -167,7 +167,7 @@ export default Vue.extend({
 			}, 1000 * 30);
 			
 			// Although should never have the connection killed
-			ws?.connection?.addEventListener('close', (_event) => {
+			ws.connection?.addEventListener('close', (_event) => {
 				UserModule.dispatch_logout();
 			});
 		},

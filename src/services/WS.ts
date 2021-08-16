@@ -12,6 +12,10 @@ export class CreateWs {
 			this.#ws = new WebSocket(`${process.env.VUE_APP_WSS_ADDRESS}/${password}`, [ process.env.VUE_APP_APIKEY ]);
 		}
 	}
+
+	closeWs (): void {
+		this.#ws?.close();
+	}
 }
 
 export const ws = new CreateWs();

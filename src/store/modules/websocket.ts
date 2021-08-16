@@ -22,7 +22,7 @@ class WS extends VuexModule {
 	dispatch_openWs (password: string): void {
 		if (!UserModule.authenticated) return;
 		ws.openWs(password);
-		ws?.connection?.addEventListener('open', () => {
+		ws.connection?.addEventListener('open', () => {
 			this.dispatch_connected(true);
 		});
 	}
@@ -33,11 +33,11 @@ class WS extends VuexModule {
 	@Action
 	dispatch_closeWS (): void {
 		this.mutate_connected(false);
-		ws?.connection?.close();
+		ws.closeWs();
 	}
 	@Action
 	dispatch_send (data: TWSToServer): void {
-		ws?.connection?.send(JSON.stringify({ data, unique: true }));
+		ws.connection?.send(JSON.stringify({ data, unique: true }));
 	}
 	@Action
 	dispatch_ping (): void {

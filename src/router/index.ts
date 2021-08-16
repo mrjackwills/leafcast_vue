@@ -1,5 +1,3 @@
-import Home from '@/views/Home.vue';
-import Login from '@/views/Login.vue';
 import Router from 'vue-router';
 import Vue from 'vue';
 
@@ -14,7 +12,8 @@ export default new Router({
 		{
 			path: '/login',
 			name: 'login',
-			component: Login,
+			// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+			component: () => import(/* webpackChunkName: "n" */ '@/views/Login.vue'),
 			beforeEnter: (_to, _from, next): void => {
 				const isAuthenticated = UserModule.authenticated;
 				if (isAuthenticated) next('/');
@@ -24,7 +23,8 @@ export default new Router({
 		{
 			path: '/',
 			name: 'home',
-			component: Home,
+			// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+			component: () => import(/* webpackChunkName: "n" */ '@/views/Home.vue'),
 			beforeEnter: (_to, _from, next): void => {
 				const isAuthenticated = UserModule.authenticated;
 				if (!isAuthenticated) next('/login');

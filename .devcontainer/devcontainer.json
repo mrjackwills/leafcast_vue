@@ -1,0 +1,46 @@
+/**
+* wsl dns issues
+* sudo /etc//etc/docker/daemon.json
+* {
+* "dns": ["1.1.1.1", "8.8.8.8"]
+* }
+*/
+
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.202.1/containers/typescript-node
+{
+	"name": "Node.js & TypeScript",
+	"runArgs": ["--init"],
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": { 
+			"VARIANT": "16",
+		},
+	},
+
+	"mounts": [
+		"source=/etc/timezone,target=/etc/timezone,type=bind,readonly",
+		"source=/etc/localtime,target=/etc/localtime,type=bind,readonly"
+	],
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": {},
+	
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"dbaeumer.vscode-eslint",
+		"octref.vetur",
+		"meganrogge.template-string-converter",
+		"bungcip.better-toml",
+		"wix.vscode-import-cost",
+		"christian-kohler.path-intellisense",
+		"timonwong.shellcheck"
+	],
+
+
+	"remoteUser": "node",
+	"features": {
+		"docker-in-docker": "latest",
+		"git": "latest"
+	}
+}

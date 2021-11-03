@@ -1,6 +1,6 @@
 import { snackError, snackReset } from './snack';
 import { UserModule, WSModule, } from '@/store';
-import Axios, { AxiosInstance } from 'axios';
+import Axios, { AxiosError, AxiosInstance } from 'axios';
 
 const wrap = <T> () => {
 	return function (_target: AxiosRequests, _propertyKey: string, descriptor: PropertyDescriptor): void {
@@ -9,7 +9,8 @@ const wrap = <T> () => {
 			try {
 				const result = await original.call(this, t);
 				return result;
-			} catch (e) {
+			} catch (err) {
+				const e = <AxiosError>err;
 				if (e.message === 'offline') snackError({ message: 'server offline' });
 				else if (e.response?.status === 429) {
 					const converted = Math.ceil(e.response.data.response / 1000);

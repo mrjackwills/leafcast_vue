@@ -154,7 +154,8 @@ export default Vue.extend({
 					if (!message) throw Error(`can't parse message`);
 					this.wsDataHandler(message);
 				} catch (e) {
-					snackError(e);
+					const message = e instanceof Error ? e.message : 'ERROR';
+					snackError({ message });
 				}
 			});
 

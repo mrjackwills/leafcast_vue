@@ -121,9 +121,9 @@ ask_changelog_update() {
 update_release_body_and_changelog () {
 	GIT_REPO_URL=$(get_git_remote_url)
 	CHANGELOG_ADDITION="# <a href='${GIT_REPO_URL}/releases/tag/${NEW_TAG_VERSION}'>${NEW_TAG_VERSION}</a>\n#### $(date +'%Y-%m-%d')\n\n"
-	REALEASE_BODY_ADDITION="$CHANGELOG_ADDITION$1"
-	printf "%s\n\nsee <a href='%s/blob/main/CHANGELOG.md'> CHANGELOG.md</a> for more details" "${REALEASE_BODY_ADDITION}" "${GIT_REPO_URL}"> .github/release-body.md
-	echo "${CHANGELOG_ADDITION}$(cat CHANGELOG.md)" > CHANGELOG.md
+	RELEASE_BODY_ADDITION="$CHANGELOG_ADDITION$1"
+	echo -e "${RELEASE_BODY_ADDITION}\n\nsee <a href='${GIT_REPO_URL}/blob/main/CHANGELOG.md'> CHANGELOG.md</a> for more details" > .github/release-body.md
+	echo -e "${CHANGELOG_ADDITION}$(cat CHANGELOG.md)" > CHANGELOG.md
 }
 
 # $1 new_version

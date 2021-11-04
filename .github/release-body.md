@@ -1,17 +1,11 @@
-<h2>Release of 0.6.0</h2>
+# <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.6.1'>v0.6.1</a>
+#### 2021-11-03
 
 ### Chores
-+ dependancies updated, [581766c779c4f6e19e355fcca6f97896e8b6b774]
++ npm update, [96060cbff2382ef4746f887e462d6d239b05af4c]
 
 ### Features
-+ router use dynamic imports for component views, [e42eef6b04b7a517a805f8d99a2457b16b911cac]
-+ ws class public closeWs method, [80e8c0266e2ce336fe407099f99b15d8018346a9]
++ devcontainer added, [6a7c05d7312b50938c2b6abe233283c2777efcd5]
++ release.sh added, [1757c9930483cf9aa8febe02668d1bf29630a8cc] & [213987b1a93540b66fee6277c6208111049ce071]
 
-### Refactors
-+ dead code removed, [2366c327570cbdea707cc8b4e76ce573add2d6c2]
-
-### Styles
-+ function return typescript syntax unified, [5bc0cc46157d850e68c61e3e9ae19de5f7c4abea]
-
-
-<br><br>See <a href='https://github.com/mrjackwills/leafcast_vue/blob/main/CHANGELOG.md'>CHANGELOG.md</a> for more details<br>
+see <a href='https://github.com/mrjackwills/leafcast_vue/blob/main/CHANGELOG.md'> CHANGELOG.md</a> for more details

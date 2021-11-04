@@ -1,3 +1,6 @@
+# <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.6.1'>v0.6.1</a>
+#### 2021-11-03
+
 ### Chores
 + npm update, [96060cbff2382ef4746f887e462d6d239b05af4c]
 

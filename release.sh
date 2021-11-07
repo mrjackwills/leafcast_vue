@@ -62,10 +62,10 @@ update_api_version_ts () {
 # $1 package_name
 # $2 new_version
 update_yaml () {
-	DOCKER_COMPOSE=./src/config/api_version.ts
+	DOCKER_COMPOSE="./docker-compose.yml"
 	if [[ -f "$DOCKER_COMPOSE" ]]
 	then
-		yq e -i ".services.$1.image = \"$1:${2:1}\"" docker-compose.yml
+		yq e -i ".services.$1.image = \"$1:${2:1}\"" "${DOCKER_COMPOSE}"
 	fi
 }
 
@@ -98,13 +98,11 @@ check_git() {
 	GIT_CLEAN=$(git status --porcelain)
 	if [[ -n $GIT_CLEAN ]]
 	then
-		printf "\ngit dirty\n\n"
-		exit
+		error_close "git dirty"
 	fi
 	if [[ ! "$CURRENT_GIT_BRANCH" =~ ^dev$ ]]
 	then
-		printf "\nnot on dev branch\n\n"
-		exit
+		error_close "not on dev branch"
 	fi
 }
 
@@ -135,7 +133,7 @@ update_release_body_and_changelog () {
 
 # $1 new_version
 update () {
-	PACKAGE_JSON=package.json
+	PACKAGE_JSON="package.json"
 	update_package_files "$1" "$PACKAGE_JSON" "$PACKAGE_NAME"
 }
 

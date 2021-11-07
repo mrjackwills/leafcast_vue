@@ -42,6 +42,12 @@ import debounce from 'lodash/debounce';
 export default Vue.extend({
 	name: 'leafcast-app',
 
+	beforeCreate () {
+		window.addEventListener('beforeinstallprompt', (e) => {
+			e.preventDefault();
+		});
+	},
+	
 	async beforeDestroy () {
 		document.removeEventListener('updateEvent', this.appUpdate);
 	},

@@ -1,11 +1,17 @@
 #!/bin/bash
+# Colours for echo
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+RESET='\033[0m'
 
 PACKAGE_NAME='mealpedant_backup_pi'
 STAR_LINE='****************************************'
 
 # $1 string - error message
 error_close() {
-	echo -e "\n${RED}ERROR: ${YELLOW}$1${RESET}\n";
+	echo -e "\n${RED}ERROR - EXITED: ${YELLOW}$1${RESET}\n";
 	exit 1
 }
 
@@ -56,10 +62,10 @@ update_api_version_ts () {
 # $1 package_name
 # $2 new_version
 update_yaml () {
-	DOCKER_COMPOSE=./src/config/api_version.ts
+	DOCKER_COMPOSE="./docker-compose.yml"
 	if [[ -f "$DOCKER_COMPOSE" ]]
 	then
-		yq e -i ".services.$1.image = \"$1:${2:1}\"" docker-compose.yml
+		yq e -i ".services.$1.image = \"$1:${2:1}\"" "${DOCKER_COMPOSE}"
 	fi
 }
 
@@ -92,20 +98,18 @@ check_git() {
 	GIT_CLEAN=$(git status --porcelain)
 	if [[ -n $GIT_CLEAN ]]
 	then
-		printf "\ngit dirty\n\n"
-		exit
+		error_close "git dirty"
 	fi
 	if [[ ! "$CURRENT_GIT_BRANCH" =~ ^dev$ ]]
 	then
-		printf "\nnot on dev branch\n\n"
-		exit
+		error_close "not on dev branch"
 	fi
 }
 
 ask_changelog_update() {
 	echo "${STAR_LINE}"
 	RELEASE_BODY_TEXT=$(sed '/# <a href=/Q' CHANGELOG.md)
-	printf "%s" "$RELEASE_BODY_TEXT\n"
+	printf "%s" "$RELEASE_BODY_TEXT"
 	printf "\n%s\n" "${STAR_LINE}"
 	ask_yn "accept release body"
 	if [[ "$(user_input)" =~ ^y$ ]] 
@@ -116,23 +120,25 @@ ask_changelog_update() {
 	fi
 }
 
+
 # $1 RELEASE_BODY
-# $2 NEW_TAG_VERSION
 update_release_body_and_changelog () {
-	GIT_REPO_URL=$(get_git_remote_url)
+	echo -e
 	CHANGELOG_ADDITION="# <a href='${GIT_REPO_URL}/releases/tag/${NEW_TAG_VERSION}'>${NEW_TAG_VERSION}</a>\n#### $(date +'%Y-%m-%d')\n\n"
 	RELEASE_BODY_ADDITION="$CHANGELOG_ADDITION$1"
 	echo -e "${RELEASE_BODY_ADDITION}\n\nsee <a href='${GIT_REPO_URL}/blob/main/CHANGELOG.md'> CHANGELOG.md</a> for more details" > .github/release-body.md
 	echo -e "${CHANGELOG_ADDITION}$(cat CHANGELOG.md)" > CHANGELOG.md
+	sed -i -E "s|(\s)([0-9a-f]{40})| [\2](${GIT_REPO_URL}/commit/\2)|g" ./CHANGELOG.md
 }
 
 # $1 new_version
 update () {
-	PACKAGE_JSON=package.json
+	PACKAGE_JSON="package.json"
 	update_package_files "$1" "$PACKAGE_JSON" "$PACKAGE_NAME"
 }
 
 check_tag () {
+	 echo -e "${YELLOW}Choose new tag version:${RESET}\n"
 	LATEST_TAG=$(git describe --tags --abbrev=0 --always)
 	if [[ $LATEST_TAG =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-((0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*)(\.(0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*))*))?(\+([0-9a-zA-Z-]+(\.[0-9a-zA-Z-]+)*))?$ ]]
 	then
@@ -153,16 +159,16 @@ check_tag () {
 	do
 		case $choice in
 			"$OP_MAJOR" )
-				echo "$MAJOR_TAG"
+				NEW_TAG_VERSION="$MAJOR_TAG"
 				break;;
 			"$OP_MINOR")
-				echo "$MINOR_TAG"
+				NEW_TAG_VERSION="$MINOR_TAG"
 				break;;
 			"$OP_PATCH")
-				echo "$PATCH_TAG"
+				NEW_TAG_VERSION="$PATCH_TAG"
 				break;;
 			*)
-				echo "invalid option $REPLY"
+				error_close "invalid option $REPLY"
 				break;;
 		esac
 	done
@@ -178,8 +184,8 @@ vue_build () {
 
 release_flow() {
 	check_git
-	printf "Choose new tag version:\n\n"
-	NEW_TAG_VERSION=$(check_tag)
+	GIT_REPO_URL=$(get_git_remote_url)
+	check_tag
 	printf "\nnew tag chosen: %s\n\n" "${NEW_TAG_VERSION}"
 	RELEASE_BRANCH=release-$NEW_TAG_VERSION
 	echo -e

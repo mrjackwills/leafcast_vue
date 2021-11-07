@@ -129,11 +129,12 @@ export default Vue.extend({
 	},
 
 	data: () => ({
+		initCount: 0,
+		initTimeout: 0,
+		pageTitle: '',
 		pingInterval: 0,
 		showPiInfo: false,
 		updateInterval: 0,
-		pageTitle: '',
-		initTimeout: 0
 	}),
 
 	metaInfo (): MetaInfo {
@@ -191,13 +192,19 @@ export default Vue.extend({
 		},
 
 		/**
-		* If a message isn't received within the first 5000ms of being mounted, logout
+		* If a message isn't received within the first 3500ms(x4) of being mounted, logout
 		* */
 		initCheck (): void {
+			this.initCount ++;
+			this.loading = true;
 			this.initTimeout = window.setTimeout(() => {
 				if (this.init) clearInterval(this.initTimeout);
+				else if (this.initCount < 4) {
+					this.sendPhoto();
+					this.initCheck();
+				}
 				else UserModule.dispatch_logout('unable to contact pi');
-			}, 5000);
+			}, 3500);
 		},
 
 		piInfo ():void {
@@ -253,6 +260,7 @@ export default Vue.extend({
 				this.uptime = message.data.data.piInfo.uptime;
 				this.nodeUptime = message.data.data.piInfo.nodeUptime;
 				if (!this.init) this.startInterval();
+				this.initCount = 0;
 				this.init = true;
 				this.loading = false;
 				break;

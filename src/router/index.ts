@@ -32,6 +32,17 @@ export default new Router({
 			},
 		},
 		{
+			path: '/video',
+			name: 'video',
+			// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+			component: () => import(/* webpackChunkName: "n" */ '@/views/Video.vue'),
+			beforeEnter: (_to, _from, next): void => {
+				const isAuthenticated = UserModule.authenticated;
+				if (!isAuthenticated) next('/login');
+				else next();
+			},
+		},
+		{
 			path: '*',
 			redirect: { name: 'home' },
 		},

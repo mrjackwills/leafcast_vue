@@ -15,6 +15,12 @@ error_close() {
 	exit 1
 }
 
+
+if [[ ! "$PACKAGE_NAME" ]]
+then
+	error_close "NO PACKAGE NAME"
+fi
+
 # $1 string - question to ask
 ask_yn () {
 	printf  "%b%s? [y/N]:%b " "${GREEN}" "$1" "${RESET}"
@@ -25,6 +31,8 @@ user_input() {
 	read -r data
 	echo "$data"
 }
+
+
 
 #$1 semver MAJOR
 #$2 semver MINOR
@@ -120,14 +128,13 @@ ask_changelog_update() {
 	fi
 }
 
-
 # $1 RELEASE_BODY
 update_release_body_and_changelog () {
 	echo -e
-	CHANGELOG_ADDITION="# <a href='${GIT_REPO_URL}/releases/tag/${NEW_TAG_VERSION}'>${NEW_TAG_VERSION}</a>\n#### $(date +'%Y-%m-%d')\n\n"
-	RELEASE_BODY_ADDITION="$CHANGELOG_ADDITION$1"
+	DATE_SUBHEADING="### $(date +'%Y-%m-%d')\n\n"
+	RELEASE_BODY_ADDITION="${DATE_SUBHEADING}$1"
 	echo -e "${RELEASE_BODY_ADDITION}\n\nsee <a href='${GIT_REPO_URL}/blob/main/CHANGELOG.md'> CHANGELOG.md</a> for more details" > .github/release-body.md
-	echo -e "${CHANGELOG_ADDITION}$(cat CHANGELOG.md)" > CHANGELOG.md
+	echo -e "# <a href='${GIT_REPO_URL}/releases/tag/${NEW_TAG_VERSION}'>${NEW_TAG_VERSION}</a>\n${DATE_SUBHEADING}${CHANGELOG_ADDITION}$(cat CHANGELOG.md)" > CHANGELOG.md
 	sed -i -E "s|(\s)([0-9a-f]{40})| [\2](${GIT_REPO_URL}/commit/\2)|g" ./CHANGELOG.md
 }
 

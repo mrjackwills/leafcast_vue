@@ -20,9 +20,29 @@
 
 				<v-col cols='auto' class='my-2'>
 					<v-btn
+						@click='goVideo'
+						class=''
+						color='lip elevation-0'
+						dark
+						small
+						rounded
+					>
+						<v-row align='center' justify='center' class='ma-0 pa-0'>
+							<v-col cols='auto' class='ma-0 pa-0'>
+								<v-icon class='mr-2'>{{ mdiVideo }}</v-icon>
+							</v-col>
+							<v-col cols='auto' class='ma-0 pa-0'>
+								videos
+							</v-col>
+						</v-row>
+					</v-btn>
+				</v-col>
+
+				<v-col cols='auto' class='my-2'>
+					<v-btn
 						@click='piInfo'
 						class=''
-						color='secondary elevation-0'
+						color='secondary elevation-0 ml-2'
 						dark
 						small
 						rounded
@@ -53,7 +73,7 @@
 import Vue from 'vue';
 
 import { ImageModule, LoadingModule, PiStatusModule, UserModule, WSModule } from '@/store';
-import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
+import { mdiChevronDown, mdiChevronUp, mdiVideo } from '@mdi/js';
 import { MetaInfo } from 'vue-meta';
 import { parseMessage } from '@/vanillaTS/messageParser';
 import { snackError } from '@/services/snack';
@@ -135,6 +155,7 @@ export default Vue.extend({
 		pingInterval: 0,
 		showPiInfo: false,
 		updateInterval: 0,
+		mdiVideo
 	}),
 
 	metaInfo (): MetaInfo {
@@ -198,13 +219,20 @@ export default Vue.extend({
 			this.initCount ++;
 			this.loading = true;
 			this.initTimeout = window.setTimeout(() => {
-				if (this.init) clearInterval(this.initTimeout);
+				if (this.init) {
+					clearInterval(this.initTimeout);
+					this.loading = false;
+				}
 				else if (this.initCount < 4) {
 					this.sendPhoto();
 					this.initCheck();
 				}
 				else UserModule.dispatch_logout('unable to contact pi');
 			}, 3500);
+		},
+
+		goVideo (): void {
+			this.$router.push('/video');
 		},
 
 		piInfo ():void {

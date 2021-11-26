@@ -1,3 +1,14 @@
+### Chores
++ npm update, 6fda709d6e999be991ef7297fbdbc1db92f59516, 9c2bd4f654fbacbabefa099a16153f9d76cb6353
+
+### Fixes
++ webpack config, remove fibers, 9a294e5b5f10aea34f92c6d26de8813550a15d5b
++ release.sh, c7cb4a7575062a59ec67ed4d3ecc39ece133ba95
+
+### Features
++ video page/location, for showing timelapses, 864c7b4c900f1ae737f86dab012976cfa466ab4c (origin/dev), c1aa84da784e187684badd97534856fe6129ad09
+
+
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.6.2'>v0.6.2</a>
 #### 2021-11-07
 

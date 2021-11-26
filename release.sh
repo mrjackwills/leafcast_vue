@@ -1,13 +1,16 @@
 #!/bin/bash
-# Colours for echo
 
+# v0.0.1
+
+# Colours for echo
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 RESET='\033[0m'
 
-PACKAGE_NAME='mealpedant_backup_pi'
+PACKAGE_NAME='leafcast_vue_site'
 STAR_LINE='****************************************'
+CWD=$(pwd)
 
 # $1 string - error message
 error_close() {
@@ -15,15 +18,17 @@ error_close() {
 	exit 1
 }
 
-
-if [[ ! "$PACKAGE_NAME" ]]
-then
-	error_close "NO PACKAGE NAME"
-fi
-
 # $1 string - question to ask
 ask_yn () {
-	printf  "%b%s? [y/N]:%b " "${GREEN}" "$1" "${RESET}"
+	printf "%b%s? [y/N]:%b " "${GREEN}" "$1" "${RESET}"
+}
+
+ask_continue () {
+	ask_yn "continue"
+	if [[ ! "$(user_input)" =~ ^y$ ]] 
+	then 
+		exit
+	fi
 }
 
 # return user input
@@ -32,73 +37,28 @@ user_input() {
 	echo "$data"
 }
 
-
-
-#$1 semver MAJOR
-#$2 semver MINOR
-#$3 semver PATCH
 update_major () {
-	RESULT="$(($1 + 1)).0.0"
-	echo "$RESULT"
+	local bumped_major
+	bumped_major=$((MAJOR + 1))
+	echo "${bumped_major}.${MINOR}.${PATCH}"
 }
 
-#$1 semver MAJOR
-#$2 semver MINOR
-#$3 semver PATCH
 update_minor () {
-	RESULT="$1.$(($2 + 1)).0"
-	echo "$RESULT"
+	local bumped_minor
+	bumped_minor=$((MINOR + 1))
+	echo "${MAJOR}.${bumped_minor}.${PATCH}"
 }
 
-#$1 semver MAJOR
-#$2 semver MINOR
-#$3 semver PATCH
 update_patch () {
-	RESULT="$1.$2.$(($3 + 1))"
-	echo "$RESULT"
+	local bumped_patch
+	bumped_patch=$((PATCH + 1))
+	echo "${MAJOR}.${MINOR}.${bumped_patch}"
 }
-
-# $1 new_version
-update_api_version_ts () {
-	NODE_FILE=./src/config/api_version.ts
-	if [[ -f "$NODE_FILE" ]]
-	then
-		echo "export const api_version = '${2:1}';" > $NODE_FILE
-	fi
-}
-
-# $1 package_name
-# $2 new_version
-update_yaml () {
-	DOCKER_COMPOSE="./docker-compose.yml"
-	if [[ -f "$DOCKER_COMPOSE" ]]
-	then
-		yq e -i ".services.$1.image = \"$1:${2:1}\"" "${DOCKER_COMPOSE}"
-	fi
-}
-
-# $1 new_version
-# $2 package_json_location
-# $3 package_name
-update_json () {
-	NEW_JSON=$(jq ".version = \"${1:1}\"" "$2")
-	echo "$NEW_JSON" > "$2"
-	update_api_version_ts "$3" "$1"
-	update_yaml "$3" "$1"
-}
-
-# $1 new_version
-# $2 package_json_location
-# $3 package_name
-update_package_files () {
-	update_json "$1" "$2" "$3"
-}
-
 
 get_git_remote_url() {
 	REMOTE_ORIGIN=$(git config --get remote.origin.url)
 	TO_REMOVE=".git"
-	printf '%s\n' "${REMOTE_ORIGIN//$TO_REMOVE}"
+	GIT_REPO_URL="${REMOTE_ORIGIN//$TO_REMOVE}"
 }
 
 check_git() {
@@ -138,14 +98,37 @@ update_release_body_and_changelog () {
 	sed -i -E "s|(\s)([0-9a-f]{40})| [\2](${GIT_REPO_URL}/commit/\2)|g" ./CHANGELOG.md
 }
 
+update_json () {
+	local json_file="./package.json"
+	NEW_JSON=$(jq ".version = \"${NEW_TAG_VERSION:1}\"" "${json_file}")
+	echo "$NEW_JSON" > "$json_file"
+}
+
+# $1 pacakge_name
+update_api_version_ts () {
+	NODE_FILE="./src/config/api_version.ts"
+	if [[ -f "$NODE_FILE" ]]; then
+		echo "export const api_version = '${NEW_TAG_VERSION:1}';" > "$NODE_FILE"
+	fi
+}
+
+update_yaml () {
+	DOCKER_COMPOSE="./docker-compose.yml"
+	if [[ -f "$DOCKER_COMPOSE" ]]
+	then
+	yq e -i ".services.$PACKAGE_NAME.image = \"$PACKAGE_NAME:${NEW_TAG_VERSION:1}\"" ${DOCKER_COMPOSE}
+	fi
+}
+
 # $1 new_version
-update () {
-	PACKAGE_JSON="package.json"
-	update_package_files "$1" "$PACKAGE_JSON" "$PACKAGE_NAME"
+bump_version () {
+	update_json
+	update_api_version_ts
+	update_yaml
 }
 
 check_tag () {
-	 echo -e "${YELLOW}Choose new tag version:${RESET}\n"
+	echo -e "${YELLOW}Choose new tag version:${RESET}\n"
 	LATEST_TAG=$(git describe --tags --abbrev=0 --always)
 	if [[ $LATEST_TAG =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-((0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*)(\.(0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*))*))?(\+([0-9a-zA-Z-]+(\.[0-9a-zA-Z-]+)*))?$ ]]
 	then
@@ -155,9 +138,9 @@ check_tag () {
 		MINOR="0"
 		PATCH="0"
 	fi
-	MAJOR_TAG=v$(update_major "$MAJOR" "$MINOR" "$PATCH")
-	MINOR_TAG=v$(update_minor "$MAJOR" "$MINOR" "$PATCH")
-	PATCH_TAG=v$(update_patch "$MAJOR" "$MINOR" "$PATCH")
+	MAJOR_TAG=v$(update_major)
+	MINOR_TAG=v$(update_minor)
+	PATCH_TAG=v$(update_patch)
 	OP_MAJOR="major___$MAJOR_TAG"
 	OP_MINOR="minor___$MINOR_TAG"
 	OP_PATCH="patch___$PATCH_TAG"
@@ -167,6 +150,7 @@ check_tag () {
 		case $choice in
 			"$OP_MAJOR" )
 				NEW_TAG_VERSION="$MAJOR_TAG"
+				# IFS="." read -ra UPDATE_NGINX  <<< "${NEW_TAG_VERSION:1}"
 				break;;
 			"$OP_MINOR")
 				NEW_TAG_VERSION="$MINOR_TAG"
@@ -181,24 +165,40 @@ check_tag () {
 	done
 }
 
-vue_build () {
-	VUE_CONFIG="./vue.config.js"
-	if [[ -f "$VUE_CONFIG" ]]
-	then
-		npm run build
-	fi
+linter () {
+	npm run lint
 }
+
+npm_build () {
+	npm run build
+}
+
+npm_test () {
+	npm run testAllSilent
+}
+
 
 release_flow() {
 	check_git
-	GIT_REPO_URL=$(get_git_remote_url)
+	get_git_remote_url
+	linter
+	ask_continue
+	npm_build
+	ask_continue
+	# npm_test
+	# ask_continue
+	cd "${CWD}" || error_close "Can't find ${CWD}"
 	check_tag
 	printf "\nnew tag chosen: %s\n\n" "${NEW_TAG_VERSION}"
 	RELEASE_BRANCH=release-$NEW_TAG_VERSION
 	echo -e
 	ask_changelog_update
 	git checkout -b "$RELEASE_BRANCH"
-	update "$NEW_TAG_VERSION"
+	bump_version
+	# if [[ ${UPDATE_NGINX[0]} ]]
+	# then
+	# 	update_nginx_and_vue "${UPDATE_NGINX[0]}"
+	# fi
 	git add .
 	git commit -m "chore: release $NEW_TAG_VERSION"
 	git checkout main
@@ -208,7 +208,36 @@ release_flow() {
 	git checkout dev
 	git merge --no-ff main -m 'chore: merge main into dev'
 	git branch -d "$RELEASE_BRANCH"
-	vue_build
+	npm run build
 }
 
-release_flow
+
+main () {
+	select opt in "lint" "tsc" "test" "release" "exit"
+	do
+		case $opt in
+			"lint" )
+				linter
+				main
+				break;;
+			"tsc")
+				npm_build
+				main
+				break;;
+			"test")
+				npm_test
+				main
+				break;;
+			"release")
+				release_flow
+				break;;
+			"exit")
+				break;;
+			*)
+				error_close "invalid choice"
+				break;;
+		esac
+	done
+}
+
+main

@@ -23,6 +23,7 @@
 						@click='goVideo'
 						class=''
 						color='lip elevation-0'
+						:disabled='loading'
 						dark
 						small
 						rounded

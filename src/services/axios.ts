@@ -1,5 +1,6 @@
 import { snackError, snackReset } from './snack';
-import { UserModule, WSModule, } from '@/store';
+import { userModule, websocketModule } from '@/store';
+
 import Axios, { AxiosError, AxiosInstance } from 'axios';
 
 const wrap = <T> () => {
@@ -11,14 +12,16 @@ const wrap = <T> () => {
 				return result;
 			} catch (err) {
 				const e = <AxiosError>err;
+				const user_store = userModule();
+				const websocket_store = websocketModule();
 				if (e.message === 'offline') snackError({ message: 'server offline' });
 				else if (e.response?.status === 429) {
 					const converted = Math.ceil(e.response.data.response / 1000);
 					const message = `too many requests - please try again in ${converted} seconds `;
 					snackError({ message });
 				} else {
-					if (UserModule.authenticated) UserModule.dispatch_logout();
-					WSModule.dispatch_closeWS();
+					if (user_store.authenticated) user_store.logout();
+					websocket_store.closeWS();
 					snackError({ message: 'authentication error' });
 				}
 			}
@@ -52,8 +55,10 @@ class AxiosRequests {
 		const { data } = await this.#wsAuthAxios.post('/', { key: process.env.VUE_APP_APIKEY, password });
 		if (data.response) {
 			snackReset();
-			UserModule.dispatch_authenticated(true);
-			WSModule.dispatch_openWs(data?.response);
+			const user_store = userModule();
+			const websocket_store = websocketModule();
+			user_store.set_authenticated(true);
+			websocket_store.openWs(data?.response);
 		}
 		return !!data.response;
 	}

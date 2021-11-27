@@ -73,12 +73,13 @@
 <script lang='ts'>
 import Vue from 'vue';
 
-import { ImageModule, LoadingModule, PiStatusModule, UserModule, WSModule } from '@/store';
+import { imageModule, loadingModule, piStatusModule, userModule, websocketModule } from '@/store';
+import { mapStores } from 'pinia';
 import { mdiChevronDown, mdiChevronUp, mdiVideo } from '@mdi/js';
 import { MetaInfo } from 'vue-meta';
 import { parseMessage } from '@/vanillaTS/messageParser';
 import { snackError } from '@/services/snack';
-import { TWSFromPi, nu } from '@/types';
+import { TWSFromPi } from '@/types';
 import { ws } from '@/services/WS';
 import Image from '@/components/Authenticated/Image.vue';
 import ImageMetadata from '@/components/Authenticated/ImageMetadata.vue';
@@ -98,54 +99,55 @@ export default Vue.extend({
 	},
 
 	computed: {
+		...mapStores(imageModule, loadingModule, piStatusModule, userModule, websocketModule),
 		imageExists (): boolean {
-			return ImageModule.imageExists;
+			return this.imageStore.imageExists;
 		},
 		infoIcon (): string {
 			return this.showPiInfo ? mdiChevronUp: mdiChevronDown;
 		},
 		loading: {
 			get (): boolean {
-				return LoadingModule.loading;
+				return this.loadingStore.loading;
 			},
 			set (b: boolean): void {
-				LoadingModule.dispatch_loading(b);
+				this.loadingStore.set_loading(b);
 			}
 		},
 		nodeUptime: {
-			get: function (): nu {
-				return PiStatusModule.nodeUptime;
+			get: function (): number {
+				return this.piStatusStore.nodeUptime;
 			},
-			set: function (s: nu): void {
-				PiStatusModule.dispatch_nodeUptime(s);
+			set: function (n: number): void {
+				this.piStatusStore.set_nodeUptime(n);
 			}
 		},
 		uptime: {
-			get: function (): nu {
-				return PiStatusModule.uptime;
+			get: function (): number {
+				return this.piStatusStore.uptime;
 			},
-			set: function (s: nu): void {
-				PiStatusModule.dispatch_uptime(s);
+			set: function (n: number): void {
+				this.piStatusStore.set_uptime(n);
 			}
 		},
 		init: {
 			get: function (): boolean {
-				return PiStatusModule.init;
+				return this.piStatusStore.init;
 			},
 			set: function (b: boolean): void {
-				PiStatusModule.dispatch_init(b);
+				this.piStatusStore.set_init(b);
 			}
 		},
 		updateCountdown: {
 			get: function (): number {
-				return ImageModule.updateCountdown;
+				return this.imageStore.updateCountdown;
 			},
 			set: function (s: number): void {
-				ImageModule.dispatch_updateCountdown(s);
+				this.imageStore.set_updateCountdown(s);
 			}
 		},
 		ws_connected (): boolean {
-			return WSModule.connected;
+			return this.websocketStore.connected;
 		},
 	},
 
@@ -170,7 +172,7 @@ export default Vue.extend({
 		/**
 		 * Create handlers for all ws events
 		 */
-		addHandlers (): void {
+		addWSHandlers (): void {
 			ws.connection?.addEventListener('message', (data) => {
 				try {
 					const message = parseMessage(data.data);
@@ -186,12 +188,12 @@ export default Vue.extend({
 
 			// PING sever every 30 seconds, to keep client side connection alive
 			this.pingInterval = window.setInterval(() => {
-				WSModule.dispatch_ping();
+				this.websocketStore.ping();
 			}, 1000 * 30);
 			
 			// Although should never have the connection killed
 			ws.connection?.addEventListener('close', (_event) => {
-				UserModule.dispatch_logout();
+				this.userStore.logout();
 			});
 		},
 
@@ -210,7 +212,7 @@ export default Vue.extend({
 		 */
 		closeWS (): void {
 			if (!this.ws_connected) return;
-			WSModule.dispatch_closeWS();
+			this.websocketStore.closeWS();
 		},
 
 		/**
@@ -228,7 +230,7 @@ export default Vue.extend({
 					this.sendPhoto();
 					this.initCheck();
 				}
-				else UserModule.dispatch_logout('unable to contact pi');
+				else this.userStore.logout('unable to contact pi');
 			}, 3500);
 		},
 
@@ -242,16 +244,16 @@ export default Vue.extend({
 
 		refresh (): void {
 			if (this.loading) return;
-			if (!WSModule.connected) UserModule.dispatch_logout();
+			if (!this.websocketStore.connected) this.userStore.logout;
 			this.loading = true;
 			this.clearAllIntervals();
-			WSModule.dispatch_send({ message: 'force-update' });
+			this.websocketStore.send({ message: 'force-update' });
 			this.startInterval();
 		},
 
 		sendPhoto (): void {
 			this.loading = true;
-			WSModule.dispatch_send({ message: 'photo' });
+			this.websocketStore.send({ message: 'photo' });
 		},
 
 		startInterval (): void {
@@ -276,16 +278,16 @@ export default Vue.extend({
 			// Maybe just logout?
 			switch (message.data?.message) {
 			case 'photo':
-				ImageModule.dispatch_cached(!!message.cache);
-				ImageModule.dispatch_image(message.data.data.image ?? '');
-				ImageModule.dispatch_imageSize_compressed(message.data.data.imageSize_compressed??0);
-				ImageModule.dispatch_imageSize_original(message.data.data.imageSize_original??0);
-				ImageModule.dispatch_timestamp(message.data.data.timestamp);
-				PiStatusModule.dispatch_internalIp(message.data.data.piInfo.internalIp);
-				PiStatusModule.dispatch_numberImages(message.data.data.piInfo.numberImages);
-				PiStatusModule.dispatch_online(!message.cache);
-				PiStatusModule.dispatch_piVersion(message.data.data.piInfo.piVersion);
-				PiStatusModule.dispatch_totalFileSize(message.data.data.piInfo.totalFileSize);
+				this.imageStore.set_cached(!!message.cache);
+				this.imageStore.set_image(message.data.data.image ?? '');
+				this.imageStore.set_imageSize_compressed(message.data.data.imageSize_compressed??0);
+				this.imageStore.set_imageSize_original(message.data.data.imageSize_original??0);
+				this.imageStore.set_timestamp(message.data.data.timestamp);
+				this.piStatusStore.set_internalIp(message.data.data.piInfo.internalIp);
+				this.piStatusStore.set_numberImages(message.data.data.piInfo.numberImages);
+				this.piStatusStore.set_online(!message.cache);
+				this.piStatusStore.set_piVersion(message.data.data.piInfo.piVersion);
+				this.piStatusStore.set_totalFileSize(message.data.data.piInfo.totalFileSize);
 				this.uptime = message.data.data.piInfo.uptime;
 				this.nodeUptime = message.data.data.piInfo.nodeUptime;
 				if (!this.init) this.startInterval();
@@ -304,7 +306,7 @@ export default Vue.extend({
 	watch: {
 		ws_connected (i): void {
 			if (i) {
-				this.addHandlers();
+				this.addWSHandlers();
 			}
 		},
 	},

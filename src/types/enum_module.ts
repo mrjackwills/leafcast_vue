@@ -1,7 +1,7 @@
 export enum ModuleName {
 	Image = 'image',
 	Loading = 'loading',
-	Pistatus = 'pistatus',
+	Pistatus = 'piStatus',
 	Settings = 'settings',
 	Snackbar = 'snackbar',
 	User = 'user',

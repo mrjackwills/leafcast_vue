@@ -40,13 +40,13 @@ user_input() {
 update_major () {
 	local bumped_major
 	bumped_major=$((MAJOR + 1))
-	echo "${bumped_major}.${MINOR}.${PATCH}"
+	echo "${bumped_major}.0.0"
 }
 
 update_minor () {
 	local bumped_minor
 	bumped_minor=$((MINOR + 1))
-	echo "${MAJOR}.${bumped_minor}.${PATCH}"
+	echo "${MAJOR}.${bumped_minor}.0"
 }
 
 update_patch () {

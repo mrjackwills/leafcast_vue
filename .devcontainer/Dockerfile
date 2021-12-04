@@ -4,7 +4,7 @@ ARG VARIANT="16-bullseye"
 FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:0-${VARIANT}
 
 ARG YQ_BINARY="yq_linux_amd64"
-ARG YQ_VERSION="v4.15.1"
+ARG YQ_VERSION="v4.16.1"
 
 RUN printf "alias cls='clear'\nalias ll='ls -l --human-readable --color=auto --group-directories-first --classify --time-style=long-iso -all'" >> /etc/bash.bashrc
 

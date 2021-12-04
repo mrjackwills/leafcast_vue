@@ -1,11 +1,11 @@
 import './registerServiceWorker';
 import { createPinia, PiniaVuePlugin } from 'pinia';
+import { router } from '@/router';
+import { VNode } from 'vue/types/umd';
 import App from './App.vue';
 import Meta from 'vue-meta';
 import Vue from 'vue';
 import vuetify from '@/plugins/vuetify';
-import { VNode } from 'vue/types/umd';
-import { router } from '@/router';
 
 const pinia = createPinia();
 

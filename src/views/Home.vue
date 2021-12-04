@@ -3,7 +3,7 @@
 
 		<v-row justify='center' align='center' class='align-center minh' no-gutters v-if='!imageExists'>
 			<v-col cols='auto'>
-				<v-progress-circular :indeterminate='true' />
+				<v-progress-circular indeterminate />
 			</v-col>
 		</v-row>
 

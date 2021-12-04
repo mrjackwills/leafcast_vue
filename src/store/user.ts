@@ -24,10 +24,7 @@ export const userStore = defineStore(ModuleName.User, {
 			this.api_version = value;
 		},
 		async logout (message?: string): Promise<void> {
-			const loading_store = loadingStore();
-			const piStatus_store = piStatusStore();
-			const websocket_store = websocketStore();
-			const image_store = imageStore();
+			const [ image_store, loading_store, piStatus_store, websocket_store ] = [ imageStore(), loadingStore(), piStatusStore(), websocketStore() ];
 			this.authenticated = false;
 			loading_store.set_loading(false);
 			piStatus_store.$reset();

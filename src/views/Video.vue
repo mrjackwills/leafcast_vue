@@ -1,68 +1,61 @@
 <template>
-	<section class='fill-height'>
-		<template>
-			<section>
-				<v-row justify='center' align='center' no-gutters>
-					<v-col cols='auto' sm='11' lg='6' class='parent'>
-						<video width='100%' class='main-image' :class='{"image-border" : !isFullScreen }' controls :key='videoName'>
-							<source :src='videoUrl' type='video/mp4'>
-							Your browser does not support the video tag.
-						</video>
-						<v-img src='@/assets/watermark.png' class='watermark' contain />
-					</v-col>
-				</v-row>
-				<v-row justify='center' align='center' no-gutters>
+	<section>
+	
+		<v-row justify='center' align='center' no-gutters>
+			<v-col cols='auto' sm='11' lg='6' class='parent'>
+				<video width='100%' class='main-image' :class='{"image-border" : !isFullScreen }' controls :key='videoName'>
+					<source :src='videoUrl' type='video/mp4'>
+					Your browser does not support the video tag.
+				</video>
+				<v-img src='@/assets/watermark.png' class='watermark' contain />
+			</v-col>
+		</v-row>
 
-					<v-col cols='auto' class='ma-0 pa-0'>
+		<v-row justify='center' align='center' no-gutters>
+			<v-col cols='auto' class='ma-0 pa-0 white--text'>
+				current video: {{ videoName }}
+			</v-col>
+		</v-row>
 
-						<v-btn
-							@click='goHome'
-							class=' fab-fix elevation-0 mr-2'
-							color='lip'
-							dark
-							rounded
-							small
-						>
-							<v-row align='center' justify='space-around' class='ma-0 pa-0'>
-								<v-col cols='auto' class='ma-0 pa-0'>
-									<v-icon class='mr-1'>{{ mdiHome }}</v-icon>
-								</v-col>
-								<v-col cols='auto' class='ma-0 pa-0' id='pi-info'>
-									go home
-								</v-col>
-							</v-row>
-
-						</v-btn>
-
-						<v-btn
-							@click='switchVideo'
-							class=' fab-fix elevation-0 ml-2'
-							color='serious'
-							dark
-							rounded
-							small
-						>
-							<v-row align='center' justify='space-around' class='ma-0 pa-0'>
-								<v-col cols='auto' class='ma-0 pa-0'>
-									<v-icon class='mr-1'>{{ mdiVideoSwitch }}</v-icon>
-								</v-col>
-								<v-col cols='auto' class='ma-0 pa-0' id='pi-info'>
-									switch video
-								</v-col>
-							</v-row>
-
-						</v-btn>
-					
-					</v-col>
-				</v-row>
-				<v-row justify='center' align='center' no-gutters>
-
-					<v-col cols='auto' class='ma-0 pa-0 white--text'>
-						current video: 	{{ videoName }}
-					</v-col>
-				</v-row>
-			</section>
-		</template>
+		<v-row justify='center' align='center' no-gutters>
+			<v-col cols='auto' class='ma-0 pa-0'>
+				<v-btn
+					@click='goHome'
+					class=' fab-fix elevation-0 mr-2'
+					color='lip'
+					dark
+					rounded
+					small
+				>
+					<v-row align='center' justify='space-around' class='ma-0 pa-0'>
+						<v-col cols='auto' class='ma-0 pa-0'>
+							<v-icon class='mr-1'>{{ mdiHome }}</v-icon>
+						</v-col>
+						<v-col cols='auto' class='ma-0 pa-0' id='pi-info'>
+							go home
+						</v-col>
+					</v-row>
+				</v-btn>
+				<v-btn
+					@click='switchVideo'
+					class=' fab-fix elevation-0 ml-2'
+					color='serious'
+					dark
+					rounded
+					small
+				>
+					<v-row align='center' justify='space-around' class='ma-0 pa-0'>
+						<v-col cols='auto' class='ma-0 pa-0'>
+							<v-icon class='mr-1'>{{ mdiVideoSwitch }}</v-icon>
+						</v-col>
+						<v-col cols='auto' class='ma-0 pa-0' id='pi-info'>
+							switch video
+						</v-col>
+					</v-row>
+				</v-btn>
+			</v-col>
+		</v-row>
+				
 	</section>
 </template>
 
@@ -78,12 +71,16 @@ export default Vue.extend({
 
 	async beforeDestroy () {
 		document.removeEventListener('onfullscreenchange', this.fullScreenHandler);
+		document.removeEventListener('mozfullscreenchange', this.fullScreenHandler);
+		document.removeEventListener('webkitfullscreenchange', this.fullScreenHandler);
+		document.removeEventListener('msfullscreenchange', this.fullScreenHandler);
 	},
 
 	computed: {
 		videoUrl (): string {
 			return `${this.baseUrl}${this.videoName}.mp4`;
-		}
+		},
+	
 	},
 
 	data: () => ({
@@ -104,8 +101,9 @@ export default Vue.extend({
 			this.videoName = this.videoName === 'basil' ? 'garden' : 'basil';
 		},
 		fullScreenHandler (): void {
-			this.isFullScreen = !window.screenTop && !window.screenY;
-		}
+			this.isFullScreen = !this.isFullScreen;
+		},
+
 	},
 
 	metaInfo (): MetaInfo {
@@ -115,9 +113,25 @@ export default Vue.extend({
 	},
 
 	mounted () {
-		document.onfullscreenchange = (_event: Event): void => {
+
+		document.addEventListener('fullscreenchange', () => {
 			this.fullScreenHandler();
-		};
+		});
+
+		/* Firefox */
+		document.addEventListener('mozfullscreenchange', () => {
+			this.fullScreenHandler();
+		});
+
+		/* Chrome, Safari and Opera */
+		document.addEventListener('webkitfullscreenchange', () => {
+			this.fullScreenHandler();
+		});
+
+		/* IE / Edge */
+		document.addEventListener('msfullscreenchange', () => {
+			this.fullScreenHandler();
+		});
 	},
 
 });

@@ -38,9 +38,11 @@
 <script lang='ts'>
 
 import Vue from 'vue';
+
 import { convert_bytes } from '@/vanillaTS/convertBytes';
+import { loadingModule, piStatusModule } from '@/store';
+import { mapStores } from 'pinia';
 import { mdiAlertCircleOutline, mdiCameraFlip, mdiDesktopClassic, mdiHarddisk, mdiImageMultiple, mdiLanConnect, mdiNodejs, mdiSourceBranch } from '@mdi/js';
-import { PiStatusModule, LoadingModule } from '@/store';
 import { secondsToText } from '@/vanillaTS/secondsToText';
 import { TDataToDisplay } from '@/types';
 import DisplayRows from '@/components/Authenticated/DisplayRows.vue';
@@ -57,23 +59,24 @@ export default Vue.extend({
 	},
 
 	computed: {
-		internalIp (): string|undefined {
-			return PiStatusModule.internalIp;
+		...mapStores(loadingModule, piStatusModule),
+		internalIp (): string {
+			return this.piStatusStore.internalIp;
 		},
 		loading (): boolean {
-			return LoadingModule.loading;
+			return this.loadingStore.loading;
 		},
-		nodeUptime (): number|undefined {
-			return PiStatusModule.nodeUptime;
+		nodeUptime (): number {
+			return this.piStatusStore.nodeUptime;
 		},
-		uptime (): number|undefined {
-			return PiStatusModule.uptime;
+		uptime (): number {
+			return this.piStatusStore.uptime;
 		},
 		piOnline (): boolean {
-			return PiStatusModule.online;
+			return this.piStatusStore.online;
 		},
-		piVersion ():string|undefined {
-			return PiStatusModule.piVersion;
+		piVersion (): string {
+			return this.piStatusStore.piVersion;
 		},
 		piInfo (): TDataToDisplay {
 			const cached = this.piOnline? `` : `[ cached ]`;
@@ -122,10 +125,10 @@ export default Vue.extend({
 			return output;
 		},
 		numberFiles (): number {
-			return PiStatusModule.numberImages;
+			return this.piStatusStore.numberImages;
 		},
 		totalFileSize (): string {
-			return PiStatusModule.totalFileSize;
+			return this.piStatusStore.totalFileSize;
 		}
 	},
 

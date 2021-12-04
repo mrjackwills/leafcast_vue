@@ -31,13 +31,13 @@
 
 <script lang='ts'>
 import Vue from 'vue';
-import { UserModule, LoadingModule } from '@/store';
-import { snackSuccess } from './services/snack';
+import { loadingModule, userModule } from '@/store';
+import { mapStores } from 'pinia';
+import { snackSuccess } from '@/services/snack';
+import debounce from 'lodash/debounce';
 import Footer from '@/components/Footer.vue';
 import Snackbar from '@/components/Snackbar.vue';
 import Toolbar from '@/components/Toolbar.vue';
-
-import debounce from 'lodash/debounce';
 
 export default Vue.extend({
 	name: 'leafcast-app',
@@ -59,15 +59,17 @@ export default Vue.extend({
 	},
 
 	computed: {
+		...mapStores(loadingModule, userModule),
+
 		authenticated (): boolean {
-			return UserModule.authenticated;
+			return this.userStore.authenticated;
 		},
 		loading: {
 			get (): boolean {
-				return LoadingModule.loading;
+				return this.loadingStore.loading;
 			},
 			set (b: boolean): void {
-				LoadingModule.dispatch_loading(b);
+				this.loadingStore.set_loading(b);
 			}
 		},
 	},
@@ -109,17 +111,18 @@ export default Vue.extend({
 		visibilityChange (_e: Event) {
 			this.isHidden = document.hidden;
 			if (this.isHidden) {
-				this.logoutTimeout = window.setTimeout(() => {
+				this.logoutTimeout = setTimeout(() => {
 					this.logout();
 				}, 1000 * 60 * 7.5);
 			} else {
-				if (!UserModule.authenticated) this.logout('');
+				if (!this.userStore.authenticated) this.logout('');
 				clearTimeout(this.logoutTimeout);
+				this.logoutTimeout = 0;
 			}
 		},
 
 		logout (message = 'you have been logged out'): void {
-			UserModule.dispatch_logout(message);
+			this.userStore.logout(message);
 		}
 
 	},

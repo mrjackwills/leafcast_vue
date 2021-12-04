@@ -9,7 +9,8 @@
 
 ### Fixes
 + webpack config, remove fibers, 9a294e5b5f10aea34f92c6d26de8813550a15d5b
-+ release.sh, c7cb4a7575062a59ec67ed4d3ecc39ece133ba95
++ release.sh, c7cb4a7575062a59ec67ed4d3ecc39ece133ba95, c791b7a8c32998dbaa75a307587693e5011cb294
+
 
 
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.6.2'>v0.6.2</a>

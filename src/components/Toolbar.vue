@@ -66,33 +66,34 @@
 <script lang='ts'>
 
 import Vue from 'vue';
-import { LoadingModule, UserModule, PiStatusModule } from '@/store';
+
+import { mapStores } from 'pinia';
 import { mdiWifiArrowUpDown, mdiWifiStrengthAlertOutline } from '@mdi/js';
+import { userModule, piStatusModule, loadingModule } from '@/store';
 
 export default Vue.extend({
 	name: 'Toolbar-component',
 
-	components: {
-	},
-
 	computed: {
+		...mapStores(loadingModule, userModule, piStatusModule),
+
 		authenticated (): boolean {
-			return UserModule.authenticated;
+			return this.userStore.authenticated;
 		},
 		icon (): string {
 			return this.piOnline ? mdiWifiArrowUpDown : mdiWifiStrengthAlertOutline ;
 		},
 		init (): boolean {
-			return PiStatusModule.init;
+			return this.piStatusStore.init;
 		},
 		loading (): boolean {
-			return LoadingModule.loading;
+			return this.loadingStore.loading;
 		},
 		logoWidth ():string {
 			return this.$vuetify.breakpoint.mdAndUp ? '55px' : '40px';
 		},
 		piOnline ():boolean {
-			return PiStatusModule.online;
+			return this.piStatusStore.online;
 		},
 		spacing (): string {
 			return this.$vuetify.breakpoint.xsOnly? 'text-h6 py-2' : 'text-h4 py-4';
@@ -106,8 +107,6 @@ export default Vue.extend({
 	
 	},
 
-	data: () => ({
-	})
 });
 </script>
 

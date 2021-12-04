@@ -6,28 +6,23 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname, './dist'),
 		publicPath: '/dist/',
-		filename: 'build.js'
 	},
 	module: {
 		rules: [
 			{
-				test: /\.s(c|a)ss$/,
+				test: /\.scss$/,
 				use: [
 					'vue-style-loader',
 					'css-loader',
 					{
 						loader: 'sass-loader',
-						options: {
-							implementation: require('sass'),
-							sassOptions: {
-								fiber: require('fibers'),
-								indentedSyntax: true
-							},
+					options: {
+							additionalData: "@import '@/scss/variables.scss';"
 						},
 					},
-				],
+				]
 			},
-		]
+		],
 	},
 	resolve: {
 		alias: {

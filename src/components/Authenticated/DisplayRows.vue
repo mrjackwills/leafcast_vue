@@ -15,7 +15,7 @@
 						</v-col>
 
 						<v-col cols='auto' class='ma-0 pa-0' :class='{"mr-1" : rowIndex === 0 && $vuetify.breakpoint.mdAndUp}' >
-							<span class='secondary--text' >{{ item.value }}</span>
+							<span class='secondary--text mono-numbers' >{{ item.value }}</span>
 							<span v-if='item.extra' class='offwhite--text ml-2'>{{ item.extra }}</span>
 						</v-col>
 						

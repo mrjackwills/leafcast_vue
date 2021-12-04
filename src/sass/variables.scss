@@ -31,6 +31,13 @@ html{
 	scroll-behavior: smooth;
 }
 
+.mono-numbers{
+	font-feature-settings: 'tnum' 1;
+	font-feature-settings: "tnum";
+	font-family: 'Baloo 2', monospace !important;
+}
+
+
 
 /* Set text as unselectable*/
 .unselectable {

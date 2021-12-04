@@ -25,46 +25,48 @@
 
 <script lang ='ts'>
 import Vue from 'vue';
-import { su, nu } from '@/types';
-import { SnackModule } from '@/store';
+
+import { snackbarModule } from '@/store';
+import { mapStores } from 'pinia';
 
 export default Vue.extend({
 	name: 'snackbar-component',
 
 	computed: {
+		...mapStores(snackbarModule),
 		message: {
-			get (): su {
-				return SnackModule.message;
+			get (): string {
+				return this.snackbarStore.message;
 			},
-			set (s: su): void {
-				SnackModule.dispatch_message(s);
+			set (s: string): void {
+				this.snackbarStore.set_message(s);
 			}
 		},
-		icon (): su {
-			return SnackModule.icon;
+		icon (): string {
+			return this.snackbarStore.icon;
 		},
 		loading: {
 			get (): boolean {
-				return SnackModule.loading;
+				return this.snackbarStore.loading;
 			},
 			set (b: boolean): void {
-				SnackModule.dispatch_loading(b);
+				this.snackbarStore.set_loading(b);
 			}
 		},
 		snackTimeout: {
-			get (): nu {
-				return SnackModule.timeout;
+			get (): number {
+				return this.snackbarStore.timeout;
 			},
-			set (nu: nu): void {
-				SnackModule.dispatch_timeout(nu);
+			set (nu: number): void {
+				this.snackbarStore.set_timeout(nu);
 			}
 		},
 		visible: {
 			get (): boolean {
-				return SnackModule.visible;
+				return this.snackbarStore.visible;
 			},
 			set (b: boolean): void {
-				SnackModule.dispatch_visible(b);
+				this.snackbarStore.set_visible(b);
 			}
 		},
 	},
@@ -76,7 +78,8 @@ export default Vue.extend({
 	methods: {
 		closeSnackbar (): void {
 			this.visible = false;
-			SnackModule.dispatch_reset();
+			this.snackbarStore.$reset();
+			// SnackModule.dispatch_reset();
 			clearTimeout(this.timeout);
 			this.timeout = 0;
 		}

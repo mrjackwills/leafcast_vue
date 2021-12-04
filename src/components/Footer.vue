@@ -42,8 +42,9 @@
 
 import Vue from 'vue';
 
+import { mapStores } from 'pinia';
 import { mdiGithub } from '@mdi/js';
-import { UserModule } from '@/store';
+import { userModule } from '@/store';
 
 export default Vue.extend({
 	name: 'home-component',
@@ -53,8 +54,9 @@ export default Vue.extend({
 	},
 
 	computed: {
+		...mapStores(userModule),
 		authenticated (): boolean {
-			return UserModule.authenticated;
+			return this.userStore.authenticated;
 		},
 		href (): string {
 			return process.env.VUE_APP_GITHUB?.split('leafcast')[0] ?? '';

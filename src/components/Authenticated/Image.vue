@@ -10,14 +10,16 @@
 <script lang='ts'>
 
 import Vue from 'vue';
-import { ImageModule } from '@/store';
+import { imageModule } from '@/store';
+import { mapStores } from 'pinia';
 
 export default Vue.extend({
 	name: 'image-component',
 	
 	computed: {
+		...mapStores(imageModule),
 		image (): string {
-			return ImageModule.image;
+			return this.imageStore.get_image;
 		},
 	},
 

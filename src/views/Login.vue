@@ -47,7 +47,8 @@
 import Vue from 'vue';
 
 import { axiosRequests } from '@/services/axios';
-import { LoadingModule } from '@/store';
+import { loadingModule } from '@/store';
+import { mapStores } from 'pinia';
 import { mdiEye, mdiEyeOff, mdiLock } from '@mdi/js';
 import { MetaInfo } from 'vue-meta';
 import { snackReset } from '@/services/snack';
@@ -56,6 +57,7 @@ export default Vue.extend({
 	name: 'login-view',
 
 	computed: {
+		...mapStores(loadingModule),
 		appendIcon (): string {
 			return this.password ? this.passwordVisible ? mdiEyeOff: mdiEye : '';
 		},
@@ -64,10 +66,10 @@ export default Vue.extend({
 		},
 		loading: {
 			get: function (): boolean {
-				return LoadingModule.loading;
+				return this.loadingStore.loading;
 			},
 			set: function (b: boolean): void {
-				LoadingModule.dispatch_loading(b);
+				this.loadingStore.set_loading(b);
 			}
 		},
 	},

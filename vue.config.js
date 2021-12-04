@@ -15,10 +15,8 @@ module.exports = {
 	pwa: {
 		name: 'Leafcast',
 		assetsVersion: serviceWorkerVersion,
-		// toolbar color
 		themeColor: '#aa8945',
 		msTileColor: '#aa8945',
-		// splash screen on android color
 		background_color: '#402e32',
 		iconPaths: {
 			favicon32: './img/icons/favicon-32x32.png',
@@ -46,7 +44,7 @@ module.exports = {
 	 port: '8002',
 	 host: 'localhost',
 	},
-	transpileDependencies: [ 'vuetify', 'vuex-module-decorators', ],
+	transpileDependencies: [ 'vuetify' ],
 	configureWebpack: {
 		optimization: {
 			mangleWasmImports: true,

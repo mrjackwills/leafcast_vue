@@ -1,7 +1,7 @@
 {
   "name": "leafcast_vue",
   "description": "frontend site for leafcast service",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "private": false,
   "homepage": "https://github.com/mrjackwills/leafcast_vue",
   "license": "MIT",

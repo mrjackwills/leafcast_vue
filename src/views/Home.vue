@@ -317,6 +317,6 @@ export default Vue.extend({
 <style>
 
 .minh{
-	min-height: 240px;
+	min-height: 300px;
 }
 </style>

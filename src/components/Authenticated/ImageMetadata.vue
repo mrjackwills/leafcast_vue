@@ -17,10 +17,11 @@ import { convert_bytes } from '@/vanillaTS/convertBytes';
 import { imageModule, piStatusModule } from '@/store';
 import { mapStores } from 'pinia';
 import { mdiClock, mdiUpdate, mdiImageSizeSelectLarge, mdiImage } from '@mdi/js';
-import { secondsToText } from '@/vanillaTS/secondsToText';
+import { nextUpdateToText } from '@/vanillaTS/secondsToText';
 import { TDataToDisplay } from '@/types';
 import DisplayRows from '@/components/Authenticated/DisplayRows.vue';
 import PiOffline from '@/components/Authenticated/PiOffline.vue';
+import { zeroPad } from '@/vanillaTS/zeropad';
 
 export default Vue.extend({
 	name: 'image-metadata-component',
@@ -43,7 +44,7 @@ export default Vue.extend({
 			return this.piStatusStore.init;
 		},
 		intervalToHMS (): string {
-			return secondsToText(this.updateCountdown*1000);
+			return nextUpdateToText(this.updateCountdown*1000);
 		},
 		formattedTimestamp (): string {
 			if (!this.timestamp) return '';
@@ -108,12 +109,8 @@ export default Vue.extend({
 		},
 
 		formatDate (data: Date): string {
-			return `${this.dayOptions[data.getDay()]} ${data.getFullYear()}-${this.zeroPad(data.getMonth() + 1)}-${this.zeroPad(data.getDate())} @ ${this.zeroPad(data.getHours())}:${this.zeroPad(data.getMinutes())}:${this.zeroPad(data.getSeconds())}`;
+			return `${this.dayOptions[data.getDay()]} ${data.getFullYear()}-${zeroPad(data.getMonth() + 1)}-${zeroPad(data.getDate())} @ ${zeroPad(data.getHours())}:${zeroPad(data.getMinutes())}:${zeroPad(data.getSeconds())}`;
 		},
-
-		zeroPad (unit: number): string {
-			return String(unit).padStart(2, '0');
-		}
 		
 	},
 

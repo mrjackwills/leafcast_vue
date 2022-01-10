@@ -1,11 +1,10 @@
 import { defineStore } from 'pinia';
 import { ModuleName } from '@/types/enum_module';
-import { userStore } from './user';
-
+import { userModule } from '@/store';
 import { TWSToServer } from '@/types';
 import { ws } from '@/services/WS';
 
-export const websocketStore = defineStore(ModuleName.Websocket, {
+export const websocketModule = defineStore(ModuleName.Websocket, {
 
 	state: () => ({
 		connected: false
@@ -17,8 +16,7 @@ export const websocketStore = defineStore(ModuleName.Websocket, {
 		},
 
 		openWs (password: string): void {
-			const user_store = userStore();
-			if (!user_store.authenticated) return;
+			if (!userModule().authenticated) return;
 			ws.openWs(password);
 			ws.connection?.addEventListener('open', () => {
 				this.set_connected(true);

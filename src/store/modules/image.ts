@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ModuleName } from '@/types/enum_module';
 
-export const imageStore = defineStore(ModuleName.Image, {
+export const imageModule = defineStore(ModuleName.Image, {
 
 	state: () => ({
 		cached: false,

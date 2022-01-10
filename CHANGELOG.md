@@ -1,10 +1,13 @@
+# <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.7.1'>v0.7.1</a>
+### 2022-01-09
+
 ### Chores
-+ npm update, 9e21e4a7c3ea1857faac7235a7e7d70c9aa5a285
-+ dev container Dockerfile bump, 1e246aab7f4b71be33fadcc93592da91860114fc
-+ release.sh update, 1bc33e98f108714cbea627474c8a4dd24836f859
++ npm update, [9e21e4a7c3ea1857faac7235a7e7d70c9aa5a285](https://github.com/mrjackwills/leafcast_vue/commit/9e21e4a7c3ea1857faac7235a7e7d70c9aa5a285)
++ dev container Dockerfile bump, [1e246aab7f4b71be33fadcc93592da91860114fc](https://github.com/mrjackwills/leafcast_vue/commit/1e246aab7f4b71be33fadcc93592da91860114fc)
++ release.sh update, [1bc33e98f108714cbea627474c8a4dd24836f859](https://github.com/mrjackwills/leafcast_vue/commit/1bc33e98f108714cbea627474c8a4dd24836f859)
 
 ### Refactors
-+ xStore > xModule + into module dir, d56c06b8cba4367670f44ca2e18410fa0ea98280
++ xStore > xModule + into module dir, [d56c06b8cba4367670f44ca2e18410fa0ea98280](https://github.com/mrjackwills/leafcast_vue/commit/d56c06b8cba4367670f44ca2e18410fa0ea98280)
 
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.7.0'>v0.7.0</a>
 ### 2021-12-04

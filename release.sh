@@ -12,6 +12,8 @@ PACKAGE_NAME='leafcast_vue_site'
 STAR_LINE='****************************************'
 CWD=$(pwd)
 
+BUILD_DATE=$(date "+%a %d %Y %B %T %Z")
+
 # $1 string - error message
 error_close() {
 	echo -e "\n${RED}ERROR - EXITED: ${YELLOW}$1${RESET}\n";
@@ -98,10 +100,15 @@ update_release_body_and_changelog () {
 	sed -i -E "s|(\s)([0-9a-f]{40})| [\2](${GIT_REPO_URL}/commit/\2)|g" ./CHANGELOG.md
 }
 
+
+# $1 package_name
 update_json () {
 	local json_file="./package.json"
-	NEW_JSON=$(jq ".version = \"${NEW_TAG_VERSION:1}\"" "${json_file}")
-	echo "$NEW_JSON" > "$json_file"
+	local json_version_update
+	local json_build_update
+	json_version_update=$(jq ".version = \"${NEW_TAG_VERSION:1}\"" "${json_file}")
+	json_build_update=$(jq ".buildDate =\"${BUILD_DATE}\"" <<< "${json_version_update}")
+	echo "$json_build_update" > "$json_file"
 }
 
 # $1 pacakge_name

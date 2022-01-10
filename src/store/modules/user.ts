@@ -1,14 +1,11 @@
 import { defineStore } from 'pinia';
 import { snackError } from '@/services/snack';
-import { loadingStore } from './loading';
 import { ModuleName } from '@/types/enum_module';
 import { router } from '@/router';
 
-import { piStatusStore } from './piStatus';
-import { websocketStore } from './websocket';
-import { imageStore } from './image';
+import { piStatusModule, loadingModule, websocketModule, imageModule } from '@/store';
 
-export const userStore = defineStore(ModuleName.User, {
+export const userModule = defineStore(ModuleName.User, {
 
 	state: () => ({
 		authenticated: false,
@@ -24,12 +21,11 @@ export const userStore = defineStore(ModuleName.User, {
 			this.api_version = value;
 		},
 		async logout (message?: string): Promise<void> {
-			const [ image_store, loading_store, piStatus_store, websocket_store ] = [ imageStore(), loadingStore(), piStatusStore(), websocketStore() ];
 			this.authenticated = false;
-			loading_store.set_loading(false);
-			piStatus_store.$reset();
-			image_store.$reset();
-			websocket_store.closeWS();
+			loadingModule().set_loading(false);
+			piStatusModule().$reset();
+			imageModule().$reset();
+			websocketModule().closeWS();
 			if (message) snackError({ message });
 			if (router.currentRoute.name !== 'login') router.push('/login');
 		}

@@ -26,6 +26,5 @@ export const snackError = async ({ message = 'error', icon = mdiAlertCircle, tim
 };
 
 export const snackReset = ():void => {
-	const snackbar_store = snackbarModule();
-	snackbar_store.$reset();
+	snackbarModule().$reset();
 };

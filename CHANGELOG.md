@@ -1,5 +1,8 @@
+# <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.7.3'>v0.7.3</a>
+### 2022-01-17
+
 ### Fixes
-+ remove clientside pinger, 8ed59691a840cedeaab39803c549bec86a970758
++ remove clientside pinger, [8ed59691a840cedeaab39803c549bec86a970758](https://github.com/mrjackwills/leafcast_vue/commit/8ed59691a840cedeaab39803c549bec86a970758)
 
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.7.2'>v0.7.2</a>
 ### 2022-01-17

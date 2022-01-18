@@ -1,7 +1,7 @@
 {
   "name": "leafcast_vue",
   "description": "frontend site for leafcast service",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "private": false,
   "homepage": "https://github.com/mrjackwills/leafcast_vue",
   "license": "MIT",
@@ -12,10 +12,10 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@vue/composition-api": "^1.4.3",
+    "@vue/composition-api": "^1.4.4",
     "axios": "^0.24.0",
     "clipboard-copy": "^4.0.1",
-    "core-js": "^3.20.2",
+    "core-js": "^3.20.3",
     "lodash": "^4.17.21",
     "pinia": "^2.0.9",
     "register-service-worker": "^1.7.2",
@@ -28,8 +28,8 @@
   "devDependencies": {
     "@mdi/js": "^6.5.95",
     "@types/lodash": "^4.14.178",
-    "@typescript-eslint/eslint-plugin": "^5.9.0",
-    "@typescript-eslint/parser": "^5.9.0",
+    "@typescript-eslint/eslint-plugin": "^5.10.0",
+    "@typescript-eslint/parser": "^5.10.0",
     "@vue/cli-plugin-babel": "^4.5.15",
     "@vue/cli-plugin-eslint": "^4.5.15",
     "@vue/cli-plugin-pwa": "^4.5.15",
@@ -41,15 +41,15 @@
     "compression-webpack-plugin": "^6.1.1",
     "deepmerge": "^4.2.2",
     "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.2.0",
+    "eslint-plugin-vue": "^8.3.0",
     "eslint-plugin-vuetify": "^1.1.0",
     "launch-editor-middleware": "^2.3.0",
-    "sass": "^1.47.0",
+    "sass": "^1.48.0",
     "sass-loader": "^10.1.1",
     "typescript": "~4.5.4",
     "vue-cli-plugin-vuetify": "^2.4.5",
     "vue-template-compiler": "^2.6.14",
     "webpack-bundle-analyzer": "^4.5.0"
   },
-  "buildDate": "Sun 09 2022 January 22:43:16 EST"
+  "buildDate": "Mon 17 2022 January 21:34:53 EST"
 }

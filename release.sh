@@ -1,17 +1,18 @@
 #!/bin/bash
 
-# v0.0.2
+# v0.0.6
+
+PACKAGE_NAME='leafcast_vue_site'
 
 # Colours for echo
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 RESET='\033[0m'
+PURPLE='\033[0;35m'
 
-PACKAGE_NAME='leafcast_vue_site'
 STAR_LINE='****************************************'
 CWD=$(pwd)
-
 BUILD_DATE=$(date "+%a %d %Y %B %T %Z")
 
 # $1 string - error message
@@ -19,6 +20,11 @@ error_close() {
 	echo -e "\n${RED}ERROR - EXITED: ${YELLOW}$1${RESET}\n";
 	exit 1
 }
+
+if [ -z "$PACKAGE_NAME" ]
+then
+	error_close "No package name"
+fi
 
 # $1 string - question to ask
 ask_yn () {
@@ -100,8 +106,6 @@ update_release_body_and_changelog () {
 	sed -i -E "s|(\s)([0-9a-f]{40})| [\2](${GIT_REPO_URL}/commit/\2)|g" ./CHANGELOG.md
 }
 
-
-# $1 package_name
 update_json () {
 	local json_file="./package.json"
 	local json_version_update
@@ -135,8 +139,9 @@ bump_version () {
 }
 
 check_tag () {
-	echo -e "${YELLOW}Choose new tag version:${RESET}\n"
 	LATEST_TAG=$(git describe --tags --abbrev=0 --always)
+	echo -e "\nCurrent tag: ${PURPLE}${LATEST_TAG}${RESET}\n"
+	echo -e "${YELLOW}Choose new tag version:${RESET}\n"
 	if [[ $LATEST_TAG =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-((0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*)(\.(0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*))*))?(\+([0-9a-zA-Z-]+(\.[0-9a-zA-Z-]+)*))?$ ]]
 	then
 		IFS="." read -r MAJOR MINOR PATCH <<< "${LATEST_TAG:1}"
@@ -184,7 +189,6 @@ npm_test () {
 	npm run testAllSilent
 }
 
-
 release_flow() {
 	check_git
 	get_git_remote_url
@@ -219,29 +223,40 @@ release_flow() {
 }
 
 
-main () {
-	select opt in "lint" "tsc" "test" "release" "exit"
+main() {
+	cmd=(dialog --backtitle "Start ${MONO_NAME} containers" --radiolist "choose environment" 14 80 16)
+	options=(
+		1 "lint" off
+		2 "build" off
+		3 "test" off
+		4 "release" off
+	)
+	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+	exitStatus=$?
+	clear
+	if [ $exitStatus -ne 0 ]; then
+		exit
+	fi
+	for choice in $choices
 	do
-		case $opt in
-			"lint" )
+		case $choice in
+			0)
+				exit
+				break;;
+			1)
 				linter
 				main
 				break;;
-			"tsc")
+			2)
 				npm_build
 				main
 				break;;
-			"test")
+			3)
 				npm_test
 				main
 				break;;
-			"release")
+			4)
 				release_flow
-				break;;
-			"exit")
-				break;;
-			*)
-				error_close "invalid choice"
 				break;;
 		esac
 	done

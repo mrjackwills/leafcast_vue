@@ -2,6 +2,7 @@ import { snackError, snackReset } from './snack';
 import { userModule, websocketModule } from '@/store';
 
 import Axios, { AxiosError, AxiosInstance } from 'axios';
+import { env } from '@/vanillaTS/env';
 
 const wrap = <T> () => {
 	return function (_target: AxiosRequests, _propertyKey: string, descriptor: PropertyDescriptor): void {
@@ -52,7 +53,7 @@ class AxiosRequests {
 
 	@wrap()
 	async wsAuth_post (password: string): Promise<boolean> {
-		const { data } = await this.#wsAuthAxios.post('/', { key: process.env.VUE_APP_APIKEY, password });
+		const { data } = await this.#wsAuthAxios.post('/', { key: env.api_key, password });
 		if (data.response) {
 			snackReset();
 			const user_store = userModule();
@@ -64,4 +65,4 @@ class AxiosRequests {
 	}
 }
 
-export const axiosRequests = new AxiosRequests(<string>process.env.VUE_APP_WSAUTH_DOMAIN);
+export const axiosRequests = new AxiosRequests(env.domain_auth);

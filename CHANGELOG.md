@@ -3,7 +3,7 @@
 + npm update, 7e4a6424932f26b5668903df4fec9e8eb96256d3
 
 ### Features
-+ ens into vanilla/env, 1a37f983fcf41c2bad03ff9877b4f001b636f035
++ envs into vanilla/env, 1a37f983fcf41c2bad03ff9877b4f001b636f035
 
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.7.1'>v0.7.1</a>
 ### 2022-01-09

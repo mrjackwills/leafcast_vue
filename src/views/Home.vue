@@ -155,7 +155,6 @@ export default Vue.extend({
 		initCount: 0,
 		initTimeout: 0,
 		pageTitle: '',
-		pingInterval: 0,
 		showPiInfo: false,
 		updateInterval: 0,
 		mdiVideo
@@ -186,11 +185,6 @@ export default Vue.extend({
 
 			this.sendPhoto();
 
-			// PING sever every 30 seconds, to keep client side connection alive
-			this.pingInterval = window.setInterval(() => {
-				this.websocketStore.ping();
-			}, 1000 * 30);
-			
 			// Although should never have the connection killed
 			ws.connection?.addEventListener('close', (_event) => {
 				this.userStore.logout();
@@ -201,7 +195,6 @@ export default Vue.extend({
 		 * Clear clock interval and re-connect interval
 		 */
 		clearAllIntervals (): void {
-			clearInterval(this.pingInterval);
 			clearInterval(this.updateInterval);
 			clearInterval(this.initTimeout);
 			this.updateCountdown = 300;

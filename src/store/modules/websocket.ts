@@ -32,8 +32,5 @@ export const websocketModule = defineStore(ModuleName.Websocket, {
 			ws.connection?.send(JSON.stringify({ data, unique: true }));
 		},
 
-		ping (): void {
-			ws.connection?.send('PING');
-		},
 	}
 });

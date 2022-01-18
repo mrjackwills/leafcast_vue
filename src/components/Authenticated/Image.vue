@@ -26,7 +26,6 @@ export default Vue.extend({
 	data: () => ({
 		piTimeInterval: 0,
 		updateInterval: 0,
-		pingInterval: 0,
 		countdown: 60,
 		init: false,
 	}),

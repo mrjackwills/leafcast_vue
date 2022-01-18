@@ -18,7 +18,7 @@
 					<app-image-metadata @refresh='refresh' />
 				</v-col>
 
-				<v-col cols='auto' class='my-2'>
+				<!-- <v-col cols='auto' class='my-2'>
 					<v-btn
 						@click='goVideo'
 						class=''
@@ -37,7 +37,7 @@
 							</v-col>
 						</v-row>
 					</v-btn>
-				</v-col>
+				</v-col> -->
 
 				<v-col cols='auto' class='my-2'>
 					<v-btn

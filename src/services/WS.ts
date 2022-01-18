@@ -1,4 +1,5 @@
 import { userModule } from '@/store';
+import { env } from '@/vanillaTS/env';
 
 export class CreateWs {
 	#ws?: WebSocket
@@ -10,9 +11,7 @@ export class CreateWs {
 
 	openWs (password: string): void {
 		const user_store = userModule();
-		if (user_store.authenticated && process.env.VUE_APP_WSS_ADDRESS && process.env.VUE_APP_APIKEY) {
-			this.#ws = new WebSocket(`${process.env.VUE_APP_WSS_ADDRESS}/${password}`, [ process.env.VUE_APP_APIKEY ]);
-		}
+		if (user_store.authenticated) this.#ws = new WebSocket(`${env.domain_wss}/${password}`, [ env.api_key ]);
 	}
 
 	closeWs (): void {

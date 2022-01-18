@@ -45,6 +45,7 @@ import Vue from 'vue';
 import { mapStores } from 'pinia';
 import { mdiGithub } from '@mdi/js';
 import { userModule } from '@/store';
+import { env } from '@/vanillaTS/env';
 
 export default Vue.extend({
 	name: 'home-component',
@@ -59,13 +60,13 @@ export default Vue.extend({
 			return this.userStore.authenticated;
 		},
 		href (): string {
-			return process.env.VUE_APP_GITHUB?.split('leafcast')[0] ?? '';
+			return env.github.split('leafcast')[0] ?? '';
 		}
 	},
 
 	data: () => ({
-		appVersion: process.env.VUE_APP_VERSION as string,
-		buildDate: process.env.VUE_APP_DATE as string,
+		appVersion: env.app_version,
+		buildDate: env.build_date,
 		buildTimeout: 0,
 		showBuild: false,
 		mdiGithub,

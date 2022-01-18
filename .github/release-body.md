@@ -1,11 +1,11 @@
-### 2022-01-09
+### 2022-01-17
 
 ### Chores
-+ npm update, 9e21e4a7c3ea1857faac7235a7e7d70c9aa5a285
-+ dev container Dockerfile bump, 1e246aab7f4b71be33fadcc93592da91860114fc
-+ release.sh update, 1bc33e98f108714cbea627474c8a4dd24836f859
++ release.sh v0.0.6, 9e639441d99f09fa2621d74f29bb6d730c1e6465
++ npm update, 7e4a6424932f26b5668903df4fec9e8eb96256d3
 
-### Refactors
-+ xStore > xModule + into module dir, d56c06b8cba4367670f44ca2e18410fa0ea98280
+### Features
++ envs into vanilla/env, 1a37f983fcf41c2bad03ff9877b4f001b636f035
+
 
 see <a href='https://github.com/mrjackwills/leafcast_vue/blob/main/CHANGELOG.md'> CHANGELOG.md</a> for more details

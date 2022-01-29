@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia';
-import { snackError } from '@/services/snack';
+import { FrontendRoutes } from '@/types/enum_routes';
 import { ModuleName } from '@/types/enum_module';
-import { router } from '@/router';
-
 import { piStatusModule, loadingModule, websocketModule, imageModule } from '@/store';
+import { router } from '@/router';
+import { snackError } from '@/services/snack';
 
-export const userModule = defineStore(ModuleName.User, {
+export const userModule = defineStore(ModuleName.USER, {
 
 	state: () => ({
 		authenticated: false,
@@ -27,7 +27,7 @@ export const userModule = defineStore(ModuleName.User, {
 			imageModule().$reset();
 			websocketModule().closeWS();
 			if (message) snackError({ message });
-			if (router.currentRoute.name !== 'login') router.push('/login');
+			if (router.currentRoute.name !== 'login') router.push(FrontendRoutes.LOGIN);
 		}
 	}
 });

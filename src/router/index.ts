@@ -1,3 +1,4 @@
+import { FrontendRoutes } from '@/types/enum_routes';
 import { PiniaVuePlugin } from 'pinia';
 import { userModule } from '@/store';
 import Vue from 'vue';
@@ -8,7 +9,7 @@ Vue.use(VueRouter);
 
 const authedRoutes: Array<RouteConfig> = [
 	{
-		path: '/',
+		path: FrontendRoutes.BASE,
 		name: 'home',
 		// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 		component: () => import(/* webpackChunkName: "n" */ '@/views/Home.vue'),
@@ -24,16 +25,14 @@ const authedRoutes: Array<RouteConfig> = [
 for (const route of authedRoutes) {
 	route.beforeEnter = (_to, _from, next): void => {
 		const user_store = userModule();
-		if (!user_store.authenticated) {
-			next('/login');
-		}
+		if (!user_store.authenticated) next(FrontendRoutes.LOGIN);
 		else next();
 	};
 }
 
 const unAuthedRoutes: Array<RouteConfig> = [
 	{
-		path: '/login',
+		path: FrontendRoutes.LOGIN,
 		name: 'login',
 		// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 		component: () => import(/* webpackChunkName: "n" */ '@/views/Login.vue'),
@@ -44,14 +43,14 @@ for (const route of unAuthedRoutes) {
 	route.beforeEnter = (_to, _from, next): void => {
 		const user_store = userModule();
 		const isAuthenticated = user_store.authenticated;
-		if (isAuthenticated) next('/');
+		if (isAuthenticated) next(FrontendRoutes.BASE);
 		else next();
 	};
 }
 
 const baseRoutes: Array<RouteConfig> = [
 	{
-		path: '*',
+		path: FrontendRoutes.CATCHALL,
 		redirect: { name: 'home' },
 	},
 ];

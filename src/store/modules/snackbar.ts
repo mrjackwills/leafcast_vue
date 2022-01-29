@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ModuleName } from '@/types/enum_module';
 
-export const snackbarModule = defineStore(ModuleName.Snackbar, {
+export const snackbarModule = defineStore(ModuleName.SNACKBAR, {
 
 	state: () => ({
 		loading: false,

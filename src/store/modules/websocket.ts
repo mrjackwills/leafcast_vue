@@ -4,7 +4,7 @@ import { userModule } from '@/store';
 import { TWSToServer } from '@/types';
 import { ws } from '@/services/WS';
 
-export const websocketModule = defineStore(ModuleName.Websocket, {
+export const websocketModule = defineStore(ModuleName.WEBSOCKET, {
 
 	state: () => ({
 		connected: false

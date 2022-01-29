@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# v0.0.6
+# v0.0.11
 
 PACKAGE_NAME='leafcast_vue_site'
 
@@ -8,12 +8,14 @@ PACKAGE_NAME='leafcast_vue_site'
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
-RESET='\033[0m'
 PURPLE='\033[0;35m'
+RESET='\033[0m'
+
 
 STAR_LINE='****************************************'
 CWD=$(pwd)
 BUILD_DATE=$(date "+%a %d %Y %B %T %Z")
+
 
 # $1 string - error message
 error_close() {
@@ -82,6 +84,20 @@ check_git() {
 	fi
 }
 
+check_git_update() {
+	CURRENT_GIT_BRANCH=$(git branch --show-current)
+	GIT_CLEAN=$(git status --porcelain)
+	if [[ -n $GIT_CLEAN ]]
+	then
+		error_close "git dirty"
+	fi
+	if [[ ! "$CURRENT_GIT_BRANCH" =~ ^chore/npm_update$ ]]
+	then
+		error_close "not on chore/npm_update branch"
+	fi
+}
+
+
 ask_changelog_update() {
 	echo "${STAR_LINE}"
 	RELEASE_BODY_TEXT=$(sed '/# <a href=/Q' CHANGELOG.md)
@@ -114,6 +130,7 @@ update_json () {
 	json_build_update=$(jq ".buildDate =\"${BUILD_DATE}\"" <<< "${json_version_update}")
 	echo "$json_build_update" > "$json_file"
 }
+
 
 # $1 pacakge_name
 update_api_version_ts () {
@@ -179,23 +196,87 @@ check_tag () {
 
 linter () {
 	npm run lint
+	ask_continue
 }
 
 npm_build () {
 	npm run build
+	ask_continue
 }
 
+
 npm_test () {
-	npm run testAllSilent
+	start_time=$(date +%s)
+	npm run test:run
+	end_time=$(date +%s)
+	elapsed=$(( end_time - start_time ))
+	echo "test tooks ${elapsed}s"
+	ask_continue
+}
+
+single_package_test() {
+	ask_yn "run tests?"
+		if [[ "$(user_input)" =~ ^y$ ]]
+		then
+			npm run lint
+			npm run test
+		fi
+}
+
+# $1 all_ncu
+update_git_package() {
+	to_add=()
+	git_message="chore: npm update\n"
+	while IFS= read -r line; do
+		local trimmed_line
+		trimmed_line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+		to_add+=("$trimmed_line")
+	done <<< "$1"
+	for line in "${to_add[@]}"
+	do
+		echo -e ""
+		echo "${line}"
+		ask_yn "add line to git message"
+		if [[ "$(user_input)" =~ ^y$ ]]
+			then
+			git_message="${git_message}\n${line}"
+		fi
+	done
+	echo -e ""
+	echo -e "${git_message}"
+	ask_yn "accept message"
+	if [[ "$(user_input)" =~ ^y$ ]]
+	then
+		git add package.json
+		git add package-lock.json
+		git commit -m "$(echo -e "${git_message}")"
+	else
+		exit
+	fi
+}
+
+update() {
+	check_git_update
+	single_package_test "$DIRECTORY"
+	all_ncu=$(ncu | tail -n +3 | head -n -2)
+	echo "${all_ncu}"
+	ncu -i
+	ask_yn "npm install"
+	if [[ "$(user_input)" =~ ^y$ ]]
+	then
+		npm install
+		single_package_test
+		update_git_package "${all_ncu}"
+	fi
 }
 
 release_flow() {
 	check_git
 	get_git_remote_url
 	linter
-	ask_continue
+	# ask_continue
 	npm_build
-	ask_continue
+	# ask_continue
 	# npm_test
 	# ask_continue
 	cd "${CWD}" || error_close "Can't find ${CWD}"
@@ -219,17 +300,18 @@ release_flow() {
 	git checkout dev
 	git merge --no-ff main -m 'chore: merge main into dev'
 	git branch -d "$RELEASE_BRANCH"
+	git push origin dev
 	npm run build
 }
 
-
 main() {
-	cmd=(dialog --backtitle "Start ${MONO_NAME} containers" --radiolist "choose environment" 14 80 16)
+	cmd=(dialog --backtitle "Start ${MONO_NAME} containers" --radiolist "choose" 14 80 16)
 	options=(
-		1 "lint" off
-		2 "build" off
-		3 "test" off
-		4 "release" off
+		1 "update" update
+		2 "lint" off
+		3 "build" off
+		4 "test" off
+		5 "release" off
 	)
 	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 	exitStatus=$?
@@ -244,18 +326,22 @@ main() {
 				exit
 				break;;
 			1)
-				linter
+				update
 				main
 				break;;
 			2)
-				npm_build
+				linter
 				main
 				break;;
 			3)
-				npm_test
+				npm_build
 				main
 				break;;
 			4)
+				npm_test
+				main
+				break;;
+			5)
 				release_flow
 				break;;
 		esac

@@ -134,9 +134,9 @@ export default Vue.extend({
 
 	data: () => ({
 		goToTimeout: 0,
+		isIntersecting: false,
 		mdiAlertCircleOutline,
 		mdiCameraFlip,
-		isIntersecting: false
 	}),
 
 	methods: {

@@ -1,5 +1,6 @@
 import './registerServiceWorker';
 import { createPinia, PiniaVuePlugin } from 'pinia';
+import { env } from './vanillaTS/env';
 import { router } from '@/router';
 import { VNode } from 'vue/types/umd';
 import App from './App.vue';
@@ -12,7 +13,7 @@ const pinia = createPinia();
 Vue.use(PiniaVuePlugin);
 Vue.use(Meta);
 
-Vue.config.productionTip = process.env.VUE_APP_MODE === 'production' ? false : true;
+Vue.config.productionTip = !env.production_mode;
 
 new Vue({
 	router: router,

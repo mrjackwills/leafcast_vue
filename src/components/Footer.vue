@@ -42,10 +42,10 @@
 
 import Vue from 'vue';
 
+import { env } from '@/vanillaTS/env';
 import { mapStores } from 'pinia';
 import { mdiGithub } from '@mdi/js';
 import { userModule } from '@/store';
-import { env } from '@/vanillaTS/env';
 
 export default Vue.extend({
 	name: 'home-component',

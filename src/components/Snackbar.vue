@@ -26,8 +26,8 @@
 <script lang ='ts'>
 import Vue from 'vue';
 
-import { snackbarModule } from '@/store';
 import { mapStores } from 'pinia';
+import { snackbarModule } from '@/store';
 
 export default Vue.extend({
 	name: 'snackbar-component',
@@ -79,7 +79,6 @@ export default Vue.extend({
 		closeSnackbar (): void {
 			this.visible = false;
 			this.snackbarStore.$reset();
-			// SnackModule.dispatch_reset();
 			clearTimeout(this.timeout);
 			this.timeout = 0;
 		}

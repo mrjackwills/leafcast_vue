@@ -6,7 +6,7 @@ export type nu = u<number>
 
 export type TConvertBytes = {
 	total: string,
-	unit: 'GB' | 'MB' | 'KB'
+	unit: 'GB' | 'MB' | 'kB'
 }
 
 export type TDataToDisplay = Array<Array< { [ K in 'icon' | 'text' | 'value' ]: string } & { extra?: string } >>

@@ -1,6 +1,7 @@
 import { register, unregister } from 'register-service-worker';
+import { env } from './vanillaTS/env';
 
-if (process.env.NODE_ENV === 'production') {
+if (env.production_mode) {
 	register(`${process.env.BASE_URL}service-worker.js`, {
 		ready () {
 			// console.log('App is being served from cache by a service worker');

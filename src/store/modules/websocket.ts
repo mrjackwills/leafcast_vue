@@ -4,15 +4,17 @@ import { userModule } from '@/store';
 import { TWSToServer } from '@/types';
 import { ws } from '@/services/WS';
 
-export const websocketModule = defineStore(ModuleName.Websocket, {
+export const websocketModule = defineStore(ModuleName.WEBSOCKET, {
 
 	state: () => ({
 		connected: false
 	}),
 
 	actions: {
-		set_connected (b: boolean): void {
-			this.connected = b;
+		
+		closeWS (): void {
+			this.set_connected(false);
+			ws.closeWs();
 		},
 
 		openWs (password: string): void {
@@ -22,14 +24,13 @@ export const websocketModule = defineStore(ModuleName.Websocket, {
 				this.set_connected(true);
 			});
 		},
-
-		closeWS (): void {
-			this.set_connected(false);
-			ws.closeWs();
-		},
-
+		
 		send (data: TWSToServer): void {
 			ws.connection?.send(JSON.stringify({ data, unique: true }));
+		},
+		
+		set_connected (b: boolean): void {
+			this.connected = b;
 		},
 
 	}

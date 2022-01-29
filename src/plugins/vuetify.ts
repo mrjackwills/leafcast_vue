@@ -1,6 +1,6 @@
-import Vue from 'vue';
+import { env } from '@/vanillaTS/env';
 import { Intersect, Ripple, Touch } from 'vuetify/lib/directives';
-
+import Vue from 'vue';
 import Vuetify, {
 	VApp,
 	VBtn,
@@ -85,7 +85,7 @@ const opts = {
 			},
 			options: {
 				customProperties: true,
-				minifyTheme: (css: string): string => process.env.NODE_ENV === 'production' ? css.replace(/[\s|\r\n|\r|\n]/g, ''): css,
+				minifyTheme: (css: string): string => env.production_mode ? css.replace(/[\s|\r\n|\r|\n]/g, ''): css,
 			}
 		}
 	}

@@ -257,22 +257,17 @@ update_git_package() {
 
 update() {
 	check_git_update
-	for DIRECTORY in "${ALL_PACKAGES[@]}"
-	do
-		cd "${CWD}/packages/$DIRECTORY" || error_close "${CWD}/packages/${DIRECTORY} not found"
-		single_package_test "$DIRECTORY"
-		all_ncu=$(ncu | tail -n +3 | head -n -2)
-		echo "${all_ncu}"
-		ncu -i
-		ask_yn "npm install"
-		if [[ "$(user_input)" =~ ^y$ ]]
-		then
-			npm install
-			single_package_test
-			update_git_package "${all_ncu}"
-		fi
-		ask_continue
-	done
+	single_package_test "$DIRECTORY"
+	all_ncu=$(ncu | tail -n +3 | head -n -2)
+	echo "${all_ncu}"
+	ncu -i
+	ask_yn "npm install"
+	if [[ "$(user_input)" =~ ^y$ ]]
+	then
+		npm install
+		single_package_test
+		update_git_package "${all_ncu}"
+	fi
 }
 
 release_flow() {

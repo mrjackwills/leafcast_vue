@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ModuleName } from '@/types/enum_module';
 
-export const piStatusModule = defineStore(ModuleName.Pistatus, {
+export const piStatusModule = defineStore(ModuleName.PI_STATUS, {
 
 	state: () => ({
 		init: false,

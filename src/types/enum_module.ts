@@ -1,9 +1,9 @@
 export enum ModuleName {
-	Image = 'image',
-	Loading = 'loading',
-	Pistatus = 'piStatus',
-	Settings = 'settings',
-	Snackbar = 'snackbar',
-	User = 'user',
-	Websocket = 'websocket'
+	IMAGE = 'image',
+	LOADING = 'loading',
+	PI_STATUS = 'piStatus',
+	SETTINGS = 'settings',
+	SNACKBAR = 'snackbar',
+	USER = 'user',
+	WEBSOCKET = 'websocket'
 }

@@ -1,8 +1,7 @@
+import { env } from '@/vanillaTS/env';
 import { snackError, snackReset } from './snack';
 import { userModule, websocketModule } from '@/store';
-
 import Axios, { AxiosError, AxiosInstance } from 'axios';
-import { env } from '@/vanillaTS/env';
 
 const wrap = <T> () => {
 	return function (_target: AxiosRequests, _propertyKey: string, descriptor: PropertyDescriptor): void {

@@ -11,8 +11,10 @@ export const websocketModule = defineStore(ModuleName.WEBSOCKET, {
 	}),
 
 	actions: {
-		set_connected (b: boolean): void {
-			this.connected = b;
+		
+		closeWS (): void {
+			this.set_connected(false);
+			ws.closeWs();
 		},
 
 		openWs (password: string): void {
@@ -22,14 +24,13 @@ export const websocketModule = defineStore(ModuleName.WEBSOCKET, {
 				this.set_connected(true);
 			});
 		},
-
-		closeWS (): void {
-			this.set_connected(false);
-			ws.closeWs();
-		},
-
+		
 		send (data: TWSToServer): void {
 			ws.connection?.send(JSON.stringify({ data, unique: true }));
+		},
+		
+		set_connected (b: boolean): void {
+			this.connected = b;
 		},
 
 	}

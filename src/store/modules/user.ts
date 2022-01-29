@@ -13,13 +13,7 @@ export const userModule = defineStore(ModuleName.USER, {
 	}),
 
 	actions: {
-		set_authenticated (value: boolean) {
-			this.authenticated = value;
-		},
-
-		set_api_version (value: string) {
-			this.api_version = value;
-		},
+	
 		async logout (message?: string): Promise<void> {
 			this.authenticated = false;
 			loadingModule().set_loading(false);
@@ -28,6 +22,14 @@ export const userModule = defineStore(ModuleName.USER, {
 			websocketModule().closeWS();
 			if (message) snackError({ message });
 			if (router.currentRoute.name !== 'login') router.push(FrontendRoutes.LOGIN);
-		}
+		},
+
+		set_api_version (value: string) {
+			this.api_version = value;
+		},
+
+		set_authenticated (value: boolean) {
+			this.authenticated = value;
+		},
 	}
 });

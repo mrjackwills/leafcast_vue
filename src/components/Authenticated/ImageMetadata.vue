@@ -19,9 +19,9 @@ import { mapStores } from 'pinia';
 import { mdiClock, mdiUpdate, mdiImageSizeSelectLarge, mdiImage } from '@mdi/js';
 import { nextUpdateToText } from '@/vanillaTS/secondsToText';
 import { TDataToDisplay } from '@/types';
+import { zeroPad } from '@/vanillaTS/zeropad';
 import DisplayRows from '@/components/Authenticated/DisplayRows.vue';
 import PiOffline from '@/components/Authenticated/PiOffline.vue';
-import { zeroPad } from '@/vanillaTS/zeropad';
 
 export default Vue.extend({
 	name: 'image-metadata-component',

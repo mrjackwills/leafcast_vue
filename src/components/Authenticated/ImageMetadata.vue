@@ -19,7 +19,7 @@ import { mapStores } from 'pinia';
 import { mdiClock, mdiUpdate, mdiImageSizeSelectLarge, mdiImage } from '@mdi/js';
 import { nextUpdateToText } from '@/vanillaTS/secondsToText';
 import { TDataToDisplay } from '@/types';
-import { zeroPad } from '@/vanillaTS/zeropad';
+// import { zeroPad } from '@/vanillaTS/zeropad';
 import DisplayRows from '@/components/Authenticated/DisplayRows.vue';
 import PiOffline from '@/components/Authenticated/PiOffline.vue';
 
@@ -34,8 +34,8 @@ export default Vue.extend({
 	computed: {
 		...mapStores(imageModule, piStatusModule),
 
-		imageSize_compressed (): number|undefined {
-			return this.imageStore.imageSize_compressed;
+		imageSize_converted (): number|undefined {
+			return this.imageStore.imageSize_converted;
 		},
 		imageSize_original (): number|undefined {
 			return this.imageStore.imageSize_original;
@@ -46,10 +46,11 @@ export default Vue.extend({
 		intervalToHMS (): string {
 			return nextUpdateToText(this.updateCountdown*1000);
 		},
-		formattedTimestamp (): string {
-			if (!this.timestamp) return '';
-			return this.formatDate(this.timestamp);
-		},
+		// formattedTimestamp (): string {
+		// 	// if (!this.timestamp) return '';
+		// 	return this.timestamp ? this.timestamp : '';
+		// 	// return this.formatDate(this.timestamp);
+		// },
 		piOnline (): boolean {
 			return this.piStatusStore.online;
 		},
@@ -59,7 +60,7 @@ export default Vue.extend({
 					{
 						icon: mdiClock,
 						text: 'taken',
-						value: this.formattedTimestamp,
+						value: this.timestamp,
 					},
 					{
 						icon: mdiUpdate,
@@ -77,13 +78,14 @@ export default Vue.extend({
 					{
 						icon: mdiImageSizeSelectLarge,
 						text: 'compressed size',
-						value: this.convert_bytes(this.imageSize_compressed??0)
+						value: this.convert_bytes(this.imageSize_converted??0)
 					}
-				]
+				],
+
 			];
 		},
-		timestamp (): Date|undefined {
-			return this.imageStore.timestamp ? new Date(this.imageStore.timestamp) : undefined;
+		timestamp (): string {
+			return this.imageStore.timestamp;
 		},
 		updateCountdown (): number {
 			return this.imageStore.updateCountdown;
@@ -92,13 +94,13 @@ export default Vue.extend({
 
 	data: () => ({
 		dayOptions: [
-			'Sunday',
 			'Monday',
 			'Tuesday',
 			'Wednesday',
 			'Thursday',
 			'Friday',
 			'Saturday',
+			'Sunday',
 		] as const
 	}),
 
@@ -108,9 +110,9 @@ export default Vue.extend({
 			return `${a.total} ${a.unit}`;
 		},
 
-		formatDate (data: Date): string {
-			return `${this.dayOptions[data.getDay()]} ${data.getFullYear()}-${zeroPad(data.getMonth() + 1)}-${zeroPad(data.getDate())} @ ${zeroPad(data.getHours())}:${zeroPad(data.getMinutes())}:${zeroPad(data.getSeconds())}`;
-		},
+		// formatDate (data: Date): string {
+		// return `${this.dayOptions[data.getDay()]} ${data.getFullYear()}-${zeroPad(data.getMonth() + 1)}-${zeroPad(data.getDate())} @ ${zeroPad(data.getHours())}:${zeroPad(data.getMinutes())}:${zeroPad(data.getSeconds())}`;
+		// },
 		
 	},
 

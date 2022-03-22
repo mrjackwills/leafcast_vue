@@ -6,7 +6,7 @@ export const imageModule = defineStore(ModuleName.IMAGE, {
 	state: () => ({
 		cached: false,
 		image: '',
-		imageSize_compressed: 0,
+		imageSize_converted: 0,
 		imageSize_original: 0,
 		timestamp: '',
 		updateCountdown: 300,
@@ -15,7 +15,7 @@ export const imageModule = defineStore(ModuleName.IMAGE, {
 	getters: {
 		
 		get_image () :string {
-			return this.imageExists ? `data:image/webp;base64,${this.image}` : '';
+			return this.imageExists ? this.image : '';
 		},
 
 		imageExists (): boolean {
@@ -32,8 +32,8 @@ export const imageModule = defineStore(ModuleName.IMAGE, {
 			this.image = b;
 		},
 
-		set_imageSize_compressed (b: number): void {
-			this.imageSize_compressed = b;
+		set_imageSize_converted (b: number): void {
+			this.imageSize_converted = b;
 		},
 
 		set_imageSize_original (b: number): void {

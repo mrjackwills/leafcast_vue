@@ -122,6 +122,14 @@ export default Vue.extend({
 				this.piStatusStore.set_nodeUptime(n);
 			}
 		},
+		connectedFor: {
+			get: function (): number {
+				return this.piStatusStore.connectedFor;
+			},
+			set: function (n: number): void {
+				this.piStatusStore.set_connectedFor(n);
+			}
+		},
 		uptime: {
 			get: function (): number {
 				return this.piStatusStore.uptime;
@@ -240,13 +248,13 @@ export default Vue.extend({
 			if (!this.websocketStore.connected) this.userStore.logout;
 			this.loading = true;
 			this.clearAllIntervals();
-			this.websocketStore.send({ message: 'force-update' });
+			this.websocketStore.send({ name: 'force_update' });
 			this.startInterval();
 		},
 
 		sendPhoto (): void {
 			this.loading = true;
-			this.websocketStore.send({ message: 'photo' });
+			this.websocketStore.send({ name: 'photo' });
 		},
 
 		startInterval (): void {
@@ -255,6 +263,7 @@ export default Vue.extend({
 				this.updateCountdown --;
 				if (this.nodeUptime) this.nodeUptime ++;
 				if (this.uptime) this.uptime ++;
+				if (this.connectedFor) this.connectedFor ++;
 
 				if (this.updateCountdown === 1) this.sendPhoto();
 				if (this.updateCountdown === 0) this.updateCountdown = 300;
@@ -269,20 +278,21 @@ export default Vue.extend({
 			
 			// TODO switch case for errors
 			// Maybe just logout?
-			switch (message.data?.message) {
+			switch (message.data?.name) {
 			case 'photo':
 				this.imageStore.set_cached(!!message.cache);
 				this.imageStore.set_image(message.data.data.image ?? '');
-				this.imageStore.set_imageSize_compressed(message.data.data.imageSize_compressed??0);
-				this.imageStore.set_imageSize_original(message.data.data.imageSize_original??0);
+				this.imageStore.set_imageSize_converted(message.data.data.size_converted??0);
+				this.imageStore.set_imageSize_original(message.data.data.size_original??0);
 				this.imageStore.set_timestamp(message.data.data.timestamp);
-				this.piStatusStore.set_internalIp(message.data.data.piInfo.internalIp);
-				this.piStatusStore.set_numberImages(message.data.data.piInfo.numberImages);
+				this.piStatusStore.set_internalIp(message.data.data.pi_info.internal_ip);
+				this.piStatusStore.set_numberImages(message.data.data.pi_info.number_images);
 				this.piStatusStore.set_online(!message.cache);
-				this.piStatusStore.set_piVersion(message.data.data.piInfo.piVersion);
-				this.piStatusStore.set_totalFileSize(message.data.data.piInfo.totalFileSize);
-				this.uptime = message.data.data.piInfo.uptime;
-				this.nodeUptime = message.data.data.piInfo.nodeUptime;
+				this.piStatusStore.set_piVersion(message.data.data.pi_info.version);
+				this.piStatusStore.set_totalFileSize(message.data.data.pi_info.total_file_size);
+				this.piStatusStore.set_connectedFor(message.data.data.pi_info.websocket_uptime);
+				this.uptime = message.data.data.pi_info.uptime;
+				this.nodeUptime = message.data.data.pi_info.app_uptime;
 				if (!this.init) this.startInterval();
 				this.initCount = 0;
 				this.init = true;

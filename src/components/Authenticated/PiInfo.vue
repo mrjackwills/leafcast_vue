@@ -42,7 +42,7 @@ import Vue from 'vue';
 import { convert_bytes } from '@/vanillaTS/convertBytes';
 import { loadingModule, piStatusModule } from '@/store';
 import { mapStores } from 'pinia';
-import { mdiAlertCircleOutline, mdiCameraFlip, mdiDesktopClassic, mdiHarddisk, mdiImageMultiple, mdiLanConnect, mdiNodejs, mdiSourceBranch } from '@mdi/js';
+import { mdiAlertCircleOutline, mdiCameraFlip, mdiDesktopClassic, mdiHarddisk, mdiImageMultiple, mdiLanConnect, mdiLanguageRust, mdiSourceBranch, mdiWebClock } from '@mdi/js';
 import { secondsToText } from '@/vanillaTS/secondsToText';
 import { TDataToDisplay } from '@/types';
 import DisplayRows from '@/components/Authenticated/DisplayRows.vue';
@@ -65,6 +65,9 @@ export default Vue.extend({
 		},
 		loading (): boolean {
 			return this.loadingStore.loading;
+		},
+		connectedFor (): number {
+			return this.piStatusStore.connectedFor;
 		},
 		nodeUptime (): number {
 			return this.piStatusStore.nodeUptime;
@@ -94,19 +97,27 @@ export default Vue.extend({
 				},
 			] ];
 			if (this.piOnline) {
-				output.push([
-
-					{
-						icon: mdiDesktopClassic,
-						text: 'pi uptime',
-						value: secondsToText(this.uptime? this.uptime*1000: 0),
-					},
-					{
-						icon: mdiNodejs,
-						text: 'node uptime',
-						value: secondsToText(this.nodeUptime? this.nodeUptime*1000:0),
-					}
-				]);
+				output.push(
+					[
+						{
+							icon: mdiDesktopClassic,
+							text: 'pi uptime',
+							value: secondsToText(this.uptime? this.uptime*1000: 0),
+						},
+						{
+							icon: mdiLanguageRust,
+							text: 'app uptime',
+							value: secondsToText(this.nodeUptime? this.nodeUptime*1000:0),
+						},
+					],
+					[
+						{
+							icon: mdiWebClock,
+							text: 'websocket uptime',
+							value: secondsToText(this.connectedFor? this.connectedFor*1000:0),
+						}
+					]
+				);
 			}
 			output.push([
 				{
@@ -120,7 +131,9 @@ export default Vue.extend({
 					text: 'total file size',
 					value: this.convert_bytes(this.totalFileSize),
 					extra: cached
-				}, ]
+				},
+				
+			]
 			);
 			return output;
 		},

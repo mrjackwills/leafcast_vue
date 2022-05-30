@@ -10,11 +10,17 @@ export const piStatusModule = defineStore(ModuleName.PI_STATUS, {
 		numberImages: 0,
 		online: false,
 		piVersion: '',
+		connectedFor: 0,
 		totalFileSize: '',
 		uptime: 0,
 	}),
 
 	actions: {
+
+		set_connectedFor (b: number): void {
+			this.connectedFor = b;
+		},
+
 		set_init (b: boolean): void {
 			this.init = b;
 		},

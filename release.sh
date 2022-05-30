@@ -33,6 +33,12 @@ ask_yn () {
 	printf "%b%s? [y/N]:%b " "${GREEN}" "$1" "${RESET}"
 }
 
+# return user input
+user_input() {
+	read -r data
+	echo "$data"
+}
+
 ask_continue () {
 	ask_yn "continue"
 	if [[ ! "$(user_input)" =~ ^y$ ]] 
@@ -41,11 +47,6 @@ ask_continue () {
 	fi
 }
 
-# return user input
-user_input() {
-	read -r data
-	echo "$data"
-}
 
 update_major () {
 	local bumped_major
@@ -65,19 +66,26 @@ update_patch () {
 	echo "${MAJOR}.${MINOR}.${bumped_patch}"
 }
 
+# Get the url of the github repo, strip .git from the end of it
 get_git_remote_url() {
 	REMOTE_ORIGIN=$(git config --get remote.origin.url)
 	TO_REMOVE=".git"
 	GIT_REPO_URL="${REMOTE_ORIGIN//$TO_REMOVE}"
 }
 
-check_git() {
-	CURRENT_GIT_BRANCH=$(git branch --show-current)
+# Check that git status is clean
+check_git_clean() {
 	GIT_CLEAN=$(git status --porcelain)
 	if [[ -n $GIT_CLEAN ]]
 	then
 		error_close "git dirty"
 	fi
+}
+
+# Check currently on dev branch
+check_git() {
+	CURRENT_GIT_BRANCH=$(git branch --show-current)
+	check_git_clean
 	if [[ ! "$CURRENT_GIT_BRANCH" =~ ^dev$ ]]
 	then
 		error_close "not on dev branch"
@@ -86,11 +94,7 @@ check_git() {
 
 check_git_update() {
 	CURRENT_GIT_BRANCH=$(git branch --show-current)
-	GIT_CLEAN=$(git status --porcelain)
-	if [[ -n $GIT_CLEAN ]]
-	then
-		error_close "git dirty"
-	fi
+	check_git_clean
 	if [[ ! "$CURRENT_GIT_BRANCH" =~ ^chore/npm_update$ ]]
 	then
 		error_close "not on chore/npm_update branch"
@@ -118,7 +122,7 @@ update_release_body_and_changelog () {
 	DATE_SUBHEADING="### $(date +'%Y-%m-%d')\n\n"
 	RELEASE_BODY_ADDITION="${DATE_SUBHEADING}$1"
 	echo -e "${RELEASE_BODY_ADDITION}\n\nsee <a href='${GIT_REPO_URL}/blob/main/CHANGELOG.md'> CHANGELOG.md</a> for more details" > .github/release-body.md
-	echo -e "# <a href='${GIT_REPO_URL}/releases/tag/${NEW_TAG_VERSION}'>${NEW_TAG_VERSION}</a>\n${DATE_SUBHEADING}${CHANGELOG_ADDITION}$(cat CHANGELOG.md)" > CHANGELOG.md
+	echo -e "# <a href='${GIT_REPO_URL}/releases/tag/${NEW_TAG_WITH_V}'>${NEW_TAG_WITH_V}</a>\n${DATE_SUBHEADING}${CHANGELOG_ADDITION}$(cat CHANGELOG.md)" > CHANGELOG.md
 	sed -i -E "s|(\s)([0-9a-f]{40})| [\2](${GIT_REPO_URL}/commit/\2)|g" ./CHANGELOG.md
 }
 
@@ -126,7 +130,7 @@ update_json () {
 	local json_file="./package.json"
 	local json_version_update
 	local json_build_update
-	json_version_update=$(jq ".version = \"${NEW_TAG_VERSION:1}\"" "${json_file}")
+	json_version_update=$(jq ".version = \"${NEW_TAG_WITH_V:1}\"" "${json_file}")
 	json_build_update=$(jq ".buildDate =\"${BUILD_DATE}\"" <<< "${json_version_update}")
 	echo "$json_build_update" > "$json_file"
 }
@@ -136,7 +140,7 @@ update_json () {
 update_api_version_ts () {
 	NODE_FILE="./src/config/api_version.ts"
 	if [[ -f "$NODE_FILE" ]]; then
-		echo "export const api_version = '${NEW_TAG_VERSION:1}';" > "$NODE_FILE"
+		echo "export const api_version = '${NEW_TAG_WITH_V:1}';" > "$NODE_FILE"
 	fi
 }
 
@@ -144,7 +148,7 @@ update_yaml () {
 	DOCKER_COMPOSE="./docker-compose.yml"
 	if [[ -f "$DOCKER_COMPOSE" ]]
 	then
-	yq e -i ".services.$PACKAGE_NAME.image = \"$PACKAGE_NAME:${NEW_TAG_VERSION:1}\"" ${DOCKER_COMPOSE}
+	yq e -i ".services.$PACKAGE_NAME.image = \"$PACKAGE_NAME:${NEW_TAG_WITH_V:1}\"" ${DOCKER_COMPOSE}
 	fi
 }
 
@@ -155,6 +159,9 @@ bump_version () {
 	update_yaml
 }
 
+# Work out the current version, based on git tags
+# create new semver version based on user input
+# Set MAJOR MINOR PATCH
 check_tag () {
 	LATEST_TAG=$(git describe --tags --abbrev=0 --always)
 	echo -e "\nCurrent tag: ${PURPLE}${LATEST_TAG}${RESET}\n"
@@ -167,25 +174,24 @@ check_tag () {
 		MINOR="0"
 		PATCH="0"
 	fi
-	MAJOR_TAG=v$(update_major)
-	MINOR_TAG=v$(update_minor)
-	PATCH_TAG=v$(update_patch)
-	OP_MAJOR="major___$MAJOR_TAG"
-	OP_MINOR="minor___$MINOR_TAG"
-	OP_PATCH="patch___$PATCH_TAG"
+	OP_MAJOR="major___v$(update_major)"
+	OP_MINOR="minor___v$(update_minor)"
+	OP_PATCH="patch___v$(update_patch)"
 	OPTIONS=("$OP_MAJOR" "$OP_MINOR" "$OP_PATCH")
 	select choice in "${OPTIONS[@]}"
 	do
 		case $choice in
 			"$OP_MAJOR" )
-				NEW_TAG_VERSION="$MAJOR_TAG"
-				# IFS="." read -ra UPDATE_NGINX  <<< "${NEW_TAG_VERSION:1}"
+				MAJOR=$((MAJOR + 1))
+				MINOR=0
+				PATCH=0
 				break;;
 			"$OP_MINOR")
-				NEW_TAG_VERSION="$MINOR_TAG"
+				MINOR=$((MINOR + 1))
+				PATCH=0
 				break;;
 			"$OP_PATCH")
-				NEW_TAG_VERSION="$PATCH_TAG"
+				PATCH=$((PATCH + 1))
 				break;;
 			*)
 				error_close "invalid option $REPLY"
@@ -203,7 +209,6 @@ npm_build () {
 	npm run build
 	ask_continue
 }
-
 
 npm_test () {
 	start_time=$(date +%s)
@@ -274,29 +279,25 @@ release_flow() {
 	check_git
 	get_git_remote_url
 	linter
-	# ask_continue
 	npm_build
-	# ask_continue
-	# npm_test
-	# ask_continue
 	cd "${CWD}" || error_close "Can't find ${CWD}"
+
+
 	check_tag
-	printf "\nnew tag chosen: %s\n\n" "${NEW_TAG_VERSION}"
-	RELEASE_BRANCH=release-$NEW_TAG_VERSION
+	NEW_TAG_WITH_V="v${MAJOR}.${MINOR}.${PATCH}"
+	printf "\nnew tag chosen: %s\n\n" "${NEW_TAG_WITH_V}"
+	RELEASE_BRANCH=release-$NEW_TAG_WITH_V
 	echo -e
 	ask_changelog_update
 	git checkout -b "$RELEASE_BRANCH"
 	bump_version
-	# if [[ ${UPDATE_NGINX[0]} ]]
-	# then
-	# 	update_nginx_and_vue "${UPDATE_NGINX[0]}"
-	# fi
+
 	git add .
-	git commit -m "chore: release $NEW_TAG_VERSION"
+	git commit -m "chore: release $NEW_TAG_WITH_V"
 	git checkout main
 	git merge --no-ff "$RELEASE_BRANCH" -m "chore: merge ${RELEASE_BRANCH} into main"
-	git tag -a -m "${RELEASE_BRANCH}" "$NEW_TAG_VERSION"
-	git push --atomic origin main "$NEW_TAG_VERSION"
+	git tag -a -m "${RELEASE_BRANCH}" "$NEW_TAG_WITH_V"
+	git push --atomic origin main "$NEW_TAG_WITH_V"
 	git checkout dev
 	git merge --no-ff main -m 'chore: merge main into dev'
 	git branch -d "$RELEASE_BRANCH"
@@ -305,7 +306,7 @@ release_flow() {
 }
 
 main() {
-	cmd=(dialog --backtitle "Start ${MONO_NAME} containers" --radiolist "choose" 14 80 16)
+	cmd=(dialog --backtitle "Choose build option" --radiolist "choose" 14 80 16)
 	options=(
 		1 "update" update
 		2 "lint" off

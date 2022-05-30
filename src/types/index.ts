@@ -1,4 +1,4 @@
-type TWSToServerNames = 'photo' | 'force-update'
+type TWSToServerNames = 'photo' | 'force_update'
 
 export type u<T> = T | undefined
 export type su = u<string>
@@ -13,9 +13,9 @@ export type TDataToDisplay = Array<Array< { [ K in 'icon' | 'text' | 'value' ]: 
 
 export type TError = { message: string, code: number }
 
-export type TPhoto = { message: 'photo', data: { image?: string, timestamp: string, imageSize_compressed?: number, imageSize_original? :number, piInfo: TPiStatus } }
+export type TPhoto = { name: 'photo', data: { image?: string, timestamp: string, size_converted?: number, size_original? :number, pi_info: TPiStatus } }
 
-export type TPiStatus = { [ K in 'internalIp' | 'piVersion' | 'totalFileSize']: string } & { [ K in 'uptime' | 'nodeUptime' | 'numberImages' ]: number }
+export type TPiStatus = { [ K in 'internal_ip' | 'version' | 'total_file_size']: string } & { [ K in 'uptime' | 'app_uptime' | 'number_images' | 'websocket_uptime' ]: number }
 
 export type TSnackbarModule = {
 	loading: boolean,
@@ -36,4 +36,4 @@ export type TVideoName = 'basil' | 'garden'
 
 export type TWSFromPi = { data?: TPhoto, cache?: boolean, unique?: boolean, error?: TError }
 
-export type TWSToServer = { message: TWSToServerNames }
+export type TWSToServer = { name: TWSToServerNames }

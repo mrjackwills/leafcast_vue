@@ -19,7 +19,7 @@
 	},
 
 	"mounts": [
-		"source=/etc/timezone,target=/etc/timezone,type=bind,readonly",
+		//"source=/etc/timezone,target=/etc/timezone,type=bind,readonly",
 		"source=/etc/localtime,target=/etc/localtime,type=bind,readonly",
 		"source=/home/jack/.ssh,target=/home/node/.ssh,type=bind,readonly"
 	],
@@ -42,6 +42,6 @@
 	"remoteUser": "node",
 	"features": {
 		"docker-in-docker": "latest",
-		"git": "latest"
+		"git": "os-provided"
 	}
 }

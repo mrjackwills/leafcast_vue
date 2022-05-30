@@ -14,7 +14,7 @@
 <p align="center">
 	Front end to the <a href='https://github.com/mrjackwills/leafcast_pi' target='_blank' rel='noopener noreferrer'>pi backend client</a>
 	<br>
-	Password available on request
+	<a href='https://plants.mrjackwills.com' target='_blank' rel='noopener noreferrer'>See the plants</a>, password available on request
 </p>
 
 <p align="center">

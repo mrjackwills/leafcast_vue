@@ -122,7 +122,7 @@ update_release_body_and_changelog () {
 	DATE_SUBHEADING="### $(date +'%Y-%m-%d')\n\n"
 	RELEASE_BODY_ADDITION="${DATE_SUBHEADING}$1"
 	echo -e "${RELEASE_BODY_ADDITION}\n\nsee <a href='${GIT_REPO_URL}/blob/main/CHANGELOG.md'> CHANGELOG.md</a> for more details" > .github/release-body.md
-	echo -e "# <a href='${GIT_REPO_URL}/releases/tag/${NEW_TAG_VERSION}'>${NEW_TAG_VERSION}</a>\n${DATE_SUBHEADING}${CHANGELOG_ADDITION}$(cat CHANGELOG.md)" > CHANGELOG.md
+	echo -e "# <a href='${GIT_REPO_URL}/releases/tag/${NEW_TAG_WITH_V}'>${NEW_TAG_WITH_V}</a>\n${DATE_SUBHEADING}${CHANGELOG_ADDITION}$(cat CHANGELOG.md)" > CHANGELOG.md
 	sed -i -E "s|(\s)([0-9a-f]{40})| [\2](${GIT_REPO_URL}/commit/\2)|g" ./CHANGELOG.md
 }
 
@@ -130,7 +130,7 @@ update_json () {
 	local json_file="./package.json"
 	local json_version_update
 	local json_build_update
-	json_version_update=$(jq ".version = \"${NEW_TAG_VERSION:1}\"" "${json_file}")
+	json_version_update=$(jq ".version = \"${NEW_TAG_WITH_V:1}\"" "${json_file}")
 	json_build_update=$(jq ".buildDate =\"${BUILD_DATE}\"" <<< "${json_version_update}")
 	echo "$json_build_update" > "$json_file"
 }
@@ -140,7 +140,7 @@ update_json () {
 update_api_version_ts () {
 	NODE_FILE="./src/config/api_version.ts"
 	if [[ -f "$NODE_FILE" ]]; then
-		echo "export const api_version = '${NEW_TAG_VERSION:1}';" > "$NODE_FILE"
+		echo "export const api_version = '${NEW_TAG_WITH_V:1}';" > "$NODE_FILE"
 	fi
 }
 
@@ -148,7 +148,7 @@ update_yaml () {
 	DOCKER_COMPOSE="./docker-compose.yml"
 	if [[ -f "$DOCKER_COMPOSE" ]]
 	then
-	yq e -i ".services.$PACKAGE_NAME.image = \"$PACKAGE_NAME:${NEW_TAG_VERSION:1}\"" ${DOCKER_COMPOSE}
+	yq e -i ".services.$PACKAGE_NAME.image = \"$PACKAGE_NAME:${NEW_TAG_WITH_V:1}\"" ${DOCKER_COMPOSE}
 	fi
 }
 

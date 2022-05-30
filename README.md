@@ -13,11 +13,13 @@
 
 <p align="center">
 	Front end to the <a href='https://github.com/mrjackwills/leafcast_pi' target='_blank' rel='noopener noreferrer'>pi backend client</a>
+	<br>
+	Password available on request
 </p>
 
 <p align="center">
 	<a href="https://raw.githubusercontent.com/mrjackwills/leafcast_vue/main/.github/screenshot.png" target='_blank' rel='noopener noreferrer'>
-		<img src='./.github/screenshot.png' width='75%'/>
+		<img src='./.github/screenshot.png' width='100%'/>
 	</a>
 </p>
 

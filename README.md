@@ -17,7 +17,7 @@
 
 <p align="center">
 	<a href="https://raw.githubusercontent.com/mrjackwills/leafcast_vue/main/.github/screenshot.png" target='_blank' rel='noopener noreferrer'>
-		<img src='./.github/screenshot.png' width='50%'/>
+		<img src='./.github/screenshot.png' width='75%'/>
 	</a>
 </p>
 

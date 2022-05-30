@@ -1,3 +1,6 @@
+# <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.7.5'>v0.7.5</a>
+### 2022-05-30
+
 ### Chores
 + npm update, [c9e67167697c764460fcbc9ac638adde7dc4b679], [e0e53daeb364be09337c265594704b0cb0911b40]
 

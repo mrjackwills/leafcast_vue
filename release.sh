@@ -123,7 +123,7 @@ update_release_body_and_changelog () {
 	RELEASE_BODY_ADDITION="${DATE_SUBHEADING}$1"
 	echo -e "${RELEASE_BODY_ADDITION}\n\nsee <a href='${GIT_REPO_URL}/blob/main/CHANGELOG.md'> CHANGELOG.md</a> for more details" > .github/release-body.md
 	echo -e "# <a href='${GIT_REPO_URL}/releases/tag/${NEW_TAG_WITH_V}'>${NEW_TAG_WITH_V}</a>\n${DATE_SUBHEADING}${CHANGELOG_ADDITION}$(cat CHANGELOG.md)" > CHANGELOG.md
-	sed -i -E "s|(\s)([0-9a-f]{40})| [\2](${GIT_REPO_URL}/commit/\2)|g" ./CHANGELOG.md
+	sed -i -E "s=(\s)\[([0-9a-f]{8})([0-9a-f]{32})\]= [\2](${GIT_REPO_URL}/commit/\2\3)=g" ./CHANGELOG.md
 }
 
 update_json () {

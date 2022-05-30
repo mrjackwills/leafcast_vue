@@ -3,6 +3,9 @@ import { snackError, snackReset } from './snack';
 import { userModule, websocketModule } from '@/store';
 import Axios, { AxiosError, AxiosInstance } from 'axios';
 
+// Some kind of dirty work around for strict axios typing?
+type ErrorData = {data: {response: number}}
+
 const wrap = <T> () => {
 	return function (_target: AxiosRequests, _propertyKey: string, descriptor: PropertyDescriptor): void {
 		const original = descriptor.value;
@@ -16,7 +19,8 @@ const wrap = <T> () => {
 				const websocket_store = websocketModule();
 				if (e.message === 'offline') snackError({ message: 'server offline' });
 				else if (e.response?.status === 429) {
-					const converted = Math.ceil(e.response.data.response / 1000);
+					const error_response = <ErrorData>e.response.data;
+					const converted = Math.ceil(error_response.data.response / 1000);
 					const message = `too many requests - please try again in ${converted} seconds `;
 					snackError({ message });
 				} else {

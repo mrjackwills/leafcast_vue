@@ -8,7 +8,7 @@
 	The frontend for <a href='https://plants.mrjackwills.com' target='_blank' rel='noopener noreferrer'>Leafcast</a>, powered by <a href='https://www.staticpi.com' target='_blank' rel='noopener noreferrer'>staticPi.com</a>
 </p>
 <p align="center">
-	Built using <a href='https://vuejs.org/' target='_blank' rel='noopener noreferrer'>vue.js</a>, and <a href='https://www.typescriptlang.org/' target='_blank' rel='noopener noreferrer'>Typescript</a>
+	Built using <a href='https://vuejs.org/' target='_blank' rel='noopener noreferrer'>vue.js</a>, and <a href='https://www.typescriptlang.org/' target='_blank' rel='noopener noreferrer'>Typescript</a>, with PWA support
 </p>
 
 <p align="center">

@@ -159,46 +159,6 @@ bump_version () {
 	update_yaml
 }
 
-# check_tag () {
-# 	LATEST_TAG=$(git describe --tags --abbrev=0 --always)
-# 	echo -e "\nCurrent tag: ${PURPLE}${LATEST_TAG}${RESET}\n"
-# 	echo -e "${YELLOW}Choose new tag version:${RESET}\n"
-# 	if [[ $LATEST_TAG =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-((0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*)(\.(0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*))*))?(\+([0-9a-zA-Z-]+(\.[0-9a-zA-Z-]+)*))?$ ]]
-# 	then
-# 		IFS="." read -r MAJOR MINOR PATCH <<< "${LATEST_TAG:1}"
-# 	else
-# 		MAJOR="0"
-# 		MINOR="0"
-# 		PATCH="0"
-# 	fi
-# 	MAJOR_TAG=v$(update_major)
-# 	MINOR_TAG=v$(update_minor)
-# 	PATCH_TAG=v$(update_patch)
-# 	OP_MAJOR="major___$MAJOR_TAG"
-# 	OP_MINOR="minor___$MINOR_TAG"
-# 	OP_PATCH="patch___$PATCH_TAG"
-# 	OPTIONS=("$OP_MAJOR" "$OP_MINOR" "$OP_PATCH")
-# 	select choice in "${OPTIONS[@]}"
-# 	do
-# 		case $choice in
-# 			"$OP_MAJOR" )
-# 				NEW_TAG_VERSION="$MAJOR_TAG"
-# 				# IFS="." read -ra UPDATE_NGINX  <<< "${NEW_TAG_VERSION:1}"
-# 				break;;
-# 			"$OP_MINOR")
-# 				NEW_TAG_VERSION="$MINOR_TAG"
-# 				break;;
-# 			"$OP_PATCH")
-# 				NEW_TAG_VERSION="$PATCH_TAG"
-# 				break;;
-# 			*)
-# 				error_close "invalid option $REPLY"
-# 				break;;
-# 		esac
-# 	done
-# }
-
-
 # Work out the current version, based on git tags
 # create new semver version based on user input
 # Set MAJOR MINOR PATCH

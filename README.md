@@ -1,5 +1,5 @@
 <p align="center">
-	<img src='./.github/logo.svg' width='200px'/>
+	<img src='./.github/logo.svg' width='125px'/>
 </p>
 
 <h1 align="center">Leafcast website</h1>
@@ -16,8 +16,8 @@
 </p>
 
 <p align="center">
-	<a href="https://raw.githubusercontent.com/mrjackwills/oxker/main/.github/screenshot_01.jpg" target='_blank' rel='noopener noreferrer'>
-		<img src='./.github/screenshot.png' width='200px'/>
+	<a href="https://raw.githubusercontent.com/mrjackwills/leafcast_vue/main/.github/screenshot.png" target='_blank' rel='noopener noreferrer'>
+		<img src='./.github/screenshot.png' width='50%'/>
 	</a>
 </p>
 

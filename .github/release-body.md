@@ -1,14 +1,16 @@
-### 2022-01-29
+### 2022-05-30
 
 ### Chores
-+ npm update, 3d0db021d5c243710ffdc2aa3fd2f4037e339b01
++ npm update, [c9e67167697c764460fcbc9ac638adde7dc4b679], [e0e53daeb364be09337c265594704b0cb0911b40]
 
-### Features
-+ routes put into enum, 67512fe78d159e3b2a510e30c311cf8f8c07286f
-+ production mode put into env class, 32f9724d313a4cf91e37cec84938fa24206403dc
+### Fixes
++ axios 429 response error type work-around, [4d417246180c99f9fe25c6f829c83ff9c1076c81]
++ security.txt updated, [98b868ed343141e9d6b7a9828ac937c137180bd0]
++ main.yml workflow updated, [2ca1098f3bc1b460e980cd3702ddc6dc26301e35]
 
-### Refactors
-+ dead code removed, 5f4b2e0b8e896100d8ff5db8b1ce97e3c2004966
+### Featues
++ screen shot added to readme.md, [5797fc7646f248b99d2ded8c885f118853318bde]
++ updated to use rust powered backend, [1e5aedd2a82566f4a78c01cddd380814a1fa8260]
 
 
 see <a href='https://github.com/mrjackwills/leafcast_vue/blob/main/CHANGELOG.md'> CHANGELOG.md</a> for more details

@@ -4,6 +4,7 @@
 ### Fixes
 + axios 429 response error type work-around, [4d417246180c99f9fe25c6f829c83ff9c1076c81]
 + security.txt updated, [98b868ed343141e9d6b7a9828ac937c137180bd0]
++ main.yml workflow updated, [2ca1098f3bc1b460e980cd3702ddc6dc26301e35]
 
 ### Featues
 + screen shot added to readme.md, [5797fc7646f248b99d2ded8c885f118853318bde]

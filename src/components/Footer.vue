@@ -27,7 +27,7 @@
 							</a>
 						</template>
 						<span @click='buildInfo'>
-							mrjackwills 2021-
+							mrjackwills 2021 -
 						</span>
 					</section>
 					

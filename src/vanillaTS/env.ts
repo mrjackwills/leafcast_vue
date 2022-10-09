@@ -2,8 +2,8 @@ class Env {
 	readonly #api_key = String(process.env.VUE_APP_APIKEY);
 	readonly #app_version = String(process.env.VUE_APP_VERSION);
 	readonly #build_date = String(process.env.VUE_APP_DATE);
-	readonly #domain_auth = String(process.env.VUE_APP_WS_AUTH_DOMAIN);
-	readonly #domain_wss = String(process.env.VUE_APP_WSS_ADDRESS);
+	readonly #domain_token = String(process.env.VUE_APP_TOKEN_DOMAIN);
+	readonly #domain_wss = String(process.env.VUE_APP_WSS_DOMAIN);
 	readonly #github = String(process.env.VUE_APP_GITHUB);
 	readonly #production_mode = process.env.NODE_ENV === 'production';
 
@@ -15,8 +15,8 @@ class Env {
 		return this.#app_version;
 	}
 	
-	get domain_auth (): string {
-		return this.#domain_auth;
+	get domain_token (): string {
+		return this.#domain_token;
 	}
 
 	get domain_wss (): string {

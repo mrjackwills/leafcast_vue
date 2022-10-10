@@ -11,7 +11,7 @@ export class CreateWs {
 
 	openWs (password: string): void {
 		const user_store = userModule();
-		if (user_store.authenticated) this.#ws = new WebSocket(`${env.domain_wss}/${password}`, [ env.api_key ]);
+		if (user_store.authenticated) this.#ws = new WebSocket(`${env.domain_wss}/${password}`);
 	}
 
 	closeWs (): void {

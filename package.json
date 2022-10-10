@@ -1,7 +1,7 @@
 {
   "name": "leafcast_vue",
   "description": "frontend site for leafcast service",
-  "version": "0.7.5",
+  "version": "0.8.0",
   "private": false,
   "homepage": "https://github.com/mrjackwills/leafcast_vue",
   "license": "MIT",
@@ -51,5 +51,5 @@
     "vue-template-compiler": "^2.7.0",
     "webpack-bundle-analyzer": "^4.6.1"
   },
-  "buildDate": "Mon 30 2022 May 00:37:38 EDT"
+  "buildDate": "Sun 09 2022 October 22:02:19 EDT"
 }

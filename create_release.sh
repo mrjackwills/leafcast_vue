@@ -33,12 +33,6 @@ ask_yn () {
 	printf "%b%s? [y/N]:%b " "${GREEN}" "$1" "${RESET}"
 }
 
-# return user input
-user_input() {
-	read -r data
-	echo "$data"
-}
-
 ask_continue () {
 	ask_yn "continue"
 	if [[ ! "$(user_input)" =~ ^y$ ]] 
@@ -47,6 +41,11 @@ ask_continue () {
 	fi
 }
 
+# return user input
+user_input() {
+	read -r data
+	echo "$data"
+}
 
 update_major () {
 	local bumped_major
@@ -66,26 +65,19 @@ update_patch () {
 	echo "${MAJOR}.${MINOR}.${bumped_patch}"
 }
 
-# Get the url of the github repo, strip .git from the end of it
 get_git_remote_url() {
 	REMOTE_ORIGIN=$(git config --get remote.origin.url)
 	TO_REMOVE=".git"
 	GIT_REPO_URL="${REMOTE_ORIGIN//$TO_REMOVE}"
 }
 
-# Check that git status is clean
-check_git_clean() {
+check_git() {
+	CURRENT_GIT_BRANCH=$(git branch --show-current)
 	GIT_CLEAN=$(git status --porcelain)
 	if [[ -n $GIT_CLEAN ]]
 	then
 		error_close "git dirty"
 	fi
-}
-
-# Check currently on dev branch
-check_git() {
-	CURRENT_GIT_BRANCH=$(git branch --show-current)
-	check_git_clean
 	if [[ ! "$CURRENT_GIT_BRANCH" =~ ^dev$ ]]
 	then
 		error_close "not on dev branch"
@@ -94,7 +86,11 @@ check_git() {
 
 check_git_update() {
 	CURRENT_GIT_BRANCH=$(git branch --show-current)
-	check_git_clean
+	GIT_CLEAN=$(git status --porcelain)
+	if [[ -n $GIT_CLEAN ]]
+	then
+		error_close "git dirty"
+	fi
 	if [[ ! "$CURRENT_GIT_BRANCH" =~ ^chore/npm_update$ ]]
 	then
 		error_close "not on chore/npm_update branch"
@@ -116,14 +112,27 @@ ask_changelog_update() {
 	fi
 }
 
-# $1 RELEASE_BODY
+# Edit the release-body to include new lines from changelog
+# add commit urls to changelog
+# $1 RELEASE_BODY 
 update_release_body_and_changelog () {
 	echo -e
 	DATE_SUBHEADING="### $(date +'%Y-%m-%d')\n\n"
 	RELEASE_BODY_ADDITION="${DATE_SUBHEADING}$1"
-	echo -e "${RELEASE_BODY_ADDITION}\n\nsee <a href='${GIT_REPO_URL}/blob/main/CHANGELOG.md'> CHANGELOG.md</a> for more details" > .github/release-body.md
+
+	# Put new changelog entries into release-body, add link to changelog
+	echo -e "${RELEASE_BODY_ADDITION}\n\nsee <a href='${GIT_REPO_URL}/blob/main/CHANGELOG.md'>CHANGELOG.md</a> for more details" > .github/release-body.md
+
+	# Add subheading with release version and date of release
 	echo -e "# <a href='${GIT_REPO_URL}/releases/tag/${NEW_TAG_WITH_V}'>${NEW_TAG_WITH_V}</a>\n${DATE_SUBHEADING}${CHANGELOG_ADDITION}$(cat CHANGELOG.md)" > CHANGELOG.md
-	sed -i -E "s|(\s)([0-9a-f]{40})| [\2](${GIT_REPO_URL}/commit/\2)|g" ./CHANGELOG.md
+
+	# Update changelog to add links to commits [hex:8](url_with_full_commit)
+	# "[aaaaaaaaaabbbbbbbbbbccccccccccddddddddd]" -> "[aaaaaaaa](https:/www.../commit/aaaaaaaaaabbbbbbbbbbccccccccccddddddddd),"
+	sed -i -E "s=(\s)\[([0-9a-f]{8})([0-9a-f]{32})\]= [\2](${GIT_REPO_URL}/commit/\2\3),=g" ./CHANGELOG.md
+
+	# Update changelog to add links to closed issues - comma included!
+	# "closes [#1]," -> "closes [#1](https:/www.../issues/1),""
+	sed -i -r -E "s=closes \[#([0-9]+)\],=closes [#\1](${GIT_REPO_URL}/issues/\1),=g" ./CHANGELOG.md
 }
 
 update_json () {
@@ -210,80 +219,14 @@ npm_build () {
 	ask_continue
 }
 
-npm_test () {
-	start_time=$(date +%s)
-	npm run test:run
-	end_time=$(date +%s)
-	elapsed=$(( end_time - start_time ))
-	echo "test tooks ${elapsed}s"
-	ask_continue
-}
-
-single_package_test() {
-	ask_yn "run tests?"
-		if [[ "$(user_input)" =~ ^y$ ]]
-		then
-			npm run lint
-			npm run test
-		fi
-}
-
-# $1 all_ncu
-update_git_package() {
-	to_add=()
-	git_message="chore: npm update\n"
-	while IFS= read -r line; do
-		local trimmed_line
-		trimmed_line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-		to_add+=("$trimmed_line")
-	done <<< "$1"
-	for line in "${to_add[@]}"
-	do
-		echo -e ""
-		echo "${line}"
-		ask_yn "add line to git message"
-		if [[ "$(user_input)" =~ ^y$ ]]
-			then
-			git_message="${git_message}\n${line}"
-		fi
-	done
-	echo -e ""
-	echo -e "${git_message}"
-	ask_yn "accept message"
-	if [[ "$(user_input)" =~ ^y$ ]]
-	then
-		git add package.json
-		git add package-lock.json
-		git commit -m "$(echo -e "${git_message}")"
-	else
-		exit
-	fi
-}
-
-update() {
-	check_git_update
-	single_package_test "$DIRECTORY"
-	all_ncu=$(ncu | tail -n +3 | head -n -2)
-	echo "${all_ncu}"
-	ncu -i
-	ask_yn "npm install"
-	if [[ "$(user_input)" =~ ^y$ ]]
-	then
-		npm install
-		single_package_test
-		update_git_package "${all_ncu}"
-	fi
-}
-
 release_flow() {
 	check_git
 	get_git_remote_url
 	linter
 	npm_build
 	cd "${CWD}" || error_close "Can't find ${CWD}"
-
-
 	check_tag
+
 	NEW_TAG_WITH_V="v${MAJOR}.${MINOR}.${PATCH}"
 	printf "\nnew tag chosen: %s\n\n" "${NEW_TAG_WITH_V}"
 	RELEASE_BRANCH=release-$NEW_TAG_WITH_V
@@ -306,13 +249,12 @@ release_flow() {
 }
 
 main() {
-	cmd=(dialog --backtitle "Choose build option" --radiolist "choose" 14 80 16)
+	cmd=(dialog --backtitle "Start ${MONO_NAME} containers" --radiolist "choose" 14 80 16)
 	options=(
-		1 "update" update
-		2 "lint" off
-		3 "build" off
-		4 "test" off
-		5 "release" off
+		1 "lint" off
+		2 "build" off
+		3 "test" off
+		4 "release" off
 	)
 	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 	exitStatus=$?
@@ -326,23 +268,20 @@ main() {
 			0)
 				exit
 				break;;
+		
 			1)
-				update
-				main
-				break;;
-			2)
 				linter
 				main
 				break;;
-			3)
+			2)
 				npm_build
 				main
 				break;;
-			4)
+			3)
 				npm_test
 				main
 				break;;
-			5)
+			4)
 				release_flow
 				break;;
 		esac

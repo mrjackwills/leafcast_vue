@@ -32,8 +32,6 @@ export type TSnack = {
 	loading?: boolean,
 }
 
-export type TVideoName = 'basil' | 'garden'
-
 export type TWSFromPi = { data?: TPhoto, cache?: boolean, unique?: boolean, error?: TError }
 
 export type TWSToServer = { name: TWSToServerNames }

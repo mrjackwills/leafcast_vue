@@ -1,16 +1,15 @@
-### 2022-05-30
+### 2022-10-09
 
 ### Chores
-+ npm update, [c9e67167697c764460fcbc9ac638adde7dc4b679], [e0e53daeb364be09337c265594704b0cb0911b40]
++ footer typo, [2b9418db87199c018b74af93bc6e6cfb4db41b00]
++ dependcies updated, [d8cd93dc2a8b65fd8fdb4360d7188aa15b3c4f1b]
 
-### Fixes
-+ axios 429 response error type work-around, [4d417246180c99f9fe25c6f829c83ff9c1076c81]
-+ security.txt updated, [98b868ed343141e9d6b7a9828ac937c137180bd0]
-+ main.yml workflow updated, [2ca1098f3bc1b460e980cd3702ddc6dc26301e35]
+### Features
++ staticPi protocol updated, [3cd34cba0384a3fa45d133eb760e8b8c8f811b92]
 
-### Featues
-+ screen shot added to readme.md, [5797fc7646f248b99d2ded8c885f118853318bde]
-+ updated to use rust powered backend, [1e5aedd2a82566f4a78c01cddd380814a1fa8260]
+### Refactors
++ releases.sh > create_release.sh, [45d6fd15686b0e59b8e89d25133e31676bb8c946]
++ dead code removed, [0c9494243caaf81988d42a439dcd9c75ade479ba]
 
 
-see <a href='https://github.com/mrjackwills/leafcast_vue/blob/main/CHANGELOG.md'> CHANGELOG.md</a> for more details
+see <a href='https://github.com/mrjackwills/leafcast_vue/blob/main/CHANGELOG.md'>CHANGELOG.md</a> for more details

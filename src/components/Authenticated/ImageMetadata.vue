@@ -19,7 +19,6 @@ import { mapStores } from 'pinia';
 import { mdiClock, mdiUpdate, mdiImageSizeSelectLarge, mdiImage } from '@mdi/js';
 import { nextUpdateToText } from '@/vanillaTS/secondsToText';
 import { TDataToDisplay } from '@/types';
-// import { zeroPad } from '@/vanillaTS/zeropad';
 import DisplayRows from '@/components/Authenticated/DisplayRows.vue';
 import PiOffline from '@/components/Authenticated/PiOffline.vue';
 
@@ -46,11 +45,6 @@ export default Vue.extend({
 		intervalToHMS (): string {
 			return nextUpdateToText(this.updateCountdown*1000);
 		},
-		// formattedTimestamp (): string {
-		// 	// if (!this.timestamp) return '';
-		// 	return this.timestamp ? this.timestamp : '';
-		// 	// return this.formatDate(this.timestamp);
-		// },
 		piOnline (): boolean {
 			return this.piStatusStore.online;
 		},
@@ -109,11 +103,7 @@ export default Vue.extend({
 			const a = convert_bytes(amount);
 			return `${a.total} ${a.unit}`;
 		},
-
-		// formatDate (data: Date): string {
-		// return `${this.dayOptions[data.getDay()]} ${data.getFullYear()}-${zeroPad(data.getMonth() + 1)}-${zeroPad(data.getDate())} @ ${zeroPad(data.getHours())}:${zeroPad(data.getMinutes())}:${zeroPad(data.getSeconds())}`;
-		// },
-		
+	
 	},
 
 });

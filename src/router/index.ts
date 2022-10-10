@@ -14,12 +14,6 @@ const authedRoutes: Array<RouteConfig> = [
 		// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 		component: () => import(/* webpackChunkName: "n" */ '@/views/Home.vue'),
 	},
-	// {
-	// 	path: '/video',
-	// 	name: 'video',
-	// 	// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-	// 	component: () => import(/* webpackChunkName: "n" */ '@/views/Video.vue'),
-	// }
 ];
 
 for (const route of authedRoutes) {

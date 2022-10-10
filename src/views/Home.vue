@@ -18,27 +18,6 @@
 					<app-image-metadata @refresh='refresh' />
 				</v-col>
 
-				<!-- <v-col cols='auto' class='my-2'>
-					<v-btn
-						@click='goVideo'
-						class=''
-						color='lip elevation-0'
-						:disabled='loading'
-						dark
-						small
-						rounded
-					>
-						<v-row align='center' justify='center' class='ma-0 pa-0'>
-							<v-col cols='auto' class='ma-0 pa-0'>
-								<v-icon class='mr-2'>{{ mdiVideo }}</v-icon>
-							</v-col>
-							<v-col cols='auto' class='ma-0 pa-0'>
-								videos
-							</v-col>
-						</v-row>
-					</v-btn>
-				</v-col> -->
-
 				<v-col cols='auto' class='my-2'>
 					<v-btn
 						@click='piInfo'
@@ -75,7 +54,7 @@ import Vue from 'vue';
 
 import { imageModule, loadingModule, piStatusModule, userModule, websocketModule } from '@/store';
 import { mapStores } from 'pinia';
-import { mdiChevronDown, mdiChevronUp, mdiVideo } from '@mdi/js';
+import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 import { MetaInfo } from 'vue-meta';
 import { parseMessage } from '@/vanillaTS/messageParser';
 import { snackError } from '@/services/snack';
@@ -165,7 +144,6 @@ export default Vue.extend({
 		pageTitle: '',
 		showPiInfo: false,
 		updateInterval: 0,
-		mdiVideo
 	}),
 
 	metaInfo (): MetaInfo {
@@ -233,10 +211,6 @@ export default Vue.extend({
 				}
 				else this.userStore.logout('unable to contact pi');
 			}, 3500);
-		},
-
-		goVideo (): void {
-			this.$router.push('/video');
 		},
 
 		piInfo ():void {

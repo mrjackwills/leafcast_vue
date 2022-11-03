@@ -2,7 +2,7 @@ import { userModule } from '@/store';
 import { env } from '@/vanillaTS/env';
 
 export class CreateWs {
-	#ws?: WebSocket
+	#ws?: WebSocket;
 
 	get connection (): undefined | WebSocket {
 		const user_store = userModule();

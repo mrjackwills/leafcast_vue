@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { FrontendRoutes } from '@/types/enum_routes';
 import { ModuleName } from '@/types/enum_module';
 import { piStatusModule, loadingModule, websocketModule, imageModule } from '@/store';
-import { router } from '@/router';
+import { useRoute, useRouter } from 'vue-router';
 import { snackError } from '@/services/snack';
 
 export const userModule = defineStore(ModuleName.USER, {
@@ -21,7 +21,9 @@ export const userModule = defineStore(ModuleName.USER, {
 			imageModule().$reset();
 			websocketModule().closeWS();
 			if (message) snackError({ message });
-			if (router.currentRoute.name !== 'login') router.push(FrontendRoutes.LOGIN);
+			const route = useRoute();
+			const router = useRouter();
+			if (route.name !== 'login') router.push(FrontendRoutes.LOGIN);
 		},
 
 		set_api_version (value: string) {

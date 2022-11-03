@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ModuleName } from '@/types/enum_module';
 import { userModule } from '@/store';
-import { TWSToServer } from '@/types';
+import type { TWSToServer } from '@/types';
 import { ws } from '@/services/WS';
 
 export const websocketModule = defineStore(ModuleName.WEBSOCKET, {

@@ -1,11 +1,11 @@
 class Env {
-	readonly #api_key = String(process.env.VUE_APP_APIKEY);
-	readonly #app_version = String(process.env.VUE_APP_VERSION);
-	readonly #build_date = String(process.env.VUE_APP_DATE);
-	readonly #domain_token = String(process.env.VUE_APP_TOKEN_DOMAIN);
-	readonly #domain_wss = String(process.env.VUE_APP_WSS_DOMAIN);
-	readonly #github = String(process.env.VUE_APP_GITHUB);
-	readonly #production_mode = process.env.NODE_ENV === 'production';
+	readonly #api_key = String(import.meta.env.VITE_APP_APIKEY);
+	readonly #app_version = String(import.meta.env.VERSION);
+	readonly #domain_token = String(import.meta.env.VITE_APP_TOKEN_DOMAIN);
+	readonly #domain_wss = String(import.meta.env.VITE_APP_WSS_DOMAIN);
+	readonly #build_date = new Date(import.meta.env.BUILD_DATE);
+	readonly #homepage = String(import.meta.env.VITE_GITHUB_HOMEPAGE);
+	readonly #mode_production = import.meta.env.PROD ;
 
 	get api_key (): string {
 		return this.#api_key;
@@ -14,7 +14,11 @@ class Env {
 	get app_version (): string {
 		return this.#app_version;
 	}
-	
+
+	get build_date (): string {
+		return this.#build_date.toISOString();
+	}
+
 	get domain_token (): string {
 		return this.#domain_token;
 	}
@@ -23,16 +27,12 @@ class Env {
 		return this.#domain_wss;
 	}
 
-	get build_date (): string {
-		return this.#build_date;
+	get homepage (): string {
+		return this.#homepage;
 	}
 
-	get github (): string {
-		return this.#github;
-	}
-
-	get production_mode (): boolean {
-		return this.#production_mode;
+	get mode_production (): boolean {
+		return this.#mode_production;
 	}
 }
 

@@ -9,11 +9,11 @@
 				<v-row justify='space-between' align='center' no-gutters class='pulse-animation'>
 
 					<v-col cols='auto' class='ma-0 pa-0'>
-						<v-icon dense color='white' class='mr-1' :small='$vuetify.breakpoint.smAndDown'>{{ mdiAlertCircle }}</v-icon>
+						<v-icon dense color='white' class='mr-1' :size='xs?"small":"default"' :icon='mdiAlertCircle' />
 					</v-col>
 
 					<v-col cols='auto' class='ma-0 pa-0' >
-						<span class='white--text' >pi offline</span>
+						<span class='text-white' >pi offline</span>
 					</v-col>
 						
 				</v-row>
@@ -25,17 +25,9 @@
 		
 </template>
 
-<script lang='ts'>
-
-import Vue from 'vue';
+<script setup lang='ts'>
 import { mdiAlertCircle } from '@mdi/js';
+import { useDisplay } from 'vuetify';
+const { xs } = useDisplay();
 
-export default Vue.extend({
-	name: 'pi-offline-component',
-
-	data: () => ({
-		mdiAlertCircle,
-	}),
-
-});
 </script>

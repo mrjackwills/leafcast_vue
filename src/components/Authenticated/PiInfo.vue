@@ -12,12 +12,12 @@
 
 					<v-btn
 						@click='refresh'
-						:disabled='loading'
+						:disabled='loading||!piOnline'
 						class=' fab-fix elevation-0'
-						color='serious'
-						dark
-						rounded
 						small
+						:color='piOnline?"serious":""'
+						:variant='!piOnline?"outlined":"flat"'
+						rounded
 					>
 						<v-row align='center' justify='space-around' class='ma-0 pa-0'>
 							<v-col cols='auto' class='ma-0 pa-0'>

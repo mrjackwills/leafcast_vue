@@ -6,17 +6,12 @@
 	</v-row>
 </template>
 
-<script lang='ts'>
+<script setup lang='ts'>
 
-import Vue from 'vue';
-
-export default Vue.extend({
-	name: 'divider-component',
-	props: {
-		cols: {
-			type: Number,
-			default: 12
-		}
+defineProps({
+	cols: {
+		type: Number,
+		default: 12
 	}
 });
 </script>

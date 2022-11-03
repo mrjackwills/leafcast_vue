@@ -2,7 +2,7 @@
 
 	<v-row justify='center' align='center' class='' no-gutters v-intersect='onIntersect'>
 		
-		<app-display-rows :toDisplay='piInfo' />
+		<DisplayRows :toDisplay='piInfo' />
 
 		<v-col cols='12' class='mt-2' id='update-button'>
 
@@ -35,145 +35,125 @@
 	</v-row>
 </template>
 
-<script lang='ts'>
-
-import Vue from 'vue';
+<script setup lang='ts'>
 
 import { convert_bytes } from '@/vanillaTS/convertBytes';
-import { loadingModule, piStatusModule } from '@/store';
-import { mapStores } from 'pinia';
-import { mdiAlertCircleOutline, mdiCameraFlip, mdiDesktopClassic, mdiHarddisk, mdiImageMultiple, mdiLanConnect, mdiLanguageRust, mdiSourceBranch, mdiWebClock } from '@mdi/js';
+import { mdiCameraFlip, mdiDesktopClassic, mdiHarddisk, mdiImageMultiple, mdiLanConnect, mdiLanguageRust, mdiSourceBranch, mdiWebClock } from '@mdi/js';
 import { secondsToText } from '@/vanillaTS/secondsToText';
-import { TDataToDisplay } from '@/types';
+import type { TDataToDisplay } from '@/types';
 import DisplayRows from '@/components/Authenticated/DisplayRows.vue';
 
-export default Vue.extend({
-	name: 'pi-info-component',
+const [ loadingStore, piStatusStore ] = [ loadingModule(), piStatusModule() ];
+onBeforeUnmount(() => {
+	clearTimeout(goToTimeout.value);
 
-	beforeDestroy () {
-		clearTimeout(this.goToTimeout);
-	},
-
-	components: {
-		appDisplayRows: DisplayRows
-	},
-
-	computed: {
-		...mapStores(loadingModule, piStatusModule),
-		internalIp (): string {
-			return this.piStatusStore.internalIp;
-		},
-		loading (): boolean {
-			return this.loadingStore.loading;
-		},
-		connectedFor (): number {
-			return this.piStatusStore.connectedFor;
-		},
-		nodeUptime (): number {
-			return this.piStatusStore.nodeUptime;
-		},
-		uptime (): number {
-			return this.piStatusStore.uptime;
-		},
-		piOnline (): boolean {
-			return this.piStatusStore.online;
-		},
-		piVersion (): string {
-			return this.piStatusStore.piVersion;
-		},
-		piInfo (): TDataToDisplay {
-			const cached = this.piOnline? `` : `[ cached ]`;
-			const output = [ [
-				{
-					icon: mdiSourceBranch,
-					text: 'pi software version',
-					value: this.piVersion??''
-				},
-				{
-					icon: mdiLanConnect,
-					text: `internal ip`,
-					value: this.internalIp??'',
-					extra: cached
-				},
-			] ];
-			if (this.piOnline) {
-				output.push(
-					[
-						{
-							icon: mdiDesktopClassic,
-							text: 'pi uptime',
-							value: secondsToText(this.uptime? this.uptime*1000: 0),
-						},
-						{
-							icon: mdiLanguageRust,
-							text: 'app uptime',
-							value: secondsToText(this.nodeUptime? this.nodeUptime*1000:0),
-						},
-					],
-					[
-						{
-							icon: mdiWebClock,
-							text: 'websocket uptime',
-							value: secondsToText(this.connectedFor? this.connectedFor*1000:0),
-						}
-					]
-				);
-			}
-			output.push([
-				{
-					icon: mdiImageMultiple,
-					text: 'number of images',
-					value: `${this.numberFiles}`,
-					extra: cached
-				},
-				{
-					icon: mdiHarddisk,
-					text: 'total file size',
-					value: this.convert_bytes(this.totalFileSize),
-					extra: cached
-				},
-				
-			]
-			);
-			return output;
-		},
-		numberFiles (): number {
-			return this.piStatusStore.numberImages;
-		},
-		totalFileSize (): string {
-			return this.piStatusStore.totalFileSize;
-		}
-	},
-
-	data: () => ({
-		goToTimeout: 0,
-		isIntersecting: false,
-		mdiAlertCircleOutline,
-		mdiCameraFlip,
-	}),
-
-	methods: {
-		convert_bytes (amount: string|number):string {
-			const converted = convert_bytes(amount);
-			return `${converted.total} ${converted.unit}`;
-		},
-		onIntersect (entries: Array<IntersectionObserverEntry>, _observer: IntersectionObserver): void {
-			this.isIntersecting = !!entries[0]?.isIntersecting;
-		},
-		refresh ():void {
-			if (this.loading) return;
-			this.$emit('refresh');
-		}
-	},
-
-	watch: {
-		isIntersecting (i) {
-			if (!i) return;
-			this.goToTimeout = window.setTimeout(() => {
-				this.$vuetify.goTo(`#footer`, { duration: 50 });
-			}, 75);
-			
-		}
-	}
 });
+
+const internalIp= computed((): string => {
+	return piStatusStore.internalIp;
+});
+const loading= computed((): boolean => {
+	return loadingStore.loading;
+});
+const connectedFor= computed((): number => {
+	return piStatusStore.connectedFor;
+});
+const nodeUptime= computed((): number => {
+	return piStatusStore.nodeUptime;
+});
+const uptime= computed((): number => {
+	return piStatusStore.uptime;
+});
+const piOnline= computed((): boolean => {
+	return piStatusStore.online;
+});
+const piVersion= computed((): string => {
+	return piStatusStore.piVersion;
+});
+
+const piInfo = computed((): TDataToDisplay => {
+	const cached = piOnline? `` : `[ cached ]`;
+	const output = [ [
+		{
+			icon: mdiSourceBranch,
+			text: 'pi software version',
+			value: piVersion.value ??''
+		},
+		{
+			icon: mdiLanConnect,
+			text: `internal ip`,
+			value: internalIp.value??'',
+			extra: cached
+		},
+	] ];
+	if (piOnline) {
+		output.push(
+			[
+				{
+					icon: mdiDesktopClassic,
+					text: 'pi uptime',
+					value: secondsToText(uptime.value? uptime.value*1000: 0),
+				},
+				{
+					icon: mdiLanguageRust,
+					text: 'app uptime',
+					value: secondsToText(nodeUptime.value? nodeUptime.value*1000:0),
+				},
+			],
+			[
+				{
+					icon: mdiWebClock,
+					text: 'websocket uptime',
+					value: secondsToText(connectedFor.value? connectedFor.value*1000:0),
+				}
+			]
+		);
+	}
+	output.push([
+		{
+			icon: mdiImageMultiple,
+			text: 'number of images',
+			value: `${numberFiles.value}`,
+			extra: cached
+		},
+		{
+			icon: mdiHarddisk,
+			text: 'total file size',
+			value: convert(totalFileSize.value),
+			extra: cached
+		},
+				
+	]
+	);
+	return output;
+});
+const numberFiles = computed((): number => {
+	return piStatusStore.numberImages;
+});
+const totalFileSize = computed((): string => {
+	return piStatusStore.totalFileSize;
+});
+
+const goToTimeout = ref(0);
+const isIntersecting = ref(false);
+
+const convert = (amount: string|number):string => {
+	const converted = convert_bytes(amount);
+	return `${converted.total} ${converted.unit}`;
+};
+const onIntersect = (entries: Array<IntersectionObserverEntry>, _observer: IntersectionObserver): void => {
+	isIntersecting.value = !!entries[0]?.isIntersecting;
+};
+const emit = defineEmits([ 'refresh' ]);
+const refresh = ():void => {
+	if (loading.value) return;
+	emit('refresh');
+};
+		
+// watch(isIntersecting, (i) => {
+// 	if (!i) return;
+// 	goToTimeout.value = window.setTimeout(() => {
+// 		// $vuetify.goTo(`#footer`, { duration: 50 });
+// 	}, 75);
+// });
 </script>

@@ -1,7 +1,7 @@
 import { env } from '@/vanillaTS/env';
 import { snackError, snackReset } from './snack';
 import { userModule, websocketModule } from '@/store';
-import Axios, { AxiosError, AxiosInstance } from 'axios';
+import Axios, { AxiosError, type AxiosInstance } from 'axios';
 
 // Some kind of dirty work around for strict axios typing?
 type ErrorData = {data: {response: number}}
@@ -35,7 +35,7 @@ const wrap = <T> () => {
 
 class AxiosRequests {
 
-	#wsAuthAxios!: AxiosInstance
+	#wsAuthAxios!: AxiosInstance;
 
 	constructor (wsAuthUrl: string) {
 		this.#wsAuthAxios = Axios.create({

@@ -3,8 +3,8 @@
 	font-style: normal;
 	font-weight: 400;
 	src: local(''),
-		 url('~@/assets/fonts/baloo-2-v2-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-		 url('~@/assets/fonts/baloo-2-v2-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+		 url('@/assets/fonts/baloo-2-v2-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+		 url('@/assets/fonts/baloo-2-v2-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
 $body-font-family: 'Baloo 2', sans-serif;
@@ -13,6 +13,15 @@ $heading-font-family: 'Baloo 2', sans-serif;
 $heading-font-display: 'swap';
 $btn-text-transform: 'lowercase';
 
+
+html, .v-snackbar__content, [class*='text-']{
+	font-family: 'Baloo 2', sans-serif !important;
+	font-display: 'swap';
+}
+
+.v-btn {
+	text-transform: lowercase !important;
+}
 
 .fab-fix:focus::before {
 	 opacity: 0 !important;

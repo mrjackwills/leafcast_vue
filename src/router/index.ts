@@ -1,18 +1,18 @@
 import { FrontendRoutes } from '@/types/enum_routes';
-import { PiniaVuePlugin } from 'pinia';
+// import { PiniaVuePlugin } from 'pinia';
 import { userModule } from '@/store';
-import Vue from 'vue';
-import VueRouter, { RouteConfig } from 'vue-router';
+import Home from '@/views/HomeView.vue';
+import Login from '@/views/LoginView.vue';
+// import Vue from 'vue';
+// import VueRouter, { RouteConfig } from 'vue-router';
 
-Vue.use(PiniaVuePlugin);
-Vue.use(VueRouter);
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 
-const authedRoutes: Array<RouteConfig> = [
+const authedRoutes: Array<RouteRecordRaw> = [
 	{
 		path: FrontendRoutes.BASE,
 		name: 'home',
-		// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-		component: () => import(/* webpackChunkName: "n" */ '@/views/Home.vue'),
+		component: Home
 	},
 ];
 
@@ -24,12 +24,11 @@ for (const route of authedRoutes) {
 	};
 }
 
-const unAuthedRoutes: Array<RouteConfig> = [
+const unAuthedRoutes: Array<RouteRecordRaw> = [
 	{
 		path: FrontendRoutes.LOGIN,
 		name: 'login',
-		// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-		component: () => import(/* webpackChunkName: "n" */ '@/views/Login.vue'),
+		component: Login
 	},
 ];
 
@@ -42,7 +41,7 @@ for (const route of unAuthedRoutes) {
 	};
 }
 
-const baseRoutes: Array<RouteConfig> = [
+const baseRoutes: Array<RouteRecordRaw> = [
 	{
 		path: FrontendRoutes.CATCHALL,
 		redirect: { name: 'home' },
@@ -51,8 +50,15 @@ const baseRoutes: Array<RouteConfig> = [
 
 const routes = [ ...baseRoutes, ...unAuthedRoutes, ...authedRoutes ];
 
-export const router = new VueRouter({
-	mode: 'history',
-	base: process.env.BASE_URL,
+const router = createRouter({
+	history: createWebHistory(import.meta.env.BASE_URL),
 	routes
 });
+
+export default router;
+
+// export const router = new VueRouter({
+// 	mode: 'history',
+// 	base: process.env.BASE_URL,
+// 	routes
+// });

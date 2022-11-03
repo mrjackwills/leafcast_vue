@@ -1,5 +1,5 @@
 export enum FrontendRoutes {
 	BASE = '/',
-	CATCHALL ='*',
+	CATCHALL ='/:pathMatch(.*)*',
 	LOGIN ='/login'
 }

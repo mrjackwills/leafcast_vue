@@ -1,4 +1,4 @@
-import { TConvertBytes } from '../types';
+import type { TConvertBytes } from '../types';
 
 export const convert_bytes = (x: number|string): TConvertBytes => {
 	if (isNaN(Number(x))) throw Error('convert_bytes invalid input');

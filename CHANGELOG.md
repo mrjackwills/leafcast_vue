@@ -1,3 +1,9 @@
+# <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.9.0'>v0.9.0</a>
+### 2022-11-03
+
+### Features
++ Convert fully to Vue3, Vite, and Vuetify3, [b6534052](https://github.com/mrjackwills/leafcast_vue/commit/b6534052090fa7ddc160acf90ec8f39381dab4bd),
+
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.8.0'>v0.8.0</a>
 ### 2022-10-09
 

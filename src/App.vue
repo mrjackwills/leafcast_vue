@@ -61,9 +61,6 @@ const appUpdate = (): void => {
 	
 };
 
-// name: 'leafcast-app',
-
-// const [ loadingStore, userStore ] = [ loadingModule(), userModule() ];
 const userStore = userModule() ;
 onMounted(() => {
 	window.addEventListener('beforeinstallprompt', (e) => {
@@ -71,18 +68,6 @@ onMounted(() => {
 	});
 	document.addEventListener('visibilitychange', visibilityChange);
 });
-
-// const authenticated = computed((): boolean => {
-// 	return userStore.authenticated;
-// });
-// const loading = computed({
-// 	get (): boolean {
-// 		return loadingStore.loading;
-// 	},
-// 	set (b: boolean): void {
-// 		loadingStore.set_loading(b);
-// 	}
-// });
 
 const isHidden = ref(false);
 const logoutTimeout = ref(0);
@@ -125,14 +110,10 @@ const logout = (message = 'you have been logged out'): void => {
 
 .vh-fix :v-deep .v-application--wrap {
 	height: 100vh;
-	/* min-height: calc(var(--vh, 100vh) * 100); */
 }
 
 #main_card {
-	// border-radius: 1rem;
-	// #toolbar {
 	border-radius: 3rem;
-// }
 }
 
 </style>

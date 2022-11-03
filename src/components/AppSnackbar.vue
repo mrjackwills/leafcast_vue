@@ -4,7 +4,7 @@
 		timeout='-1'
 	>
 		<v-row justify='center' align='center' no-gutters class='ma-0 pa-0 unselectable'>
-			<v-col v-if='icon' cols='auto' class=''>
+			<v-col v-if='icon && !loading' cols='auto' class=''>
 				<v-icon color='danger' :icon='icon' />
 			</v-col>
 			<v-col v-if='loading' cols='auto' class=''>

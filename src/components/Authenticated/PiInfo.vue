@@ -72,7 +72,7 @@ const piVersion= computed((): string => {
 });
 
 const piInfo = computed((): TDataToDisplay => {
-	const cached = piOnline? `` : `[ cached ]`;
+	const cached = piOnline.value? `` : `[ cached ]`;
 	const output = [ [
 		{
 			icon: mdiSourceBranch,

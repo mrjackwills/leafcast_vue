@@ -1,6 +1,6 @@
 import { mdiAlertCircle, mdiCheckCircleOutline } from '@mdi/js';
 import { snackbarModule } from '@/store';
-import { TSnack } from '@/types';
+import type { TSnack } from '@/types';
 
 export const snackSuccess = async ({ message = 'Success', icon = mdiCheckCircleOutline, timeout=5000, loading=false }: TSnack): Promise<void> => {
 	const snackbar_store = snackbarModule();

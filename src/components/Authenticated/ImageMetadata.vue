@@ -2,109 +2,89 @@
 
 	<v-row justify='center' align='center' class='mt-3' no-gutters>
 		
-		<app-pi-offline v-if='!piOnline && init' />
+		<PiOffline v-if='!piOnline && init' />
 		
-		<app-display-rows :toDisplay='piInfo' />
+		<DisplayRows :toDisplay='piInfo' />
 		
 	</v-row>
 </template>
 
-<script lang='ts'>
-
-import Vue from 'vue';
+<script setup lang='ts'>
 
 import { convert_bytes } from '@/vanillaTS/convertBytes';
-import { imageModule, piStatusModule } from '@/store';
-import { mapStores } from 'pinia';
 import { mdiClock, mdiUpdate, mdiImageSizeSelectLarge, mdiImage } from '@mdi/js';
 import { nextUpdateToText } from '@/vanillaTS/secondsToText';
-import { TDataToDisplay } from '@/types';
+import type { TDataToDisplay } from '@/types';
 import DisplayRows from '@/components/Authenticated/DisplayRows.vue';
 import PiOffline from '@/components/Authenticated/PiOffline.vue';
 
-export default Vue.extend({
-	name: 'image-metadata-component',
+const [ imageStore, piStatusStore ] = [ imageModule(), piStatusModule() ];
 
-	components: {
-		AppDisplayRows: DisplayRows,
-		AppPiOffline: PiOffline
-	},
-
-	computed: {
-		...mapStores(imageModule, piStatusModule),
-
-		imageSize_converted (): number|undefined {
-			return this.imageStore.imageSize_converted;
-		},
-		imageSize_original (): number|undefined {
-			return this.imageStore.imageSize_original;
-		},
-		init ():boolean {
-			return this.piStatusStore.init;
-		},
-		intervalToHMS (): string {
-			return nextUpdateToText(this.updateCountdown*1000);
-		},
-		piOnline (): boolean {
-			return this.piStatusStore.online;
-		},
-		piInfo (): TDataToDisplay {
-			return [
-				[
-					{
-						icon: mdiClock,
-						text: 'taken',
-						value: this.timestamp,
-					},
-					{
-						icon: mdiUpdate,
-						text: 'next update',
-						value: this.intervalToHMS,
-					},
-				],
-
-				[
-					{
-						icon: mdiImage,
-						text: 'original size',
-						value: this.convert_bytes(this.imageSize_original??0)
-					},
-					{
-						icon: mdiImageSizeSelectLarge,
-						text: 'compressed size',
-						value: this.convert_bytes(this.imageSize_converted??0)
-					}
-				],
-
-			];
-		},
-		timestamp (): string {
-			return this.imageStore.timestamp;
-		},
-		updateCountdown (): number {
-			return this.imageStore.updateCountdown;
-		},
-	},
-
-	data: () => ({
-		dayOptions: [
-			'Monday',
-			'Tuesday',
-			'Wednesday',
-			'Thursday',
-			'Friday',
-			'Saturday',
-			'Sunday',
-		] as const
-	}),
-
-	methods: {
-		convert_bytes (amount: string|number):string {
-			const a = convert_bytes(amount);
-			return `${a.total} ${a.unit}`;
-		},
-	
-	},
-
+const imageSize_converted = computed((): number|undefined =>{
+	return imageStore.imageSize_converted;
 });
+const imageSize_original = computed((): number|undefined =>{
+	return imageStore.imageSize_original;
+});
+const init = computed(():boolean =>{
+	return piStatusStore.init;
+});
+const intervalToHMS = computed((): string =>{
+	return nextUpdateToText(updateCountdown.value*1000);
+});
+const piOnline = computed((): boolean =>{
+	return piStatusStore.online;
+});
+const piInfo = computed((): TDataToDisplay => {
+	return [
+		[
+			{
+				icon: mdiClock,
+				text: 'taken',
+				value: timestamp.value,
+			},
+			{
+				icon: mdiUpdate,
+				text: 'next update',
+				value: intervalToHMS.value,
+			},
+		],
+
+		[
+			{
+				icon: mdiImage,
+				text: 'original size',
+				value: convert(imageSize_original.value??0)
+			},
+			{
+				icon: mdiImageSizeSelectLarge,
+				text: 'compressed size',
+				value: convert(imageSize_converted.value??0)
+			}
+		],
+
+	];
+});
+const timestamp = computed((): string => {
+	return imageStore.timestamp;
+});
+const updateCountdown = computed((): number => {
+	return imageStore.updateCountdown;
+});
+
+// const dayOptions = [
+// 	'Monday',
+// 	'Tuesday',
+// 	'Wednesday',
+// 	'Thursday',
+// 	'Friday',
+// 	'Saturday',
+// 	'Sunday',
+// ];
+
+const convert = (amount: string|number):string => {
+	const a = convert_bytes(amount);
+	return `${a.total} ${a.unit}`;
+};
+
 </script>

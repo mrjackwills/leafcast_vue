@@ -1,6 +1,6 @@
 import { isString } from '@/types/typeguard';
 import { parse } from 'secure-json-parse';
-import { TWSFromPi } from '@/types';
+import type { TWSFromPi } from '@/types';
 
 export const parseMessage = (message: unknown): TWSFromPi|undefined=> {
 	try {

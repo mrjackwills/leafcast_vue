@@ -1,146 +1,112 @@
 <template>
-	<v-app container--fluid fill-height class='ma-0 pa-0 vh-fix' id='leafcast'>
-		<v-main>
-			<v-container
-				class='fill-height'
+	<v-app container--fluid class='ma-0 pa-0 vh-fix' id='leafcast'>
+		<v-main class='full-height'>
+			<v-container class='fill-height'
 				fluid
 			>
 				<v-row
 					align='center'
+					class='fill-height'
 					justify='center'
 				>
 					<v-col cols='12' sm='11' lg='8' xl='6' no-gutters class='ma-0 pa-0 px-1'>
-						<v-card transition='fade-transition' class='pb-2 elevation-0 ma-0 pa-0' color='primary'>
-							<app-toolbar />
+						<v-card transition='fade-transition' class='pb-2 elevation-0 ma-0 pa-0' id='main_card' color='primary' round>
+							<AppToolbar />
 							<v-card-text class=''>
-								<v-fade-transition group hide-on-leave>
-									<router-view key='a' />
-								</v-fade-transition>
+								<router-view />
 							</v-card-text>
 						</v-card>
 					</v-col>
 				</v-row>
 			</v-container>
 		
+			<AppFooter />
 		</v-main>
-	
-		<app-snackbar />
-		<app-footer />
+		
+		<AppSnackbar />
 	</v-app>
 </template>
 
-<script lang='ts'>
-import Vue from 'vue';
-import { loadingModule, userModule } from '@/store';
-import { mapStores } from 'pinia';
+<script setup lang='ts'>
 import { snackSuccess } from '@/services/snack';
-import debounce from 'lodash/debounce';
-import Footer from '@/components/Footer.vue';
-import Snackbar from '@/components/Snackbar.vue';
-import Toolbar from '@/components/Toolbar.vue';
+import AppFooter from '@/components/AppFooter.vue';
+import AppSnackbar from '@/components/AppSnackbar.vue';
+import AppToolbar from '@/components/AppToolbar.vue';
+import { useRegisterSW } from 'virtual:pwa-register/vue';
+import { registerSW } from 'virtual:pwa-register';
+import { useHead } from '@vueuse/head';
+import { useDebounceFn } from '@vueuse/core';
+const { updateServiceWorker } = useRegisterSW();
 
-export default Vue.extend({
-	name: 'leafcast-app',
+const userStore = userModule() ;
 
-	beforeCreate () {
-		window.addEventListener('beforeinstallprompt', (e) => {
-			e.preventDefault();
-		});
-	},
-	
-	async beforeDestroy () {
-		document.removeEventListener('updateEvent', this.appUpdate);
-	},
+if ('serviceWorker' in navigator) {
+	registerSW({
+		onNeedRefresh () {
+			appUpdate();
 
-	components: {
-		appFooter: Footer,
-		appSnackbar: Snackbar,
-		appToolbar: Toolbar,
-	},
-
-	computed: {
-		...mapStores(loadingModule, userModule),
-
-		authenticated (): boolean {
-			return this.userStore.authenticated;
-		},
-		loading: {
-			get (): boolean {
-				return this.loadingStore.loading;
-			},
-			set (b: boolean): void {
-				this.loadingStore.set_loading(b);
-			}
-		},
-	},
-
-	async created () {
-		document.addEventListener('updateEvent', this.appUpdate);
-	},
-
-	data: () => ({
-		isHidden: false,
-		logoutTimeout: 0,
-	}),
-
-	metaInfo: {
-		titleTemplate: (titleChunk): string => titleChunk ? `Leafcast - ${titleChunk}` : 'Leafcast',
-
-		meta: [
-			{ name: 'description', content: `Leafcast - pi plants` }
-		],
-		link: [
-			{ rel: 'canonical', href: `https://plants.mrjackwills.com` }
-		]
-	},
-	
-	methods: {
-		/**
-		 ** Show snack bar and reload, executed from service worker, reload page after 5 seconds
-		 */
-		appUpdate (): void {
-			snackSuccess({ message: 'downloading updates', loading: true, timeout: 4500, icon: '' });
-			window.setTimeout(() => location.reload(), 5000);
-		},
-		
-		setViewHeight (): void {
-			const vh = window.innerHeight * 0.01;
-			document.documentElement.style.setProperty('--vh', `${vh}px`);
-		},
-
-		visibilityChange (_e: Event) {
-			this.isHidden = document.hidden;
-			if (this.isHidden) {
-				this.logoutTimeout = setTimeout(() => {
-					this.logout();
-				}, 1000 * 60 * 7.5);
-			} else {
-				if (!this.userStore.authenticated) this.logout('');
-				clearTimeout(this.logoutTimeout);
-				this.logoutTimeout = 0;
-			}
-		},
-
-		logout (message = 'you have been logged out'): void {
-			this.userStore.logout(message);
 		}
+	});
+}
 
-	},
+const appUpdate = (): void => {
+	snackSuccess({
+		message: 'Downloading Updates',
+		loading: true,
+		timeout: 5000,
+	});
+	window.setTimeout(() => updateServiceWorker(), 4500);
 	
-	mounted () {
-		this.setViewHeight();
+};
 
-		document.addEventListener('visibilitychange', this.visibilityChange);
+const setViewHeight = (): void => {
+	const vh = window.innerHeight * 0.01;
+	// Not sure if this is working
+	document.documentElement.style.setProperty('--vh', `${vh}px`);
+};
 
-		const debouncedSetHeight = debounce(this.setViewHeight, 50);
+onMounted(() => {
+	window.addEventListener('beforeinstallprompt', (e) => {
+		e.preventDefault();
+	});
+	document.addEventListener('visibilitychange', visibilityChange);
+	const debouncedSetHeight = useDebounceFn(setViewHeight, 50);
 
-		window.addEventListener('resize', debouncedSetHeight);
-
-		this.$once('destroyed', () => {
-			window.removeEventListener('resize', debouncedSetHeight);
-		});
-	},
+	window.addEventListener('resize', debouncedSetHeight);
 });
+
+const isHidden = ref(false);
+const logoutTimeout = ref(0);
+
+useHead({
+	title: `Leafcast`,
+
+	meta: [
+		{
+			name: `description`,
+			content: `Leafcast - pi based plant camera`,
+		},
+	],
+	link: [ { rel: 'canonical', href: `https://www.plants.mrjackwills` } ],
+});
+
+const visibilityChange = (_e: Event): void => {
+	isHidden.value = document.hidden;
+	if (isHidden.value) {
+		logoutTimeout.value = setTimeout(() => {
+			logout();
+		}, 1000 * 60 * 7.5);
+	} else {
+		if (!userStore.authenticated) logout('');
+		clearTimeout(logoutTimeout.value);
+		logoutTimeout.value = 0;
+	}
+};
+
+const logout = (message = 'you have been logged out'): void => {
+	userStore.logout(message);
+};
+
 </script>
 
 <style scoped lang="scss">
@@ -148,8 +114,13 @@ export default Vue.extend({
 	border-radius: 3rem;
 }
 
-.vh-fix ::v-deep .v-application--wrap {
+.vh-fix :v-deep .v-application--wrap {
 	min-height: 100vh;
 	min-height: calc(var(--vh, 100vh) * 100);
 }
+
+#main_card {
+	border-radius: 3rem;
+}
+
 </style>

@@ -23,7 +23,7 @@ export const userModule = defineStore(ModuleName.USER, {
 			if (message) snackError({ message });
 			const router = useRouter();
 			const route = useRoute();
-			if (route?.name !== 'login') router.push(FrontendRoutes.LOGIN);
+			if (route?.name !== 'login') router?.push(FrontendRoutes.LOGIN);
 		},
 
 		set_api_version (value: string) {

@@ -238,10 +238,10 @@ const wsDataHandler = async (message: TWSFromPi): Promise<void> => {
 		piStatusStore.set_online(!message.cache);
 		piStatusStore.set_piVersion(message.data.data.pi_info.version);
 		piStatusStore.set_totalFileSize(message.data.data.pi_info.total_file_size);
-		piStatusStore.set_connectedFor(message.data.data.pi_info.websocket_uptime);
-		uptime.value = message.data.data.pi_info.uptime;
-		nodeUptime.value = message.data.data.pi_info.app_uptime;
-		if (!init.value) startInterval();
+		if (piStatusStore.online) piStatusStore.set_connectedFor(message.data.data.pi_info.websocket_uptime);
+		if (piStatusStore.online) uptime.value = message.data.data.pi_info.uptime;
+		if (piStatusStore.online) nodeUptime.value = message.data.data.pi_info.app_uptime;
+		if (!init.value && piStatusStore.online) startInterval();
 		initCount.value = 0;
 		init.value = true;
 		loading.value = false;

@@ -86,7 +86,7 @@ const piInfo = computed((): TDataToDisplay => {
 			extra: cached
 		},
 	] ];
-	if (piOnline) {
+	if (piOnline.value) {
 		output.push(
 			[
 				{
@@ -149,11 +149,5 @@ const refresh = ():void => {
 	if (loading.value) return;
 	emit('refresh');
 };
-		
-// watch(isIntersecting, (i) => {
-// 	if (!i) return;
-// 	goToTimeout.value = window.setTimeout(() => {
-// 		// $vuetify.goTo(`#footer`, { duration: 50 });
-// 	}, 75);
-// });
+
 </script>

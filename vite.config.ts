@@ -14,9 +14,6 @@ const pwaOptions: Partial<VitePWAOptions> = {
 	base: '/',
 	registerType: 'prompt',
 	includeAssets: [ 'favicon.ico' ],
-	workbox: {
-		cleanupOutdatedCaches: true
-	},
 	manifest: {
 		display: 'standalone',
 		name: 'Leafcast',
@@ -35,12 +32,12 @@ const pwaOptions: Partial<VitePWAOptions> = {
 				sizes: '512x512',
 				type: 'image/png',
 			},
-			{
-				src: 'img/icons/android-chrome-512x512.png',
-				sizes: '512x512',
-				type: 'image/png',
-				purpose: 'any maskable'
-			},
+			// {
+			// 	src: 'img/icons/android-chrome-512x512.png',
+			// 	sizes: '512x512',
+			// 	type: 'image/png',
+			// 	purpose: 'any maskable'
+			// },
 		],
 	},
 	// devOptions: {

@@ -1,13 +1,9 @@
 <template>
-	<v-app container--fluid class='ma-0 pa-0 vh-fix full-height' id='leafcast'>
+	<v-app container--fluid class='ma-0 pa-0 vh-fix' id='leafcast'>
 		<v-main class='full-height'>
 			<v-container class='fill-height'
 				fluid
 			>
-				<!-- class='full-height' -->
-				<!-- fluid -->
-				<!-- app -->
-				<!-- > -->
 				<v-row
 					align='center'
 					class='fill-height'
@@ -39,8 +35,10 @@ import AppToolbar from '@/components/AppToolbar.vue';
 import { useRegisterSW } from 'virtual:pwa-register/vue';
 import { registerSW } from 'virtual:pwa-register';
 import { useHead } from '@vueuse/head';
-
+import { useDebounceFn } from '@vueuse/core';
 const { updateServiceWorker } = useRegisterSW();
+
+const userStore = userModule() ;
 
 if ('serviceWorker' in navigator) {
 	registerSW({
@@ -55,18 +53,26 @@ const appUpdate = (): void => {
 	snackSuccess({
 		message: 'Downloading Updates',
 		loading: true,
-		timeout: 4500,
+		timeout: 5000,
 	});
-	window.setTimeout(() => updateServiceWorker(), 5000);
+	window.setTimeout(() => updateServiceWorker(), 4500);
 	
 };
 
-const userStore = userModule() ;
+const setViewHeight = (): void => {
+	const vh = window.innerHeight * 0.01;
+	// Not sure if this is working
+	document.documentElement.style.setProperty('--vh', `${vh}px`);
+};
+
 onMounted(() => {
 	window.addEventListener('beforeinstallprompt', (e) => {
 		e.preventDefault();
 	});
 	document.addEventListener('visibilitychange', visibilityChange);
+	const debouncedSetHeight = useDebounceFn(setViewHeight, 50);
+
+	window.addEventListener('resize', debouncedSetHeight);
 });
 
 const isHidden = ref(false);
@@ -109,7 +115,8 @@ const logout = (message = 'you have been logged out'): void => {
 }
 
 .vh-fix :v-deep .v-application--wrap {
-	height: 100vh;
+	min-height: 100vh;
+	min-height: calc(var(--vh, 100vh) * 100);
 }
 
 #main_card {

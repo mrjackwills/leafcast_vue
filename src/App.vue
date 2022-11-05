@@ -1,9 +1,7 @@
 <template>
-	<v-app container--fluid class='ma-0 pa-0 vh-fix' id='leafcast'>
-		<v-main class='full-height'>
-			<v-container class='fill-height'
-				fluid
-			>
+	<v-app container--fluid class='ma-0 pa-0' id='leafcast'>
+		<v-main>
+			<v-container class='fill-height' fluid >
 				<v-row
 					align='center'
 					class='fill-height'
@@ -20,8 +18,8 @@
 				</v-row>
 			</v-container>
 		
-			<AppFooter />
 		</v-main>
+		<AppFooter />
 		
 		<AppSnackbar />
 	</v-app>

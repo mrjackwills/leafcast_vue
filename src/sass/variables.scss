@@ -7,13 +7,6 @@
 		 url('@/assets/fonts/baloo-2-v2-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
-$body-font-family: 'Baloo 2', sans-serif;
-$body-font-display: 'swap';
-$heading-font-family: 'Baloo 2', sans-serif;
-$heading-font-display: 'swap';
-$btn-text-transform: 'lowercase';
-
-
 html, .v-snackbar__content, [class*='text-']{
 	font-family: 'Baloo 2', sans-serif !important;
 	font-display: 'swap';
@@ -45,9 +38,6 @@ html{
 	font-feature-settings: "tnum";
 	font-family: 'Baloo 2', monospace !important;
 }
-
-
-
 /* Set text as unselectable*/
 .unselectable {
 	-webkit-user-select: none;

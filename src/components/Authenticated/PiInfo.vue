@@ -12,12 +12,12 @@
 
 					<v-btn
 						@click='refresh'
-						:disabled='loading'
+						:disabled='loading||!piOnline'
 						class=' fab-fix elevation-0'
-						color='serious'
-						dark
-						rounded
 						small
+						:color='piOnline?"serious":""'
+						:variant='!piOnline?"outlined":"flat"'
+						rounded
 					>
 						<v-row align='center' justify='space-around' class='ma-0 pa-0'>
 							<v-col cols='auto' class='ma-0 pa-0'>
@@ -72,7 +72,7 @@ const piVersion= computed((): string => {
 });
 
 const piInfo = computed((): TDataToDisplay => {
-	const cached = piOnline? `` : `[ cached ]`;
+	const cached = piOnline.value? `` : `[ cached ]`;
 	const output = [ [
 		{
 			icon: mdiSourceBranch,
@@ -86,7 +86,7 @@ const piInfo = computed((): TDataToDisplay => {
 			extra: cached
 		},
 	] ];
-	if (piOnline) {
+	if (piOnline.value) {
 		output.push(
 			[
 				{
@@ -149,11 +149,5 @@ const refresh = ():void => {
 	if (loading.value) return;
 	emit('refresh');
 };
-		
-// watch(isIntersecting, (i) => {
-// 	if (!i) return;
-// 	goToTimeout.value = window.setTimeout(() => {
-// 		// $vuetify.goTo(`#footer`, { duration: 50 });
-// 	}, 75);
-// });
+
 </script>

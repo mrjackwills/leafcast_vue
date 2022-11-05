@@ -154,23 +154,16 @@ const addWSHandlers = (): void => {
 
 /**
 * Clear clock interval and re-connect interval
- */
+**/
 const clearAllIntervals = (): void => {
 	clearInterval(updateInterval.value);
 	clearInterval(initTimeout.value);
 	updateCountdown.value = 300;
 };
 
-// /**
-// 		 * close websocket, set ws and connected to false, remove all listeners, reconnect after 1.5 second
-// 		 */
-// const closeWS = (): void => {
-// 	if (!ws_connected) return;
-// 	websocketStore.closeWS();
-// };
 /**
-		* If a message isn't received within the first 3500ms(x4) of being mounted, logout
-		* */
+* If a message isn't received within the first 3500ms(x4) of being mounted, logout
+**/
 const initCheck = (): void => {
 	initCount.value ++;
 	loading.value = true;
@@ -219,9 +212,9 @@ const startInterval = (): void => {
 };
 		
 /**
-		 * Handle all incoming messages from server
-		 * @param {Object} data parsed ws data , contains name and optional body
- 		*/
+* Handle all incoming messages from server
+* @param {Object} data parsed ws data , contains name and optional body
+**/
 const wsDataHandler = async (message: TWSFromPi): Promise<void> => {
 			
 	// TODO switch case for errors
@@ -238,9 +231,9 @@ const wsDataHandler = async (message: TWSFromPi): Promise<void> => {
 		piStatusStore.set_online(!message.cache);
 		piStatusStore.set_piVersion(message.data.data.pi_info.version);
 		piStatusStore.set_totalFileSize(message.data.data.pi_info.total_file_size);
-		piStatusStore.set_connectedFor(message.data.data.pi_info.websocket_uptime);
-		uptime.value = message.data.data.pi_info.uptime;
-		nodeUptime.value = message.data.data.pi_info.app_uptime;
+		if (piStatusStore.online) piStatusStore.set_connectedFor(message.data.data.pi_info.websocket_uptime);
+		if (piStatusStore.online) uptime.value = message.data.data.pi_info.uptime;
+		if (piStatusStore.online) nodeUptime.value = message.data.data.pi_info.app_uptime;
 		if (!init.value) startInterval();
 		initCount.value = 0;
 		init.value = true;

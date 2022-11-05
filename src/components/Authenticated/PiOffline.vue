@@ -13,7 +13,7 @@
 					</v-col>
 
 					<v-col cols='auto' class='ma-0 pa-0' >
-						<span class='text-white' >pi offline</span>
+						<span class='text-white unselectable'>pi offline</span>
 					</v-col>
 						
 				</v-row>

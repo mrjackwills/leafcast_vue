@@ -8,13 +8,8 @@
 			flat
 			app
 		>
+			<v-img src='@/assets/logo.svg' class='ml-5 mr-2' :max-width='logoWidth' />
 			<v-row align='center' justify='start' no-gutters class='pa-0 ma-0'>
-				<v-col
-					class='ml-5'
-					cols='1'
-				>
-					<v-img :src='imgSrc' :max-width='logoWidth' />
-				</v-col>
 				<v-col cols='auto' class='unselectable' >
 					<span class='text-h4 text-offwhite'>Leafcast</span>
 				</v-col>
@@ -74,7 +69,6 @@ const toolbarHeight = computed((): string => {
 	return xs.value ? '56' : '70';
 });
 
-const imgSrc = new URL('@/assets/logo.svg', import.meta.url).href;
 </script>
 
 <style scoped>

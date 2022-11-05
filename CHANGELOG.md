@@ -1,3 +1,12 @@
+### Chores
++ dependencies updated, [54ca70fe1df00326f8e8671f893244152d119852]
+
+### Fixes
++ app.vue footer height overlay fix, [2a752e95d5e44669141ae4bad01f71cbc9c2263d]
++ img loading via vite template, [56779218e97bd12522f497a7a66ce0ab5e445d11]
++ update button disabled on pi offline, [29049364953d6fa444035bb505e2e90ae34eaa78]
++ computed piOnline .value, [48f996e6e119ac0880f1c58253ba92029256143c], [bac92204739c1d260b4c3db22f806f01ab869429]
+
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.9.0'>v0.9.0</a>
 ### 2022-11-03
 
@@ -22,7 +31,7 @@
 ### 2022-05-30
 
 ### Chores
-+ npm update, [c9e67167](https://github.com/mrjackwills/leafcast_vue/commit/c9e67167697c764460fcbc9ac638adde7dc4b679),, [e0e53dae](https://github.com/mrjackwills/leafcast_vue/commit/e0e53daeb364be09337c265594704b0cb0911b40),
++ npm update, [c9e67167](https://github.com/mrjackwills/leafcast_vue/commit/c9e67167697c764460fcbc9ac638adde7dc4b679), [e0e53dae](https://github.com/mrjackwills/leafcast_vue/commit/e0e53daeb364be09337c265594704b0cb0911b40),
 
 ### Fixes
 + axios 429 response error type work-around, [4d417246](https://github.com/mrjackwills/leafcast_vue/commit/4d417246180c99f9fe25c6f829c83ff9c1076c81),

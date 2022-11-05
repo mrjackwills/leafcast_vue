@@ -234,7 +234,7 @@ const wsDataHandler = async (message: TWSFromPi): Promise<void> => {
 		if (piStatusStore.online) piStatusStore.set_connectedFor(message.data.data.pi_info.websocket_uptime);
 		if (piStatusStore.online) uptime.value = message.data.data.pi_info.uptime;
 		if (piStatusStore.online) nodeUptime.value = message.data.data.pi_info.app_uptime;
-		if (!init.value && piStatusStore.online) startInterval();
+		if (!init.value) startInterval();
 		initCount.value = 0;
 		init.value = true;
 		loading.value = false;

@@ -6,6 +6,7 @@
 + img loading via vite template, [56779218e97bd12522f497a7a66ce0ab5e445d11]
 + update button disabled on pi offline, [29049364953d6fa444035bb505e2e90ae34eaa78]
 + computed piOnline .value, [48f996e6e119ac0880f1c58253ba92029256143c], [bac92204739c1d260b4c3db22f806f01ab869429]
++ start update countdown even if offline, [3851ad632a3f71c6160b6ab8664fb1788711ae3c]
 
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.9.0'>v0.9.0</a>
 ### 2022-11-03

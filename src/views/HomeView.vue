@@ -154,23 +154,16 @@ const addWSHandlers = (): void => {
 
 /**
 * Clear clock interval and re-connect interval
- */
+**/
 const clearAllIntervals = (): void => {
 	clearInterval(updateInterval.value);
 	clearInterval(initTimeout.value);
 	updateCountdown.value = 300;
 };
 
-// /**
-// 		 * close websocket, set ws and connected to false, remove all listeners, reconnect after 1.5 second
-// 		 */
-// const closeWS = (): void => {
-// 	if (!ws_connected) return;
-// 	websocketStore.closeWS();
-// };
 /**
-		* If a message isn't received within the first 3500ms(x4) of being mounted, logout
-		* */
+* If a message isn't received within the first 3500ms(x4) of being mounted, logout
+**/
 const initCheck = (): void => {
 	initCount.value ++;
 	loading.value = true;
@@ -219,9 +212,9 @@ const startInterval = (): void => {
 };
 		
 /**
-		 * Handle all incoming messages from server
-		 * @param {Object} data parsed ws data , contains name and optional body
- 		*/
+* Handle all incoming messages from server
+* @param {Object} data parsed ws data , contains name and optional body
+**/
 const wsDataHandler = async (message: TWSFromPi): Promise<void> => {
 			
 	// TODO switch case for errors

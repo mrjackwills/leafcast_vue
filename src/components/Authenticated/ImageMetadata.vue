@@ -72,16 +72,6 @@ const updateCountdown = computed((): number => {
 	return imageStore.updateCountdown;
 });
 
-// const dayOptions = [
-// 	'Monday',
-// 	'Tuesday',
-// 	'Wednesday',
-// 	'Thursday',
-// 	'Friday',
-// 	'Saturday',
-// 	'Sunday',
-// ];
-
 const convert = (amount: string|number):string => {
 	const a = convert_bytes(amount);
 	return `${a.total} ${a.unit}`;

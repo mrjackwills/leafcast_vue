@@ -56,27 +56,11 @@ const appUpdate = (): void => {
 	
 };
 
-// const setViewHeight = (): void => {
-// 	const vh = window.innerHeight * 0.01;
-// 	// Not sure if this is working
-// 	document.documentElement.style.setProperty('--vh', `${vh}px`);
-// };
-
-const setDocHeight = (): void => {
-	document.documentElement.style.setProperty('--vh', `${window.innerHeight/100}px`);
-};
-
 onMounted(() => {
 	window.addEventListener('beforeinstallprompt', (e) => {
 		e.preventDefault();
 	});
 	document.addEventListener('visibilitychange', visibilityChange);
-	// const debouncedSetHeight = useDebounceFn(setViewHeight, 50);
-
-	addEventListener('resize', setDocHeight);
-	addEventListener('orientationchange', setDocHeight);
-
-	// window.addEventListener('resize', debouncedSetHeight);
 });
 
 const isHidden = ref(false);
@@ -116,19 +100,6 @@ const logout = (message = 'you have been logged out'): void => {
 <style scoped lang="scss">
 .v-sheet.v-card.v-sheet {
 	border-radius: 3rem;
-}
-
-// .vh-fix :v-deep .v-application--wrap {
-// 	min-height: 100vh;
-// 	min-height: calc(var(--vh, 100vh) * 100);
-// }
-
-@function vh($quantity) {
-@return calc(var(--vh, 1vh) * #{$quantity});
-}
-
-.vh-fix {
-height: vh(100);
 }
 
 #main_card {

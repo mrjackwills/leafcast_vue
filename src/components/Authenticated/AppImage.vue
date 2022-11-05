@@ -2,7 +2,7 @@
 	<v-row justify='center' align='center' no-gutters>
 		<v-col cols='auto' class='parent' width>
 			<v-img :src='image' class='image-border main-image' width='650px'/>
-			<v-img :src='imgSrc' class='watermark' width='100%'/>
+			<v-img src='@/assets/watermark.png' class='watermark' width='100%'/>
 		</v-col>
 	</v-row>
 </template>
@@ -15,7 +15,6 @@ const image = computed((): string => {
 	return imageStore.get_image;
 });
 	
-const imgSrc = new URL('@/assets/watermark.png', import.meta.url).href;
 </script>
 
 <style scoped>

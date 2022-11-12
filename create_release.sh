@@ -191,6 +191,7 @@ check_tag () {
 }
 
 linter () {
+	npm run check
 	npm run lint
 	ask_continue
 }

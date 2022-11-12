@@ -4,13 +4,13 @@ import { ModuleName } from '@/types/enum_module';
 export const piStatusModule = defineStore(ModuleName.PI_STATUS, {
 
 	state: () => ({
+		connectedFor: 0,
 		init: false,
 		internalIp: '',
 		nodeUptime: 0,
 		numberImages: 0,
 		online: false,
 		piVersion: '',
-		connectedFor: 0,
 		totalFileSize: '',
 		uptime: 0,
 	}),

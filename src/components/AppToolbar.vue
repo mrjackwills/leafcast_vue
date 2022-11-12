@@ -2,9 +2,9 @@
 	<section>
 		<v-toolbar
 			:height='toolbarHeight'
+			color='secondary'
 			id='toolbar'
 			dark
-			color='secondary'
 			flat
 			app
 		>
@@ -20,9 +20,9 @@
 					cols='auto'
 				>
 					<v-icon
+						:icon='icon'
 						:size='mdAndUp?"large":"default"'
 						color='offwhite'
-						:icon='icon'
 					/>
 				</v-col>
 			</v-row>

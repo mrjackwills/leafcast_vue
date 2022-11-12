@@ -36,10 +36,11 @@ const wrap = <T> () => {
 class AxiosRequests {
 
 	#wsAuthAxios!: AxiosInstance;
+	#baseurl: string;
 
 	constructor (wsAuthUrl: string) {
+		this.#baseurl = wsAuthUrl;
 		this.#wsAuthAxios = Axios.create({
-			baseURL: wsAuthUrl,
 			withCredentials: false,
 			headers: {
 				'Accept': 'application/json',
@@ -56,7 +57,7 @@ class AxiosRequests {
 
 	@wrap()
 	async wsAuth_post (password: string): Promise<boolean> {
-		const { data } = await this.#wsAuthAxios.post('', { key: env.api_key, password });
+		const { data } = await this.#wsAuthAxios.post(this.#baseurl, { key: env.api_key, password });
 		if (data.response) {
 			snackReset();
 			const user_store = userModule();

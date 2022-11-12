@@ -23,8 +23,8 @@
 						@click='showInfo'
 						class=''
 						color='secondary elevation-0 ml-2'
+						size='small'
 						dark
-						small
 						rounded
 					>
 						<v-row align='center' justify='center' class='ma-0 pa-0'>

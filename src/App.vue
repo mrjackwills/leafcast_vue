@@ -75,7 +75,7 @@ useHead({
 			content: `Leafcast - pi based plant camera`,
 		},
 	],
-	link: [ { rel: 'canonical', href: `https://www.plants.mrjackwills` } ],
+	link: [ { rel: 'canonical', href: `https://plants.mrjackwills.com` } ],
 });
 
 const visibilityChange = (_e: Event): void => {

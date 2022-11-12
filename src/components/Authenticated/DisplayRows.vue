@@ -10,7 +10,7 @@
 					<v-row justify='space-between' align='center' no-gutters>
 
 						<v-col cols='auto' class='ma-0 pa-0'>
-							<v-icon dense color='white' class='mr-1' :small='xs'>{{ item.icon }}</v-icon>
+							<v-icon density='compact' color='white' class='mr-1' :size='mobile?"small":"default"'>{{ item.icon }}</v-icon>
 							<span class='text-white'>{{ item.text }}:</span>
 						</v-col>
 
@@ -38,7 +38,7 @@
 import type { TDataToDisplay } from '@/types';
 import AppDivider from '@/components/AppDivider.vue';
 import { useDisplay } from 'vuetify';
-const { mdAndUp, xs } = useDisplay();
+const { mdAndUp, mobile } = useDisplay();
 
 defineProps({
 	toDisplay: {

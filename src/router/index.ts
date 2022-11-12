@@ -1,10 +1,7 @@
 import { FrontendRoutes } from '@/types/enum_routes';
-// import { PiniaVuePlugin } from 'pinia';
 import { userModule } from '@/store';
 import Home from '@/views/HomeView.vue';
 import Login from '@/views/LoginView.vue';
-// import Vue from 'vue';
-// import VueRouter, { RouteConfig } from 'vue-router';
 
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 
@@ -56,9 +53,3 @@ const router = createRouter({
 });
 
 export default router;
-
-// export const router = new VueRouter({
-// 	mode: 'history',
-// 	base: process.env.BASE_URL,
-// 	routes
-// });

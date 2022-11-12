@@ -1,14 +1,18 @@
-### 2022-11-05
+### 2022-11-11
 
 ### Chores
-+ dependencies updated, [54ca70fe1df00326f8e8671f893244152d119852]
++ dependencies updated, [9010fa97653f3d36466f92b714674bb9072a6f22], [71797ba52f247c31e88e7048bc1cad945753419e]
+
+### Features
++ inject store into router, [55741d93dd9e6e08371ed0c0eb497e0c34cfca7d]
 
 ### Fixes
-+ app.vue footer height overlay fix, [2a752e95d5e44669141ae4bad01f71cbc9c2263d]
-+ img loading via vite template, [56779218e97bd12522f497a7a66ce0ab5e445d11]
-+ update button disabled on pi offline, [29049364953d6fa444035bb505e2e90ae34eaa78]
-+ computed piOnline .value, [48f996e6e119ac0880f1c58253ba92029256143c], [bac92204739c1d260b4c3db22f806f01ab869429]
-+ start update countdown even if offline, [3851ad632a3f71c6160b6ab8664fb1788711ae3c]
++ check types on release, [0a83d216110d519e6ec212125a476f83efe34172]
++ footer padding removed, [0cdfce57b2d4a6b5613135ce4b3baf5bd0445c4d]
++ canonical href typo, [dd6746394110078effd0da2f3b1cc3603ede46d1]
+
+### Refactors
++ dead code removed, [cbb767074f9d5dc85a9aab0385b84dcc5f50767b]
 
 
 see <a href='https://github.com/mrjackwills/leafcast_vue/blob/main/CHANGELOG.md'>CHANGELOG.md</a> for more details

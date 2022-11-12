@@ -1,16 +1,19 @@
+# <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.9.2'>v0.9.2</a>
+### 2022-11-11
+
 ### Chores
-+ dependencies updated, [9010fa97653f3d36466f92b714674bb9072a6f22], [71797ba52f247c31e88e7048bc1cad945753419e]
++ dependencies updated, [9010fa97](https://github.com/mrjackwills/leafcast_vue/commit/9010fa97653f3d36466f92b714674bb9072a6f22),, [71797ba5](https://github.com/mrjackwills/leafcast_vue/commit/71797ba52f247c31e88e7048bc1cad945753419e),
 
 ### Features
-+ inject store into router, [55741d93dd9e6e08371ed0c0eb497e0c34cfca7d]
++ inject store into router, [55741d93](https://github.com/mrjackwills/leafcast_vue/commit/55741d93dd9e6e08371ed0c0eb497e0c34cfca7d),
 
 ### Fixes
-+ check types on release, [0a83d216110d519e6ec212125a476f83efe34172]
-+ footer padding removed, [0cdfce57b2d4a6b5613135ce4b3baf5bd0445c4d]
-+ canonical href typo, [dd6746394110078effd0da2f3b1cc3603ede46d1]
++ check types on release, [0a83d216](https://github.com/mrjackwills/leafcast_vue/commit/0a83d216110d519e6ec212125a476f83efe34172),
++ footer padding removed, [0cdfce57](https://github.com/mrjackwills/leafcast_vue/commit/0cdfce57b2d4a6b5613135ce4b3baf5bd0445c4d),
++ canonical href typo, [dd674639](https://github.com/mrjackwills/leafcast_vue/commit/dd6746394110078effd0da2f3b1cc3603ede46d1),
 
 ### Refactors
-+ dead code removed, [cbb767074f9d5dc85a9aab0385b84dcc5f50767b]
++ dead code removed, [cbb76707](https://github.com/mrjackwills/leafcast_vue/commit/cbb767074f9d5dc85a9aab0385b84dcc5f50767b),
 
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.9.1'>v0.9.1</a>
 ### 2022-11-05

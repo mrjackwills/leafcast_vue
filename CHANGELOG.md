@@ -1,5 +1,5 @@
 ### Chores
-+ chore: dependencies updated, [9010fa97653f3d36466f92b714674bb9072a6f22], [71797ba52f247c31e88e7048bc1cad945753419e]
++ dependencies updated, [9010fa97653f3d36466f92b714674bb9072a6f22], [71797ba52f247c31e88e7048bc1cad945753419e]
 
 ### Features
 + inject store into router, [55741d93dd9e6e08371ed0c0eb497e0c34cfca7d]

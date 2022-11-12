@@ -10,8 +10,8 @@
 			<v-col v-if='loading' cols='auto' class=''>
 				<v-progress-circular
 					indeterminate
-					:width='3'
 					:size='18'
+					:width='3'
 					color='white'
 				/>
 			</v-col>

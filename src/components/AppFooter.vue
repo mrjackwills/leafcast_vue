@@ -13,8 +13,8 @@
 					:ripple='false'
 					class='not-cl elevation-0'
 					color='offwhite'
-					pill
 					variant='flat'
+					pill
 				>
 					<section v-if='showBuild' class='text-caption' @click='buildInfo'>
 						<span>site version: {{ env.app_version }}</span>

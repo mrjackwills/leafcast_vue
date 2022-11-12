@@ -18,6 +18,7 @@
 							autocomplete='password'
 							id='password'
 							label='password'
+							variant='outlined'
 							dark
 						/>
 					</v-form>
@@ -30,13 +31,12 @@
 					<v-btn
 						@click='login'
 						:disabled='loading|| !password'
-						class='elevation-0'
-						rounded
-						color='secondary'
 						:variant='!password?"outlined":"flat"'
+						class='elevation-0'
+						color='secondary'
+						rounded
 					>
 						login
-				
 					</v-btn>
 				</v-col>
 			</v-row>

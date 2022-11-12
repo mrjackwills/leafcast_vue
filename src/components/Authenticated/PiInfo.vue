@@ -13,10 +13,10 @@
 					<v-btn
 						@click='refresh'
 						:disabled='loading||!piOnline'
-						class=' fab-fix elevation-0'
-						small
 						:color='piOnline?"serious":""'
 						:variant='!piOnline?"outlined":"flat"'
+						class=' fab-fix elevation-0'
+						size='small'
 						rounded
 					>
 						<v-row align='center' justify='space-around' class='ma-0 pa-0'>
@@ -46,7 +46,6 @@ import DisplayRows from '@/components/Authenticated/DisplayRows.vue';
 const [ loadingStore, piStatusStore ] = [ loadingModule(), piStatusModule() ];
 onBeforeUnmount(() => {
 	clearTimeout(goToTimeout.value);
-
 });
 
 const internalIp= computed((): string => {

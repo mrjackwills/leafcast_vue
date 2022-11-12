@@ -9,7 +9,7 @@
 				<v-row justify='space-between' align='center' no-gutters class='pulse-animation'>
 
 					<v-col cols='auto' class='ma-0 pa-0'>
-						<v-icon dense color='white' class='mr-1' :size='xs?"small":"default"' :icon='mdiAlertCircle' />
+						<v-icon dense color='white' class='mr-1' :size='mobile?"small":"default"' :icon='mdiAlertCircle' />
 					</v-col>
 
 					<v-col cols='auto' class='ma-0 pa-0' >
@@ -28,6 +28,6 @@
 <script setup lang='ts'>
 import { mdiAlertCircle } from '@mdi/js';
 import { useDisplay } from 'vuetify';
-const { xs } = useDisplay();
+const { mobile } = useDisplay();
 
 </script>

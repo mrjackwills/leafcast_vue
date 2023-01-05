@@ -184,8 +184,7 @@ check_tag () {
 				PATCH=$((PATCH + 1))
 				break;;
 			*)
-				error_close "invalid option $REPLY"
-				break;;
+				error_close "invalid option $REPLY";;
 		esac
 	done
 }
@@ -281,8 +280,7 @@ main() {
 	do
 		case $choice in
 			0)
-				exit
-				break;;
+				exit;;
 		
 			1)
 				linter

@@ -1,3 +1,6 @@
+### Fixes
++ caluclate image size based on screen width, [ea466e3e793a446242c175034b3a32176884962f]
+
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.9.3'>v0.9.3</a>
 ### 2023-01-26
 

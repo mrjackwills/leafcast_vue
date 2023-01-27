@@ -57,8 +57,8 @@ const loading= computed((): boolean => {
 const connectedFor= computed((): number => {
 	return piStatusStore.connectedFor;
 });
-const nodeUptime= computed((): number => {
-	return piStatusStore.nodeUptime;
+const appUptime= computed((): number => {
+	return piStatusStore.appUptime;
 });
 const uptime= computed((): number => {
 	return piStatusStore.uptime;
@@ -96,7 +96,7 @@ const piInfo = computed((): TDataToDisplay => {
 				{
 					icon: mdiLanguageRust,
 					text: 'app uptime',
-					value: secondsToText(nodeUptime.value? nodeUptime.value*1000:0),
+					value: secondsToText(appUptime.value? appUptime.value*1000:0),
 				},
 			],
 			[

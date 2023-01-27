@@ -7,7 +7,7 @@ export const piStatusModule = defineStore(ModuleName.PI_STATUS, {
 		connectedFor: 0,
 		init: false,
 		internalIp: '',
-		nodeUptime: 0,
+		appUptime: 0,
 		numberImages: 0,
 		online: false,
 		piVersion: '',
@@ -29,8 +29,8 @@ export const piStatusModule = defineStore(ModuleName.PI_STATUS, {
 			this.internalIp = su;
 		},
 
-		set_nodeUptime (nu: number): void {
-			this.nodeUptime = nu;
+		set_appUptime (nu: number): void {
+			this.appUptime = nu;
 		},
 
 		set_numberImages (nu: number): void {

@@ -26,15 +26,15 @@
 					/>
 				</v-col>
 			</v-row>
-	
+			<v-progress-linear
+				v-if='loading'
+				:indeterminate='loading'
+				location='bottom center'
+				bg-color='primary'
+				color='offwhite'
+				absolute
+			/>
 		</v-toolbar>
-		<v-progress-linear
-			:indeterminate='loading'
-			bg-color='primary'
-			color='offwhite'
-			absolute
-			bottom
-		/>
 
 	</section>
 </template>

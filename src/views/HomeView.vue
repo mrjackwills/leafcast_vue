@@ -80,12 +80,12 @@ const loading = computed({
 		loadingStore.set_loading(b);
 	}
 });
-const nodeUptime = computed({
+const appUptime = computed({
 	get (): number {
-		return piStatusStore.nodeUptime;
+		return piStatusStore.appUptime;
 	},
 	set (n: number): void {
-		piStatusStore.set_nodeUptime(n);
+		piStatusStore.set_appUptime(n);
 	}
 });
 const connectedFor = computed({
@@ -202,7 +202,7 @@ const startInterval = (): void => {
 	clearInterval(updateInterval.value);
 	updateInterval.value = window.setInterval(() => {
 		updateCountdown.value --;
-		if (nodeUptime.value) nodeUptime.value ++;
+		if (appUptime.value) appUptime.value ++;
 		if (uptime.value) uptime.value ++;
 		if (connectedFor) connectedFor.value ++;
 
@@ -233,7 +233,7 @@ const wsDataHandler = async (message: TWSFromPi): Promise<void> => {
 		piStatusStore.set_totalFileSize(message.data.data.pi_info.total_file_size);
 		if (piStatusStore.online) piStatusStore.set_connectedFor(message.data.data.pi_info.websocket_uptime);
 		if (piStatusStore.online) uptime.value = message.data.data.pi_info.uptime;
-		if (piStatusStore.online) nodeUptime.value = message.data.data.pi_info.app_uptime;
+		if (piStatusStore.online) appUptime.value = message.data.data.pi_info.app_uptime;
 		if (!init.value) startInterval();
 		initCount.value = 0;
 		init.value = true;

@@ -1,14 +1,23 @@
 <template>
-	<v-row justify='center' align='center' no-gutters>
+	<v-row justify='center' align='center' no-gutters v-if='image'>
 		<v-col cols='auto' class='parent' width>
-			<v-img :src='image' class='image-border main-image' width='650px'/>
+			<v-img class='image-border main-image' :src='image' cover :width='image_width' />
 			<v-img src='@/assets/watermark.png' class='watermark' width='100%'/>
 		</v-col>
 	</v-row>
 </template>
 
 <script setup lang='ts'>
+import { useDisplay } from 'vuetify';
+const { width } = useDisplay();
 
+const image_width = computed((): string => {
+	if (width.value > 750) {
+		return '650';
+	} else {
+		return `${width.value * .80}`;
+	}
+});
 const imageStore = imageModule();
 
 const image = computed((): string => {

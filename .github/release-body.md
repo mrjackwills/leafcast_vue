@@ -1,18 +1,12 @@
-### 2022-11-11
+### 2023-01-26
 
 ### Chores
-+ dependencies updated, [9010fa97653f3d36466f92b714674bb9072a6f22], [71797ba52f247c31e88e7048bc1cad945753419e]
-
-### Features
-+ inject store into router, [55741d93dd9e6e08371ed0c0eb497e0c34cfca7d]
++ dependencies updated, [c6d935cdf5dfa15adad804ba431a65b265652e50], [ff7e0591f61db19463124d24176d99da8640355b]
++ dev container docker removed, [ded78cf7279bbff7556a34cff23466a2fe6f5e49]
 
 ### Fixes
-+ check types on release, [0a83d216110d519e6ec212125a476f83efe34172]
-+ footer padding removed, [0cdfce57b2d4a6b5613135ce4b3baf5bd0445c4d]
-+ canonical href typo, [dd6746394110078effd0da2f3b1cc3603ede46d1]
-
-### Refactors
-+ dead code removed, [cbb767074f9d5dc85a9aab0385b84dcc5f50767b]
++ nodeUptime > appUptime, [31fcf0ec8fe541ce724f6604a65f208e7ea28a13]
++ AppBar progress-linear, [7db62ef81b94e0f9cdad3d51b75bafdbffac89d1]
 
 
 see <a href='https://github.com/mrjackwills/leafcast_vue/blob/main/CHANGELOG.md'>CHANGELOG.md</a> for more details

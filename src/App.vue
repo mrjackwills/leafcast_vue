@@ -78,6 +78,7 @@ useHead({
 	link: [ { rel: 'canonical', href: `https://plants.mrjackwills.com` } ],
 });
 
+// use vue core visibility here?
 const visibilityChange = (_e: Event): void => {
 	isHidden.value = document.hidden;
 	if (isHidden.value) {
@@ -97,13 +98,18 @@ const logout = (message = 'you have been logged out'): void => {
 
 </script>
 
-<style scoped lang="scss">
+<style>
+
 .v-sheet.v-card.v-sheet {
 	border-radius: 3rem;
 }
 
 #main_card {
 	border-radius: 3rem;
+}
+
+.v-application__wrap {
+  min-height: 100dvh !important;
 }
 
 </style>

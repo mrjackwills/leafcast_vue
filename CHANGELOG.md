@@ -54,7 +54,7 @@
 
 ### Chores
 + footer typo, [2b9418db](https://github.com/mrjackwills/leafcast_vue/commit/2b9418db87199c018b74af93bc6e6cfb4db41b00),
-+ dependcies updated, [d8cd93dc](https://github.com/mrjackwills/leafcast_vue/commit/d8cd93dc2a8b65fd8fdb4360d7188aa15b3c4f1b),
++ dependencies updated, [d8cd93dc](https://github.com/mrjackwills/leafcast_vue/commit/d8cd93dc2a8b65fd8fdb4360d7188aa15b3c4f1b),
 
 ### Features
 + staticPi protocol updated, [3cd34cba](https://github.com/mrjackwills/leafcast_vue/commit/3cd34cba0384a3fa45d133eb760e8b8c8f811b92),
@@ -74,7 +74,7 @@
 + security.txt updated, [98b868ed](https://github.com/mrjackwills/leafcast_vue/commit/98b868ed343141e9d6b7a9828ac937c137180bd0),
 + main.yml workflow updated, [2ca1098f](https://github.com/mrjackwills/leafcast_vue/commit/2ca1098f3bc1b460e980cd3702ddc6dc26301e35),
 
-### Featues
+### Features
 + screen shot added to readme.md, [5797fc76](https://github.com/mrjackwills/leafcast_vue/commit/5797fc7646f248b99d2ded8c885f118853318bde),
 + updated to use rust powered backend, [1e5aedd2](https://github.com/mrjackwills/leafcast_vue/commit/1e5aedd2a82566f4a78c01cddd380814a1fa8260),
 
@@ -160,7 +160,7 @@
 #### 2021-08-16
 
 ### Chores
-+ dependancies updated, [581766c7](https://github.com/mrjackwills/leafcast_vue/commit/581766c779c4f6e19e355fcca6f97896e8b6b774),(https://github.com/mrjackwills/leafcast_vue/commit/581766c779c4f6e19e355fcca6f97896e8b6b774)
++ dependencies updated, [581766c7](https://github.com/mrjackwills/leafcast_vue/commit/581766c779c4f6e19e355fcca6f97896e8b6b774),(https://github.com/mrjackwills/leafcast_vue/commit/581766c779c4f6e19e355fcca6f97896e8b6b774)
 
 ### Features
 + router use dynamic imports for component views, [e42eef6b](https://github.com/mrjackwills/leafcast_vue/commit/e42eef6b04b7a517a805f8d99a2457b16b911cac),(https://github.com/mrjackwills/leafcast_vue/commit/e42eef6b04b7a517a805f8d99a2457b16b911cac)
@@ -177,7 +177,7 @@
 #### 2021-07-31
 
 ### Chores
-+ dependancies updated, [7be3cd14](https://github.com/mrjackwills/leafcast_vue/commit/7be3cd1472effad391a2199d9edbdf860d6b8f2d),(https://github.com/mrjackwills/leafcast_vue/commit/7be3cd1472effad391a2199d9edbdf860d6b8f2d)
++ dependencies updated, [7be3cd14](https://github.com/mrjackwills/leafcast_vue/commit/7be3cd1472effad391a2199d9edbdf860d6b8f2d),(https://github.com/mrjackwills/leafcast_vue/commit/7be3cd1472effad391a2199d9edbdf860d6b8f2d)
 
 ### Fixes
 + DisplayRows.vue width increased, [68a05602](https://github.com/mrjackwills/leafcast_vue/commit/68a0560260b280d82db3a8496b7ba6d951f17b2e),(https://github.com/mrjackwills/leafcast_vue/commit/68a0560260b280d82db3a8496b7ba6d951f17b2e)
@@ -187,13 +187,13 @@
 #### 2021-07-29
 
 ### Chores
-+ dependancies updated, [d6ddacff](https://github.com/mrjackwills/leafcast_vue/commit/d6ddacff0a15bb7f7effd8f386d7e6bad0defa53),(https://github.com/mrjackwills/leafcast_vue/commit/d6ddacff0a15bb7f7effd8f386d7e6bad0defa53)
++ dependencies updated, [d6ddacff](https://github.com/mrjackwills/leafcast_vue/commit/d6ddacff0a15bb7f7effd8f386d7e6bad0defa53),(https://github.com/mrjackwills/leafcast_vue/commit/d6ddacff0a15bb7f7effd8f386d7e6bad0defa53)
 
 ### Features
 + use browser WebSocket instead of ws, [9beed907](https://github.com/mrjackwills/leafcast_vue/commit/9beed907ad449828bfd85663fd4f4e0e7cc93d33),(https://github.com/mrjackwills/leafcast_vue/commit/9beed907ad449828bfd85663fd4f4e0e7cc93d33)
 
 ### Refactors
-+ unused dependancies removed, [957c3292](https://github.com/mrjackwills/leafcast_vue/commit/957c32920cff89715862aab5ac4362f7f4a9da1b),(https://github.com/mrjackwills/leafcast_vue/commit/957c32920cff89715862aab5ac4362f7f4a9da1b)
++ unused dependencies removed, [957c3292](https://github.com/mrjackwills/leafcast_vue/commit/957c32920cff89715862aab5ac4362f7f4a9da1b),(https://github.com/mrjackwills/leafcast_vue/commit/957c32920cff89715862aab5ac4362f7f4a9da1b)
 
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.4.1'>v0.4.1</a>
 #### 2021-07-23
@@ -205,7 +205,7 @@
 #### 2021-07-21
 
 ### Chores
-+ dependancies updated, [9e5cd792](https://github.com/mrjackwills/leafcast_vue/commit/9e5cd792c537f23e81aa802abac172f1ea6d301a),(https://github.com/mrjackwills/leafcast_vue/commit/9e5cd792c537f23e81aa802abac172f1ea6d301a) & [9dcc0531](https://github.com/mrjackwills/leafcast_vue/commit/9dcc05312482b0befbbc32361231210b1b7df247),(https://github.com/mrjackwills/leafcast_vue/commit/9dcc05312482b0befbbc32361231210b1b7df247)
++ dependencies updated, [9e5cd792](https://github.com/mrjackwills/leafcast_vue/commit/9e5cd792c537f23e81aa802abac172f1ea6d301a),(https://github.com/mrjackwills/leafcast_vue/commit/9e5cd792c537f23e81aa802abac172f1ea6d301a) & [9dcc0531](https://github.com/mrjackwills/leafcast_vue/commit/9dcc05312482b0befbbc32361231210b1b7df247),(https://github.com/mrjackwills/leafcast_vue/commit/9dcc05312482b0befbbc32361231210b1b7df247)
 
 ### Fixes
 + photo timestamp as date/string rahter than number, custom formatter to display [101018a0](https://github.com/mrjackwills/leafcast_vue/commit/101018a01a3b9bb692f75862ce57c0240cd48b18),(https://github.com/mrjackwills/leafcast_vue/commit/101018a01a3b9bb692f75862ce57c0240cd48b18)
@@ -215,7 +215,7 @@
 #### 2021-06-20
 
 ### Chores
-+ dependancies updated, [4e781726](https://github.com/mrjackwills/leafcast_vue/commit/4e781726c5f08d79f83bd28939eec6dede736db1),(https://github.com/mrjackwills/leafcast_vue/commit/4e781726c5f08d79f83bd28939eec6dede736db1)
++ dependencies updated, [4e781726](https://github.com/mrjackwills/leafcast_vue/commit/4e781726c5f08d79f83bd28939eec6dede736db1),(https://github.com/mrjackwills/leafcast_vue/commit/4e781726c5f08d79f83bd28939eec6dede736db1)
 
 ### Fixes
 + vh fix class name fixed, [a50c9fcd](https://github.com/mrjackwills/leafcast_vue/commit/a50c9fcd4966eebb07a810a99e7257c6cc541280),(https://github.com/mrjackwills/leafcast_vue/commit/a50c9fcd4966eebb07a810a99e7257c6cc541280)
@@ -247,7 +247,7 @@
 #### 2021-06-13
 
 ### Chores
-+ dependancies updated, [aef27605](https://github.com/mrjackwills/leafcast_vue/commit/aef27605de5b0d562be0cf0210dfb6c28ba4f6d2),(https://github.com/mrjackwills/leafcast_vue/commit/aef27605de5b0d562be0cf0210dfb6c28ba4f6d2)
++ dependencies updated, [aef27605](https://github.com/mrjackwills/leafcast_vue/commit/aef27605de5b0d562be0cf0210dfb6c28ba4f6d2),(https://github.com/mrjackwills/leafcast_vue/commit/aef27605de5b0d562be0cf0210dfb6c28ba4f6d2)
 
 ### Fixes
 + pwa update snack message lowercased, [91bc7b71](https://github.com/mrjackwills/leafcast_vue/commit/91bc7b7115dd3e1cbc8294e9a5e94c9dfbb2bfc1),(https://github.com/mrjackwills/leafcast_vue/commit/91bc7b7115dd3e1cbc8294e9a5e94c9dfbb2bfc1)

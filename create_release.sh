@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# v0.0.12
+# Vue release
+# v0.1.0
 
 PACKAGE_NAME='leafcast_vue_site'
 
@@ -206,10 +207,21 @@ release_continue () {
 	ask_continue
 
 }
+
+# Check repository for typos
+check_typos () {
+	echo -e "\n${PURPLE}check typos${RESET}"
+	typos
+	ask_continue
+}
+
 # Full flow to create a new release
 release_flow() {
+	check_typos
+
 	check_git
 	get_git_remote_url
+	
 	linter
 	npm_build
 	

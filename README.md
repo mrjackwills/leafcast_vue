@@ -32,8 +32,8 @@
 File that are required by Leafcast
 | file | reason|
 |---|---|
-|```./.env.development```	| development enviromental variables|
-|```./.env.development```	| productions enviromental variables|
+|```./.env.development```	| development environmental variables|
+|```./.env.development```	| productions environmental variables|
 
 ### Development
 ---

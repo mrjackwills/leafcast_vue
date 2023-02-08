@@ -1,6 +1,6 @@
 ### Chores
 + devcontainer updated, [2017955eb4ac2f14350e666596ba81405daaf900]
-+ dependancies updated, [658d42144ef296a5323ab2aacf3523da2502df89]
++ dependencies updated, [658d42144ef296a5323ab2aacf3523da2502df89]
 + create_release.sh updated, [f1401d24d086eb0a3af28a8ccca12dfa706a4c73]
 
 ### Fixes

@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@mdi/js": "^7.1.96",
+    "@rushstack/eslint-patch": "^1.2.0",
     "@types/node": "^18.13.0",
     "@types/secure-json-parse": "^1.0.3",
     "@vitejs/plugin-vue": "^4.0.0",

@@ -12,7 +12,7 @@
 ### 2023-01-26
 
 ### Chores
-+ dependencies updated, [c6d935cd](https://github.com/mrjackwills/leafcast_vue/commit/c6d935cdf5dfa15adad804ba431a65b265652e50),, [ff7e0591](https://github.com/mrjackwills/leafcast_vue/commit/ff7e0591f61db19463124d24176d99da8640355b),
++ dependencies updated, [c6d935cd](https://github.com/mrjackwills/leafcast_vue/commit/c6d935cdf5dfa15adad804ba431a65b265652e50), [ff7e0591](https://github.com/mrjackwills/leafcast_vue/commit/ff7e0591f61db19463124d24176d99da8640355b),
 + dev container docker removed, [ded78cf7](https://github.com/mrjackwills/leafcast_vue/commit/ded78cf7279bbff7556a34cff23466a2fe6f5e49),
 
 ### Fixes
@@ -23,7 +23,7 @@
 ### 2022-11-11
 
 ### Chores
-+ dependencies updated, [9010fa97](https://github.com/mrjackwills/leafcast_vue/commit/9010fa97653f3d36466f92b714674bb9072a6f22),, [71797ba5](https://github.com/mrjackwills/leafcast_vue/commit/71797ba52f247c31e88e7048bc1cad945753419e),
++ dependencies updated, [9010fa97](https://github.com/mrjackwills/leafcast_vue/commit/9010fa97653f3d36466f92b714674bb9072a6f22), [71797ba5](https://github.com/mrjackwills/leafcast_vue/commit/71797ba52f247c31e88e7048bc1cad945753419e),
 
 ### Features
 + inject store into router, [55741d93](https://github.com/mrjackwills/leafcast_vue/commit/55741d93dd9e6e08371ed0c0eb497e0c34cfca7d),
@@ -46,7 +46,7 @@
 + app.vue footer height overlay fix, [2a752e95](https://github.com/mrjackwills/leafcast_vue/commit/2a752e95d5e44669141ae4bad01f71cbc9c2263d),
 + img loading via vite template, [56779218](https://github.com/mrjackwills/leafcast_vue/commit/56779218e97bd12522f497a7a66ce0ab5e445d11),
 + update button disabled on pi offline, [29049364](https://github.com/mrjackwills/leafcast_vue/commit/29049364953d6fa444035bb505e2e90ae34eaa78),
-+ computed piOnline .value, [48f996e6](https://github.com/mrjackwills/leafcast_vue/commit/48f996e6e119ac0880f1c58253ba92029256143c),, [bac92204](https://github.com/mrjackwills/leafcast_vue/commit/bac92204739c1d260b4c3db22f806f01ab869429),
++ computed piOnline .value, [48f996e6](https://github.com/mrjackwills/leafcast_vue/commit/48f996e6e119ac0880f1c58253ba92029256143c), [bac92204](https://github.com/mrjackwills/leafcast_vue/commit/bac92204739c1d260b4c3db22f806f01ab869429),
 + start update countdown even if offline, [3851ad63](https://github.com/mrjackwills/leafcast_vue/commit/3851ad632a3f71c6160b6ab8664fb1788711ae3c),
 
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.9.0'>v0.9.0</a>

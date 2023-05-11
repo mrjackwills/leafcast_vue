@@ -1,7 +1,6 @@
 import { defineStore, getActivePinia } from 'pinia';
 import { FrontendRoutes } from '@/types/enum_routes';
 import { ModuleName } from '@/types/enum_module';
-import { piStatusModule, loadingModule, websocketModule, imageModule } from '@/store';
 import { snackError } from '@/services/snack';
 
 export const userModule = defineStore(ModuleName.USER, {

@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
 import { ModuleName } from '@/types/enum_module';
-import { userModule } from '@/store';
 import type { TWSToServer } from '@/types';
 import { ws } from '@/services/WS';
 

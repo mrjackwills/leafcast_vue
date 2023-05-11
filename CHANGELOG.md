@@ -1,3 +1,6 @@
+### Chores
++ dependencies updated, [608841cd7334642253ee215669a6c7e63ec1d67f]
+
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.9.4'>v0.9.4</a>
 ### 2023-02-08
 

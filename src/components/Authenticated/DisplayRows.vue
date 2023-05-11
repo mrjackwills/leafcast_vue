@@ -40,10 +40,8 @@ import AppDivider from '@/components/AppDivider.vue';
 import { useDisplay } from 'vuetify';
 const { mdAndUp, mobile } = useDisplay();
 
-defineProps({
-	toDisplay: {
-		type: Array as () => TDataToDisplay,
-		required: true
-	}
-});
+defineProps<{
+	toDisplay: TDataToDisplay,
+}>();
+
 </script>

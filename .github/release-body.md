@@ -1,14 +1,13 @@
-### 2023-02-08
+### 2023-05-11
 
 ### Chores
-+ devcontainer updated, [2017955eb4ac2f14350e666596ba81405daaf900]
-+ dependencies updated, [658d42144ef296a5323ab2aacf3523da2502df89]
-+ create_release.sh updated, [f1401d24d086eb0a3af28a8ccca12dfa706a4c73]
++ dependencies updated, [c34fcc33a577e204f0a572a103ba1f66ca5ef3c6], [43c30e71fd1a98b7238e842004ae700c3b5bf43e], [608841cd7334642253ee215669a6c7e63ec1d67f]
+
+### Features
++ typed defineProps, [de7bb3557b5eb726ec0b24c8c3686d856233a4c6]
 
 ### Fixes
-+ calculate image size based on screen width, [ea466e3e793a446242c175034b3a32176884962f]
-+ divider color, [5308e028a83e20034b66e2d84f9c53c8d290c02a], [aedef9d6fdbc9958c6629f69ffabf6a7dd13efd2]
-+ 100% size on mobilee fix, [3c8b45ab9c51de8f1f58588065b6a4e117559537]
++ autoimport pinia store, [2035dcb4f9289df35963a498e5c72b13145f79a6]
 
 
 see <a href='https://github.com/mrjackwills/leafcast_vue/blob/main/CHANGELOG.md'>CHANGELOG.md</a> for more details

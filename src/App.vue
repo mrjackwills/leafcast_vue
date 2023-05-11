@@ -108,8 +108,4 @@ const logout = (message = 'you have been logged out'): void => {
 	border-radius: 3rem;
 }
 
-.v-application__wrap {
-  min-height: 100dvh !important;
-}
-
 </style>

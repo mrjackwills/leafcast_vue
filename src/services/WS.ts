@@ -1,4 +1,3 @@
-import { userModule } from '@/store';
 import { env } from '@/vanillaTS/env';
 
 export class CreateWs {

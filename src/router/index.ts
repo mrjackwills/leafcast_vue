@@ -1,5 +1,4 @@
 import { FrontendRoutes } from '@/types/enum_routes';
-import { userModule } from '@/store';
 import Home from '@/views/HomeView.vue';
 import Login from '@/views/LoginView.vue';
 

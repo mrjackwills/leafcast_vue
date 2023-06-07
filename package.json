@@ -1,7 +1,7 @@
 {
   "name": "leafcast_vue",
   "description": "frontend site for leafcast service",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "private": false,
   "homepage": "https://github.com/mrjackwills/leafcast_vue",
   "license": "MIT",
@@ -44,5 +44,5 @@
     "vite-plugin-vuetify": "^1.0.2",
     "vue-tsc": "^1.6.5"
   },
-  "buildDate": "Thu 11 2023 May 15:35:14 EDT"
+  "buildDate": "Wed 07 2023 June 11:56:29 EDT"
 }

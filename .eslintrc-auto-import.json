@@ -68,6 +68,7 @@
     "watchEffect": true,
     "watchPostEffect": true,
     "watchSyncEffect": true,
-    "websocketModule": true
+    "websocketModule": true,
+    "toValue": true
   }
 }

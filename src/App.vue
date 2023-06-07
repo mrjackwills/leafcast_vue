@@ -27,9 +27,6 @@
 
 <script setup lang='ts'>
 import { snackSuccess } from '@/services/snack';
-import AppFooter from '@/components/AppFooter.vue';
-import AppSnackbar from '@/components/AppSnackbar.vue';
-import AppToolbar from '@/components/AppToolbar.vue';
 import { useRegisterSW } from 'virtual:pwa-register/vue';
 import { registerSW } from 'virtual:pwa-register';
 import { useHead } from '@vueuse/head';

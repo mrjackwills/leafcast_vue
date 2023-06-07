@@ -15,8 +15,6 @@ import { convert_bytes } from '@/vanillaTS/convertBytes';
 import { mdiClock, mdiUpdate, mdiImageSizeSelectLarge, mdiImage } from '@mdi/js';
 import { nextUpdateToText } from '@/vanillaTS/secondsToText';
 import type { TDataToDisplay } from '@/types';
-import DisplayRows from '@/components/Authenticated/DisplayRows.vue';
-import PiOffline from '@/components/Authenticated/PiOffline.vue';
 
 const [ imageStore, piStatusStore ] = [ imageModule(), piStatusModule() ];
 

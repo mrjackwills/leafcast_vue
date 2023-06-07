@@ -36,7 +36,6 @@
 <script setup lang="ts">
 
 import type { TDataToDisplay } from '@/types';
-import AppDivider from '@/components/AppDivider.vue';
 import { useDisplay } from 'vuetify';
 const { mdAndUp, mobile } = useDisplay();
 

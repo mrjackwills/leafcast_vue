@@ -41,7 +41,6 @@ import { convert_bytes } from '@/vanillaTS/convertBytes';
 import { mdiCameraFlip, mdiDesktopClassic, mdiHarddisk, mdiImageMultiple, mdiLanConnect, mdiLanguageRust, mdiSourceBranch, mdiWebClock } from '@mdi/js';
 import { secondsToText } from '@/vanillaTS/secondsToText';
 import type { TDataToDisplay } from '@/types';
-import DisplayRows from '@/components/Authenticated/DisplayRows.vue';
 
 const [ loadingStore, piStatusStore ] = [ loadingModule(), piStatusModule() ];
 onBeforeUnmount(() => {

@@ -1,3 +1,12 @@
+# <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.9.6'>v0.9.6</a>
+### 2023-06-07
+
+### Chores
++ dependencies updated, [85aadf86](https://github.com/mrjackwills/leafcast_vue/commit/85aadf869d5d8f78ebb2c052d89e98bebf089517), [d36f1b05](https://github.com/mrjackwills/leafcast_vue/commit/d36f1b058cd2f3a4972cd691beb1a0b1936eef24)
+
+### Features
++ use unplugin-vue-components to autoimport, [61b5f2af](https://github.com/mrjackwills/leafcast_vue/commit/61b5f2af4a177a457abdc5d36eef498f14af26ef)
+
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.9.5'>v0.9.5</a>
 ### 2023-05-11
 

@@ -56,9 +56,6 @@ import { parseMessage } from '@/vanillaTS/messageParser';
 import { snackError } from '@/services/snack';
 import type { TWSFromPi } from '@/types';
 import { ws } from '@/services/WS';
-import AppImage from '@/components/Authenticated/AppImage.vue';
-import ImageMetadata from '@/components/Authenticated/ImageMetadata.vue';
-import PiInfo from '@/components/Authenticated/PiInfo.vue';
 
 const [ imageStore, loadingStore, piStatusStore, userStore, websocketStore ] = [ imageModule(), loadingModule(), piStatusModule(), userModule(), websocketModule() ];
 

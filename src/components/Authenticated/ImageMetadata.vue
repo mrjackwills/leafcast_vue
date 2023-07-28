@@ -52,12 +52,12 @@ const piInfo = computed((): TDataToDisplay => {
 			{
 				icon: mdiImage,
 				text: 'original size',
-				value: convert(imageSize_original.value??0)
+				value: convert(imageSize_original.value??0),
 			},
 			{
 				icon: mdiImageSizeSelectLarge,
 				text: 'compressed size',
-				value: convert(imageSize_converted.value??0)
+				value: convert(imageSize_converted.value??0),
 			}
 		],
 

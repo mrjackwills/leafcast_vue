@@ -1,3 +1,9 @@
+### Chores
++ ip address selectable, [53bfc1116b686a42571870fbaa441de0d9795ea7]
+
+### Fixes
++ dependencies updated, [32a2b73d14eaf1193fbce5e69ade2842dd067f3f]
+
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.9.6'>v0.9.6</a>
 ### 2023-06-07
 

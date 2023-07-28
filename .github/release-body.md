@@ -1,10 +1,10 @@
-### 2023-06-07
+### 2023-07-28
 
 ### Chores
-+ dependencies updated, [85aadf869d5d8f78ebb2c052d89e98bebf089517], [d36f1b058cd2f3a4972cd691beb1a0b1936eef24]
++ ip address selectable, [53bfc1116b686a42571870fbaa441de0d9795ea7]
 
-### Features
-+ use unplugin-vue-components to autoimport, [61b5f2af4a177a457abdc5d36eef498f14af26ef]
+### Fixes
++ dependencies updated, [32a2b73d14eaf1193fbce5e69ade2842dd067f3f]
 
 
 see <a href='https://github.com/mrjackwills/leafcast_vue/blob/main/CHANGELOG.md'>CHANGELOG.md</a> for more details

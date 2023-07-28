@@ -1,21 +1,21 @@
 <template>
-	<v-col cols='11' md='9' class='text-center text-white text-body-1 mt-2'>
+	<v-col cols='11' md='10' class='text-center text-white text-body-1 mt-2'>
 
 		<section v-for='(row, index) in toDisplay' :key='index'>
 
-			<v-row justify='space-between' align='center' class='unselectable' no-gutters>
+			<v-row justify='space-between' align='center' class='' no-gutters>
 
 				<v-col v-for='(item, rowIndex) in row' :key='rowIndex' cols='12' md='5' :class='{ "ml-1" : rowIndex === 1 && mdAndUp }'>
 
 					<v-row justify='space-between' align='center' no-gutters>
 
-						<v-col cols='auto' class='ma-0 pa-0'>
+						<v-col cols='auto' class='ma-0 pa-0 unselectable'>
 							<v-icon density='compact' color='white' class='mr-1' :size='mobile?"small":"default"'>{{ item.icon }}</v-icon>
 							<span class='text-white'>{{ item.text }}:</span>
 						</v-col>
 
 						<v-col cols='auto' class='ma-0 pa-0' :class='{"mr-1" : rowIndex === 0 && mdAndUp}' >
-							<span class='text-secondary mono-numbers' >{{ item.value }}</span>
+							<span class='text-secondary mono-numbers' :class='{"unselectable": item.text !== "internal ip"}' >{{ item.value }}</span>
 							<span v-if='item.extra' class='text-offwhite ml-2'>{{ item.extra }}</span>
 						</v-col>
 						

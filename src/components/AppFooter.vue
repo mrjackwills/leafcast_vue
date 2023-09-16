@@ -4,8 +4,9 @@
 		id='footer'
 		absolute
 		app
+		
 	>
-		<v-row justify='center' align='center' class='no-gutters ma-0 pa-0'>
+		<v-row justify='center' align='center' class='no-gutters ma-0 pa-0 mt-3'>
 
 			<v-col cols='auto' class='no-gutters unselectable ma-0 pa-0'>
 				

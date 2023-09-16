@@ -29,9 +29,9 @@
 			<v-progress-linear
 				v-if='loading'
 				:indeterminate='loading'
-				location='bottom center'
 				bg-color='primary'
 				color='offwhite'
+				location='bottom center'
 				absolute
 			/>
 		</v-toolbar>

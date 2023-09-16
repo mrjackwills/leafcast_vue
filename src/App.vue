@@ -7,7 +7,7 @@
 					class='fill-height'
 					justify='center'
 				>
-					<v-col cols='12' sm='11' lg='8' xl='6' no-gutters class='ma-0 pa-0 px-1'>
+					<v-col cols='12' sm='11' lg='8' no-gutters class='ma-0 pa-0 px-1'>
 						<v-card transition='fade-transition' class='pb-2 elevation-0 ma-0 pa-0' id='main_card' color='primary' round>
 							<AppToolbar />
 							<v-card-text class=''>

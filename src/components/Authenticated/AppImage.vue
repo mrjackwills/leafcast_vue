@@ -34,14 +34,12 @@ const image = computed((): string => {
 
 .parent {
 	position: relative;
-	top: 0;
-	left: 0;
+	inset: 0 auto auto 0;
 }
 
 .watermark {
 	position: absolute;
-	bottom: 0;
-	right: 0;
+	inset: auto 0 0 auto;
 	max-width: 50%;
 	z-index: 2;
 }

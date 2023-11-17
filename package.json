@@ -1,6 +1,7 @@
 {
   "name": "leafcast_vue",
   "description": "frontend site for leafcast service",
+  "type": "module",
   "version": "0.9.8",
   "private": false,
   "homepage": "https://github.com/mrjackwills/leafcast_vue",

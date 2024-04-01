@@ -165,7 +165,7 @@ const initCheck = (): void => {
 	initCount.value ++;
 	loading.value = true;
 	initTimeout.value = window.setTimeout(() => {
-		if (init) {
+		if (init.value) {
 			clearInterval(initTimeout.value);
 			loading.value = false;
 		}
@@ -201,7 +201,7 @@ const startInterval = (): void => {
 		updateCountdown.value --;
 		if (appUptime.value) appUptime.value ++;
 		if (uptime.value) uptime.value ++;
-		if (connectedFor) connectedFor.value ++;
+		if (connectedFor.value) connectedFor.value ++;
 
 		if (updateCountdown.value === 1) sendPhoto();
 		if (updateCountdown.value === 0) updateCountdown.value = 300;

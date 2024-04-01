@@ -60,10 +60,10 @@ const showBuild = ref(false);
  ** Show build date on version number click if authed
  */
 const buildInfo = (): void => {
-	if (!authenticated) return;
+	if (!authenticated.value) return;
 	showBuild.value = !showBuild.value;
 	clearTimeout(buildTimeout.value);
-	if (showBuild) buildTimeout.value = window.setTimeout(() => {
+	if (showBuild.value) buildTimeout.value = window.setTimeout(() => {
 		showBuild.value = false;
 	}, 5000);
 };

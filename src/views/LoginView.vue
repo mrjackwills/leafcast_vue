@@ -81,7 +81,7 @@ const appendClick = (): void => {
 } ;
 		
 const login = async (): Promise<void> => {
-	if (!password) return;
+	if (!password.value) return;
 	passwordVisible.value = false;
 	loading.value = true;
 	const response = await axiosRequests.wsAuth_post(password.value);

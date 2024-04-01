@@ -277,7 +277,7 @@
 + dependencies updated, [9e5cd792](https://github.com/mrjackwills/leafcast_vue/commit/9e5cd792c537f23e81aa802abac172f1ea6d301a),(https://github.com/mrjackwills/leafcast_vue/commit/9e5cd792c537f23e81aa802abac172f1ea6d301a) & [9dcc0531](https://github.com/mrjackwills/leafcast_vue/commit/9dcc05312482b0befbbc32361231210b1b7df247),(https://github.com/mrjackwills/leafcast_vue/commit/9dcc05312482b0befbbc32361231210b1b7df247)
 
 ### Fixes
-+ photo timestamp as date/string rahter than number, custom formatter to display [101018a0](https://github.com/mrjackwills/leafcast_vue/commit/101018a01a3b9bb692f75862ce57c0240cd48b18),(https://github.com/mrjackwills/leafcast_vue/commit/101018a01a3b9bb692f75862ce57c0240cd48b18)
++ photo timestamp as date/string rather than number, custom formatter to display [101018a0](https://github.com/mrjackwills/leafcast_vue/commit/101018a01a3b9bb692f75862ce57c0240cd48b18),(https://github.com/mrjackwills/leafcast_vue/commit/101018a01a3b9bb692f75862ce57c0240cd48b18)
 
 
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.3.2'>v0.3.2</a>

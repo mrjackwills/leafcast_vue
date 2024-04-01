@@ -1,3 +1,14 @@
+# <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.9.10'>v0.9.10</a>
+### 2024-04-01
+
+### Chores
++ .devcontainer updated, [d8b5520a](https://github.com/mrjackwills/leafcast_vue/commit/d8b5520ab352a342930918e88deec3b5de71ed66)
++ dependencies updated, [fa6aba6b](https://github.com/mrjackwills/leafcast_vue/commit/fa6aba6b20104786b66562f4b7651859bfe946b0), [759f6e03](https://github.com/mrjackwills/leafcast_vue/commit/759f6e03249d351c7dd4b752121fbac086ef15d3)
+
+### Fixes
++ missing .value's, [62ef4d25](https://github.com/mrjackwills/leafcast_vue/commit/62ef4d25ebb2585c35d0916f27363d3bafdcff4c)
++ .gitattributes, [2c42d282](https://github.com/mrjackwills/leafcast_vue/commit/2c42d28235d74b6c848fb6667929d8a46541360f)
+
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.9.9'>v0.9.9</a>
 ### 2023-11-17
 
@@ -269,7 +280,7 @@
 + dependencies updated, [9e5cd792](https://github.com/mrjackwills/leafcast_vue/commit/9e5cd792c537f23e81aa802abac172f1ea6d301a),(https://github.com/mrjackwills/leafcast_vue/commit/9e5cd792c537f23e81aa802abac172f1ea6d301a) & [9dcc0531](https://github.com/mrjackwills/leafcast_vue/commit/9dcc05312482b0befbbc32361231210b1b7df247),(https://github.com/mrjackwills/leafcast_vue/commit/9dcc05312482b0befbbc32361231210b1b7df247)
 
 ### Fixes
-+ photo timestamp as date/string rahter than number, custom formatter to display [101018a0](https://github.com/mrjackwills/leafcast_vue/commit/101018a01a3b9bb692f75862ce57c0240cd48b18),(https://github.com/mrjackwills/leafcast_vue/commit/101018a01a3b9bb692f75862ce57c0240cd48b18)
++ photo timestamp as date/string rather than number, custom formatter to display [101018a0](https://github.com/mrjackwills/leafcast_vue/commit/101018a01a3b9bb692f75862ce57c0240cd48b18),(https://github.com/mrjackwills/leafcast_vue/commit/101018a01a3b9bb692f75862ce57c0240cd48b18)
 
 
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.3.2'>v0.3.2</a>

@@ -1,11 +1,11 @@
-### 2023-11-17
+### 2024-04-01
 
 ### Chores
-+ .gitattributes updated, [69dc321d2978c9841bbd3a5131b5cb6630c657df]
-+ devcontainer updated, [e06d58838ee0c61ab72f0a68a37706ac6736117e]
-+ dependencies updated, [39ff60974744763053bc405619e27f97041433b2], [58641f9776231ad8d4610237d31314a17e406eb5]
++ .devcontainer updated, [d8b5520ab352a342930918e88deec3b5de71ed66]
++ dependencies updated, [fa6aba6b20104786b66562f4b7651859bfe946b0], [759f6e03249d351c7dd4b752121fbac086ef15d3]
 
 ### Fixes
-+ changed for Vite v5, [5809ad2217688d460b062a5c074e2039af7a1a04]
++ missing .value's, [62ef4d25ebb2585c35d0916f27363d3bafdcff4c]
++ .gitattributes, [2c42d28235d74b6c848fb6667929d8a46541360f]
 
 see <a href='https://github.com/mrjackwills/leafcast_vue/blob/main/CHANGELOG.md'>CHANGELOG.md</a> for more details

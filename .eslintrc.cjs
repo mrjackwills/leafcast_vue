@@ -1,5 +1,4 @@
 /* eslint-env node */
-require('@rushstack/eslint-patch/modern-module-resolution');
 
 module.exports = {
 	root: true,
@@ -25,7 +24,7 @@ module.exports = {
 		'arrow-parens': [ 'error', 'always' ],
 		'comma-spacing': [ 'error', { before: false, after: true } ],
 		'generator-star-spacing': 'off',
-		indent: [ 'error', 'tab' ],
+		'indent': [ 'error', 'tab' ],
 		'key-spacing': [ 1, { beforeColon: false, afterColon: true } ],
 		'keyword-spacing': [ 'error', { before: true } ],
 		'max-len': [
@@ -33,8 +32,7 @@ module.exports = {
 			{ code: 222, ignoreComments: true, ignoreTemplateLiterals: true },
 		],
 		'no-await-in-loop': 1,
-		'no-console': [ 'error', { allow: [ 'warn', 'error' ] } ],
-		// 'no-console': 0,
+		'no-console': 0,
 		'no-constructor-return': 1,
 		'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
 		'no-extra-parens': 1,
@@ -46,9 +44,9 @@ module.exports = {
 		'no-trailing-spaces': [ 'error', { skipBlankLines: true } ],
 		'no-unused-vars': 'off',
 		'object-curly-spacing': [ 'error', 'always' ],
-		quotes: [ 'error', 'single', { allowTemplateLiterals: true } ],
+		'quotes': [ 'error', 'single', { allowTemplateLiterals: true } ],
 		'require-atomic-updates': 1,
-		semi: [ 'error', 'always' ],
+		'semi': [ 'error', 'always' ],
 		'space-before-blocks': [
 			'error',
 			{ functions: 'always', keywords: 'always', classes: 'always' },

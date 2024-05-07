@@ -12,7 +12,7 @@
 	"esModuleInterop": true,
 	"lib": ["ESNext", "DOM"],
 	"skipLibCheck": true,
-	"noEmit": true,
+	"noEmit": false,
 	"experimentalDecorators": true,
 	"paths": {
 		"@/*": [
@@ -23,7 +23,7 @@
 	"extends": "@vue/tsconfig/tsconfig.dom.json",
 	"types": ["node", "vite-plugin-pwa/client", "vuetify", ],
 	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-	"references": [{ "path": "./tsconfig.config.json" }],
+	// "references": [{ "path": "./tsconfig.config.json" }],
 	"exclude": ["node_modules"]
 }
 

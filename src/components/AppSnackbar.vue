@@ -2,6 +2,7 @@
 	<v-snackbar
 		v-model='visible'
 		timeout='-1'
+		id='snackbar'
 	>
 		<v-row justify='center' align='center' no-gutters class='ma-0 pa-0 unselectable'>
 			<v-col v-if='icon && !loading' cols='auto' class=''>
@@ -77,3 +78,9 @@ watch(visible, (i): void => {
 	}, snackTimeout.value);
 });
 </script>
+
+<style>
+#snackbar{
+	padding-bottom:1.5rem
+}
+</style>

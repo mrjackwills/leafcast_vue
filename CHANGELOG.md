@@ -1,9 +1,12 @@
+# <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.9.11'>v0.9.11</a>
+### 2024-05-07
+
 ### Chores
-+ dependencies updated, [4dd536926583a044a75ab0b303382b4e2b1a68aa]
++ dependencies updated, [4dd53692](https://github.com/mrjackwills/leafcast_vue/commit/4dd536926583a044a75ab0b303382b4e2b1a68aa)
 
 ### Fixes
-+ snackbar padding, [708da3e4d51be23ed8f11a228ee842e950af73ce]
-+ set host in vite.config.ts, [201886fa89bd63b30993c3825950605e0b026afe]
++ snackbar padding, [708da3e4](https://github.com/mrjackwills/leafcast_vue/commit/708da3e4d51be23ed8f11a228ee842e950af73ce)
++ set host in vite.config.ts, [201886fa](https://github.com/mrjackwills/leafcast_vue/commit/201886fa89bd63b30993c3825950605e0b026afe)
 
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.9.10'>v0.9.10</a>
 ### 2024-04-01

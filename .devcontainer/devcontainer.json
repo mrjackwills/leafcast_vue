@@ -24,11 +24,12 @@
 				"bungcip.better-toml",
 				"christian-kohler.path-intellisense",
 				"dbaeumer.vscode-eslint",
+				"fill-labs.dependi",
 				"foxundermoon.shell-format",
 				"meganrogge.template-string-converter",
 				"mutantdino.resourcemonitor",
-				"timonwong.shellcheck",
 				"redhat.vscode-yaml",
+				"timonwong.shellcheck",
 				"vue.volar",
 				"yoavbls.pretty-ts-errors"
 			]

@@ -1,3 +1,10 @@
+### Chores
++ .devcontainer updated, [70c784c59a5e6996d6ade662d1411187081722f5]
++ dependencies updated, [27a586fd2466921b8ba2dafaca8fda492a44f2d6]
+
+### Fixes
++ github workflow, [8283f1d4c9d1bd3de5e3bc2ebe771bfa4323210a]
+
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.9.12'>v0.9.12</a>
 ### 2024-06-17
 

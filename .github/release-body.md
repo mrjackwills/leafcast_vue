@@ -1,9 +1,10 @@
-### 2024-06-17
+### 2024-07-26
 
 ### Chores
-+ dependencies updated, [9a311fd2b09bf5407c66d859f089ed8be92d7f71], [88df58579ec8350767825c2e138a2524bf81f8b6], [2b2b3d937e7f314bf6535a927f3bbf07a6d9987b]
++ .devcontainer updated, [70c784c59a5e6996d6ade662d1411187081722f5]
++ dependencies updated, [27a586fd2466921b8ba2dafaca8fda492a44f2d6]
 
-### Refactors
-+ dead code removed, [4ef1dcadb7e7244735287f4a9196d79f6dde3c10], [a97b755be451d6ca6171801aade96346368e2b8e]
+### Fixes
++ github workflow, [8283f1d4c9d1bd3de5e3bc2ebe771bfa4323210a]
 
 see <a href='https://github.com/mrjackwills/leafcast_vue/blob/main/CHANGELOG.md'>CHANGELOG.md</a> for more details

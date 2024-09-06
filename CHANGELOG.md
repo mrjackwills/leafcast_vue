@@ -1,6 +1,9 @@
+# <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.9.14'>v0.9.14</a>
+### 2024-09-06
+
 ### Chores
-+ GitHub workflow dependency, [9006b7e41684509d9c3af4e4b6eefa4f10bb8746]
-+ dependencies updated, [42ae3483d1100320799ea014d20b835bfae1b2a6]
++ GitHub workflow dependency, [9006b7e4](https://github.com/mrjackwills/leafcast_vue/commit/9006b7e41684509d9c3af4e4b6eefa4f10bb8746)
++ dependencies updated, [42ae3483](https://github.com/mrjackwills/leafcast_vue/commit/42ae3483d1100320799ea014d20b835bfae1b2a6)
 
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.9.13'>v0.9.13</a>
 ### 2024-07-26

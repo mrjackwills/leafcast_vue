@@ -83,6 +83,13 @@ export default defineConfig({
 		viteCompression({ algorithm: 'brotliCompress', filter: /\.(js|mjs|json|css)$/i }),
 		viteCompression({ algorithm: 'gzip', filter: /\.(js|mjs|json|css)$/i }),
 	],
+	css: {
+		preprocessorOptions: {
+			scss: {
+				api: 'modern-compiler',
+			},
+		},
+	},
 	define: {
 		'process.env': {},
 		'import.meta.env.BUILD_DATE': Date.now(),

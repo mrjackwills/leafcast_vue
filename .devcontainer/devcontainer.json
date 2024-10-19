@@ -21,14 +21,15 @@
 		"vscode": {
 				// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
-				"bungcip.better-toml",
 				"christian-kohler.path-intellisense",
 				"dbaeumer.vscode-eslint",
 				"fill-labs.dependi",
 				"foxundermoon.shell-format",
+				"gruntfuggly.todo-tree",
 				"meganrogge.template-string-converter",
 				"mutantdino.resourcemonitor",
 				"redhat.vscode-yaml",
+				"tamasfe.even-better-toml",
 				"timonwong.shellcheck",
 				"vue.volar",
 				"yoavbls.pretty-ts-errors"

@@ -1,6 +1,6 @@
-### 2024-11-28
+### 2025-01-13
 
 ### Chores
-+ dependencies updated, [8489894906a867c2fe30af364f1a16459b28410b]
++ dependencies updated, [18756e205713c9952f463222c1c750c2f7125957]
 
 see <a href='https://github.com/mrjackwills/leafcast_vue/blob/main/CHANGELOG.md'>CHANGELOG.md</a> for more details

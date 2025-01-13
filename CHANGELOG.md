@@ -1,3 +1,9 @@
+# <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.9.17'>v0.9.17</a>
+### 2025-01-13
+
+### Chores
++ dependencies updated, [18756e20](https://github.com/mrjackwills/leafcast_vue/commit/18756e205713c9952f463222c1c750c2f7125957)
+
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.9.16'>v0.9.16</a>
 ### 2024-11-28
 

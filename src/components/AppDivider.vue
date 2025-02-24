@@ -8,11 +8,7 @@
 
 <script setup lang='ts'>
 
-withDefaults(defineProps<{
-	cols?: number,
-}>(), {
-	cols: 12
-});
+withDefaults(defineProps<{ cols?: number }>(), { cols: 12 });
 
 </script>
 

@@ -67,7 +67,7 @@ const imageExists = computed((): boolean => {
 	return imageStore.imageExists;
 });
 const infoIcon = computed((): string => {
-	return showPiInfo.value ? mdiChevronUp: mdiChevronDown;
+	return showPiInfo.value ? mdiChevronUp : mdiChevronDown;
 });
 const loading = computed({
 	get (): boolean {
@@ -168,22 +168,20 @@ const initCheck = (): void => {
 		if (init.value) {
 			clearInterval(initTimeout.value);
 			loading.value = false;
-		}
-		else if (initCount.value < 4) {
+		} else if (initCount.value < 4) {
 			sendPhoto();
 			initCheck();
-		}
-		else userStore.logout('unable to contact pi');
+		} else userStore.logout('unable to contact pi');
 	}, 3500);
 };
 
-const showInfo = ():void => {
+const showInfo = (): void => {
 	showPiInfo.value = !showPiInfo.value;
 };
 
 const refresh = (): void => {
 	if (loading.value) return;
-	if (!websocketStore.connected) userStore.logout;
+	if (!websocketStore.connected) userStore.logout();
 	loading.value = true;
 	clearAllIntervals();
 	websocketStore.send({ name: 'force_update' });
@@ -217,25 +215,25 @@ const wsDataHandler = async (message: TWSFromPi): Promise<void> => {
 	// TODO switch case for errors
 	// Maybe just logout?
 	switch (message.data?.name) {
-	case 'photo':
-		imageStore.set_cached(!!message.cache);
-		imageStore.set_image(message.data.data.image ?? '');
-		imageStore.set_imageSize_converted(message.data.data.size_converted??0);
-		imageStore.set_imageSize_original(message.data.data.size_original??0);
-		imageStore.set_timestamp(message.data.data.timestamp);
-		piStatusStore.set_internalIp(message.data.data.pi_info.internal_ip);
-		piStatusStore.set_numberImages(message.data.data.pi_info.number_images);
-		piStatusStore.set_online(!message.cache);
-		piStatusStore.set_piVersion(message.data.data.pi_info.version);
-		piStatusStore.set_totalFileSize(message.data.data.pi_info.total_file_size);
-		if (piStatusStore.online) piStatusStore.set_connectedFor(message.data.data.pi_info.websocket_uptime);
-		if (piStatusStore.online) uptime.value = message.data.data.pi_info.uptime;
-		if (piStatusStore.online) appUptime.value = message.data.data.pi_info.app_uptime;
-		if (!init.value) startInterval();
-		initCount.value = 0;
-		init.value = true;
-		loading.value = false;
-		break;
+		case 'photo':
+			imageStore.set_cached(!!message.cache);
+			imageStore.set_image(message.data.data.image ?? '');
+			imageStore.set_imageSize_converted(message.data.data.size_converted ?? 0);
+			imageStore.set_imageSize_original(message.data.data.size_original ?? 0);
+			imageStore.set_timestamp(message.data.data.timestamp);
+			piStatusStore.set_internalIp(message.data.data.pi_info.internal_ip);
+			piStatusStore.set_numberImages(message.data.data.pi_info.number_images);
+			piStatusStore.set_online(!message.cache);
+			piStatusStore.set_piVersion(message.data.data.pi_info.version);
+			piStatusStore.set_totalFileSize(message.data.data.pi_info.total_file_size);
+			if (piStatusStore.online) piStatusStore.set_connectedFor(message.data.data.pi_info.websocket_uptime);
+			if (piStatusStore.online) uptime.value = message.data.data.pi_info.uptime;
+			if (piStatusStore.online) appUptime.value = message.data.data.pi_info.app_uptime;
+			if (!init.value) startInterval();
+			initCount.value = 0;
+			init.value = true;
+			loading.value = false;
+			break;
 	}
 };
 

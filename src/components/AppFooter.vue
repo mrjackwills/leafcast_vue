@@ -49,7 +49,7 @@ onBeforeUnmount(() => {
 	clearTimeout(buildTimeout.value);
 
 });
-const authenticated= computed((): boolean => {
+const authenticated = computed((): boolean => {
 	return userStore.authenticated;
 });
 

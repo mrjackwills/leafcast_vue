@@ -18,17 +18,17 @@ import type { TDataToDisplay } from '@/types';
 
 const [ imageStore, piStatusStore ] = [ imageModule(), piStatusModule() ];
 
-const imageSize_converted = computed((): number|undefined =>{
+const imageSize_converted = computed((): number | undefined =>{
 	return imageStore.imageSize_converted;
 });
-const imageSize_original = computed((): number|undefined =>{
+const imageSize_original = computed((): number | undefined =>{
 	return imageStore.imageSize_original;
 });
-const init = computed(():boolean =>{
+const init = computed((): boolean =>{
 	return piStatusStore.init;
 });
 const intervalToHMS = computed((): string =>{
-	return nextUpdateToText(updateCountdown.value*1000);
+	return nextUpdateToText(updateCountdown.value * 1000);
 });
 const piOnline = computed((): boolean =>{
 	return piStatusStore.online;
@@ -39,27 +39,27 @@ const piInfo = computed((): TDataToDisplay => {
 			{
 				icon: mdiClock,
 				text: 'taken',
-				value: timestamp.value,
+				value: timestamp.value
 			},
 			{
 				icon: mdiUpdate,
 				text: 'next update',
-				value: intervalToHMS.value,
-			},
+				value: intervalToHMS.value
+			}
 		],
 
 		[
 			{
 				icon: mdiImage,
 				text: 'original size',
-				value: convert(imageSize_original.value??0),
+				value: convert(imageSize_original.value ?? 0)
 			},
 			{
 				icon: mdiImageSizeSelectLarge,
 				text: 'compressed size',
-				value: convert(imageSize_converted.value??0),
+				value: convert(imageSize_converted.value ?? 0)
 			}
-		],
+		]
 
 	];
 });
@@ -70,7 +70,7 @@ const updateCountdown = computed((): number => {
 	return imageStore.updateCountdown;
 });
 
-const convert = (amount: string|number):string => {
+const convert = (amount: string | number): string => {
 	const a = convert_bytes(amount);
 	return `${a.total} ${a.unit}`;
 };

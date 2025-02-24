@@ -51,14 +51,14 @@ import { axiosRequests } from '@/services/axios';
 import { mdiEye, mdiEyeOff, mdiLock } from '@mdi/js';
 import { snackReset } from '@/services/snack';
 import { useRouter } from 'vue-router';
-import { FrontendRoutes } from '@/types/enum_routes';
+import { FrontendRoutes } from '@/types/const_routes';
 
 const router = useRouter();
 
 const loadingStore = loadingModule();
 
 const appendIcon = computed((): string => {
-	return passwordVisible.value ? mdiEyeOff: mdiEye;
+	return passwordVisible.value ? mdiEyeOff : mdiEye;
 });
 const fieldType = computed((): string => {
 	return passwordVisible.value ? 'text' : 'password';
@@ -78,14 +78,14 @@ const passwordVisible = ref(false);
 const appendClick = (): void => {
 	if (loading.value) return;
 	passwordVisible.value = !passwordVisible.value;
-} ;
+};
 		
 const login = async (): Promise<void> => {
 	if (!password.value) return;
 	passwordVisible.value = false;
 	loading.value = true;
 	const response = await axiosRequests.wsAuth_post(password.value);
-	// eslint-disable-next-line require-atomic-updates
+	 
 	password.value = '';
 	loading.value = false;
 	if (response) {

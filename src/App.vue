@@ -32,7 +32,7 @@ import { registerSW } from 'virtual:pwa-register';
 import { useHead } from '@vueuse/head';
 const { updateServiceWorker } = useRegisterSW();
 
-const userStore = userModule() ;
+const userStore = userModule();
 
 if ('serviceWorker' in navigator) {
 	registerSW({
@@ -47,7 +47,7 @@ const appUpdate = (): void => {
 	snackSuccess({
 		message: 'Downloading Updates',
 		loading: true,
-		timeout: 5000,
+		timeout: 5000
 	});
 	window.setTimeout(() => updateServiceWorker(), 4500);
 	
@@ -69,10 +69,13 @@ useHead({
 	meta: [
 		{
 			name: `description`,
-			content: `Leafcast - pi based plant camera`,
-		},
+			content: `Leafcast - pi based plant camera`
+		}
 	],
-	link: [ { rel: 'canonical', href: `https://plants.mrjackwills.com` } ],
+	link: [ {
+		rel: 'canonical',
+		href: `https://plants.mrjackwills.com` 
+	} ]
 });
 
 // use vue core visibility here?

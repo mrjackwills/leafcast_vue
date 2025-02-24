@@ -39,8 +39,6 @@ import type { TDataToDisplay } from '@/types';
 import { useDisplay } from 'vuetify';
 const { mdAndUp, mobile } = useDisplay();
 
-defineProps<{
-	toDisplay: TDataToDisplay,
-}>();
+defineProps<{ toDisplay: TDataToDisplay }>();
 
 </script>

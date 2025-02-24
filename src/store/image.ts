@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ModuleName } from '@/types/enum_module';
+import { ModuleName } from '@/types/const_module';
 
 export const imageModule = defineStore(ModuleName.IMAGE, {
 
@@ -9,18 +9,18 @@ export const imageModule = defineStore(ModuleName.IMAGE, {
 		imageSize_converted: 0,
 		imageSize_original: 0,
 		timestamp: '',
-		updateCountdown: 300,
+		updateCountdown: 300
 	}),
 
 	getters: {
 		
-		get_image () :string {
+		get_image (): string {
 			return this.imageExists ? this.image : '';
 		},
 
 		imageExists (): boolean {
 			return !!this.image;
-		},
+		}
 	},
 
 	actions: {

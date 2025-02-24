@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ModuleName } from '@/types/enum_module';
+import { ModuleName } from '@/types/const_module';
 
 export const piStatusModule = defineStore(ModuleName.PI_STATUS, {
 
@@ -12,7 +12,7 @@ export const piStatusModule = defineStore(ModuleName.PI_STATUS, {
 		online: false,
 		piVersion: '',
 		totalFileSize: '',
-		uptime: 0,
+		uptime: 0
 	}),
 
 	actions: {
@@ -51,7 +51,7 @@ export const piStatusModule = defineStore(ModuleName.PI_STATUS, {
 		
 		set_uptime (nu: number): void {
 			this.uptime = nu;
-		},
+		}
 
 	}
 });

@@ -1,4 +1,4 @@
-import { FrontendRoutes } from '@/types/enum_routes';
+import { FrontendRoutes } from '@/types/const_routes';
 import Home from '@/views/HomeView.vue';
 import Login from '@/views/LoginView.vue';
 
@@ -9,7 +9,7 @@ const authedRoutes: Array<RouteRecordRaw> = [
 		path: FrontendRoutes.BASE,
 		name: 'home',
 		component: Home
-	},
+	}
 ];
 
 for (const route of authedRoutes) {
@@ -25,7 +25,7 @@ const unAuthedRoutes: Array<RouteRecordRaw> = [
 		path: FrontendRoutes.LOGIN,
 		name: 'login',
 		component: Login
-	},
+	}
 ];
 
 for (const route of unAuthedRoutes) {
@@ -40,8 +40,8 @@ for (const route of unAuthedRoutes) {
 const baseRoutes: Array<RouteRecordRaw> = [
 	{
 		path: FrontendRoutes.CATCHALL,
-		redirect: { name: 'home' },
-	},
+		redirect: { name: 'home' }
+	}
 ];
 
 const routes = [ ...baseRoutes, ...unAuthedRoutes, ...authedRoutes ];

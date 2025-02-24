@@ -45,13 +45,13 @@ import { mdiWifiArrowUpDown, mdiWifiStrengthAlertOutline } from '@mdi/js';
 import { useDisplay } from 'vuetify';
 const { mdAndUp, xs } = useDisplay();
 
-const [ loadingStore, piStatusStore, userStore ]= [ loadingModule(), piStatusModule(), userModule() ];
+const [ loadingStore, piStatusStore, userStore ] = [ loadingModule(), piStatusModule(), userModule() ];
 
 const authenticated = computed((): boolean => {
 	return userStore.authenticated;
 });
 const icon = computed((): string => {
-	return piOnline.value ? mdiWifiArrowUpDown : mdiWifiStrengthAlertOutline ;
+	return piOnline.value ? mdiWifiArrowUpDown : mdiWifiStrengthAlertOutline;
 });
 const init = computed((): boolean => {
 	return piStatusStore.init;
@@ -59,10 +59,10 @@ const init = computed((): boolean => {
 const loading = computed((): boolean => {
 	return loadingStore.loading;
 });
-const logoWidth = computed(():string => {
+const logoWidth = computed((): string => {
 	return mdAndUp.value ? '55px' : '40px';
 });
-const piOnline = computed(():boolean => {
+const piOnline = computed((): boolean => {
 	return piStatusStore.online;
 });
 const toolbarHeight = computed((): string => {

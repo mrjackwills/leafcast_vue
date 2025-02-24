@@ -47,42 +47,42 @@ onBeforeUnmount(() => {
 	clearTimeout(goToTimeout.value);
 });
 
-const internalIp= computed((): string => {
+const internalIp = computed((): string => {
 	return piStatusStore.internalIp;
 });
-const loading= computed((): boolean => {
+const loading = computed((): boolean => {
 	return loadingStore.loading;
 });
-const connectedFor= computed((): number => {
+const connectedFor = computed((): number => {
 	return piStatusStore.connectedFor;
 });
-const appUptime= computed((): number => {
+const appUptime = computed((): number => {
 	return piStatusStore.appUptime;
 });
-const uptime= computed((): number => {
+const uptime = computed((): number => {
 	return piStatusStore.uptime;
 });
-const piOnline= computed((): boolean => {
+const piOnline = computed((): boolean => {
 	return piStatusStore.online;
 });
-const piVersion= computed((): string => {
+const piVersion = computed((): string => {
 	return piStatusStore.piVersion;
 });
 
 const piInfo = computed((): TDataToDisplay => {
-	const cached = piOnline.value? `` : `[ cached ]`;
+	const cached = piOnline.value ? `` : `[ cached ]`;
 	const output = [ [
 		{
 			icon: mdiSourceBranch,
 			text: 'pi software version',
-			value: piVersion.value ??''
+			value: piVersion.value ?? ''
 		},
 		{
 			icon: mdiLanConnect,
 			text: `internal ip`,
-			value: internalIp.value??'',
+			value: internalIp.value ?? '',
 			extra: cached
-		},
+		}
 	] ];
 	if (piOnline.value) {
 		output.push(
@@ -90,19 +90,19 @@ const piInfo = computed((): TDataToDisplay => {
 				{
 					icon: mdiDesktopClassic,
 					text: 'pi uptime',
-					value: secondsToText(uptime.value? uptime.value*1000: 0),
+					value: secondsToText(uptime.value ? uptime.value * 1000 : 0)
 				},
 				{
 					icon: mdiLanguageRust,
 					text: 'app uptime',
-					value: secondsToText(appUptime.value? appUptime.value*1000:0),
-				},
+					value: secondsToText(appUptime.value ? appUptime.value * 1000 : 0)
+				}
 			],
 			[
 				{
 					icon: mdiWebClock,
 					text: 'websocket uptime',
-					value: secondsToText(connectedFor.value? connectedFor.value*1000:0),
+					value: secondsToText(connectedFor.value ? connectedFor.value * 1000 : 0)
 				}
 			]
 		);
@@ -119,7 +119,7 @@ const piInfo = computed((): TDataToDisplay => {
 			text: 'total file size',
 			value: convert(totalFileSize.value),
 			extra: cached
-		},
+		}
 				
 	]
 	);
@@ -135,7 +135,7 @@ const totalFileSize = computed((): string => {
 const goToTimeout = ref(0);
 const isIntersecting = ref(false);
 
-const convert = (amount: string|number):string => {
+const convert = (amount: string | number): string => {
 	const converted = convert_bytes(amount);
 	return `${converted.total} ${converted.unit}`;
 };
@@ -143,7 +143,7 @@ const onIntersect = (entries: Array<IntersectionObserverEntry>, _observer: Inter
 	isIntersecting.value = !!entries[0]?.isIntersecting;
 };
 const emit = defineEmits([ 'refresh' ]);
-const refresh = ():void => {
+const refresh = (): void => {
 	if (loading.value) return;
 	emit('refresh');
 };

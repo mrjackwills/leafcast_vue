@@ -28,7 +28,7 @@
 
 const snackbarStore = snackbarModule();
 
-const message= computed({
+const message = computed({
 	get (): string {
 		return snackbarStore.message;
 	},
@@ -39,7 +39,7 @@ const message= computed({
 const icon = computed((): string => {
 	return snackbarStore.icon;
 });
-const loading= computed({
+const loading = computed({
 	get (): boolean {
 		return snackbarStore.loading;
 	},
@@ -47,7 +47,7 @@ const loading= computed({
 		snackbarStore.set_loading(b);
 	}
 });
-const snackTimeout= computed({
+const snackTimeout = computed({
 	get (): number {
 		return snackbarStore.timeout;
 	},
@@ -55,7 +55,7 @@ const snackTimeout= computed({
 		snackbarStore.set_timeout(nu);
 	}
 });
-const visible= computed({
+const visible = computed({
 	get (): boolean {
 		return snackbarStore.visible;
 	},

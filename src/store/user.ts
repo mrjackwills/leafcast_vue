@@ -1,13 +1,13 @@
 import { defineStore, getActivePinia } from 'pinia';
-import { FrontendRoutes } from '@/types/enum_routes';
-import { ModuleName } from '@/types/enum_module';
+import { FrontendRoutes } from '@/types/const_routes';
+import { ModuleName } from '@/types/const_module';
 import { snackError } from '@/services/snack';
 
 export const userModule = defineStore(ModuleName.USER, {
 
 	state: () => ({
 		api_version: '',
-		authenticated: false,
+		authenticated: false
 	}),
 
 	actions: {
@@ -30,6 +30,6 @@ export const userModule = defineStore(ModuleName.USER, {
 
 		set_authenticated (value: boolean) {
 			this.authenticated = value;
-		},
+		}
 	}
 });

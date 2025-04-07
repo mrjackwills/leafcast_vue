@@ -8,7 +8,7 @@ export const websocketModule = defineStore(ModuleName.WEBSOCKET, {
 	state: () => ({ connected: false }),
 
 	actions: {
-		
+
 		closeWS (): void {
 			this.set_connected(false);
 			ws.closeWs();
@@ -21,17 +21,16 @@ export const websocketModule = defineStore(ModuleName.WEBSOCKET, {
 				this.set_connected(true);
 			});
 		},
-		
+
 		send (data: TWSToServer): void {
 			ws.connection?.send(JSON.stringify({
 				data,
-				unique: true 
+				unique: true
 			}));
 		},
-		
+
 		set_connected (b: boolean): void {
 			this.connected = b;
 		}
-
 	}
 });

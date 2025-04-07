@@ -1,3 +1,12 @@
+# <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.10.1'>v0.10.1</a>
+### 2025-04-07
+
+### Chores
++ dependencies updated, [b2ce088a](https://github.com/mrjackwills/leafcast_vue/commit/b2ce088a88d58fcec930e0f8e38daad324826882)
+
+### Refactors
++ compued() methods, [0f970413](https://github.com/mrjackwills/leafcast_vue/commit/0f970413735992c6b82be92c0ca3eb57cc99e418)
+
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.10.0'>v0.10.0</a>
 ### 2025-02-24
 

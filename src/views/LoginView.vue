@@ -57,12 +57,8 @@ const router = useRouter();
 
 const loadingStore = loadingModule();
 
-const appendIcon = computed((): string => {
-	return passwordVisible.value ? mdiEyeOff : mdiEye;
-});
-const fieldType = computed((): string => {
-	return passwordVisible.value ? 'text' : 'password';
-});
+const appendIcon = computed(() => passwordVisible.value ? mdiEyeOff : mdiEye);
+const fieldType = computed(() => passwordVisible.value ? 'text' : 'password');
 const loading = computed({
 	get (): boolean {
 		return loadingStore.loading;

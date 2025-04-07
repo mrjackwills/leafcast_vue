@@ -2,7 +2,7 @@
 	<v-row justify='center' align='center' no-gutters v-if='image'>
 		<v-col cols='auto' class='parent' width>
 			<v-img class='image-border main-image' :src='image' cover :width='image_width' />
-			<v-img src='@/assets/watermark.png' class='watermark' width='100%'/>
+			<v-img src='@/assets/watermark.png' class='watermark' width='100%' />
 		</v-col>
 	</v-row>
 </template>
@@ -20,14 +20,12 @@ const image_width = computed((): string => {
 });
 const imageStore = imageModule();
 
-const image = computed((): string => {
-	return imageStore.get_image;
-});
-	
+const image = computed(() => imageStore.get_image);
+
 </script>
 
 <style scoped>
-.image-border{
+.image-border {
 	border-radius: 0rem 6rem 0 6rem;
 	border: 4px solid #ffeecb
 }

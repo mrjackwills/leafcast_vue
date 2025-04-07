@@ -11,7 +11,7 @@ export const userModule = defineStore(ModuleName.USER, {
 	}),
 
 	actions: {
-	
+
 		async logout (message?: string): Promise<void> {
 			this.authenticated = false;
 			loadingModule().set_loading(false);

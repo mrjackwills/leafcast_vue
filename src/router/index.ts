@@ -44,7 +44,7 @@ const baseRoutes: Array<RouteRecordRaw> = [
 	}
 ];
 
-const routes = [ ...baseRoutes, ...unAuthedRoutes, ...authedRoutes ];
+const routes = [...baseRoutes, ...unAuthedRoutes, ...authedRoutes];
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),

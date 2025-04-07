@@ -1,7 +1,7 @@
 <template>
 
 	<v-row justify='center' align='center' class='' no-gutters v-intersect='onIntersect'>
-		
+
 		<DisplayRows :toDisplay='piInfo' />
 
 		<v-col cols='12' class='mt-2' id='update-button'>
@@ -10,15 +10,8 @@
 
 				<v-col cols='auto' class='ma-0 pa-0'>
 
-					<v-btn
-						@click='refresh'
-						:disabled='loading||!piOnline'
-						:color='piOnline?"serious":""'
-						:variant='!piOnline?"outlined":"flat"'
-						class=' fab-fix elevation-0'
-						size='small'
-						rounded
-					>
+					<v-btn @click='refresh' :disabled='loading || !piOnline' :color='piOnline ? "serious" : ""'
+						:variant='!piOnline ? "outlined" : "flat"' class=' fab-fix elevation-0' size='small' rounded>
 						<v-row align='center' justify='space-around' class='ma-0 pa-0'>
 							<v-col cols='auto' class='ma-0 pa-0'>
 								<v-icon class='mr-1'>{{ mdiCameraFlip }}</v-icon>
@@ -42,36 +35,22 @@ import { mdiCameraFlip, mdiDesktopClassic, mdiHarddisk, mdiImageMultiple, mdiLan
 import { secondsToText } from '@/vanillaTS/secondsToText';
 import type { TDataToDisplay } from '@/types';
 
-const [ loadingStore, piStatusStore ] = [ loadingModule(), piStatusModule() ];
+const [loadingStore, piStatusStore] = [loadingModule(), piStatusModule()];
 onBeforeUnmount(() => {
 	clearTimeout(goToTimeout.value);
 });
 
-const internalIp = computed((): string => {
-	return piStatusStore.internalIp;
-});
-const loading = computed((): boolean => {
-	return loadingStore.loading;
-});
-const connectedFor = computed((): number => {
-	return piStatusStore.connectedFor;
-});
-const appUptime = computed((): number => {
-	return piStatusStore.appUptime;
-});
-const uptime = computed((): number => {
-	return piStatusStore.uptime;
-});
-const piOnline = computed((): boolean => {
-	return piStatusStore.online;
-});
-const piVersion = computed((): string => {
-	return piStatusStore.piVersion;
-});
+const internalIp = computed(() => piStatusStore.internalIp);
+const loading = computed(() => loadingStore.loading);
+const connectedFor = computed(() => piStatusStore.connectedFor);
+const appUptime = computed(() => piStatusStore.appUptime);
+const uptime = computed(() => piStatusStore.uptime);
+const piOnline = computed(() => piStatusStore.online);
+const piVersion = computed(() => piStatusStore.piVersion);
 
 const piInfo = computed((): TDataToDisplay => {
 	const cached = piOnline.value ? `` : `[ cached ]`;
-	const output = [ [
+	const output = [[
 		{
 			icon: mdiSourceBranch,
 			text: 'pi software version',
@@ -83,7 +62,7 @@ const piInfo = computed((): TDataToDisplay => {
 			value: internalIp.value ?? '',
 			extra: cached
 		}
-	] ];
+	]];
 	if (piOnline.value) {
 		output.push(
 			[
@@ -120,17 +99,13 @@ const piInfo = computed((): TDataToDisplay => {
 			value: convert(totalFileSize.value),
 			extra: cached
 		}
-				
+
 	]
 	);
 	return output;
 });
-const numberFiles = computed((): number => {
-	return piStatusStore.numberImages;
-});
-const totalFileSize = computed((): string => {
-	return piStatusStore.totalFileSize;
-});
+const numberFiles = computed(() => piStatusStore.numberImages);
+const totalFileSize = computed(() => piStatusStore.totalFileSize);
 
 const goToTimeout = ref(0);
 const isIntersecting = ref(false);
@@ -142,7 +117,7 @@ const convert = (amount: string | number): string => {
 const onIntersect = (entries: Array<IntersectionObserverEntry>, _observer: IntersectionObserver): void => {
 	isIntersecting.value = !!entries[0]?.isIntersecting;
 };
-const emit = defineEmits([ 'refresh' ]);
+const emit = defineEmits(['refresh']);
 const refresh = (): void => {
 	if (loading.value) return;
 	emit('refresh');

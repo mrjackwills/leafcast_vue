@@ -52,6 +52,5 @@ export const piStatusModule = defineStore(ModuleName.PI_STATUS, {
 		set_uptime (nu: number): void {
 			this.uptime = nu;
 		}
-
 	}
 });

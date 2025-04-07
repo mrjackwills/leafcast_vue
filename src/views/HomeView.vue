@@ -19,14 +19,7 @@
 				</v-col>
 
 				<v-col cols='auto' class='my-2'>
-					<v-btn
-						@click='showInfo'
-						class=''
-						color='secondary elevation-0 ml-2'
-						size='small'
-						dark
-						rounded
-					>
+					<v-btn @click='showInfo' class='' color='secondary elevation-0 ml-2' size='small' dark rounded>
 						<v-row align='center' justify='center' class='ma-0 pa-0'>
 							<v-col cols='auto' class='ma-0 pa-0'>
 								<v-icon class='mr-1'>{{ infoIcon }}</v-icon>
@@ -57,18 +50,14 @@ import { snackError } from '@/services/snack';
 import type { TWSFromPi } from '@/types';
 import { ws } from '@/services/WS';
 
-const [ imageStore, loadingStore, piStatusStore, userStore, websocketStore ] = [ imageModule(), loadingModule(), piStatusModule(), userModule(), websocketModule() ];
+const [imageStore, loadingStore, piStatusStore, userStore, websocketStore] = [imageModule(), loadingModule(), piStatusModule(), userModule(), websocketModule()];
 
 onBeforeUnmount(() => {
 	clearAllIntervals();
 });
 
-const imageExists = computed((): boolean => {
-	return imageStore.imageExists;
-});
-const infoIcon = computed((): string => {
-	return showPiInfo.value ? mdiChevronUp : mdiChevronDown;
-});
+const imageExists = computed(() => imageStore.imageExists);
+const infoIcon = computed(() => showPiInfo.value ? mdiChevronUp : mdiChevronDown);
 const loading = computed({
 	get (): boolean {
 		return loadingStore.loading;
@@ -117,9 +106,7 @@ const updateCountdown = computed({
 		imageStore.set_updateCountdown(s);
 	}
 });
-const ws_connected = computed((): boolean =>{
-	return websocketStore.connected;
-});
+const ws_connected = computed(() => websocketStore.connected);
 
 const initCount = ref(0);
 const initTimeout = ref(0);
@@ -162,7 +149,7 @@ const clearAllIntervals = (): void => {
 * If a message isn't received within the first 3500ms(x4) of being mounted, logout
 **/
 const initCheck = (): void => {
-	initCount.value ++;
+	initCount.value++;
 	loading.value = true;
 	initTimeout.value = window.setTimeout(() => {
 		if (init.value) {
@@ -196,22 +183,22 @@ const sendPhoto = (): void => {
 const startInterval = (): void => {
 	clearInterval(updateInterval.value);
 	updateInterval.value = window.setInterval(() => {
-		updateCountdown.value --;
-		if (appUptime.value) appUptime.value ++;
-		if (uptime.value) uptime.value ++;
-		if (connectedFor.value) connectedFor.value ++;
+		updateCountdown.value--;
+		if (appUptime.value) appUptime.value++;
+		if (uptime.value) uptime.value++;
+		if (connectedFor.value) connectedFor.value++;
 
 		if (updateCountdown.value === 1) sendPhoto();
 		if (updateCountdown.value === 0) updateCountdown.value = 300;
 	}, 1000);
 };
-		
+
 /**
 * Handle all incoming messages from server
 * @param {Object} data parsed ws data , contains name and optional body
 **/
 const wsDataHandler = async (message: TWSFromPi): Promise<void> => {
-			
+
 	// TODO switch case for errors
 	// Maybe just logout?
 	switch (message.data?.name) {
@@ -239,7 +226,6 @@ const wsDataHandler = async (message: TWSFromPi): Promise<void> => {
 
 onMounted(() => {
 	initCheck();
-
 });
 
 watch(ws_connected, (i) => {
@@ -251,8 +237,7 @@ watch(ws_connected, (i) => {
 </script>
 
 <style>
-
-.minh{
+.minh {
 	min-height: 300px;
 }
 </style>

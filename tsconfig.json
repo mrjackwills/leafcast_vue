@@ -1,36 +1,47 @@
 {
 	"compilerOptions": {
-	"baseUrl": ".",
-	"target": "ESNext",
-	"useDefineForClassFields": true,
-	"module": "ESNext",
-	"moduleResolution": "bundler",
-	"strict": true,
-	"jsx": "preserve",
-	"resolveJsonModule": true,
-	"isolatedModules": true,
-	"esModuleInterop": true,
-	"lib": ["ESNext", "DOM"],
-	"skipLibCheck": true,
-	"noEmit": false,
-	"experimentalDecorators": true,
-	"paths": {
-		"@/*": [
-			"src/*"
+		"baseUrl": ".",
+		"target": "ESNext",
+		"useDefineForClassFields": true,
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"strict": true,
+		"jsx": "preserve",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"lib": [
+			"ESNext",
+			"DOM"
+		],
+		"skipLibCheck": true,
+		"noEmit": true,
+		"experimentalDecorators": true,
+		
+		"paths": {
+			"@/*": [
+				"./src/*"
 			]
 		}
 	},
-	"extends": "@vue/tsconfig/tsconfig.dom.json",
-	"types": ["node", "vite-plugin-pwa/client", "vuetify", ],
-	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-	// "references": [{ "path": "./tsconfig.config.json" }],
-	"exclude": ["node_modules"]
+	// "extends": "@vue/tsconfig/tsconfig.dom.json",
+	"types": [
+		"node",
+		"vite-plugin-pwa/client",
+		"vuetify",
+	],
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.d.ts",
+		"src/**/*.tsx",
+		"src/**/*.vue",
+	],
+	"references": [
+		{
+			"path": "./tsconfig.config.json"
+		}
+	],
+	"exclude": [
+		"node_modules"
+	]
 }
-
-
-
-
-
-
-
-

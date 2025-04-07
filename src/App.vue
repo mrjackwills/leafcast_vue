@@ -33,7 +33,7 @@ const userStore = userModule();
 
 if ('serviceWorker' in navigator) {
 	registerSW({
-		onNeedRefresh() {
+		onNeedRefresh () {
 			appUpdate();
 
 		}
@@ -79,7 +79,7 @@ useHead({
 const visibilityChange = (_e: Event): void => {
 	isHidden.value = document.hidden;
 	if (isHidden.value) {
-		logoutTimeout.value = setTimeout(() => {
+		logoutTimeout.value = window.setTimeout(() => {
 			logout();
 		}, 1000 * 60 * 7.5);
 	} else {

@@ -56,53 +56,53 @@ onBeforeUnmount(() => {
 	clearAllIntervals();
 });
 
-const imageExists = computed(() => imageStore.imageExists)
+const imageExists = computed(() => imageStore.imageExists);
 const infoIcon = computed(() => showPiInfo.value ? mdiChevronUp : mdiChevronDown);
 const loading = computed({
-	get(): boolean {
+	get (): boolean {
 		return loadingStore.loading;
 	},
-	set(b: boolean): void {
+	set (b: boolean): void {
 		loadingStore.set_loading(b);
 	}
 });
 const appUptime = computed({
-	get(): number {
+	get (): number {
 		return piStatusStore.appUptime;
 	},
-	set(n: number): void {
+	set (n: number): void {
 		piStatusStore.set_appUptime(n);
 	}
 });
 const connectedFor = computed({
-	get(): number {
+	get (): number {
 		return piStatusStore.connectedFor;
 	},
-	set(n: number): void {
+	set (n: number): void {
 		piStatusStore.set_connectedFor(n);
 	}
 });
 const uptime = computed({
-	get(): number {
+	get (): number {
 		return piStatusStore.uptime;
 	},
-	set(n: number): void {
+	set (n: number): void {
 		piStatusStore.set_uptime(n);
 	}
 });
 const init = computed({
-	get(): boolean {
+	get (): boolean {
 		return piStatusStore.init;
 	},
-	set(b: boolean): void {
+	set (b: boolean): void {
 		piStatusStore.set_init(b);
 	}
 });
 const updateCountdown = computed({
-	get(): number {
+	get (): number {
 		return imageStore.updateCountdown;
 	},
-	set(s: number): void {
+	set (s: number): void {
 		imageStore.set_updateCountdown(s);
 	}
 });

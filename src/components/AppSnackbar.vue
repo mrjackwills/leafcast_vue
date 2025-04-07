@@ -20,35 +20,35 @@
 const snackbarStore = snackbarModule();
 
 const message = computed({
-	get(): string {
+	get (): string {
 		return snackbarStore.message;
 	},
-	set(s: string): void {
+	set (s: string): void {
 		snackbarStore.set_message(s);
 	}
 });
 const icon = computed(() => snackbarStore.icon);
 const loading = computed({
-	get(): boolean {
+	get (): boolean {
 		return snackbarStore.loading;
 	},
-	set(b: boolean): void {
+	set (b: boolean): void {
 		snackbarStore.set_loading(b);
 	}
 });
 const snackTimeout = computed({
-	get(): number {
+	get (): number {
 		return snackbarStore.timeout;
 	},
-	set(nu: number): void {
+	set (nu: number): void {
 		snackbarStore.set_timeout(nu);
 	}
 });
 const visible = computed({
-	get(): boolean {
+	get (): boolean {
 		return snackbarStore.visible;
 	},
-	set(b: boolean): void {
+	set (b: boolean): void {
 		snackbarStore.set_visible(b);
 	}
 });

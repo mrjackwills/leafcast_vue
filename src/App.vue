@@ -1,14 +1,11 @@
 <template>
 	<v-app container--fluid class='ma-0 pa-0' id='leafcast'>
 		<v-main>
-			<v-container class='fill-height' fluid >
-				<v-row
-					align='center'
-					class='fill-height'
-					justify='center'
-				>
+			<v-container class='fill-height' fluid>
+				<v-row align='center' class='fill-height' justify='center'>
 					<v-col cols='12' sm='11' lg='8' no-gutters class='ma-0 pa-0 px-1'>
-						<v-card transition='fade-transition' class='pb-2 elevation-0 ma-0 pa-0' id='main_card' color='primary' round>
+						<v-card transition='fade-transition' class='pb-2 elevation-0 ma-0 pa-0' id='main_card'
+							color='primary' round>
 							<AppToolbar />
 							<v-card-text class=''>
 								<router-view />
@@ -17,10 +14,10 @@
 					</v-col>
 				</v-row>
 			</v-container>
-		
+
 		</v-main>
 		<AppFooter />
-		
+
 		<AppSnackbar />
 	</v-app>
 </template>
@@ -36,7 +33,7 @@ const userStore = userModule();
 
 if ('serviceWorker' in navigator) {
 	registerSW({
-		onNeedRefresh () {
+		onNeedRefresh() {
 			appUpdate();
 
 		}
@@ -50,7 +47,7 @@ const appUpdate = (): void => {
 		timeout: 5000
 	});
 	window.setTimeout(() => updateServiceWorker(), 4500);
-	
+
 };
 
 onMounted(() => {
@@ -72,10 +69,10 @@ useHead({
 			content: `Leafcast - pi based plant camera`
 		}
 	],
-	link: [ {
+	link: [{
 		rel: 'canonical',
-		href: `https://plants.mrjackwills.com` 
-	} ]
+		href: `https://plants.mrjackwills.com`
+	}]
 });
 
 // use vue core visibility here?
@@ -99,7 +96,6 @@ const logout = (message = 'you have been logged out'): void => {
 </script>
 
 <style>
-
 .v-sheet.v-card.v-sheet {
 	border-radius: 3rem;
 }
@@ -107,5 +103,4 @@ const logout = (message = 'you have been logged out'): void => {
 #main_card {
 	border-radius: 3rem;
 }
-
 </style>

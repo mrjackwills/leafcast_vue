@@ -12,7 +12,7 @@ export const snackbarModule = defineStore(ModuleName.SNACKBAR, {
 	}),
 
 	actions: {
-		
+
 		set_icon (su: string): void {
 			this.icon = su;
 		},
@@ -20,15 +20,15 @@ export const snackbarModule = defineStore(ModuleName.SNACKBAR, {
 		set_loading (b: boolean): void {
 			this.loading = b;
 		},
-		
+
 		set_message (su: string): void {
 			this.message = su;
 		},
-		
+
 		set_timeout (nu: number): void {
 			this.timeout = nu;
 		},
-		
+
 		set_visible (b: boolean): void {
 			this.visible = b;
 		}

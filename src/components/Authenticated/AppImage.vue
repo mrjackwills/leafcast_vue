@@ -15,7 +15,7 @@ const image_width = computed((): string => {
 	if (width.value > 750) {
 		return '650';
 	} else {
-		return `${width.value * .80}`;
+		return `${width.value * 0.80}`;
 	}
 });
 const imageStore = imageModule();

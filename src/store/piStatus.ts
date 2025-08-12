@@ -40,7 +40,7 @@ export const piStatusModule = defineStore(ModuleName.PI_STATUS, {
 		set_online (b: boolean): void {
 			this.online = b;
 		},
-		
+
 		set_piVersion (su: string): void {
 			this.piVersion = su;
 		},
@@ -48,7 +48,7 @@ export const piStatusModule = defineStore(ModuleName.PI_STATUS, {
 		set_totalFileSize (s: string): void {
 			this.totalFileSize = s;
 		},
-		
+
 		set_uptime (nu: number): void {
 			this.uptime = nu;
 		}

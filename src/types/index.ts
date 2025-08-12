@@ -9,11 +9,11 @@ export type TConvertBytes = {
 	unit: 'GB' | 'MB' | 'kB';
 };
 
-export type TDataToDisplay = Array<Array< Record<'icon' | 'text' | 'value', string> & { extra?: string } >>;
+export type TDataToDisplay = Array<Array<Record<'icon' | 'text' | 'value', string> & { extra?: string }>>;
 
 export type TError = {
 	message: string;
-	code: number; 
+	code: number;
 };
 
 export type TPhoto = {
@@ -23,8 +23,8 @@ export type TPhoto = {
 		timestamp: string;
 		size_converted?: number;
 		size_original?: number;
-		pi_info: TPiStatus; 
-	}; 
+		pi_info: TPiStatus;
+	};
 };
 
 export type TPiStatus = Record<'internal_ip' | 'version' | 'total_file_size', string> & Record<'uptime' | 'app_uptime' | 'number_images' | 'websocket_uptime', number>;
@@ -48,7 +48,7 @@ export type TWSFromPi = {
 	data?: TPhoto;
 	cache?: boolean;
 	unique?: boolean;
-	error?: TError; 
+	error?: TError;
 };
 
 export type TWSToServer = { name: TWSToServerNames };

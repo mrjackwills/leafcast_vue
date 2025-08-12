@@ -1,6 +1,7 @@
-### 2025-05-23
+### 2025-08-12
 
 ### Chores
-+ dependencies updated, [24218c6f7885458f168fb7ecce853f5e4228a98b]
++ linting, [1ccd3b1b16d22f6948820e777f728f425197853d]
++ dependencies updated, [e37c50eeae52376525726378113f7046d2cacc1d]
 
 see <a href='https://github.com/mrjackwills/leafcast_vue/blob/main/CHANGELOG.md'>CHANGELOG.md</a> for more details

@@ -35,7 +35,6 @@ const userStore = userModule();
 
 onBeforeUnmount(() => {
 	clearTimeout(buildTimeout.value);
-
 });
 const authenticated = computed(() => userStore.authenticated);
 

@@ -35,7 +35,6 @@ if ('serviceWorker' in navigator) {
 	registerSW({
 		onNeedRefresh () {
 			appUpdate();
-
 		}
 	});
 }
@@ -47,7 +46,6 @@ const appUpdate = (): void => {
 		timeout: 5000
 	});
 	window.setTimeout(() => updateServiceWorker(), 4500);
-
 };
 
 onMounted(() => {
@@ -69,14 +67,16 @@ useHead({
 			content: `Leafcast - pi based plant camera`
 		}
 	],
-	link: [{
-		rel: 'canonical',
-		href: `https://plants.mrjackwills.com`
-	}]
+	link: [
+		{
+			rel: 'canonical',
+			href: `https://plants.mrjackwills.com`
+		}
+	]
 });
 
 // use vue core visibility here?
-const visibilityChange = (_e: Event): void => {
+const visibilityChange = (): void => {
 	isHidden.value = document.hidden;
 	if (isHidden.value) {
 		logoutTimeout.value = window.setTimeout(() => {

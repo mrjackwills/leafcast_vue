@@ -40,7 +40,7 @@
 					</v-btn>
 				</v-col>
 			</v-row>
-			
+
 		</v-card-actions>
 	</section>
 </template>
@@ -75,13 +75,13 @@ const appendClick = (): void => {
 	if (loading.value) return;
 	passwordVisible.value = !passwordVisible.value;
 };
-		
+
 const login = async (): Promise<void> => {
 	if (!password.value) return;
 	passwordVisible.value = false;
 	loading.value = true;
 	const response = await axiosRequests.wsAuth_post(password.value);
-	 
+
 	password.value = '';
 	loading.value = false;
 	if (response) {

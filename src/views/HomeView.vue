@@ -50,7 +50,13 @@ import { snackError } from '@/services/snack';
 import type { TWSFromPi } from '@/types';
 import { ws } from '@/services/WS';
 
-const [imageStore, loadingStore, piStatusStore, userStore, websocketStore] = [imageModule(), loadingModule(), piStatusModule(), userModule(), websocketModule()];
+const [
+	imageStore,
+	loadingStore,
+	piStatusStore,
+	userStore,
+	websocketStore
+] = [imageModule(), loadingModule(), piStatusModule(), userModule(), websocketModule()];
 
 onBeforeUnmount(() => {
 	clearAllIntervals();
@@ -114,7 +120,7 @@ const showPiInfo = ref(false);
 const updateInterval = ref(0);
 
 /**
-* Create handlers for all ws events
+ * Create handlers for all ws events
  */
 const addWSHandlers = (): void => {
 	ws.connection?.addEventListener('message', (data) => {
@@ -131,14 +137,15 @@ const addWSHandlers = (): void => {
 	sendPhoto();
 
 	// Although should never have the connection killed
-	ws.connection?.addEventListener('close', (_event) => {
+	ws.connection?.addEventListener('close', () => {
 		userStore.logout();
 	});
 };
 
 /**
-* Clear clock interval and re-connect interval
-**/
+ * Clear clock interval and re-connect interval
+ *
+ */
 const clearAllIntervals = (): void => {
 	clearInterval(updateInterval.value);
 	clearInterval(initTimeout.value);
@@ -146,8 +153,9 @@ const clearAllIntervals = (): void => {
 };
 
 /**
-* If a message isn't received within the first 3500ms(x4) of being mounted, logout
-**/
+ * If a message isn't received within the first 3500ms(x4) of being mounted, logout
+ *
+ */
 const initCheck = (): void => {
 	initCount.value++;
 	loading.value = true;
@@ -194,13 +202,12 @@ const startInterval = (): void => {
 };
 
 /**
-* Handle all incoming messages from server
-* @param {Object} data parsed ws data , contains name and optional body
-**/
+ * Handle all incoming messages from server
+ * @param {Object} data parsed ws data , contains name and optional body
+ * TODO switch case for errors
+ * Maybe just logout?
+ */
 const wsDataHandler = async (message: TWSFromPi): Promise<void> => {
-
-	// TODO switch case for errors
-	// Maybe just logout?
 	switch (message.data?.name) {
 		case 'photo':
 			imageStore.set_cached(!!message.cache);

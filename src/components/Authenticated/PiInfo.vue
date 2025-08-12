@@ -50,41 +50,40 @@ const piVersion = computed(() => piStatusStore.piVersion);
 
 const piInfo = computed((): TDataToDisplay => {
 	const cached = piOnline.value ? `` : `[ cached ]`;
-	const output = [[
-		{
-			icon: mdiSourceBranch,
-			text: 'pi software version',
-			value: piVersion.value ?? ''
-		},
-		{
-			icon: mdiLanConnect,
-			text: `internal ip`,
-			value: internalIp.value ?? '',
-			extra: cached
-		}
-	]];
+	const output = [
+		[
+			{
+				icon: mdiSourceBranch,
+				text: 'pi software version',
+				value: piVersion.value ?? ''
+			},
+			{
+				icon: mdiLanConnect,
+				text: `internal ip`,
+				value: internalIp.value ?? '',
+				extra: cached
+			}
+		]
+	];
 	if (piOnline.value) {
-		output.push(
-			[
-				{
-					icon: mdiDesktopClassic,
-					text: 'pi uptime',
-					value: secondsToText(uptime.value ? uptime.value * 1000 : 0)
-				},
-				{
-					icon: mdiLanguageRust,
-					text: 'app uptime',
-					value: secondsToText(appUptime.value ? appUptime.value * 1000 : 0)
-				}
-			],
-			[
-				{
-					icon: mdiWebClock,
-					text: 'websocket uptime',
-					value: secondsToText(connectedFor.value ? connectedFor.value * 1000 : 0)
-				}
-			]
-		);
+		output.push([
+			{
+				icon: mdiDesktopClassic,
+				text: 'pi uptime',
+				value: secondsToText(uptime.value ? uptime.value * 1000 : 0)
+			},
+			{
+				icon: mdiLanguageRust,
+				text: 'app uptime',
+				value: secondsToText(appUptime.value ? appUptime.value * 1000 : 0)
+			}
+		], [
+			{
+				icon: mdiWebClock,
+				text: 'websocket uptime',
+				value: secondsToText(connectedFor.value ? connectedFor.value * 1000 : 0)
+			}
+		]);
 	}
 	output.push([
 		{
@@ -100,8 +99,7 @@ const piInfo = computed((): TDataToDisplay => {
 			extra: cached
 		}
 
-	]
-	);
+	]);
 	return output;
 });
 const numberFiles = computed(() => piStatusStore.numberImages);
@@ -114,7 +112,7 @@ const convert = (amount: string | number): string => {
 	const converted = convert_bytes(amount);
 	return `${converted.total} ${converted.unit}`;
 };
-const onIntersect = (entries: Array<IntersectionObserverEntry>, _observer: IntersectionObserver): void => {
+const onIntersect = (entries: Array<IntersectionObserverEntry>): void => {
 	isIntersecting.value = !!entries[0]?.isIntersecting;
 };
 const emit = defineEmits(['refresh']);

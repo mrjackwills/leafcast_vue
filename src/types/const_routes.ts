@@ -1,7 +1,7 @@
 export const FrontendRoutes = {
-	BASE: '/' as const,
-	CATCHALL: '/:pathMatch(.*)*' as const,
-	LOGIN: '/login' as const
-};
+	BASE: '/',
+	CATCHALL: '/:pathMatch(.*)*',
+	LOGIN: '/login'
+} as const;
 
-export type FrontendRoutes = (typeof FrontendRoutes)[keyof typeof FrontendRoutes]; 
+export type FrontendRoutes = (typeof FrontendRoutes)[keyof typeof FrontendRoutes];

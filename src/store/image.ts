@@ -13,7 +13,7 @@ export const imageModule = defineStore(ModuleName.IMAGE, {
 	}),
 
 	getters: {
-		
+
 		get_image (): string {
 			return this.imageExists ? this.image : '';
 		},
@@ -43,7 +43,7 @@ export const imageModule = defineStore(ModuleName.IMAGE, {
 		set_timestamp (s: string): void {
 			this.timestamp = s;
 		},
-		
+
 		set_updateCountdown (b: number): void {
 			this.updateCountdown = b;
 		}

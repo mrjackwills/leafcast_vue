@@ -8,7 +8,7 @@
 				</v-col>
 				<v-spacer />
 				<v-col v-if='authenticated && init' class='mr-5' cols='auto'>
-					<v-icon :icon='icon' :size='mdAndUp ? "large" : "default"' color='offwhite' />
+					<v-icon :icon :size='mdAndUp ? "large" : "default"' color='offwhite' />
 				</v-col>
 			</v-row>
 			<v-progress-linear v-if='loading' :indeterminate='loading' bg-color='primary' color='offwhite'

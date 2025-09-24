@@ -1,3 +1,10 @@
+### Chores
++ GitHub workflow updated, [a2c63fe1e9d0b9876427a4a8342723dda3181963]
++ dependencies updated, [f4ac9e03c5e605414dfd4fcea3c31d857430f644], [db5ca6adf23bfeba8bddc3c5471ab28c5f5ac537]
+
+### Refactors
++ params use :x insteaf of :x='x', [b8d0d69215883986eefbe12b46e8280fc63132aa]
+
 # <a href='https://github.com/mrjackwills/leafcast_vue/releases/tag/v0.10.3'>v0.10.3</a>
 ### 2025-08-12
 

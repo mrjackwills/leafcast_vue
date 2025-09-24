@@ -14,7 +14,7 @@ import { fileURLToPath, URL } from 'node:url';
 const pwaOptions: Partial<VitePWAOptions> = {
 	base: '/',
 	registerType: 'prompt',
-	includeAssets: [ 'favicon.ico' ],
+	includeAssets: ['favicon.ico'],
 	manifest: {
 		display: 'standalone',
 		name: 'Leafcast',
@@ -33,12 +33,15 @@ const pwaOptions: Partial<VitePWAOptions> = {
 				sizes: '512x512',
 				type: 'image/png'
 			}
-			// {
-			// 	src: 'img/icons/android-chrome-512x512.png',
-			// 	sizes: '512x512',
-			// 	type: 'image/png',
-			// 	purpose: 'any maskable'
-			// },
+
+			/*
+			 * {
+			 * 	src: 'img/icons/android-chrome-512x512.png',
+			 * 	sizes: '512x512',
+			 * 	type: 'image/png',
+			 * 	purpose: 'any maskable'
+			 * },
+			 */
 		]
 	}
 	// devOptions: {
@@ -59,7 +62,8 @@ export default defineConfig({
 		AutoImport({
 			include: [
 				/\.[tj]sx?$/,
-				/\.vue$/, /\.vue\?vue/,
+				/\.vue$/,
+				/\.vue\?vue/,
 				/\.md$/
 			],
 			imports: [
@@ -68,22 +72,19 @@ export default defineConfig({
 			],
 			dts: 'src/auto-imports.d.ts',
 			eslintrc: { enabled: true },
-			dirs: [
-				'src/store'
-			],
+			dirs: ['src/store'],
 			vueTemplate: false
 		}),
 		VitePWA(pwaOptions),
 		viteCompression({
 			algorithm: 'brotliCompress',
-			filter: /\.(js|mjs|json|css)$/i 
+			filter: /\.(js|mjs|json|css)$/i
 		}),
 		viteCompression({
 			algorithm: 'gzip',
-			filter: /\.(js|mjs|json|css)$/i 
+			filter: /\.(js|mjs|json|css)$/i
 		})
 	],
-	css: { preprocessorOptions: { scss: { api: 'modern-compiler' } } },
 	define: {
 		'process.env': {},
 		'import.meta.env.BUILD_DATE': Date.now(),
@@ -91,7 +92,7 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },
-		extensions: [ '.js', '.json', '.jsx', '.mjs', '.ts', '.tsx', '.vue' ]
+		extensions: ['.js', '.json', '.jsx', '.mjs', '.ts', '.tsx', '.vue']
 	},
 	server: {
 		port: 8002,

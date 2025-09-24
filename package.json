@@ -23,7 +23,7 @@
     "secure-json-parse": "^4.0.0",
     "vue": "^3.5.21",
     "vue-router": "^4.5.1",
-    "vuetify": "^3.10.2"
+    "vuetify": "^3.10.3"
   },
   "devDependencies": {
     "@mdi/js": "^7.4.47",
@@ -34,16 +34,16 @@
     "@vue/eslint-config-typescript": "^14.6.0",
     "@vue/tsconfig": "^0.8.1",
     "eslint": "^9.36.0",
-    "sass": "^1.92.1",
-    "typescript-eslint": "^8.44.0",
+    "sass": "^1.93.2",
+    "typescript-eslint": "^8.44.1",
     "typescript": "^5.9.2",
-    "unplugin-auto-import": "^20.1.0",
-    "unplugin-vue-components": "^29.0.0",
+    "unplugin-auto-import": "^20.2.0",
+    "unplugin-vue-components": "^29.1.0",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-pwa": "^1.0.3",
     "vite-plugin-vuetify": "^2.1.2",
-    "vite": "^7.1.6",
-    "vue-tsc": "^3.0.7"
+    "vite": "^7.1.7",
+    "vue-tsc": "^3.0.8"
   },
   "buildDate": "Tue 12 2025 August 20:34:46 BST"
 }

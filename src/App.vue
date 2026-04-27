@@ -1,12 +1,24 @@
 <template>
-	<v-app container--fluid class='ma-0 pa-0' id='leafcast'>
+	<v-app id='leafcast' class='ma-0 pa-0' container--fluid>
 		<v-main>
 			<v-container class='fill-height' fluid>
 				<v-row class='fill-height align-center justify-center'>
-					<v-col cols='12' sm='11' lg='8' no-gutters class='ma-0 pa-0 px-1'>
-						<v-card transition='fade-transition' class='pb-2 elevation-0 ma-0 pa-0' id='main_card'
-							color='primary' round>
+					<v-col
+						class='ma-0 pa-0 px-1'
+						cols='12'
+						lg='8'
+						no-gutters
+						sm='11'
+					>
+						<v-card
+							id='main_card'
+							class='pb-2 elevation-0 ma-0 pa-0'
+							color='primary'
+							round
+							transition='fade-transition'
+						>
 							<AppToolbar />
+
 							<v-card-text class=''>
 								<router-view />
 							</v-card-text>
@@ -16,6 +28,7 @@
 			</v-container>
 
 		</v-main>
+
 		<AppFooter />
 
 		<AppSnackbar />
@@ -23,40 +36,40 @@
 </template>
 
 <script setup lang='ts'>
-import { snackSuccess } from '@/services/snack';
-import { useRegisterSW } from 'virtual:pwa-register/vue';
-import { registerSW } from 'virtual:pwa-register';
-import { useHead } from '@vueuse/head';
-const { updateServiceWorker } = useRegisterSW();
+import { useHead } from '@vueuse/head'
+import { registerSW } from 'virtual:pwa-register'
+import { useRegisterSW } from 'virtual:pwa-register/vue'
+import { snackSuccess } from '@/services/snack'
+const { updateServiceWorker } = useRegisterSW()
 
-const userStore = userModule();
+const userStore = userModule()
 
 if ('serviceWorker' in navigator) {
 	registerSW({
 		onNeedRefresh () {
-			appUpdate();
-		}
-	});
+			appUpdate()
+		},
+	})
 }
 
-const appUpdate = (): void => {
+function appUpdate (): void {
 	snackSuccess({
 		message: 'Downloading Updates',
 		loading: true,
-		timeout: 5000
-	});
-	window.setTimeout(() => updateServiceWorker(), 4500);
-};
+		timeout: 5000,
+	})
+	window.setTimeout(() => updateServiceWorker(), 4500)
+}
 
 onMounted(() => {
-	window.addEventListener('beforeinstallprompt', (e) => {
-		e.preventDefault();
-	});
-	document.addEventListener('visibilitychange', visibilityChange);
-});
+	window.addEventListener('beforeinstallprompt', e => {
+		e.preventDefault()
+	})
+	document.addEventListener('visibilitychange', visibilityChange)
+})
 
-const isHidden = ref(false);
-const logoutTimeout = ref(0);
+const isHidden = ref(false)
+const logoutTimeout = ref(0)
 
 useHead({
 	title: `Leafcast`,
@@ -64,34 +77,34 @@ useHead({
 	meta: [
 		{
 			name: `description`,
-			content: `Leafcast - pi based plant camera`
-		}
+			content: `Leafcast - pi based plant camera`,
+		},
 	],
 	link: [
 		{
 			rel: 'canonical',
-			href: `https://plants.mrjackwills.com`
-		}
-	]
-});
+			href: `https://plants.mrjackwills.com`,
+		},
+	],
+})
 
 // use vue core visibility here?
-const visibilityChange = (): void => {
-	isHidden.value = document.hidden;
+function visibilityChange (): void {
+	isHidden.value = document.hidden
 	if (isHidden.value) {
 		logoutTimeout.value = window.setTimeout(() => {
-			logout();
-		}, 1000 * 60 * 7.5);
+			logout()
+		}, 1000 * 60 * 7.5)
 	} else {
-		if (!userStore.authenticated) logout('');
-		clearTimeout(logoutTimeout.value);
-		logoutTimeout.value = 0;
+		if (!userStore.authenticated) logout('')
+		clearTimeout(logoutTimeout.value)
+		logoutTimeout.value = 0
 	}
-};
+}
 
-const logout = (message = 'you have been logged out'): void => {
-	userStore.logout(message);
-};
+function logout (message = 'you have been logged out'): void {
+	userStore.logout(message)
+}
 
 </script>
 

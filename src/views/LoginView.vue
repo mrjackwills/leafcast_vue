@@ -2,39 +2,40 @@
 	<section>
 		<v-card-text>
 			<v-row class='ma-0 pa-0 align-center justify-center'>
-				<v-col cols='12' md='9' lg='6' class='ma-0 pa-0'>
+				<v-col class='ma-0 pa-0' cols='12' lg='6' md='9'>
 					<v-form
-						v-on:submit.prevent
 						method='post'
+						@submit.prevent
 					>
 						<v-text-field
+							id='password'
 							v-model='password'
-							@click:append-inner='appendClick'
-							@keydown.enter='login'
 							:append-inner-icon='appendIcon'
+							autocomplete='password'
+							dark
 							:disabled='loading'
+							label='password'
 							:prepend-inner-icon='mdiLock'
 							:type='fieldType'
-							autocomplete='password'
-							id='password'
-							label='password'
 							variant='outlined'
-							dark
+							@click:append-inner='appendClick'
+							@keydown.enter='login'
 						/>
 					</v-form>
 				</v-col>
 			</v-row>
 		</v-card-text>
+
 		<v-card-actions>
 			<v-row class='ma-0 pa-0 align-center justify-center'>
-				<v-col cols='auto' class='ma-0 pa-0'>
+				<v-col class='ma-0 pa-0' cols='auto'>
 					<v-btn
-						@click='login'
-						:disabled='loading|| !password'
-						:variant='!password?"outlined":"flat"'
 						class='elevation-0'
 						color='secondary'
+						:disabled='loading|| !password'
 						rounded
+						:variant='!password?"outlined":"flat"'
+						@click='login'
 					>
 						login
 					</v-btn>
@@ -47,47 +48,47 @@
 
 <script setup lang='ts'>
 
-import { fetchRequests } from '@/services/fetch';
-import { mdiEye, mdiEyeOff, mdiLock } from '@mdi/js';
-import { snackReset } from '@/services/snack';
-import { useRouter } from 'vue-router';
-import { FrontendRoutes } from '@/types/const_routes';
+import { mdiEye, mdiEyeOff, mdiLock } from '@mdi/js'
+import { useRouter } from 'vue-router'
+import { fetchRequests } from '@/services/fetch'
+import { snackReset } from '@/services/snack'
+import { FrontendRoutes } from '@/types/const_routes'
 
-const router = useRouter();
+const router = useRouter()
 
-const loadingStore = loadingModule();
+const loadingStore = loadingModule()
 
-const appendIcon = computed(() => passwordVisible.value ? mdiEyeOff : mdiEye);
-const fieldType = computed(() => passwordVisible.value ? 'text' : 'password');
+const appendIcon = computed(() => passwordVisible.value ? mdiEyeOff : mdiEye)
+const fieldType = computed(() => passwordVisible.value ? 'text' : 'password')
 const loading = computed({
 	get (): boolean {
-		return loadingStore.loading;
+		return loadingStore.loading
 	},
 	set (b: boolean): void {
-		loadingStore.set_loading(b);
-	}
-});
+		loadingStore.set_loading(b)
+	},
+})
 
-const password = ref('');
-const passwordVisible = ref(false);
+const password = ref('')
+const passwordVisible = ref(false)
 
-const appendClick = (): void => {
-	if (loading.value) return;
-	passwordVisible.value = !passwordVisible.value;
-};
+function appendClick (): void {
+	if (loading.value) return
+	passwordVisible.value = !passwordVisible.value
+}
 
-const login = async (): Promise<void> => {
-	if (!password.value) return;
-	passwordVisible.value = false;
-	loading.value = true;
-	const response = await fetchRequests.wsAuth_post(password.value);
+async function login (): Promise<void> {
+	if (!password.value) return
+	passwordVisible.value = false
+	loading.value = true
+	const response = await fetchRequests.wsAuth_post(password.value)
 
-	password.value = '';
-	loading.value = false;
+	password.value = ''
+	loading.value = false
 	if (response) {
-		snackReset();
-		router.push(FrontendRoutes.BASE);
+		snackReset()
+		router.push(FrontendRoutes.BASE)
 	}
-};
+}
 
 </script>

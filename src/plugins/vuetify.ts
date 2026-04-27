@@ -14,7 +14,7 @@ const customDarkTheme: ThemeDefinition = {
 		danger: '#FB8C00',
 		serious: '#B71C1C',
 		offwhite: '#ffeecb',
-		haze: '#98b0a9'
+		haze: '#98b0a9',
 	},
 }
 
@@ -35,4 +35,3 @@ export default createVuetify({
 		themes: { customDarkTheme },
 	},
 })
-

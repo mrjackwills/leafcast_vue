@@ -1,26 +1,22 @@
 <template>
-	<v-row class='align-center justify-center' no-gutters v-if='image'>
-		<v-col cols='auto' class='parent' width>
-			<v-img class='image-border main-image' :src='image' cover :width='image_width' />
-			<v-img src='@/assets/watermark.png' class='watermark' width='100%' />
+	<v-row v-if='image' class='align-center justify-center' no-gutters>
+		<v-col class='parent' cols='auto' width>
+			<v-img class='image-border main-image' cover :src='image' :width='image_width' />
+			<v-img class='watermark' src='@/assets/watermark.png' width='100%' />
 		</v-col>
 	</v-row>
 </template>
 
 <script setup lang='ts'>
-import { useDisplay } from 'vuetify';
-const { width } = useDisplay();
+import { useDisplay } from 'vuetify'
+const { width } = useDisplay()
 
 const image_width = computed((): string => {
-	if (width.value > 750) {
-		return '650';
-	} else {
-		return `${width.value * 0.80}`;
-	}
-});
-const imageStore = imageModule();
+	return width.value > 750 ? '650' : `${width.value * 0.8}`
+})
+const imageStore = imageModule()
 
-const image = computed(() => imageStore.get_image);
+const image = computed(() => imageStore.get_image)
 
 </script>
 

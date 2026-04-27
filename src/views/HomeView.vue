@@ -1,7 +1,7 @@
 <template>
 	<section class='full-height'>
 
-		<v-row class='align-center minh justify-center' no-gutters v-if='!imageExists'>
+		<v-row v-if='!imageExists' class='align-center minh justify-center' no-gutters>
 			<v-col cols='auto'>
 				<v-progress-circular indeterminate />
 			</v-col>
@@ -18,13 +18,21 @@
 					<ImageMetadata @refresh='refresh' />
 				</v-col>
 
-				<v-col cols='auto' class='my-2'>
-					<v-btn @click='showInfo' class='' color='secondary elevation-0 ml-2' size='small' dark rounded>
+				<v-col class='my-2' cols='auto'>
+					<v-btn
+						class=''
+						color='secondary elevation-0 ml-2'
+						dark
+						rounded
+						size='small'
+						@click='showInfo'
+					>
 						<v-row class='ma-0 pa-0 align-center justify-center'>
-							<v-col cols='auto' class='ma-0 pa-0'>
+							<v-col class='ma-0 pa-0' cols='auto'>
 								<v-icon class='mr-1'>{{ infoIcon }}</v-icon>
 							</v-col>
-							<v-col cols='auto' class='ma-0 pa-0'>
+
+							<v-col class='ma-0 pa-0' cols='auto'>
 								pi info
 							</v-col>
 						</v-row>
@@ -44,162 +52,162 @@
 
 <script setup lang='ts'>
 
-import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
-import { parseMessage } from '@/vanillaTS/messageParser';
-import { snackError } from '@/services/snack';
-import type { TWSFromPi } from '@/types';
-import { ws } from '@/services/WS';
+import type { TWSFromPi } from '@/types'
+import { mdiChevronDown, mdiChevronUp } from '@mdi/js'
+import { snackError } from '@/services/snack'
+import { ws } from '@/services/WS'
+import { parseMessage } from '@/vanillaTS/messageParser'
 
 const [
 	imageStore,
 	loadingStore,
 	piStatusStore,
 	userStore,
-	websocketStore
-] = [imageModule(), loadingModule(), piStatusModule(), userModule(), websocketModule()];
+	websocketStore,
+] = [imageModule(), loadingModule(), piStatusModule(), userModule(), websocketModule()]
 
 onBeforeUnmount(() => {
-	clearAllIntervals();
-});
+	clearAllIntervals()
+})
 
-const imageExists = computed(() => imageStore.imageExists);
-const infoIcon = computed(() => showPiInfo.value ? mdiChevronUp : mdiChevronDown);
+const imageExists = computed(() => imageStore.imageExists)
+const infoIcon = computed(() => showPiInfo.value ? mdiChevronUp : mdiChevronDown)
 const loading = computed({
 	get (): boolean {
-		return loadingStore.loading;
+		return loadingStore.loading
 	},
 	set (b: boolean): void {
-		loadingStore.set_loading(b);
-	}
-});
+		loadingStore.set_loading(b)
+	},
+})
 const appUptime = computed({
 	get (): number {
-		return piStatusStore.appUptime;
+		return piStatusStore.appUptime
 	},
 	set (n: number): void {
-		piStatusStore.set_appUptime(n);
-	}
-});
+		piStatusStore.set_appUptime(n)
+	},
+})
 const connectedFor = computed({
 	get (): number {
-		return piStatusStore.connectedFor;
+		return piStatusStore.connectedFor
 	},
 	set (n: number): void {
-		piStatusStore.set_connectedFor(n);
-	}
-});
+		piStatusStore.set_connectedFor(n)
+	},
+})
 const uptime = computed({
 	get (): number {
-		return piStatusStore.uptime;
+		return piStatusStore.uptime
 	},
 	set (n: number): void {
-		piStatusStore.set_uptime(n);
-	}
-});
+		piStatusStore.set_uptime(n)
+	},
+})
 const init = computed({
 	get (): boolean {
-		return piStatusStore.init;
+		return piStatusStore.init
 	},
 	set (b: boolean): void {
-		piStatusStore.set_init(b);
-	}
-});
+		piStatusStore.set_init(b)
+	},
+})
 const updateCountdown = computed({
 	get (): number {
-		return imageStore.updateCountdown;
+		return imageStore.updateCountdown
 	},
 	set (s: number): void {
-		imageStore.set_updateCountdown(s);
-	}
-});
-const ws_connected = computed(() => websocketStore.connected);
+		imageStore.set_updateCountdown(s)
+	},
+})
+const ws_connected = computed(() => websocketStore.connected)
 
-const initCount = ref(0);
-const initTimeout = ref(0);
-const showPiInfo = ref(false);
-const updateInterval = ref(0);
+const initCount = ref(0)
+const initTimeout = ref(0)
+const showPiInfo = ref(false)
+const updateInterval = ref(0)
 
 /**
  * Create handlers for all ws events
  */
-const addWSHandlers = (): void => {
-	ws.connection?.addEventListener('message', (data) => {
+function addWSHandlers (): void {
+	ws.connection?.addEventListener('message', data => {
 		try {
-			const message = parseMessage(data.data);
-			if (!message) throw Error(`can't parse message`);
-			wsDataHandler(message);
-		} catch (e) {
-			const message = e instanceof Error ? e.message : 'ERROR';
-			snackError({ message });
+			const message = parseMessage(data.data)
+			if (!message) throw new Error(`can't parse message`)
+			wsDataHandler(message)
+		} catch (error) {
+			const message = error instanceof Error ? error.message : 'ERROR'
+			snackError({ message })
 		}
-	});
+	})
 
-	sendPhoto();
+	sendPhoto()
 
 	// Although should never have the connection killed
 	ws.connection?.addEventListener('close', () => {
-		userStore.logout();
-	});
-};
+		userStore.logout()
+	})
+}
 
 /**
  * Clear clock interval and re-connect interval
  *
  */
-const clearAllIntervals = (): void => {
-	clearInterval(updateInterval.value);
-	clearInterval(initTimeout.value);
-	updateCountdown.value = 300;
-};
+function clearAllIntervals (): void {
+	clearInterval(updateInterval.value)
+	clearInterval(initTimeout.value)
+	updateCountdown.value = 300
+}
 
 /**
  * If a message isn't received within the first 3500ms(x4) of being mounted, logout
  *
  */
-const initCheck = (): void => {
-	initCount.value++;
-	loading.value = true;
+function initCheck (): void {
+	initCount.value++
+	loading.value = true
 	initTimeout.value = window.setTimeout(() => {
 		if (init.value) {
-			clearInterval(initTimeout.value);
-			loading.value = false;
+			clearInterval(initTimeout.value)
+			loading.value = false
 		} else if (initCount.value < 4) {
-			sendPhoto();
-			initCheck();
-		} else userStore.logout('unable to contact pi');
-	}, 3500);
-};
+			sendPhoto()
+			initCheck()
+		} else userStore.logout('unable to contact pi')
+	}, 3500)
+}
 
-const showInfo = (): void => {
-	showPiInfo.value = !showPiInfo.value;
-};
+function showInfo (): void {
+	showPiInfo.value = !showPiInfo.value
+}
 
-const refresh = (): void => {
-	if (loading.value) return;
-	if (!websocketStore.connected) userStore.logout();
-	loading.value = true;
-	clearAllIntervals();
-	websocketStore.send({ name: 'force_update' });
-	startInterval();
-};
+function refresh (): void {
+	if (loading.value) return
+	if (!websocketStore.connected) userStore.logout()
+	loading.value = true
+	clearAllIntervals()
+	websocketStore.send({ name: 'force_update' })
+	startInterval()
+}
 
-const sendPhoto = (): void => {
-	loading.value = true;
-	websocketStore.send({ name: 'photo' });
-};
+function sendPhoto (): void {
+	loading.value = true
+	websocketStore.send({ name: 'photo' })
+}
 
-const startInterval = (): void => {
-	clearInterval(updateInterval.value);
+function startInterval (): void {
+	clearInterval(updateInterval.value)
 	updateInterval.value = window.setInterval(() => {
-		updateCountdown.value--;
-		if (appUptime.value) appUptime.value++;
-		if (uptime.value) uptime.value++;
-		if (connectedFor.value) connectedFor.value++;
+		updateCountdown.value--
+		if (appUptime.value) appUptime.value++
+		if (uptime.value) uptime.value++
+		if (connectedFor.value) connectedFor.value++
 
-		if (updateCountdown.value === 1) sendPhoto();
-		if (updateCountdown.value === 0) updateCountdown.value = 300;
-	}, 1000);
-};
+		if (updateCountdown.value === 1) sendPhoto()
+		if (updateCountdown.value === 0) updateCountdown.value = 300
+	}, 1000)
+}
 
 /**
  * Handle all incoming messages from server
@@ -207,39 +215,40 @@ const startInterval = (): void => {
  * TODO switch case for errors
  * Maybe just logout?
  */
-const wsDataHandler = async (message: TWSFromPi): Promise<void> => {
+async function wsDataHandler (message: TWSFromPi): Promise<void> {
 	switch (message.data?.name) {
-		case 'photo':
-			imageStore.set_cached(!!message.cache);
-			imageStore.set_image(message.data.data.image ?? '');
-			imageStore.set_imageSize_converted(message.data.data.size_converted ?? 0);
-			imageStore.set_imageSize_original(message.data.data.size_original ?? 0);
-			imageStore.set_timestamp(message.data.data.timestamp);
-			piStatusStore.set_internalIp(message.data.data.pi_info.internal_ip);
-			piStatusStore.set_numberImages(message.data.data.pi_info.number_images);
-			piStatusStore.set_online(!message.cache);
-			piStatusStore.set_piVersion(message.data.data.pi_info.version);
-			piStatusStore.set_totalFileSize(message.data.data.pi_info.total_file_size);
-			if (piStatusStore.online) piStatusStore.set_connectedFor(message.data.data.pi_info.websocket_uptime);
-			if (piStatusStore.online) uptime.value = message.data.data.pi_info.uptime;
-			if (piStatusStore.online) appUptime.value = message.data.data.pi_info.app_uptime;
-			if (!init.value) startInterval();
-			initCount.value = 0;
-			init.value = true;
-			loading.value = false;
-			break;
+		case 'photo': {
+			imageStore.set_cached(!!message.cache)
+			imageStore.set_image(message.data.data.image ?? '')
+			imageStore.set_imageSize_converted(message.data.data.size_converted ?? 0)
+			imageStore.set_imageSize_original(message.data.data.size_original ?? 0)
+			imageStore.set_timestamp(message.data.data.timestamp)
+			piStatusStore.set_internalIp(message.data.data.pi_info.internal_ip)
+			piStatusStore.set_numberImages(message.data.data.pi_info.number_images)
+			piStatusStore.set_online(!message.cache)
+			piStatusStore.set_piVersion(message.data.data.pi_info.version)
+			piStatusStore.set_totalFileSize(message.data.data.pi_info.total_file_size)
+			if (piStatusStore.online) piStatusStore.set_connectedFor(message.data.data.pi_info.websocket_uptime)
+			if (piStatusStore.online) uptime.value = message.data.data.pi_info.uptime
+			if (piStatusStore.online) appUptime.value = message.data.data.pi_info.app_uptime
+			if (!init.value) startInterval()
+			initCount.value = 0
+			init.value = true
+			loading.value = false
+			break
+		}
 	}
-};
+}
 
 onMounted(() => {
-	initCheck();
-});
+	initCheck()
+})
 
-watch(ws_connected, (i) => {
+watch(ws_connected, i => {
 	if (i) {
-		addWSHandlers();
+		addWSHandlers()
 	}
-});
+})
 
 </script>
 

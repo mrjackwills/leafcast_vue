@@ -1,6 +1,6 @@
 <template>
 	<v-snackbar id='snackbar' v-model='visible' timeout='-1'>
-		<v-row class='ma-0 pa-0 unselectable align-center justify-center' no-gutters>
+		<v-row class='ma-0 pa-0 unselectable align-center justify-center'>
 			<v-col v-if='icon && !loading' class='' cols='auto'>
 				<v-icon color='danger' :icon='icon' />
 			</v-col>

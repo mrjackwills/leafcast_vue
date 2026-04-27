@@ -1,14 +1,14 @@
 <template>
 	<section class='full-height'>
 
-		<v-row v-if='!imageExists' class='align-center minh justify-center' no-gutters>
+		<v-row v-if='!imageExists' class='align-center minh justify-center'>
 			<v-col cols='auto'>
 				<v-progress-circular indeterminate />
 			</v-col>
 		</v-row>
 
 		<v-fade-transition>
-			<v-row v-if='imageExists' class='align-center justify-center' no-gutters>
+			<v-row v-if='imageExists' class='align-center justify-center ga-0'>
 
 				<v-col cols='12'>
 					<app-image />

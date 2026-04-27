@@ -7,7 +7,6 @@
 						class='ma-0 pa-0 px-1'
 						cols='12'
 						lg='8'
-						no-gutters
 						sm='11'
 					>
 						<v-card

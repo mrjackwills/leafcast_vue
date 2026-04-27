@@ -1,6 +1,6 @@
 <template>
 
-	<v-row class='mt-3 align-center justify-center' no-gutters>
+	<v-row class='mt-3 ga-0 align-center justify-center'>
 
 		<PiOffline v-if='!piOnline && init' />
 

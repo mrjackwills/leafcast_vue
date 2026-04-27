@@ -6,7 +6,7 @@
 
 			<v-col class='ma-0 pa-0' cols='auto'>
 
-				<v-row class='pulse-animation align-center justify-space-between' no-gutters>
+				<v-row class='pulse-animation align-center justify-space-between'>
 
 					<v-col class='ma-0 pa-0' cols='auto'>
 						<v-icon

@@ -1,9 +1,9 @@
 <template>
-	<v-col class='text-center text-white text-body-large mt-2' cols='11' md='10'>
+	<v-col class='text-center text-white text-body-large' cols='11' md='10'>
 
 		<section v-for='(row, index) in toDisplay' :key='index'>
 
-			<v-row class='align-center justify-space-between' no-gutters>
+			<v-row class='align-center justify-space-between'>
 
 				<v-col
 					v-for='(item, rowIndex) in row'
@@ -13,7 +13,7 @@
 					md='5'
 				>
 
-					<v-row class='align-center justify-space-between' no-gutters>
+					<v-row class='align-center justify-space-between'>
 
 						<v-col class='ma-0 pa-0 unselectable' cols='auto'>
 							<v-icon class='mr-1' color='white' density='compact' :size='mobile ? "small" : "default"'>{{

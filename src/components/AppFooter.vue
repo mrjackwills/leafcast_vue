@@ -1,8 +1,8 @@
 <template>
 	<v-footer id='footer' absolute app color='transparent'>
-		<v-row class='no-gutters ma-0 pa-0 mt-3 align-center justify-center'>
+		<v-row class='ma-0 pa-0 align-center justify-center'>
 
-			<v-col class='no-gutters unselectable ma-0 pa-0' cols='auto'>
+			<v-col class='unselectable ma-0 pa-0' cols='auto'>
 
 				<v-chip
 					class='not-cl elevation-0'

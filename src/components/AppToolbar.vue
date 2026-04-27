@@ -10,7 +10,7 @@
 		>
 			<v-img class='ml-5 mr-2' :max-width='logoWidth' src='@/assets/logo.svg' />
 
-			<v-row class='pa-0 ma-0 align-center justify-start' no-gutters>
+			<v-row class='pa-0 ma-0 align-center justify-start'>
 				<v-col class='unselectable' cols='auto'>
 					<span class='text-headline-large text-offwhite'>Leafcast</span>
 				</v-col>

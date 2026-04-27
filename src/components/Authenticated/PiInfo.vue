@@ -1,10 +1,10 @@
 <template>
 
-	<v-row v-intersect='onIntersect' class='align-center justify-center' no-gutters>
+	<v-row v-intersect='onIntersect' class='align-center justify-center ga-0'>
 
 		<DisplayRows :to-display='piInfo' />
 
-		<v-col id='update-button' class='mt-2' cols='12'>
+		<v-col id='update-button' class='' cols='12'>
 
 			<v-row class='ma-0 pa-0 align-center justify-center'>
 

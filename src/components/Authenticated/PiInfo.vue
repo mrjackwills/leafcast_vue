@@ -1,22 +1,30 @@
 <template>
 
-	<v-row justify='center' align='center' class='' no-gutters v-intersect='onIntersect'>
+	<v-row v-intersect='onIntersect' class='align-center justify-center ga-0'>
 
-		<DisplayRows :toDisplay='piInfo' />
+		<DisplayRows :to-display='piInfo' />
 
-		<v-col cols='12' class='mt-2' id='update-button'>
+		<v-col id='update-button' class='' cols='12'>
 
-			<v-row align='center' justify='center' class='ma-0 pa-0'>
+			<v-row class='ma-0 pa-0 align-center justify-center'>
 
-				<v-col cols='auto' class='ma-0 pa-0'>
+				<v-col class='ma-0 pa-0' cols='auto'>
 
-					<v-btn @click='refresh' :disabled='loading || !piOnline' :color='piOnline ? "serious" : ""'
-						:variant='!piOnline ? "outlined" : "flat"' class=' fab-fix elevation-0' size='small' rounded>
-						<v-row align='center' justify='space-around' class='ma-0 pa-0'>
-							<v-col cols='auto' class='ma-0 pa-0'>
+					<v-btn
+						class=' fab-fix elevation-0'
+						:color='piOnline ? "serious" : ""'
+						:disabled='loading || !piOnline'
+						rounded
+						size='small'
+						:variant='!piOnline ? "outlined" : "flat"'
+						@click='refresh'
+					>
+						<v-row class='ma-0 pa-0 align-center justify-space-around'>
+							<v-col class='ma-0 pa-0' cols='auto'>
 								<v-icon class='mr-1'>{{ mdiCameraFlip }}</v-icon>
 							</v-col>
-							<v-col cols='auto' class='ma-0 pa-0' id='pi-info'>
+
+							<v-col id='pi-info' class='ma-0 pa-0' cols='auto'>
 								update
 							</v-col>
 						</v-row>
@@ -30,95 +38,95 @@
 
 <script setup lang='ts'>
 
-import { convert_bytes } from '@/vanillaTS/convertBytes';
-import { mdiCameraFlip, mdiDesktopClassic, mdiHarddisk, mdiImageMultiple, mdiLanConnect, mdiLanguageRust, mdiSourceBranch, mdiWebClock } from '@mdi/js';
-import { secondsToText } from '@/vanillaTS/secondsToText';
-import type { TDataToDisplay } from '@/types';
+import type { TDataToDisplay } from '@/types'
+import { mdiCameraFlip, mdiDesktopClassic, mdiHarddisk, mdiImageMultiple, mdiLanConnect, mdiLanguageRust, mdiSourceBranch, mdiWebClock } from '@mdi/js'
+import { convert_bytes } from '@/vanillaTS/convertBytes'
+import { secondsToText } from '@/vanillaTS/secondsToText'
 
-const [loadingStore, piStatusStore] = [loadingModule(), piStatusModule()];
+const [loadingStore, piStatusStore] = [loadingModule(), piStatusModule()]
 onBeforeUnmount(() => {
-	clearTimeout(goToTimeout.value);
-});
+	clearTimeout(goToTimeout.value)
+})
 
-const internalIp = computed(() => piStatusStore.internalIp);
-const loading = computed(() => loadingStore.loading);
-const connectedFor = computed(() => piStatusStore.connectedFor);
-const appUptime = computed(() => piStatusStore.appUptime);
-const uptime = computed(() => piStatusStore.uptime);
-const piOnline = computed(() => piStatusStore.online);
-const piVersion = computed(() => piStatusStore.piVersion);
+const internalIp = computed(() => piStatusStore.internalIp)
+const loading = computed(() => loadingStore.loading)
+const connectedFor = computed(() => piStatusStore.connectedFor)
+const appUptime = computed(() => piStatusStore.appUptime)
+const uptime = computed(() => piStatusStore.uptime)
+const piOnline = computed(() => piStatusStore.online)
+const piVersion = computed(() => piStatusStore.piVersion)
 
 const piInfo = computed((): TDataToDisplay => {
-	const cached = piOnline.value ? `` : `[ cached ]`;
+	const cached = piOnline.value ? `` : `[ cached ]`
 	const output = [
 		[
 			{
 				icon: mdiSourceBranch,
 				text: 'pi software version',
-				value: piVersion.value ?? ''
+				value: piVersion.value ?? '',
 			},
 			{
 				icon: mdiLanConnect,
 				text: `internal ip`,
 				value: internalIp.value ?? '',
-				extra: cached
-			}
-		]
-	];
+				extra: cached,
+			},
+		],
+	]
 	if (piOnline.value) {
 		output.push([
 			{
 				icon: mdiDesktopClassic,
 				text: 'pi uptime',
-				value: secondsToText(uptime.value ? uptime.value * 1000 : 0)
+				value: secondsToText(uptime.value ? uptime.value * 1000 : 0),
 			},
 			{
 				icon: mdiLanguageRust,
 				text: 'app uptime',
-				value: secondsToText(appUptime.value ? appUptime.value * 1000 : 0)
-			}
+				value: secondsToText(appUptime.value ? appUptime.value * 1000 : 0),
+			},
 		], [
 			{
 				icon: mdiWebClock,
 				text: 'websocket uptime',
-				value: secondsToText(connectedFor.value ? connectedFor.value * 1000 : 0)
-			}
-		]);
+				value: secondsToText(connectedFor.value ? connectedFor.value * 1000 : 0),
+			},
+		])
 	}
 	output.push([
 		{
 			icon: mdiImageMultiple,
 			text: 'number of images',
 			value: `${numberFiles.value}`,
-			extra: cached
+			extra: cached,
 		},
 		{
 			icon: mdiHarddisk,
 			text: 'total file size',
 			value: convert(totalFileSize.value),
-			extra: cached
-		}
+			extra: cached,
+		},
 
-	]);
-	return output;
-});
-const numberFiles = computed(() => piStatusStore.numberImages);
-const totalFileSize = computed(() => piStatusStore.totalFileSize);
+	])
+	return output
+})
+const numberFiles = computed(() => piStatusStore.numberImages)
+const totalFileSize = computed(() => piStatusStore.totalFileSize)
 
-const goToTimeout = ref(0);
-const isIntersecting = ref(false);
+const goToTimeout = ref(0)
+const isIntersecting = ref(false)
 
-const convert = (amount: string | number): string => {
-	const converted = convert_bytes(amount);
-	return `${converted.total} ${converted.unit}`;
-};
-const onIntersect = (entries: Array<IntersectionObserverEntry>): void => {
-	isIntersecting.value = !!entries[0]?.isIntersecting;
-};
-const emit = defineEmits(['refresh']);
-const refresh = (): void => {
-	if (loading.value) return;
-	emit('refresh');
-};
+function convert (amount: string | number): string {
+	const converted = convert_bytes(amount)
+	return `${converted.total} ${converted.unit}`
+}
+function onIntersect (entries: Array<IntersectionObserverEntry>): void {
+	isIntersecting.value = !!entries[0]?.isIntersecting
+}
+const emit = defineEmits(['refresh'])
+function refresh (): void {
+	if (loading.value) return
+	emit('refresh')
+}
 
 </script>

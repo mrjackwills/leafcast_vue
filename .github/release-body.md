@@ -1,10 +1,14 @@
-### 2025-09-24
+### 2026-04-27
 
 ### Chores
-+ GitHub workflow updated, [a2c63fe1e9d0b9876427a4a8342723dda3181963]
-+ dependencies updated, [f4ac9e03c5e605414dfd4fcea3c31d857430f644], [db5ca6adf23bfeba8bddc3c5471ab28c5f5ac537]
++ dependencies updated, [ce52f7558c2bea41dd9c1ac5ee11ceb977d555a5]
++ linting, [00e0b960942f9a058537cecabeb38ce3496e5a9a]
++ GitHub workflow updated, [aa4324339e47de1bb3306768bb7a25379402385c]
 
-### Refactors
-+ params use :x instead of :x='x', [b8d0d69215883986eefbe12b46e8280fc63132aa]
+### Features
++ replace axios with fetch, [ea3b3996f020eed56a04961dfbcab2f60f8770dc]
+
+### Fixes
++ no-gutters, [1e546a5920cef006ad59f957cd87361e032705eb]
 
 see <a href='https://github.com/mrjackwills/leafcast_vue/blob/main/CHANGELOG.md'>CHANGELOG.md</a> for more details

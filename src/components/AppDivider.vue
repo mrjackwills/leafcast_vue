@@ -1,14 +1,14 @@
 <template>
-	<v-row class='my-1 ma-0 pa-0' align='center' justify='center' no-gutters>
-		<v-col :cols='`${cols}`' class='ma-0 pa-0'>
-			<v-divider  color='offwhite' class='divider'/>
+	<v-row class='my-1 ma-0 pa-0 align-center justify-center'>
+		<v-col class='ma-0 pa-0' :cols='`${cols}`'>
+			<v-divider class='divider' color='offwhite' />
 		</v-col>
 	</v-row>
 </template>
 
 <script setup lang='ts'>
 
-withDefaults(defineProps<{ cols?: number }>(), { cols: 12 });
+withDefaults(defineProps<{ cols?: number }>(), { cols: 12 })
 
 </script>
 

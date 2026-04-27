@@ -1,18 +1,18 @@
 <template>
 
-	<v-row justify='center' align='center' class='' no-gutters v-intersect='onIntersect'>
+	<v-row class='align-center justify-center' no-gutters v-intersect='onIntersect'>
 
 		<DisplayRows :toDisplay='piInfo' />
 
 		<v-col cols='12' class='mt-2' id='update-button'>
 
-			<v-row align='center' justify='center' class='ma-0 pa-0'>
+			<v-row class='ma-0 pa-0 align-center justify-center'>
 
 				<v-col cols='auto' class='ma-0 pa-0'>
 
 					<v-btn @click='refresh' :disabled='loading || !piOnline' :color='piOnline ? "serious" : ""'
 						:variant='!piOnline ? "outlined" : "flat"' class=' fab-fix elevation-0' size='small' rounded>
-						<v-row align='center' justify='space-around' class='ma-0 pa-0'>
+						<v-row class='ma-0 pa-0 align-center justify-space-around'>
 							<v-col cols='auto' class='ma-0 pa-0'>
 								<v-icon class='mr-1'>{{ mdiCameraFlip }}</v-icon>
 							</v-col>

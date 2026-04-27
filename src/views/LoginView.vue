@@ -1,7 +1,7 @@
 <template>
 	<section>
 		<v-card-text>
-			<v-row align='center' justify='center' class='ma-0 pa-0'>
+			<v-row class='ma-0 pa-0 align-center justify-center'>
 				<v-col cols='12' md='9' lg='6' class='ma-0 pa-0'>
 					<v-form
 						v-on:submit.prevent
@@ -26,7 +26,7 @@
 			</v-row>
 		</v-card-text>
 		<v-card-actions>
-			<v-row align='center' justify='center' class='ma-0 pa-0'>
+			<v-row class='ma-0 pa-0 align-center justify-center'>
 				<v-col cols='auto' class='ma-0 pa-0'>
 					<v-btn
 						@click='login'
@@ -47,7 +47,7 @@
 
 <script setup lang='ts'>
 
-import { axiosRequests } from '@/services/axios';
+import { fetchRequests } from '@/services/fetch';
 import { mdiEye, mdiEyeOff, mdiLock } from '@mdi/js';
 import { snackReset } from '@/services/snack';
 import { useRouter } from 'vue-router';
@@ -80,7 +80,7 @@ const login = async (): Promise<void> => {
 	if (!password.value) return;
 	passwordVisible.value = false;
 	loading.value = true;
-	const response = await axiosRequests.wsAuth_post(password.value);
+	const response = await fetchRequests.wsAuth_post(password.value);
 
 	password.value = '';
 	loading.value = false;

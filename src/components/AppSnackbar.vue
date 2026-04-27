@@ -1,8 +1,8 @@
 <template>
 	<v-snackbar v-model='visible' timeout='-1' id='snackbar'>
-		<v-row justify='center' align='center' no-gutters class='ma-0 pa-0 unselectable'>
+		<v-row no-gutters class='ma-0 pa-0 unselectable align-center justify-center'>
 			<v-col v-if='icon && !loading' cols='auto' class=''>
-				<v-icon color='danger' />
+				<v-icon color='danger' :icon="icon" />
 			</v-col>
 			<v-col v-if='loading' cols='auto' class=''>
 				<v-progress-circular indeterminate :size='18' :width='3' color='white' />

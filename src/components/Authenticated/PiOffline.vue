@@ -2,11 +2,11 @@
 
 	<v-col cols='12' class='ma-0 pa-0'>
 
-		<v-row align='center' justify='center' class='ma-0 pa-0'>
+		<v-row class='ma-0 pa-0 align-center justify-center'>
 
 			<v-col cols='auto' class='ma-0 pa-0'>
 
-				<v-row justify='space-between' align='center' no-gutters class='pulse-animation'>
+				<v-row no-gutters class='pulse-animation align-center justify-space-between'>
 
 					<v-col cols='auto' class='ma-0 pa-0'>
 						<v-icon dense color='white' class='mr-1' :size='mobile ? "small" : "default"'

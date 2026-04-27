@@ -1,14 +1,14 @@
 <template>
 	<section class='full-height'>
 
-		<v-row justify='center' align='center' class='align-center minh' no-gutters v-if='!imageExists'>
+		<v-row class='align-center minh justify-center' no-gutters v-if='!imageExists'>
 			<v-col cols='auto'>
 				<v-progress-circular indeterminate />
 			</v-col>
 		</v-row>
 
 		<v-fade-transition>
-			<v-row v-if='imageExists' justify='center' align='center' class='align-center' no-gutters>
+			<v-row v-if='imageExists' class='align-center justify-center' no-gutters>
 
 				<v-col cols='12'>
 					<app-image />
@@ -20,7 +20,7 @@
 
 				<v-col cols='auto' class='my-2'>
 					<v-btn @click='showInfo' class='' color='secondary elevation-0 ml-2' size='small' dark rounded>
-						<v-row align='center' justify='center' class='ma-0 pa-0'>
+						<v-row class='ma-0 pa-0 align-center justify-center'>
 							<v-col cols='auto' class='ma-0 pa-0'>
 								<v-icon class='mr-1'>{{ infoIcon }}</v-icon>
 							</v-col>

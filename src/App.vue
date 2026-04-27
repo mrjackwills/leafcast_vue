@@ -2,7 +2,7 @@
 	<v-app container--fluid class='ma-0 pa-0' id='leafcast'>
 		<v-main>
 			<v-container class='fill-height' fluid>
-				<v-row align='center' class='fill-height' justify='center'>
+				<v-row class='fill-height align-center justify-center'>
 					<v-col cols='12' sm='11' lg='8' no-gutters class='ma-0 pa-0 px-1'>
 						<v-card transition='fade-transition' class='pb-2 elevation-0 ma-0 pa-0' id='main_card'
 							color='primary' round>

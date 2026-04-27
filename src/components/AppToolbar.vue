@@ -2,9 +2,9 @@
 	<section>
 		<v-toolbar :height='toolbarHeight' color='secondary' id='toolbar' dark flat app>
 			<v-img src='@/assets/logo.svg' class='ml-5 mr-2' :max-width='logoWidth' />
-			<v-row align='center' justify='start' no-gutters class='pa-0 ma-0'>
+			<v-row no-gutters class='pa-0 ma-0 align-center justify-start'>
 				<v-col cols='auto' class='unselectable'>
-					<span class='text-h4 text-offwhite'>Leafcast</span>
+					<span class='text-headline-large text-offwhite'>Leafcast</span>
 				</v-col>
 				<v-spacer />
 				<v-col v-if='authenticated && init' class='mr-5' cols='auto'>

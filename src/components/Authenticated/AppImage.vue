@@ -1,5 +1,5 @@
 <template>
-	<v-row justify='center' align='center' no-gutters v-if='image'>
+	<v-row class='align-center justify-center' no-gutters v-if='image'>
 		<v-col cols='auto' class='parent' width>
 			<v-img class='image-border main-image' :src='image' cover :width='image_width' />
 			<v-img src='@/assets/watermark.png' class='watermark' width='100%' />

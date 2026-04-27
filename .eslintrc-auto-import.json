@@ -18,6 +18,7 @@
     "Slots": true,
     "VNode": true,
     "WritableComputedRef": true,
+    "actions": true,
     "computed": true,
     "createApp": true,
     "customRef": true,

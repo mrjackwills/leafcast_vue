@@ -1,11 +1,11 @@
 <template>
 	<v-footer color='transparent' id='footer' absolute app>
-		<v-row justify='center' align='center' class='no-gutters ma-0 pa-0 mt-3'>
+		<v-row class='no-gutters ma-0 pa-0 mt-3 align-center justify-center'>
 
 			<v-col cols='auto' class='no-gutters unselectable ma-0 pa-0'>
 
 				<v-chip :ripple='false' class='not-cl elevation-0' color='offwhite' variant='flat' pill>
-					<section v-if='showBuild' class='text-caption' @click='buildInfo'>
+					<section v-if='showBuild' class='text-body-small' @click='buildInfo'>
 						<span>site version: {{ env.app_version }}</span>
 						<span class='ml-3 '>built: {{ env.build_date }}</span>
 					</section>
